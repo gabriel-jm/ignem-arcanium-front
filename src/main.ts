@@ -1,3 +1,5 @@
+import { events } from './handle-events'
+
 const connectionDataStore = {
   connectionId: <string | null> null,
   events: {
@@ -42,11 +44,11 @@ wsConnection.addEventListener('close', () => {
 wsConnection.addEventListener('message', ev => {
   const messageData = JSON.parse(ev.data)
 
-  if (messageData.event === 'accept-connection') {
-    const connectionStore = new ConnectionStore()
-    connectionStore.connectionId = messageData.headers.connectionId
-    console.log('ConnectionId', connectionStore.connectionId)
-    return
+  const eventName = String(messageData.event)
+  const handler = events[eventName]
+
+  if (handler) {
+    return handler(messageData)
   }
 
   console.log(`No handler for ${messageData.event} event`)
