@@ -9,7 +9,8 @@ export default defineConfig({
     }
   },
   test: {
-    include: ['tests/**/*.spec.ts'],
-    globals: true
+    environment: 'jsdom',
+    globals: true,
+    root: './'
   }
 })
