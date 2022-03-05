@@ -1,4 +1,4 @@
-import { defineConfig } from 'vitest/config'
+import { defineConfig } from 'vite'
 import path from 'path'
 
 export default defineConfig({
@@ -7,10 +7,5 @@ export default defineConfig({
       '@/': path.resolve('src'),
       '@/tests/': path.resolve('tests')
     }
-  },
-  test: {
-    environment: 'jsdom',
-    globals: true,
-    root: './'
   }
 })
