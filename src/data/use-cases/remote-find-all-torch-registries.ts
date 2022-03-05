@@ -5,8 +5,8 @@ export class RemoteFindAllTorchRegistries implements FindAllTorchRegistries {
   constructor(private readonly findAllTorchRegistriesService: FindAllTorchRegistriesService) {}
 
   async findAll(): Promise<FindAllTorchRegistriesResult[]> {
-    await this.findAllTorchRegistriesService.findAll()
+    const torchRegistries = await this.findAllTorchRegistriesService.findAll()
     
-    return []
+    return torchRegistries
   }
 }

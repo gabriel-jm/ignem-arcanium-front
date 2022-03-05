@@ -19,4 +19,12 @@ describe('RemoteFindAllTorchRegistries', () => {
 
     expect(findAllTorchRegistriesServiceSpy.findAll).toHaveBeenCalledWith()
   })
+
+  it('should return a list the found torch registries on success', async () => {
+    const { sut, findAllTorchRegistriesServiceSpy } = makeSut()
+
+    const response = await sut.findAll()
+
+    expect(response).toEqual(findAllTorchRegistriesServiceSpy.result)
+  })
 })
