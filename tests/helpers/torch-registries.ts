@@ -11,6 +11,6 @@ export function mockFindAllTorchRegistriesService() {
   
   return {
     result,
-    findAll: jest.fn(() => Promise.resolve(result))
+    findAll: vi.fn(() => Promise.resolve(result))
   }
 }
