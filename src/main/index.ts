@@ -1,13 +1,8 @@
-import { NotFoundPage } from '@/presentation/view/pages/not-found'
-import { router } from 'lithen-router'
-
-const routes = () => router.defineRoutes({
-  notFound: new NotFoundPage()
-})
+import { configRoutes } from '@/main/config/routes'
 
 async function init() {
-  routes()
-  
+  configRoutes()
+
   await import('@/presentation/view')
 }
 
