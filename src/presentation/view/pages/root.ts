@@ -1,7 +1,7 @@
 import { IgnemElement } from '@/presentation/view'
 import { router } from 'lithen-router'
 
-class RootPage extends IgnemElement {
+export class RootPage extends IgnemElement {
   constructor() {
     super()
     window.onload = () => this.init()
@@ -15,8 +15,6 @@ class RootPage extends IgnemElement {
   reRender() {
     const firstElement = this.root.firstChild
     const component = router.matchRoute() as HTMLElement
-
-    console.log(component)
 
     firstElement
       ? this.root.replaceChild(component, firstElement)
