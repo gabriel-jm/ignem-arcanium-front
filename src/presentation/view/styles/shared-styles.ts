@@ -7,6 +7,7 @@ export const sharedStyles = () => defineSharedStyles(css`
     padding: 0;
     outline: 0;
     box-sizing: border-box;
+    list-style: none;
   }
 
   .btn {
