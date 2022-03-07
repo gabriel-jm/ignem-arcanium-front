@@ -22,7 +22,7 @@ export class HomePage extends IgnemElement {
   render() {
     return html`
       <h1>Home</h1>
-      <button on-click=${() => router.goTo('/torch-registries')}>
+      <button on-click=${() => router.goTo('/torches')}>
         Login
       </button>
     `
