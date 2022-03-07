@@ -15,16 +15,7 @@ export class NotFoundPage extends IgnemElement {
         flex-direction: column;
         justify-content: center;
         align-items: center;
-      }
-
-      button {
-        background-color: #333;
-        cursor: pointer;
-        padding: 8px 10px;
-        color: #ddd;
-        border-radius: 4px;
-        border: 0;
-      }   
+      } 
     `
   }
 
