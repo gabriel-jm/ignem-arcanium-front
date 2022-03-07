@@ -22,7 +22,9 @@ export class NotFoundPage extends IgnemElement {
   render() {
     return html`
       <h1>Page Not Found</h1>
-      <button on-click=${() => router.goTo('/')}>Home</button>
+      <button class="btn" on-click=${() => router.goTo('/')}>
+        Home
+      </button>
     `
   }
 }

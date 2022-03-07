@@ -2,7 +2,14 @@ import { defineSharedStyles } from 'lithen-super-element'
 import { css } from 'lithen-tag-functions'
 
 export const sharedStyles = () => defineSharedStyles(css`
-  button {
+  *:not(:host) {
+    margin: 0;
+    padding: 0;
+    outline: 0;
+    box-sizing: border-box;
+  }
+
+  .btn {
     font-family: 'Nunito', sans-serif;
     background-color: #333;
     cursor: pointer;
@@ -10,19 +17,17 @@ export const sharedStyles = () => defineSharedStyles(css`
     color: #ddd;
     border-radius: 4px;
     border: 0;
-    outline: 0;
-    box-sizing: border-box;
   }
 
-  button:hover {
+  .btn:hover {
     background-color: #3f3f3f;
   }
 
-  button:focus {
+  .btn:focus {
     outline: 2px solid #aaaa;
   }
 
-  button:active {
+  .btn:active {
     background-color: #2a2a2a;
   }
 `)
