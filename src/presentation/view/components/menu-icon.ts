@@ -1,21 +1,19 @@
-import { IgnemElement } from '@/presentation/view'
+import './wrapper'
 import { css, html } from 'lithen-tag-functions'
 
-export class MenuIcon extends IgnemElement {
-  styling() {
-    return css`
-      :host {
-        width: 26px;
-        height: 26px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-      }
-    `
-  }
+export function menuIcon(className?: string) {
+  const styles = css`
+    :host {
+      width: 26px;
+      height: 26px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  `
 
-  render() {
-    return html`
+  return html`
+    <ignem-wrapper ${className ? `class="${className}"` : ''} css="${styles}">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="24"
@@ -31,8 +29,6 @@ export class MenuIcon extends IgnemElement {
         <line x1="3" y1="6" x2="21" y2="6"></line>
         <line x1="3" y1="18" x2="21" y2="18"></line>
       </svg>
-    `
-  }
+    </ignem-wrapper>
+  `
 }
-
-customElements.define('ignem-menu-icon', MenuIcon)
