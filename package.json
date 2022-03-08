@@ -21,7 +21,7 @@
   },
   "dependencies": {
     "lithen-router": "^1.0.3",
-    "lithen-super-element": "^3.1.0",
-    "lithen-tag-functions": "^1.0.6"
+    "lithen-super-element": "^3.1.1",
+    "lithen-tag-functions": "^1.0.7"
   }
 }
