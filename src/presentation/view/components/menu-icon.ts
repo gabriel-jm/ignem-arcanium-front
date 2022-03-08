@@ -2,11 +2,6 @@ import { IgnemElement } from '@/presentation/view'
 import { css, html } from 'lithen-tag-functions'
 
 export class MenuIcon extends IgnemElement {
-  constructor() {
-    super()
-    this.applyRender()
-  }
-
   styling() {
     return css`
       :host {

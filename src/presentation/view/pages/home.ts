@@ -3,11 +3,6 @@ import { router } from 'lithen-router'
 import { css, html } from 'lithen-tag-functions'
 
 export class HomePage extends IgnemElement {
-  constructor() {
-    super()
-    this.applyRender()
-  }
-
   styling() {
     return css`
       :host {

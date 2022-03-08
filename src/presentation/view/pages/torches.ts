@@ -11,11 +11,6 @@ const list = [
 ]
 
 export class TorchesPage extends IgnemElement {
-  constructor() {
-    super()
-    this.applyRender()
-  }
-
   styling() {
     return css`
       .content::part(container) {
