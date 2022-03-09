@@ -1,4 +1,5 @@
 import { IgnemElement } from '@/presentation/view'
+import { containerStyles } from '@/presentation/view/styles'
 import { css, html } from 'lithen-tag-functions'
 
 const list = [
@@ -13,7 +14,9 @@ const list = [
 export class TorchesPage extends IgnemElement {
   styling() {
     return css`
-      .content::part(container) {
+      ${containerStyles}
+
+      .container {
         padding: 10px 20px;
       }
 
@@ -30,7 +33,7 @@ export class TorchesPage extends IgnemElement {
     return html`
       <ignem-header />
 
-      <ignem-content-container class="content">
+      <div class="container">
         <h2 class="torches-title">Torches</h2>
         <ul>
           ${list.map(item => {
@@ -39,7 +42,7 @@ export class TorchesPage extends IgnemElement {
             `
           })}
         </ul>
-      </ignem-content-container>
+      </div>
     `
   }
 }

@@ -1,16 +1,19 @@
 import { IgnemElement, menuIcon } from '@/presentation/view'
+import { containerStyles } from '@/presentation/view/styles'
 import { css, html } from 'lithen-tag-functions'
 
 export class IgnemHeader extends IgnemElement {
   styling() {
     return css`
+      ${containerStyles}
+
       .header {
         background-color: #151515;
         display: block;
         padding: 6px 10px;
       }
 
-      ignem-content-container::part(container) {
+      .container {
         display: flex;
         align-items: center;
       }
@@ -30,10 +33,10 @@ export class IgnemHeader extends IgnemElement {
   render() {
     return html`
       <header class="header">
-        <ignem-content-container>
+        <div class="container">
           ${menuIcon('menu-icon')}
           <h1 class="title">Ignem Arcanium</h1>
-        </ignem-content-container>
+        </div>
       </header>
     `
   }
