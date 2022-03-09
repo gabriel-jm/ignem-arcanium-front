@@ -1,0 +1,114 @@
+import { IgnemElement } from '@/presentation/view'
+import { css, html } from 'lithen-tag-functions'
+import { torchIcon } from './torch-icon'
+
+export class TorchRegistry extends IgnemElement {
+  styling() {
+    return css`
+      .torch-card {
+        --lit-color: #cca938;
+        --off-color: #333;
+
+        display: flex;
+        align-items: center;
+        gap: 0 18px;
+        padding: 12px 14px;
+        border: 0;
+        border-radius: 4px;
+        box-sizing: border-box;
+        background-color: #1b1b1b;
+        box-shadow: 0 0 0 3px var(--off-color),
+          0 0 3px 1px #1114
+        ;
+        cursor: default;
+        transition: 300ms all;
+      }
+
+      .torch-card.lit {
+        box-shadow: 0 0 0 3px var(--lit-color),
+          0 0 6px 2px #eed151c7
+        ;
+      }
+
+      .torch-card > div {
+        flex: 1;
+      }
+
+      .torch-owner {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .torch-owner > h3 {
+        font-size: 1.8rem;
+      }
+
+      .torch-owner > span {
+        font-size: 1.45rem;
+        font-weight: bold;
+      }
+
+      .torch-charges {
+        display: flex;
+        height: 5px;
+        justify-content: stretch;
+        align-items: center;
+        gap: 0 6px;
+        margin: 10px 0 5px;
+      }
+
+      .charge-count {
+        height: 100%;
+        width: 100%;
+        background-color: #121212;
+        border-radius: 50px;
+      }
+
+      .charge-count.filled {
+        background-color: var(--off-color);
+      }
+
+      .torch-card.lit .charge-count.filled {
+        background-color: var(--lit-color);
+      }
+
+      .torch-icon {
+        display: block;
+        width: 60px;
+        fill: var(--off-color);
+      }
+
+      .torch-card.lit .torch-icon {
+        fill: var(--lit-color);
+      }
+    `
+  }
+
+  render() {
+    const isLit = this.getAttribute('is-lit')
+    const torchCharge = Number(this.getAttribute('torch-charge'))
+    const list = Array.from({ length: 6 }).map((_value, index) => html`
+      <li
+        class="charge-count ${index+1 <= torchCharge && 'filled'}"
+      ></li>
+    `)
+
+    return html`
+      <div class="torch-card ${isLit === 'true' && 'lit'}">
+        ${torchIcon('torch-icon')}
+        <div>
+          <div class="torch-owner">
+            <h3>${this.getAttribute('character-name')}</h3>
+            <span>${this.getAttribute('torch-count')}</span>
+          </div>
+          <ul class="torch-charges">
+            ${list}
+          </ul>
+        </div>
+      </div>
+    `
+  }
+}
+
+customElements.define('ignem-torch-registry', TorchRegistry)
