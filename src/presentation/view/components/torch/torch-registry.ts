@@ -7,7 +7,7 @@ export class TorchRegistry extends IgnemElement {
   styling() {
     return css`
       .torch-card {
-        --lit-color: #cca938;
+        --lit-color: #c09f34;
         --off-color: #333;
 
         display: flex;
