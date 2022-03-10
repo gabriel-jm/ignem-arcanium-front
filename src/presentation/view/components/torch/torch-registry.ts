@@ -1,6 +1,7 @@
 import { IgnemElement } from '@/presentation/view'
 import { css, html } from 'lithen-tag-functions'
-import { torchIcon } from './torch-icon'
+import { torchLitIcon } from './torch-lit-icon'
+import { torchOffIcon } from './torch-off-icon'
 
 export class TorchRegistry extends IgnemElement {
   styling() {
@@ -75,7 +76,7 @@ export class TorchRegistry extends IgnemElement {
 
       .torch-icon {
         display: block;
-        width: 60px;
+        width: 4rem;
         fill: var(--off-color);
       }
 
@@ -87,6 +88,7 @@ export class TorchRegistry extends IgnemElement {
 
   render() {
     const isLit = this.getAttribute('is-lit')
+    const isTorchLit = isLit === 'true'
     const torchCharge = Number(this.getAttribute('torch-charge'))
     const list = Array.from({ length: 6 }).map((_value, index) => html`
       <li
@@ -95,8 +97,8 @@ export class TorchRegistry extends IgnemElement {
     `)
 
     return html`
-      <div class="torch-card ${isLit === 'true' && 'lit'}">
-        ${torchIcon('torch-icon')}
+      <div class="torch-card ${isTorchLit && 'lit'}">
+        ${isTorchLit ? torchLitIcon('torch-icon') : torchOffIcon('torch-icon')}
         <div>
           <div class="torch-owner">
             <h3>${this.getAttribute('character-name')}</h3>
