@@ -7,6 +7,6 @@ export interface MessageOnceListenerPayload {
 
 export type MessageOnceListener = (payload: MessageOnceListenerPayload) => void
 
-export interface AddMessageListenerOnceStore {
+export interface AddMessageListenerOnceClient {
   once(eventName: string, listener: MessageOnceListener): void
 }

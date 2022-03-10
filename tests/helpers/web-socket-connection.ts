@@ -1,12 +1,12 @@
 import { MessageOnceListenerPayload } from '@/infra/protocols'
 
-export function mockSendMessageStore() {
+export function mockSendMessageClient() {
   return {
     send: vi.fn()
   }
 }
 
-export function mockAddMessageListenerOnceStore(event: MessageOnceListenerPayload) {
+export function mockAddMessageListenerOnceClient(event: MessageOnceListenerPayload) {
   return {
     result: event,
     once: vi.fn((_eventName, listener) => {

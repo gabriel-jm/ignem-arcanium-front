@@ -1,11 +1,11 @@
 import { FindAllTorchRegistriesService, FindAllTorchRegistriesServiceResult } from '@/data/protocols'
 import { ServiceError } from '@/infra/errors'
-import { AddMessageListenerOnceStore, SendMessageStore } from '@/infra/protocols'
+import { AddMessageListenerOnceClient, SendMessageClient } from '@/infra/protocols'
 
 export class TorchRegistryService implements FindAllTorchRegistriesService {
   constructor(
-    private readonly addMessageListenerOnceStore: AddMessageListenerOnceStore,
-    private readonly sendMessageStore: SendMessageStore
+    private readonly addMessageListenerOnceStore: AddMessageListenerOnceClient,
+    private readonly sendMessageStore: SendMessageClient
   ) {}
   
   async findAll(): Promise<FindAllTorchRegistriesServiceResult[]> {

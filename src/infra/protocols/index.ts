@@ -1,2 +1,2 @@
-export * from './stores/send-message-store'
-export * from './stores/add-message-listener-once-store'
+export * from './web-socket/send-message-client'
+export * from './web-socket/add-message-listener-once-client'

@@ -4,6 +4,6 @@ export interface SendMessageStoreParams {
   data?: any
 }
 
-export interface SendMessageStore {
+export interface SendMessageClient {
   send(params: SendMessageStoreParams): void
 }
