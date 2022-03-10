@@ -21,3 +21,14 @@ export function mockCreateConnectionService() {
     create: vi.fn(() => Promise.resolve('any_connection_id'))
   }
 }
+
+export function mockCreateConnectionClient() {
+  const result = {
+    connectionId: 'any_connection_id'
+  }
+  
+  return {
+    result,
+    create: vi.fn(() => Promise.resolve(result))
+  }
+}
