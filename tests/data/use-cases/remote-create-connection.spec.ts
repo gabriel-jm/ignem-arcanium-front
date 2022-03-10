@@ -19,4 +19,12 @@ describe('RemoteCreateConnection', () => {
 
     expect(createConnectionServiceSpy.create).toHaveBeenCalledWith()
   })
+
+  it('should return the connection id on success', async () => {
+    const { sut, createConnectionServiceSpy } = makeSut()
+
+    const response = await sut.create()
+
+    expect(response).toBe(createConnectionServiceSpy.result)
+  })
 })

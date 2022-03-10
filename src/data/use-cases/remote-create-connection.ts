@@ -5,8 +5,8 @@ export class RemoteCreateConnection implements CreateConnection {
   constructor(private readonly createConnectionService: CreateConnectionService) {}
   
   async create(): Promise<string> {
-    await this.createConnectionService.create()
+    const connectionId = await this.createConnectionService.create()
 
-    return ''
+    return connectionId
   }
 }
