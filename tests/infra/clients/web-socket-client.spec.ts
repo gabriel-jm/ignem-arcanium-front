@@ -1,8 +1,9 @@
 import { WebSocketClient } from '@/infra/clients'
 import { mockNativeWebSocket } from '@/tests/helpers'
 
+const [WebSocketSpy, fakeWebSocketInstance] = mockNativeWebSocket()
+
 function makeSut() {
-  const [WebSocketSpy, fakeWebSocketInstance] = mockNativeWebSocket()
   const sut = WebSocketClient
 
   return {
@@ -77,7 +78,7 @@ describe('WebSocketClient', () => {
   })
 
   it('should call WebSocket connection send on send method', () => {
-    const { sut, fakeWebSocketInstance } = makeSut()
+    const { sut, WebSocketSpy, fakeWebSocketInstance } = makeSut()
     const instance = sut.getInstance()
 
     instance.send({
@@ -86,6 +87,7 @@ describe('WebSocketClient', () => {
       data: null
     })
 
+    expect(WebSocketSpy).toHaveBeenCalledWith('any_server_url')
     expect(fakeWebSocketInstance.send).toHaveBeenCalledWith(JSON.stringify({
       event: 'any_event_name',
       headers: {},
