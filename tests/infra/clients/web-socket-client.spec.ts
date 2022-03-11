@@ -29,4 +29,12 @@ describe('WebSocketClient', () => {
       expect.any(Function)
     )
   })
+
+  it('should return the same instance on every getInstance call', async () => {
+    const { sut } = makeSut()
+    const instance1 = sut.getInstance()
+    const instance2 = sut.getInstance()
+
+    expect(instance1).toBe(instance2)
+  })
 })
