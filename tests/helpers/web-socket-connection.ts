@@ -1,9 +1,10 @@
 import { MessageOnceListenerPayload } from '@/infra/protocols'
 import { SpyInstanceFn } from 'vitest'
 
-export function mockNativeWebSocket(): [SpyInstanceFn, Record<'addEventListener', SpyInstanceFn>] {
+export function mockNativeWebSocket(): [SpyInstanceFn, Record<'addEventListener' | 'send', SpyInstanceFn>] {
   const fakeWebSocketInstance = {
-    addEventListener: vi.fn()
+    addEventListener: vi.fn(),
+    send: vi.fn()
   }
   const WebSocketSpy = vi.spyOn(globalThis, 'WebSocket') as SpyInstanceFn
   WebSocketSpy.mockImplementation(() => fakeWebSocketInstance)

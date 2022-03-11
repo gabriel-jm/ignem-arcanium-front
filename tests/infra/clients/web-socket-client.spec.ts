@@ -55,4 +55,41 @@ describe('WebSocketClient', () => {
 
     expect(onceSpy).toHaveBeenCalledWith('accept-connection', expect.any(Function))
   })
+
+  it('should return the connection record on create success', async () => {
+    const { sut } = makeSut()
+    const instance = sut.getInstance()
+    const onceSpy = vi.spyOn(instance, 'once')
+    onceSpy.mockImplementation((_eventName, listener) => {
+      listener({
+        event: 'any_event_name',
+        statusCode: 200,
+        headers: {},
+        data: {
+          connectionId: 'any_connection_id'
+        }
+      })
+    })
+
+    const response = await instance.create()
+
+    expect(response).toEqual({ connectionId: 'any_connection_id' })
+  })
+
+  it('should call WebSocket connection send on send method', () => {
+    const { sut, fakeWebSocketInstance } = makeSut()
+    const instance = sut.getInstance()
+
+    instance.send({
+      event: 'any_event_name',
+      headers: {},
+      data: null
+    })
+
+    expect(fakeWebSocketInstance.send).toHaveBeenCalledWith(JSON.stringify({
+      event: 'any_event_name',
+      headers: {},
+      data: null
+    }))
+  })
 })
