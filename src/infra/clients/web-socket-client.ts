@@ -67,7 +67,7 @@ export class WebSocketClient implements WebSocketConnectionClient {
     this.#events.once[eventName] = listener
   }
 
-  create(): Promise<CreateConnectionClientResult> {
+  createConnection(): Promise<CreateConnectionClientResult> {
     return new Promise((resolve) => {
       this.once('accept-connection', messageData => {
         resolve(messageData.data as  { connectionId: string })

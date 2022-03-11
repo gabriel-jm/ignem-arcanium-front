@@ -17,7 +17,7 @@ describe('WebSocketConnectionService', () => {
 
     await sut.create()
 
-    expect(createConnectionClientSpy.create).toHaveBeenCalledWith()
+    expect(createConnectionClientSpy.createConnection).toHaveBeenCalledWith()
   })
 
   it('should return the connectionId from CreateConnectionClient result', async () => {

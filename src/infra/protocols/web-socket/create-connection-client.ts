@@ -3,5 +3,5 @@ export interface CreateConnectionClientResult {
 }
 
 export interface CreateConnectionClient {
-  create(): Promise<CreateConnectionClientResult>
+  createConnection(): Promise<CreateConnectionClientResult>
 }

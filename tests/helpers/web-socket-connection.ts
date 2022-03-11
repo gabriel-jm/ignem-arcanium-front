@@ -41,6 +41,6 @@ export function mockCreateConnectionClient() {
   
   return {
     result,
-    create: vi.fn(() => Promise.resolve(result))
+    createConnection: vi.fn(() => Promise.resolve(result))
   }
 }

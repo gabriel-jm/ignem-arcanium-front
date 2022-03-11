@@ -52,7 +52,7 @@ describe('WebSocketClient', () => {
       })
     })
 
-    await instance.create()
+    await instance.createConnection()
 
     expect(onceSpy).toHaveBeenCalledWith('accept-connection', expect.any(Function))
   })
@@ -72,7 +72,7 @@ describe('WebSocketClient', () => {
       })
     })
 
-    const response = await instance.create()
+    const response = await instance.createConnection()
 
     expect(response).toEqual({ connectionId: 'any_connection_id' })
   })
