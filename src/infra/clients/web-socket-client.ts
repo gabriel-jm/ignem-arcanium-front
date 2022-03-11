@@ -27,29 +27,12 @@ type WebSocketConnectionClient = (
 export class WebSocketClient implements WebSocketConnectionClient {
   static #instance: WebSocketClient | null = null
   static #serverUrl: string
-  #connection: WebSocket
+  #connection!: WebSocket
   #events: WebSocketClientEvents = {
     once: {}
   }
 
-  private constructor() {
-    this.#connection = new WebSocket(WebSocketClient.#serverUrl)
-
-    this.#connection.addEventListener('open', () => {
-      console.log('Web Socket Connection Stablished!')
-    })
-
-    this.#connection.addEventListener('message', receivedMessage => {
-      const messageData = JSON.parse(receivedMessage.data)
-
-      const eventName = String(messageData.event)
-
-      if (eventName in this.#events.once) {
-        this.#events.once[eventName]?.(messageData)
-        this.#events.once[eventName] = undefined
-      }
-    })
-  }
+  private constructor() {}
   
   static getInstance() {
     if (!WebSocketClient.#instance) {
@@ -67,7 +50,28 @@ export class WebSocketClient implements WebSocketConnectionClient {
     this.#events.once[eventName] = listener
   }
 
-  createConnection(): Promise<CreateConnectionClientResult> {
+  async createConnection(): Promise<CreateConnectionClientResult> {
+    if (!this.#connection) {
+      const connection = await this.#connectionAttempt(WebSocketClient.#serverUrl)
+
+      if (!connection) {
+        throw new Error('Cannot stablish a connection with the server')
+      }
+
+      connection.addEventListener('message', receivedMessage => {
+        const messageData = JSON.parse(receivedMessage.data)
+  
+        const eventName = String(messageData.event)
+  
+        if (eventName in this.#events.once) {
+          this.#events.once[eventName]?.(messageData)
+          this.#events.once[eventName] = undefined
+        }
+      })
+
+      this.#connection = connection
+    }
+    
     return new Promise((resolve) => {
       this.once('accept-connection', messageData => {
         resolve(messageData.data as  { connectionId: string })
@@ -83,5 +87,20 @@ export class WebSocketClient implements WebSocketConnectionClient {
     })
 
     this.#connection.send(message)
+  }
+
+  #connectionAttempt(serverUrl: string) {
+    return new Promise<WebSocket | null>((resolve) => {
+      const connection = new WebSocket(serverUrl)
+
+      connection.addEventListener('open', () => {
+        console.log('Web Socket Connection Stablished!')
+        resolve(connection)
+      })
+
+      connection.addEventListener('error', () => {
+        resolve(null)
+      })
+    })
   }
 }
