@@ -1,8 +1,9 @@
-import { HomePage, NotFoundPage, TorchesPage } from '@/presentation/view'
+import { makeHomePage } from '@/main/factories/pages'
+import { NotFoundPage, TorchesPage } from '@/presentation/view'
 import { router } from 'lithen-router'
 
 export const configRoutes = () => router.defineRoutes({
-  '/': new HomePage(),
+  '/': makeHomePage(),
   '/torches': new TorchesPage(),
   notFound: new NotFoundPage()
 })
