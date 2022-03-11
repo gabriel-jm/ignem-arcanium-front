@@ -37,4 +37,22 @@ describe('WebSocketClient', () => {
 
     expect(instance1).toBe(instance2)
   })
+
+  it('should call once with correct values on create method', async () => {
+    const { sut } = makeSut()
+    const instance = sut.getInstance()
+    const onceSpy = vi.spyOn(instance, 'once')
+    onceSpy.mockImplementation((_eventName, listener) => {
+      listener({
+        event: 'any_event_name',
+        statusCode: 200,
+        headers: {},
+        data: null
+      })
+    })
+
+    await instance.create()
+
+    expect(onceSpy).toHaveBeenCalledWith('accept-connection', expect.any(Function))
+  })
 })
