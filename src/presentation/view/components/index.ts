@@ -1,4 +1,6 @@
 export * from './menu-icon'
+export * from './check-circle-icon'
 export * from './header'
 export * from './wrapper'
 export * from './torch/torch-registry'
+export * from './notification'

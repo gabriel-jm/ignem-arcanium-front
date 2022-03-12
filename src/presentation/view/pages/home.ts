@@ -45,6 +45,7 @@ export class HomePage extends IgnemElement {
       <button class="btn" on-click=${onClick}>
         Login
       </button>
+      <ignem-notification />
     `
   }
 }
