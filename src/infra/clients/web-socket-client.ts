@@ -58,7 +58,7 @@ export class WebSocketClient implements WebSocketConnectionClient {
 
       connection.addEventListener('message', receivedMessage => {
         const messageData = JSON.parse(receivedMessage.data)
-  
+        
         const eventName = String(messageData.event)
   
         if (eventName in this.#events.once) {
@@ -72,7 +72,7 @@ export class WebSocketClient implements WebSocketConnectionClient {
     
     return new Promise((resolve) => {
       this.once('accept-connection', messageData => {
-        resolve(messageData.data as  { connectionId: string })
+        resolve(messageData.headers as  { connectionId: string })
       })
     })
   }
