@@ -32,11 +32,9 @@ export class WebSocketClient implements WebSocketConnectionClient {
     once: {}
   }
 
-  private constructor() {}
-  
-  static getInstance() {
+  constructor() {
     if (!WebSocketClient.#instance) {
-      WebSocketClient.#instance = new WebSocketClient()
+      WebSocketClient.#instance = this
     }
 
     return WebSocketClient.#instance
