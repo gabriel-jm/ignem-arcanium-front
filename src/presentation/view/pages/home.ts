@@ -1,5 +1,5 @@
 import { CreateConnection } from '@/domain/use-cases'
-import { IgnemElement } from '@/presentation/view'
+import { IgnemElement, IgnemNotification } from '@/presentation/view'
 import { router } from 'lithen-router'
 import { css, html } from 'lithen-tag-functions'
 
@@ -44,6 +44,15 @@ export class HomePage extends IgnemElement {
       <h1>Home</h1>
       <button class="btn" on-click=${onClick}>
         Login
+      </button>
+      <button on-click=${() => {
+        this.root.append(new IgnemNotification({
+          label: 'Created',
+          message: 'Item created with success',
+          type: 'warning'
+        }))
+      }}>
+        Show notification
       </button>
     `
   }

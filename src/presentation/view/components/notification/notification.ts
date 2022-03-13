@@ -3,17 +3,31 @@ import { html } from 'lithen-tag-functions'
 import { notificationStyles } from './notification-styles'
 
 interface IgnemNotificationProps {
-  title?: string
+  label?: string
   message?: string
+  type?: string
 }
 
 export class IgnemNotification extends IgnemElement {  
   #timeoutId: number | null = null
+  #mouseIsOver = false
+  #availableTypes = ['success', 'warning']
 
   constructor(props: IgnemNotificationProps = {}) {
     super()
-    props.title && this.setAttribute('title', props.title)
+    props.label && this.setAttribute('label', props.label)
     props.message && this.setAttribute('message', props.message)
+    props.type && this.setAttribute('type', props.type)
+    this.#colorize()
+    this.applyRender()
+  }
+
+  #colorize() {
+    const type = this.getAttribute('type') ?? ''
+
+    if (this.#availableTypes.includes(type)) {
+      this.classList.add(type)
+    }
   }
 
   hide = () => {
@@ -30,13 +44,14 @@ export class IgnemNotification extends IgnemElement {
         this.remove()
       }
 
-      if (event.animationName === 'show') {
+      if (event.animationName === 'show' && !this.#mouseIsOver) {
         const twoSecondsInMs = 2000
         this.#timeoutId = Number(setTimeout(this.hide, twoSecondsInMs))
       }
     })
 
     this.on('mouseenter', () => {
+      this.#mouseIsOver = true
       this.#timeoutId && clearTimeout(this.#timeoutId)
       this.#timeoutId = null
     })
@@ -45,14 +60,14 @@ export class IgnemNotification extends IgnemElement {
       !this.#timeoutId && setTimeout(this.hide, 800)
     })
 
-    const title = this.getAttribute('title') ?? 'Unknown'
+    const label = this.getAttribute('label') ?? 'Unknown'
     const message = this.getAttribute('message') ?? 'Unknown message'
 
     return html`
       <div class="notification-container">
         ${checkCircleIcon()}
         <div class="notification-content">
-          <h4>${title}</h4>
+          <h4>${label}</h4>
           <p>${message}</p>
         </div>
         <span on-click=${() => this.hide()}>&times;</span>
