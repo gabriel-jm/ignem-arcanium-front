@@ -49,7 +49,7 @@ export class HomePage extends IgnemElement {
         this.root.append(new IgnemNotification({
           label: 'Created',
           message: 'Item created with success',
-          type: 'warning'
+          type: 'success'
         }))
       }}>
         Show notification

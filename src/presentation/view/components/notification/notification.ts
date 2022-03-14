@@ -1,4 +1,4 @@
-import { checkCircleIcon, IgnemElement } from '@/presentation/view'
+import { alertIcon, checkCircleIcon, IgnemElement } from '@/presentation/view'
 import { html } from 'lithen-tag-functions'
 import { notificationStyles } from './notification-styles'
 
@@ -45,12 +45,14 @@ export class IgnemNotification extends IgnemElement {
       }
 
       if (event.animationName === 'show' && !this.#mouseIsOver) {
-        const twoSecondsInMs = 2000
+        console.log('set exit timeout')
+        const twoSecondsInMs = 2200
         this.#timeoutId = Number(setTimeout(this.hide, twoSecondsInMs))
       }
     })
 
-    this.on('mouseenter', () => {
+    this.on('mouseover', () => {
+      console.log('enter')
       this.#mouseIsOver = true
       this.#timeoutId && clearTimeout(this.#timeoutId)
       this.#timeoutId = null
@@ -62,10 +64,16 @@ export class IgnemNotification extends IgnemElement {
 
     const label = this.getAttribute('label') ?? 'Unknown'
     const message = this.getAttribute('message') ?? 'Unknown message'
+    const type = this.getAttribute('type') ?? 'none'
+
+    const iconsByType: Record<string, DocumentFragment> = {
+      success: checkCircleIcon(),
+      warning: alertIcon()
+    }
 
     return html`
       <div class="notification-container">
-        ${checkCircleIcon()}
+        ${iconsByType[type]}
         <div class="notification-content">
           <h4>${label}</h4>
           <p>${message}</p>

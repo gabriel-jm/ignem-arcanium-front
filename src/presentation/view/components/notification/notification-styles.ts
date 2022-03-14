@@ -14,12 +14,12 @@ export const notificationStyles = css`
 
   :host(.success) {
     --edge-bg-color: #212f21;
-    --icon-color: #417741;
+    --icon-color: #418841;
   }
 
   :host(.warning) {
-    --edge-bg-color: #2f2121;
-    --icon-color: #774141;
+    --edge-bg-color: #312121;
+    --icon-color: #884141;
   }
 
   :host(.hide) {
