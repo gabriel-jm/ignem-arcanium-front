@@ -97,4 +97,36 @@ describe('WebSocketClient', () => {
       })
     })
   })
+
+  describe('send()', () => {
+    it('should call send method from native WebSocket correctly when only the event is provided', () => {
+      const sut = new WebSocketClient()
+
+      sut.send({
+        event: 'any_event'
+      })
+
+      expect(fakeWebSocketInstance.send).toHaveBeenCalledWith(JSON.stringify({
+        event: 'any_event',
+        headers: {},
+        data: null
+      }))
+    })
+
+    it('should call send method from native WebSocket with specific passed values', () => {
+      const sut = new WebSocketClient()
+
+      sut.send({
+        event: 'any_event',
+        headers: { field: 'any_value' },
+        data: { message: 'any_message' }
+      })
+
+      expect(fakeWebSocketInstance.send).toHaveBeenCalledWith(JSON.stringify({
+        event: 'any_event',
+        headers: { field: 'any_value' },
+        data: { message: 'any_message' }
+      }))
+    })
+  })
 })

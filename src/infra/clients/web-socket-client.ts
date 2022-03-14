@@ -1,3 +1,4 @@
+import { WebSocketConnectionFailedError } from '@/infra/errors'
 import {
   AddMessageListenerOnceClient,
   CreateConnectionClient,
@@ -53,7 +54,7 @@ export class WebSocketClient implements WebSocketConnectionClient {
       const connection = await this.#connectionAttempt(WebSocketClient.#serverUrl)
 
       if (!connection) {
-        throw new Error('Cannot stablish a connection with the server')
+        throw new WebSocketConnectionFailedError()
       }
 
       connection.addEventListener('message', receivedMessage => {
