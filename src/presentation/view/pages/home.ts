@@ -48,8 +48,7 @@ export class HomePage extends IgnemElement {
       <button on-click=${() => {
         this.root.append(new IgnemNotification({
           label: 'Created',
-          message: 'Item created with success',
-          type: 'success'
+          message: 'Item created with success'
         }))
       }}>
         Show notification

@@ -1,4 +1,4 @@
-import { alertIcon, checkCircleIcon, IgnemElement } from '@/presentation/view'
+import { alertIcon, checkCircleIcon, IgnemElement, infoIcon } from '@/presentation/view'
 import { html } from 'lithen-tag-functions'
 import { notificationStyles } from './notification-styles'
 
@@ -18,34 +18,25 @@ export class IgnemNotification extends IgnemElement {
     props.label && this.setAttribute('label', props.label)
     props.message && this.setAttribute('message', props.message)
     props.type && this.setAttribute('type', props.type)
-    this.#colorize()
+    this.init()
     this.applyRender()
   }
 
-  #colorize() {
-    const type = this.getAttribute('type') ?? ''
+  init() {
+    this.#colorize()
 
-    if (this.#availableTypes.includes(type)) {
-      this.classList.add(type)
-    }
-  }
-
-  hide = () => {
-    this.classList.add('hide')
-  }
-  
-  styling() {
-    return notificationStyles
-  }
-  
-  render() {
     this.on('animationend', (event: AnimationEventInit) => {
+      console.log(event.animationName)
+
       if (event.animationName === 'hide') {
         this.remove()
       }
 
       if (event.animationName === 'show' && !this.#mouseIsOver) {
         console.log('set exit timeout')
+
+        if (this.#timeoutId) return
+
         const twoSecondsInMs = 2200
         this.#timeoutId = Number(setTimeout(this.hide, twoSecondsInMs))
       }
@@ -59,21 +50,42 @@ export class IgnemNotification extends IgnemElement {
     })
 
     this.on('mouseleave', () => {
+      this.#mouseIsOver = false
       !this.#timeoutId && setTimeout(this.hide, 800)
     })
+  }
 
+  #colorize() {
+    const type = this.getAttribute('type') ?? ''
+
+    if (this.#availableTypes.includes(type)) {
+      this.classList.add(type)
+    }
+  }
+
+  hide = () => {
+    console.log('hide called')
+    this.classList.add('hide')
+  }
+  
+  styling() {
+    return notificationStyles
+  }
+  
+  render() {
     const label = this.getAttribute('label') ?? 'Unknown'
     const message = this.getAttribute('message') ?? 'Unknown message'
     const type = this.getAttribute('type') ?? 'none'
 
     const iconsByType: Record<string, DocumentFragment> = {
       success: checkCircleIcon(),
-      warning: alertIcon()
+      warning: alertIcon(),
+      none: infoIcon(true)
     }
 
     return html`
       <div class="notification-container">
-        ${iconsByType[type]}
+        ${iconsByType[type] ?? iconsByType.none}
         <div class="notification-content">
           <h4>${label}</h4>
           <p>${message}</p>

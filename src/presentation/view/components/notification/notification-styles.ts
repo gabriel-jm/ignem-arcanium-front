@@ -3,7 +3,7 @@ import { css } from 'lithen-tag-functions'
 export const notificationStyles = css`
   :host {
     --edge-bg-color: #313131;
-    --icon-color: #aaa;
+    --icon-color: #bbb;
     --bg-color: #1a1a1a;
 
     position: fixed;
@@ -35,7 +35,11 @@ export const notificationStyles = css`
   .notification-container {
     display: flex;
     max-width: 400px;
-    background: linear-gradient(to top right, var(--edge-bg-color), var(--bg-color) 35%);
+    background: linear-gradient(
+      to top right,
+      var(--edge-bg-color),
+      var(--bg-color) 30%
+    );
     border: 1px solid #222;
     border-radius: 5px;
     padding: 16px 20px;
