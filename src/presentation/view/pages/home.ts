@@ -1,4 +1,5 @@
 import { CreateConnection } from '@/domain/use-cases'
+import { NotificationStore } from '@/presentation/stores'
 import { IgnemElement, IgnemNotification } from '@/presentation/view'
 import { router } from 'lithen-router'
 import { css, html } from 'lithen-tag-functions'
@@ -36,7 +37,10 @@ export class HomePage extends IgnemElement {
           router.goTo('/torches')
         }
       } catch (error) {
-        console.log('usecase error', error)
+        new NotificationStore().warn({
+          label: 'Error',
+          message: (error as Error).message
+        })
       }
     }
 
@@ -48,7 +52,8 @@ export class HomePage extends IgnemElement {
       <button on-click=${() => {
         this.root.append(new IgnemNotification({
           label: 'Created',
-          message: 'Item created with success'
+          message: 'Item created with success',
+          type: 'success'
         }))
       }}>
         Show notification
