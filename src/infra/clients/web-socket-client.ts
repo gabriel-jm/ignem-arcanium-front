@@ -72,7 +72,7 @@ export class WebSocketClient implements WebSocketConnectionClient {
     
     return new Promise((resolve) => {
       this.once('accept-connection', messageData => {
-        resolve(messageData.headers as  { connectionId: string })
+        resolve(messageData.headers as { connectionId: string })
       })
     })
   }
