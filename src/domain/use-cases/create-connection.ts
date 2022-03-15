@@ -1,3 +1,3 @@
 export interface CreateConnection {
-  create(): Promise<string>
+  create(): Promise<boolean>
 }
