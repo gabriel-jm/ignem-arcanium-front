@@ -1,7 +1,9 @@
 import { RemoteCreateConnection } from '@/data/use-cases'
 import { WebSocketClient } from '@/infra/clients'
 import { WebSocketConnectionService } from '@/infra/services'
+import { ErrorHandlingPresenterDecorator } from '@/main/decorators'
 import { CreateConnectionPresenter } from '@/presentation/presenters'
+import { NotificationStore } from '@/ui/stores'
 import { HomePage } from '@/ui/view'
 
 export function makeHomePage() {
@@ -11,7 +13,12 @@ export function makeHomePage() {
   const createConnection = new RemoteCreateConnection(wsConnectionService)
   const createConnectionPresenter = new CreateConnectionPresenter(createConnection)
 
-  const homePage = new HomePage(createConnectionPresenter)
+  const homePage = new HomePage(
+    new ErrorHandlingPresenterDecorator(
+      new NotificationStore(),
+      createConnectionPresenter
+    )
+  )
 
   return homePage
 }

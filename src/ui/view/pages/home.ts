@@ -1,13 +1,12 @@
-import { CreateConnectionPresenter } from '@/presentation/presenters'
-import { NotificationStore } from '@/ui/stores'
+import { Presenter } from '@/presentation/protocols'
 import { IgnemElement, IgnemNotification } from '@/ui/view'
 import { router } from 'lithen-router'
 import { css, html } from 'lithen-tag-functions'
 
 export class HomePage extends IgnemElement {
-  #createConnectionPresenter: CreateConnectionPresenter
+  #createConnectionPresenter: Presenter
   
-  constructor(createConnectionPresenter: CreateConnectionPresenter) {
+  constructor(createConnectionPresenter: Presenter) {
     super()
     this.#createConnectionPresenter = createConnectionPresenter
     this.applyRender()
@@ -26,19 +25,12 @@ export class HomePage extends IgnemElement {
 
   render() {
     const onClick = async () => {
-      try {
-        const connectionId = await this.#createConnectionPresenter.handle()
+      const connectionResult = await this.#createConnectionPresenter.handle()
 
-        console.log({ connectionId })
+      console.log({ connectionResult })
 
-        if(connectionId) {
-          router.goTo('/torches')
-        }
-      } catch (error) {
-        new NotificationStore().warn({
-          label: 'Error',
-          message: (error as Error).message
-        })
+      if (connectionResult.ok) {
+        router.goTo('/torches')
       }
     }
 
