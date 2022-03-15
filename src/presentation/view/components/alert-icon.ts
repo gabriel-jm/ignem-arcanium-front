@@ -1,18 +1,10 @@
 import './wrapper'
 import { css, html } from 'lithen-tag-functions'
+import { iconsStyles } from '@/presentation/view'
 
 export function alertIcon() {
   const styles = css`
-    :host {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-
-    svg {
-      width: 100%;
-      height: 100%;
-    }
+    ${iconsStyles}
     
     svg circle {
       stroke-dasharray: 100;
@@ -24,12 +16,6 @@ export function alertIcon() {
       stroke-dasharray: 100;
       stroke-dashoffset: 100;
       animation: dash 1.2s ease-out 1.5s forwards;
-    }
-
-    @keyframes dash {
-      to {
-        stroke-dashoffset: 0;
-      }
     }
   `
 
