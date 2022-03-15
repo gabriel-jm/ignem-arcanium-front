@@ -1,6 +1,7 @@
 import { RemoteCreateConnection } from '@/data/use-cases'
 import { WebSocketClient } from '@/infra/clients'
 import { WebSocketConnectionService } from '@/infra/services'
+import { CreateConnectionPresenter } from '@/presentation/presenters'
 import { HomePage } from '@/ui/view'
 
 export function makeHomePage() {
@@ -8,7 +9,9 @@ export function makeHomePage() {
   const wsClient = new WebSocketClient()
   const wsConnectionService = new WebSocketConnectionService(wsClient as WebSocketClient)
   const createConnection = new RemoteCreateConnection(wsConnectionService)
-  const homePage = new HomePage(createConnection)
+  const createConnectionPresenter = new CreateConnectionPresenter(createConnection)
+
+  const homePage = new HomePage(createConnectionPresenter)
 
   return homePage
 }

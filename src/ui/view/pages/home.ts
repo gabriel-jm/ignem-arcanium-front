@@ -1,15 +1,15 @@
-import { CreateConnection } from '@/domain/use-cases'
+import { CreateConnectionPresenter } from '@/presentation/presenters'
 import { NotificationStore } from '@/ui/stores'
 import { IgnemElement, IgnemNotification } from '@/ui/view'
 import { router } from 'lithen-router'
 import { css, html } from 'lithen-tag-functions'
 
 export class HomePage extends IgnemElement {
-  #createConnection: CreateConnection
+  #createConnectionPresenter: CreateConnectionPresenter
   
-  constructor(createConnection: CreateConnection) {
+  constructor(createConnectionPresenter: CreateConnectionPresenter) {
     super()
-    this.#createConnection = createConnection
+    this.#createConnectionPresenter = createConnectionPresenter
     this.applyRender()
   }
 
@@ -26,10 +26,8 @@ export class HomePage extends IgnemElement {
 
   render() {
     const onClick = async () => {
-      console.log('rodou')
-      
       try {
-        const connectionId = await this.#createConnection.create()
+        const connectionId = await this.#createConnectionPresenter.handle()
 
         console.log({ connectionId })
 
