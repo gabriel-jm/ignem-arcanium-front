@@ -1,7 +1,7 @@
 import { CreateConnection } from '@/domain/use-cases'
-import { Controller } from '@/presentation/protocols'
+import { Presenter } from '@/presentation/protocols'
 
-export class CreateConnectionController implements Controller {
+export class CreateConnectionPresenter implements Presenter {
   constructor(private readonly createConnection: CreateConnection) {}
   
   async handle() {

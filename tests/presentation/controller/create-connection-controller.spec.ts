@@ -1,9 +1,9 @@
-import { CreateConnectionController } from '@/presentation/controllers'
+import { CreateConnectionPresenter } from '@/presentation/presenters'
 import { mockCreateConnection } from '@/tests/helpers'
 
 function makeSut() {
   const createConnectionSpy = mockCreateConnection()
-  const sut = new CreateConnectionController(createConnectionSpy)
+  const sut = new CreateConnectionPresenter(createConnectionSpy)
 
   return {
     sut,
@@ -11,7 +11,7 @@ function makeSut() {
   }
 }
 
-describe('CreateConnectionController', () => {
+describe('CreateConnectionPresenter', () => {
   it('should call CreateConnection use case with correct values', async () => {
     const { sut, createConnectionSpy } = makeSut()
 
