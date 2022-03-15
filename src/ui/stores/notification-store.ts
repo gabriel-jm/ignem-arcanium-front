@@ -1,11 +1,7 @@
+import { WarningNotificationStore } from '@/ui/protocols'
 import { IgnemNotification } from '@/ui/view'
 
-export interface WarningNotificationParams {
-  label: string
-  message: string
-}
-
-export class NotificationStore {
+export class NotificationStore implements WarningNotificationStore {
   static #instance: NotificationStore
   
   constructor() {
@@ -16,10 +12,10 @@ export class NotificationStore {
     return NotificationStore.#instance
   }
 
-  warn(warningData: WarningNotificationParams) {
+  warn(label: string, message: string) {
     document.body.append(new IgnemNotification({
-      label: warningData.label,
-      message: warningData.message,
+      label,
+      message,
       type: 'warning'
     }))
   }
