@@ -1,5 +1,5 @@
 import { Presenter } from '@/presentation/protocols'
-import { IgnemElement, IgnemNotification } from '@/ui/view'
+import { IgnemElement } from '@/ui/view'
 import { router } from 'lithen-router'
 import { css, html } from 'lithen-tag-functions'
 
@@ -27,8 +27,6 @@ export class HomePage extends IgnemElement {
     const onClick = async () => {
       const connectionResult = await this.#createConnectionPresenter.handle()
 
-      console.log({ connectionResult })
-
       if (connectionResult.ok) {
         router.goTo('/torches')
       }
@@ -38,15 +36,6 @@ export class HomePage extends IgnemElement {
       <h1>Home</h1>
       <button class="btn" on-click=${onClick}>
         Login
-      </button>
-      <button on-click=${() => {
-        this.root.append(new IgnemNotification({
-          label: 'Created',
-          message: 'Item created with success',
-          type: 'success'
-        }))
-      }}>
-        Show notification
       </button>
     `
   }
