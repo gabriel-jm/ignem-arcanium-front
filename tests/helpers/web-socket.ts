@@ -29,8 +29,7 @@ export function mockAddMessageListenerOnceClient(event: MessageOnceListenerPaylo
 
 export function mockCreateConnectionService() {
   return {
-    result: 'any_connection_id',
-    create: vi.fn(() => Promise.resolve('any_connection_id'))
+    create: vi.fn(() => Promise.resolve())
   }
 }
 

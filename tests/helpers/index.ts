@@ -1,2 +1,3 @@
 export * from './torch-registries'
-export * from './web-socket-connection'
+export * from './web-socket'
+export * from './connection'
