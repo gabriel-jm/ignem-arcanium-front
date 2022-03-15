@@ -1,4 +1,4 @@
-import './wrapper'
+import '../wrapper'
 import { css, html } from 'lithen-tag-functions'
 import { iconsStyles } from '@/presentation/view'
 

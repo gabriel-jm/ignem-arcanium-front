@@ -1,18 +1,18 @@
-import './wrapper'
+import '../wrapper'
 import { css, html } from 'lithen-tag-functions'
 import { iconsStyles } from '@/presentation/view'
 
-export function infoIcon(animate = false) {
+export function alertIcon() {
   const styles = css`
     ${iconsStyles}
     
-    :host(.animate) svg circle {
+    svg circle {
       stroke-dasharray: 100;
       stroke-dashoffset: 100;
       animation: dash 800ms ease-out 1s forwards;
     }
 
-    :host(.animate) svg line {
+    svg line {
       stroke-dasharray: 100;
       stroke-dashoffset: 100;
       animation: dash 1.2s ease-out 1.5s forwards;
@@ -20,7 +20,7 @@ export function infoIcon(animate = false) {
   `
 
   return html`
-    <ignem-wrapper ${animate && 'class="animate"'} css="${styles}">
+    <ignem-wrapper css="${styles}">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="24"
@@ -33,8 +33,8 @@ export function infoIcon(animate = false) {
         stroke-linejoin="round"
       >
         <circle cx="12" cy="12" r="10"></circle>
-        <line x1="12" y1="16" x2="12" y2="12"></line>
-        <line x1="12" y1="8" x2="12.01" y2="8"></line>
+        <line x1="12" y1="8" x2="12" y2="12"></line>
+        <line x1="12" y1="16" x2="12.01" y2="16"></line>
       </svg>
     </ignem-wrapper>
   `

@@ -1,4 +1,4 @@
-import './wrapper'
+import '../wrapper'
 import { css, html } from 'lithen-tag-functions'
 
 export function menuIcon(className?: string) {
