@@ -19,4 +19,16 @@ describe('CreateConnectionController', () => {
 
     expect(createConnectionSpy.create).toHaveBeenCalledWith()
   })
+
+  it('should return an ok response on success', async () => {
+    const { sut } = makeSut()
+
+    const response = await sut.handle()
+
+    expect(response).toEqual({
+      ok: true,
+      data: null,
+      validationErrors: null
+    })
+  })
 })
