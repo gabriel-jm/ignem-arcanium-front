@@ -1,5 +1,5 @@
-import { IgnemElement, menuIcon } from '@/presentation/view'
-import { containerStyles } from '@/presentation/view/styles'
+import { IgnemElement, menuIcon } from '@/ui/view'
+import { containerStyles } from '@/ui/view/styles'
 import { css, html } from 'lithen-tag-functions'
 
 export class IgnemHeader extends IgnemElement {

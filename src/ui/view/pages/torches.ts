@@ -1,5 +1,5 @@
-import { IgnemElement } from '@/presentation/view'
-import { containerStyles } from '@/presentation/view/styles'
+import { IgnemElement } from '@/ui/view'
+import { containerStyles } from '@/ui/view/styles'
 import { css, html } from 'lithen-tag-functions'
 
 const list = [

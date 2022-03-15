@@ -1,4 +1,4 @@
-import { alertIcon, checkCircleIcon, IgnemElement, infoIcon } from '@/presentation/view'
+import { alertIcon, checkCircleIcon, IgnemElement, infoIcon } from '@/ui/view'
 import { html } from 'lithen-tag-functions'
 import { notificationStyles } from './notification-styles'
 

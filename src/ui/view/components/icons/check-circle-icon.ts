@@ -1,21 +1,21 @@
 import '../wrapper'
 import { css, html } from 'lithen-tag-functions'
-import { iconsStyles } from '@/presentation/view'
+import { iconsStyles } from '@/ui/view'
 
-export function alertIcon() {
+export function checkCircleIcon() {
   const styles = css`
     ${iconsStyles}
-    
-    svg circle {
+
+    svg path {
       stroke-dasharray: 100;
       stroke-dashoffset: 100;
       animation: dash 800ms ease-out 1s forwards;
     }
 
-    svg line {
+    svg polyline {
       stroke-dasharray: 100;
       stroke-dashoffset: 100;
-      animation: dash 1.2s ease-out 1.5s forwards;
+      animation: dash 900ms ease-out 1.5s forwards;
     }
   `
 
@@ -32,9 +32,8 @@ export function alertIcon() {
         stroke-linecap="round"
         stroke-linejoin="round"
       >
-        <circle cx="12" cy="12" r="10"></circle>
-        <line x1="12" y1="8" x2="12" y2="12"></line>
-        <line x1="12" y1="16" x2="12.01" y2="16"></line>
+        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+        <polyline points="8 11 12 15 22 4"></polyline>
       </svg>
     </ignem-wrapper>
   `

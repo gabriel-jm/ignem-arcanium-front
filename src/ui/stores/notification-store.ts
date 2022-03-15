@@ -1,4 +1,4 @@
-import { IgnemNotification } from '@/presentation/view'
+import { IgnemNotification } from '@/ui/view'
 
 export interface WarningNotificationParams {
   label: string

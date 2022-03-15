@@ -1,6 +1,6 @@
 import { CreateConnection } from '@/domain/use-cases'
-import { NotificationStore } from '@/presentation/stores'
-import { IgnemElement, IgnemNotification } from '@/presentation/view'
+import { NotificationStore } from '@/ui/stores'
+import { IgnemElement, IgnemNotification } from '@/ui/view'
 import { router } from 'lithen-router'
 import { css, html } from 'lithen-tag-functions'
 

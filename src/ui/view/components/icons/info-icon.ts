@@ -1,6 +1,6 @@
 import '../wrapper'
 import { css, html } from 'lithen-tag-functions'
-import { iconsStyles } from '@/presentation/view'
+import { iconsStyles } from '@/ui/view'
 
 export function infoIcon(animate = false) {
   const styles = css`

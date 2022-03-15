@@ -1,4 +1,4 @@
-import { IgnemElement } from '@/presentation/view'
+import { IgnemElement } from '@/ui/view'
 import { css, html } from 'lithen-tag-functions'
 import { torchLitIcon } from './torch-lit-icon'
 import { torchOffIcon } from './torch-off-icon'

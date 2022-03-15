@@ -1,4 +1,4 @@
-import { IgnemElement } from '@/presentation/view'
+import { IgnemElement } from '@/ui/view'
 
 /**
  * @attr css

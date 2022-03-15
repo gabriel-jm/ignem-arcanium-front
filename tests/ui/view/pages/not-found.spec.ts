@@ -1,4 +1,4 @@
-import { NotFoundPage } from '@/presentation/view'
+import { NotFoundPage } from '@/ui/view'
 import { router } from 'lithen-router'
 
 function makeSut() {

@@ -1,4 +1,4 @@
-import { RootPage } from '@/presentation/view'
+import { RootPage } from '@/ui/view'
 import { router } from 'lithen-router'
 
 function makeSut() {

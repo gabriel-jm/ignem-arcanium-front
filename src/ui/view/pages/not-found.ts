@@ -1,4 +1,4 @@
-import { IgnemElement } from '@/presentation/view'
+import { IgnemElement } from '@/ui/view'
 import { router } from 'lithen-router'
 import { css, html } from 'lithen-tag-functions'
 

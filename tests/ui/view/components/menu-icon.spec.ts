@@ -1,4 +1,4 @@
-import { menuIcon } from '@/presentation/view'
+import { menuIcon } from '@/ui/view'
 
 describe('MenuIcon', () => {
   it('should add correct className when it is passed', () => {
