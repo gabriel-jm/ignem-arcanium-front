@@ -1,3 +1,3 @@
 export interface CreateConnectionService {
-  create(): Promise<string>
+  create(): Promise<void>
 }

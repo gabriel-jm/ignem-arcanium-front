@@ -19,12 +19,4 @@ describe('WebSocketConnectionService', () => {
 
     expect(createConnectionClientSpy.createConnection).toHaveBeenCalledWith()
   })
-
-  it('should return the connectionId from CreateConnectionClient result', async () => {
-    const { sut, createConnectionClientSpy } = makeSut()
-
-    const response = await sut.create()
-
-    expect(response).toBe(createConnectionClientSpy.result.connectionId)
-  })
 })
