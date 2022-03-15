@@ -77,8 +77,10 @@ describe('WebSocketClient', () => {
         expect.any(Function)
       )
     })
+  })
 
-    it('should return the connection id on success', async () => {
+  describe('send()', () => {
+    it('should call send method from native WebSocket correctly when only the event is provided', () => {
       const sut = new WebSocketClient()
       setTimeout(() => {
         onMessageCallback({
@@ -90,25 +92,15 @@ describe('WebSocketClient', () => {
         })
       }, 200)
 
-      const response = await sut.createConnection()
-
-      expect(response).toEqual({
-        connectionId: 'any_connection_id'
-      })
-    })
-  })
-
-  describe('send()', () => {
-    it('should call send method from native WebSocket correctly when only the event is provided', () => {
-      const sut = new WebSocketClient()
-
       sut.send({
         event: 'any_event'
       })
 
       expect(fakeWebSocketInstance.send).toHaveBeenCalledWith(JSON.stringify({
         event: 'any_event',
-        headers: {},
+        headers: {
+          connectionId: 'any_connection_id'
+        },
         data: null
       }))
     })
@@ -124,7 +116,7 @@ describe('WebSocketClient', () => {
 
       expect(fakeWebSocketInstance.send).toHaveBeenCalledWith(JSON.stringify({
         event: 'any_event',
-        headers: { field: 'any_value' },
+        headers: { connectionId: 'any_connection_id', field: 'any_value' },
         data: { message: 'any_message' }
       }))
     })

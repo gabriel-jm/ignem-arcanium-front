@@ -35,12 +35,7 @@ export function mockCreateConnectionService() {
 }
 
 export function mockCreateConnectionClient() {
-  const result = {
-    connectionId: 'any_connection_id'
-  }
-  
   return {
-    result,
-    createConnection: vi.fn(() => Promise.resolve(result))
+    createConnection: vi.fn(() => Promise.resolve())
   }
 }

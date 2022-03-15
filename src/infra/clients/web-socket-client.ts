@@ -2,7 +2,6 @@ import { WebSocketConnectionFailedError } from '@/infra/errors'
 import {
   AddMessageListenerOnceClient,
   CreateConnectionClient,
-  CreateConnectionClientResult,
   MessageOnceListener,
   SendMessageClient,
   SendMessageStoreParams
@@ -29,6 +28,7 @@ export class WebSocketClient implements WebSocketConnectionClient {
   static #instance: WebSocketClient | null = null
   static #serverUrl: string
   #connection!: WebSocket
+  #connectionId: string | null = null
   #events: WebSocketClientEvents = {
     once: {}
   }
@@ -49,7 +49,7 @@ export class WebSocketClient implements WebSocketConnectionClient {
     this.#events.once[eventName] = listener
   }
 
-  async createConnection(): Promise<CreateConnectionClientResult> {
+  async createConnection() {
     if (!this.#connection) {
       const connection = await this.#connectionAttempt(WebSocketClient.#serverUrl)
 
@@ -71,9 +71,12 @@ export class WebSocketClient implements WebSocketConnectionClient {
       this.#connection = connection
     }
     
-    return new Promise((resolve) => {
+    return new Promise<void>((resolve) => {
       this.once('accept-connection', messageData => {
-        resolve(messageData.headers as { connectionId: string })
+        const headers = messageData.headers as { connectionId: string }
+        this.#connectionId = headers.connectionId
+
+        resolve()
       })
     })
   }
@@ -81,7 +84,10 @@ export class WebSocketClient implements WebSocketConnectionClient {
   send(params: SendMessageStoreParams): void {
     const message = JSON.stringify({
       event: params.event,
-      headers: params.headers ?? {},
+      headers: {
+        connectionId: this.#connectionId,
+        ...params.headers
+      },
       data: params.data ?? null
     })
 
