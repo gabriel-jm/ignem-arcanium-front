@@ -2,34 +2,14 @@ import { IgnemElement } from '@/ui/view'
 import { containerStyles } from '@/ui/view/styles'
 import { css, html } from 'lithen-tag-functions'
 
-const list = [
-  {
-    characterName: 'Brunhard',
-    torchCount: 1,
-    torchCharge: 3,
-    isLit: true
-  },
-  {
-    characterName: 'Raven',
-    torchCount: 2,
-    torchCharge: 5,
-    isLit: true
-  },
-  {
-    characterName: 'Alí',
-    torchCount: 0,
-    torchCharge: 0,
-    isLit: false
-  },
-  {
-    characterName: 'Novato',
-    torchCount: 4,
-    torchCharge: 1,
-    isLit: false
-  }
-]
-
 export class TorchesPage extends IgnemElement {
+  #list: Array<any> = []
+
+  constructor() {
+    super()
+    this.applyRender()
+  }
+
   styling() {
     return css`
       ${containerStyles}
@@ -59,6 +39,12 @@ export class TorchesPage extends IgnemElement {
         flex: 1;
         flex-basis: 300px;
       }
+
+      .empty-torch-list {
+        text-align: center;
+        font-size: 1.6rem;
+        color: var(--unavailable-font-color);
+      }
     `
   }
 
@@ -69,7 +55,7 @@ export class TorchesPage extends IgnemElement {
       <section class="container">
         <h2 class="torches-title">Torches</h2>
         <div class="torch-list">
-          ${list.map(item => {
+          ${this.#list.map(item => {
             return html`
               <ignem-torch-registry
                 character-name="${item.characterName}"
@@ -80,6 +66,11 @@ export class TorchesPage extends IgnemElement {
             `
           })}
         </div>
+        ${!this.#list.length && (
+          html`
+            <p class="empty-torch-list">No torches registred!</p>
+          `
+        )}
       </section>
     `
   }
