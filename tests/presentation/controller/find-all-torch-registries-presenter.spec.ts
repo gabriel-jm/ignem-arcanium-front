@@ -19,4 +19,16 @@ describe('FindAllTorchRegistriesPresenter', () => {
 
     expect(findAllTorchRegistriesSpy.findAll).toHaveBeenCalledWith()
   })
+
+  it('should return a success response with the torch registries list', async () => {
+    const { sut, findAllTorchRegistriesSpy } = makeSut()
+
+    const response = await sut.handle()
+
+    expect(response).toEqual({
+      ok: true,
+      data: findAllTorchRegistriesSpy.result,
+      validationErrors: null
+    })
+  })
 })

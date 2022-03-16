@@ -5,8 +5,12 @@ export class FindAllTorchRegistriesPresenter implements Presenter {
   constructor(private readonly findAllTorchRegistries: FindAllTorchRegistries) {}
 
   async handle(): Promise<PresenterResult<unknown>> {
-    await this.findAllTorchRegistries.findAll()
+    const torchRegistries = await this.findAllTorchRegistries.findAll()
 
-    return {} as PresenterResult
+    return {
+      ok: true,
+      data: torchRegistries,
+      validationErrors: null
+    }
   }
 }
