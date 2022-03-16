@@ -26,15 +26,11 @@ export class IgnemNotification extends IgnemElement {
     this.#colorize()
 
     this.on('animationend', (event: AnimationEventInit) => {
-      console.log(event.animationName)
-
       if (event.animationName === 'hide') {
         this.remove()
       }
 
       if (event.animationName === 'show' && !this.#mouseIsOver) {
-        console.log('set exit timeout')
-
         if (this.#timeoutId) return
 
         const twoSecondsInMs = 2200
@@ -43,7 +39,6 @@ export class IgnemNotification extends IgnemElement {
     })
 
     this.on('mouseover', () => {
-      console.log('enter')
       this.#mouseIsOver = true
       this.#timeoutId && clearTimeout(this.#timeoutId)
       this.#timeoutId = null
@@ -63,10 +58,7 @@ export class IgnemNotification extends IgnemElement {
     }
   }
 
-  hide = () => {
-    console.log('hide called')
-    this.classList.add('hide')
-  }
+  hide = () => this.classList.add('hide')
   
   styling() {
     return notificationStyles

@@ -3,7 +3,7 @@ import { css, html } from 'lithen-tag-functions'
 import { torchLitIcon } from './torch-lit-icon'
 import { torchOffIcon } from './torch-off-icon'
 
-export class TorchRegistry extends IgnemElement {
+export class IgnemTorchRegistry extends IgnemElement {
   styling() {
     return css`
       .torch-card {
@@ -113,4 +113,4 @@ export class TorchRegistry extends IgnemElement {
   }
 }
 
-customElements.define('ignem-torch-registry', TorchRegistry)
+customElements.define('ignem-torch-registry', IgnemTorchRegistry)

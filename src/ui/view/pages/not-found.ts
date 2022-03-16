@@ -2,7 +2,7 @@ import { IgnemElement } from '@/ui/view'
 import { router } from 'lithen-router'
 import { css, html } from 'lithen-tag-functions'
 
-export class NotFoundPage extends IgnemElement {
+export class IgnemNotFoundPage extends IgnemElement {
   styling() {
     return css`
       :host {
@@ -24,4 +24,4 @@ export class NotFoundPage extends IgnemElement {
   }
 }
 
-customElements.define('ignem-not-found', NotFoundPage)
+customElements.define('ignem-not-found', IgnemNotFoundPage)

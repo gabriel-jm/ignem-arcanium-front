@@ -1,8 +1,8 @@
-import { NotFoundPage } from '@/ui/view'
+import { IgnemNotFoundPage } from '@/ui/view'
 import { router } from 'lithen-router'
 
 function makeSut() {
-  const sut = new NotFoundPage()
+  const sut = new IgnemNotFoundPage()
   const routerSpy = {
     goTo: vi.spyOn(router, 'goTo')
   }
@@ -13,7 +13,7 @@ function makeSut() {
   }
 }
 
-describe('NotFoundPage', () => {
+describe('IgnemNotFoundPage', () => {
   it('should call router.goTo on button click', () => {
     const { sut, routerSpy } = makeSut()
 

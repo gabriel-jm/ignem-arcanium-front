@@ -3,7 +3,7 @@ import { IgnemElement } from '@/ui/view'
 import { router } from 'lithen-router'
 import { css, html } from 'lithen-tag-functions'
 
-export class HomePage extends IgnemElement {
+export class IgnemHomePage extends IgnemElement {
   #createConnectionPresenter: Presenter
   
   constructor(createConnectionPresenter: Presenter) {
@@ -41,4 +41,4 @@ export class HomePage extends IgnemElement {
   }
 }
 
-customElements.define('ignem-home', HomePage)
+customElements.define('ignem-home', IgnemHomePage)

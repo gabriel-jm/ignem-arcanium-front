@@ -1,4 +1,4 @@
-import { RootPage } from '@/ui/view'
+import { IgnemRoot } from '@/ui/view'
 import { router } from 'lithen-router'
 
 function makeSut() {
@@ -9,7 +9,7 @@ function makeSut() {
     onNavigate: vi.spyOn(router, 'onNavigate'),
     matchRoute
   }
-  const sut = new RootPage()
+  const sut = new IgnemRoot()
 
   return {
     sut,
@@ -17,7 +17,7 @@ function makeSut() {
   }
 }
 
-describe('RootPage', () => {
+describe('IgnemRoot', () => {
   it('should call router.onNavigate and router.matchRoute on window load', () => {
     const { routerSpy } = makeSut()
 

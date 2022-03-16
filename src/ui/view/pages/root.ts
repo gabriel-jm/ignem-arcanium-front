@@ -1,7 +1,7 @@
 import { IgnemElement } from '@/ui/view'
 import { router } from 'lithen-router'
 
-export class RootPage extends IgnemElement {
+export class IgnemRoot extends IgnemElement {
   constructor() {
     super()
     window.onload = () => this.init()
@@ -22,4 +22,4 @@ export class RootPage extends IgnemElement {
   }
 }
 
-customElements.define('ignem-root', RootPage)
+customElements.define('ignem-root', IgnemRoot)

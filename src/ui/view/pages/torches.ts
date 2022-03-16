@@ -2,7 +2,7 @@ import { IgnemElement } from '@/ui/view'
 import { containerStyles } from '@/ui/view/styles'
 import { css, html } from 'lithen-tag-functions'
 
-export class TorchesPage extends IgnemElement {
+export class IgnemTorchesPage extends IgnemElement {
   #list: Array<any> = []
 
   constructor() {
@@ -76,4 +76,4 @@ export class TorchesPage extends IgnemElement {
   }
 }
 
-customElements.define('ignem-torches', TorchesPage)
+customElements.define('ignem-torches', IgnemTorchesPage)
