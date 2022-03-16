@@ -14,3 +14,12 @@ export function mockFindAllTorchRegistriesService() {
     findAll: vi.fn(() => Promise.resolve(result))
   }
 }
+
+export function mockFindAllTorchRegistries() {
+  const result = [mockTorchRegistry()]
+  
+  return {
+    result,
+    findAll: vi.fn(() => Promise.resolve(result))
+  }
+}
