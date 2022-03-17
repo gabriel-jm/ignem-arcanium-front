@@ -1,13 +1,51 @@
+import { Presenter } from '@/presentation/protocols'
 import { IgnemElement } from '@/ui/view'
 import { containerStyles } from '@/ui/view/styles'
 import { css, html } from 'lithen-tag-functions'
 
-export class IgnemTorchesPage extends IgnemElement {
-  #list: Array<any> = []
+interface TorchRegistry {
+  id: string
+  characterName: string
+  torchCount: number
+  torchCharge: number
+  isLit: string
+}
 
-  constructor() {
+export class IgnemTorchesPage extends IgnemElement {
+  #findAllTorchRegistriesPresenter: Presenter
+
+  constructor(findAllTorchRegistriesPresenter: Presenter) {
     super()
+    this.#findAllTorchRegistriesPresenter = findAllTorchRegistriesPresenter
     this.applyRender()
+  }
+
+  async connectedCallback() {
+    const findResult = await this.#findAllTorchRegistriesPresenter.handle()
+    const data = findResult.data as TorchRegistry[]
+
+    if (!findResult.ok || !data?.length) {
+      this.select('.container')?.append(
+        html`
+          <p class="empty-torch-list">No torches registred!</p>
+        `
+      )
+
+      return
+    }
+
+    const torchRegistries = data.map(item => {
+      return html`
+        <ignem-torch-registry
+          character-name="${item.characterName}"
+          torch-count="${item.torchCount.toString()}"
+          torch-charge="${item.torchCharge.toString()}"
+          is-lit="${item.isLit.toString()}"
+        />
+      `
+    })
+
+    this.select('.torch-list')?.append(...torchRegistries)
   }
 
   styling() {
@@ -54,23 +92,7 @@ export class IgnemTorchesPage extends IgnemElement {
 
       <section class="container">
         <h2 class="torches-title">Torches</h2>
-        <div class="torch-list">
-          ${this.#list.map(item => {
-            return html`
-              <ignem-torch-registry
-                character-name="${item.characterName}"
-                torch-count="${item.torchCount.toString()}"
-                torch-charge="${item.torchCharge.toString()}"
-                is-lit="${item.isLit.toString()}"
-              />
-            `
-          })}
-        </div>
-        ${!this.#list.length && (
-          html`
-            <p class="empty-torch-list">No torches registred!</p>
-          `
-        )}
+        <div class="torch-list"></div>
       </section>
     `
   }
