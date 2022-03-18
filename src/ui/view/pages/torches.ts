@@ -24,26 +24,20 @@ export class IgnemTorchesPage extends IgnemElement {
     const findResult = await this.#findAllTorchRegistriesPresenter.handle()
     const data = findResult.data as TorchRegistry[]
 
-    if (!findResult.ok || !data?.length) {
-      this.select('.container')?.append(
-        html`
-          <p class="empty-torch-list">No torches registred!</p>
-        `
-      )
-
-      return
-    }
+    if (!findResult.ok || !data?.length) return
 
     const torchRegistries = data.map(item => {
       return html`
         <ignem-torch-registry
           character-name="${item.characterName}"
-          torch-count="${item.torchCount.toString()}"
-          torch-charge="${item.torchCharge.toString()}"
-          is-lit="${item.isLit.toString()}"
+          torch-count="${item.torchCount}"
+          torch-charge="${item.torchCharge}"
+          is-lit="${item.isLit}"
         />
       `
     })
+
+    this.select('.empty-torch-list')?.remove()
 
     this.select('.torch-list')?.append(...torchRegistries)
   }
@@ -93,6 +87,7 @@ export class IgnemTorchesPage extends IgnemElement {
       <section class="container">
         <h2 class="torches-title">Torches</h2>
         <div class="torch-list"></div>
+        <p class="empty-torch-list">No torches registred!</p>
       </section>
     `
   }

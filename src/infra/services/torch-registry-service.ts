@@ -12,17 +12,19 @@ export class TorchRegistryService implements FindAllTorchRegistriesService {
     return new Promise(async (resolve, reject) => {
       const responseEvent = 'find-all-torch-registries-response'
 
-      await this.addMessageListenerOnceClient.once(responseEvent, payload => {
+      this.addMessageListenerOnceClient.once(responseEvent, payload => {
         if (payload.statusCode === 200) {
           resolve(payload.data as FindAllTorchRegistriesServiceResult[])
         }
 
         reject(new ServiceError(payload))
       })
-  
-      await this.sendMessageClient.send({
-        event: 'find-all-torch-registries'
-      })
+        .then(
+          async () => await this.sendMessageClient.send({
+            event: 'find-all-torch-registries'
+          }),
+          reject
+        )
     })
   }
 }
