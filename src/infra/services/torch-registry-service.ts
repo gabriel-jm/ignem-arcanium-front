@@ -4,15 +4,15 @@ import { AddMessageListenerOnceClient, SendMessageClient } from '@/infra/protoco
 
 export class TorchRegistryService implements FindAllTorchRegistriesService {
   constructor(
-    private readonly addMessageListenerOnceStore: AddMessageListenerOnceClient,
-    private readonly sendMessageStore: SendMessageClient
+    private readonly addMessageListenerOnceClient: AddMessageListenerOnceClient,
+    private readonly sendMessageClient: SendMessageClient
   ) {}
   
   findAll(): Promise<FindAllTorchRegistriesServiceResult[]> {
     return new Promise(async (resolve, reject) => {
       const responseEvent = 'find-all-torch-registries-response'
 
-      await this.addMessageListenerOnceStore.once(responseEvent, payload => {
+      await this.addMessageListenerOnceClient.once(responseEvent, payload => {
         if (payload.statusCode === 200) {
           resolve(payload.data as FindAllTorchRegistriesServiceResult[])
         }
@@ -20,7 +20,7 @@ export class TorchRegistryService implements FindAllTorchRegistriesService {
         reject(new ServiceError(payload))
       })
   
-      await this.sendMessageStore.send({
+      await this.sendMessageClient.send({
         event: 'find-all-torch-registries'
       })
     })
