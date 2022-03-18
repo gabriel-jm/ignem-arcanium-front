@@ -45,7 +45,7 @@ export class IgnemTorchRegistry extends IgnemElement {
         font-size: 1.8rem;
       }
 
-      .torch-owner > span {
+      .torch-owner > p {
         font-size: 1.45rem;
         font-weight: bold;
       }
@@ -56,7 +56,8 @@ export class IgnemTorchRegistry extends IgnemElement {
         justify-content: stretch;
         align-items: center;
         gap: 0 6px;
-        margin: 10px 0 5px;
+        padding: 8px 0 4px;
+        box-sizing: content-box;
       }
 
       .charge-count {
@@ -80,6 +81,35 @@ export class IgnemTorchRegistry extends IgnemElement {
         fill: var(--off-color);
       }
 
+      [data-tooltip] {
+        position: relative;
+      }
+
+      [data-tooltip]::after {
+        content: attr(data-tooltip);
+        display: block;
+        position: absolute;
+        width: max-content;
+        top: 0;
+        left: 50%;
+        font-size: 0.9rem;
+        padding: 2px 6px;
+        background-color: #252525;
+        border: 1px solid #252525;
+        border-radius: 4px;
+        pointer-events: none;
+        opacity: 0;
+        transform-origin: bottom;
+        transform: translate(-50%, -100%) scale(0);
+        transition: all 100ms;
+      }
+
+      [data-tooltip]:hover::after {
+        opacity: 1;
+        transform-origin: bottom;
+        transform: translate(-50%, -100%) scale(1);
+      }
+
       .torch-card.lit .torch-icon {
         fill: var(--lit-color);
       }
@@ -96,15 +126,20 @@ export class IgnemTorchRegistry extends IgnemElement {
       ></li>
     `)
 
+    console.log(isLit)
+
     return html`
       <div class="torch-card ${isTorchLit && 'lit'}">
-        ${isTorchLit ? torchLitIcon('torch-icon') : torchOffIcon('torch-icon')}
+        ${isTorchLit
+          ? torchLitIcon('torch-icon')
+          : torchOffIcon('torch-icon')
+        }
         <div>
           <div class="torch-owner">
-            <h3>${this.getAttribute('character-name')}</h3>
-            <span>${this.getAttribute('torch-count')}</span>
+            <h3 data-tooltip="Character name">${this.getAttribute('character-name')}</h3>
+            <p data-tooltip="Torch count">${this.getAttribute('torch-count')}</p>
           </div>
-          <ul class="torch-charges">
+          <ul data-tooltip="Torch charge" class="torch-charges">
             ${list}
           </ul>
         </div>
