@@ -1,6 +1,6 @@
 import { Presenter } from '@/presentation/protocols'
 import { IgnemElement } from '@/ui/view'
-import { containerStyles } from '@/ui/view/styles'
+import { containerStyles, tooltipStyles } from '@/ui/view/styles'
 import { css, html } from 'lithen-tag-functions'
 
 interface TorchRegistry {
@@ -45,6 +45,7 @@ export class IgnemTorchesPage extends IgnemElement {
   styling() {
     return css`
       ${containerStyles}
+      ${tooltipStyles}
 
       .container {
         padding: 10px 26px;
