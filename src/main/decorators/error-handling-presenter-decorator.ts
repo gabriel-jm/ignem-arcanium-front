@@ -1,3 +1,4 @@
+import { failureResponse } from '@/presentation/helpers'
 import { Presenter, PresenterResult } from '@/presentation/protocols'
 import { WarningNotificationStore } from '@/ui/protocols'
 
@@ -16,11 +17,7 @@ export class ErrorHandlingPresenterDecorator implements Presenter {
       const error = err as Error
       this.warnNotificationStore.warn('Error', error.message ?? 'Unknown error')
 
-      return {
-        ok: false,
-        data: null,
-        validationErrors: null
-      }
+      return failureResponse(null)
     }
   }
 }
