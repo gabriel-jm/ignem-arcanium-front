@@ -50,26 +50,26 @@ export class WebSocketClient implements WebSocketConnectionClient {
   }
 
   async createConnection() {
-    if (!this.#connection) {
-      const connection = await this.#connectionAttempt(WebSocketClient.#serverUrl)
+    if (this.#connection) return
 
-      if (!connection) {
-        throw new WebSocketConnectionFailedError()
-      }
+    const connection = await this.#connectionAttempt(WebSocketClient.#serverUrl)
 
-      connection.addEventListener('message', receivedMessage => {
-        const messageData = JSON.parse(receivedMessage.data)
-        
-        const eventName = String(messageData.event)
-  
-        if (eventName in this.#events.once) {
-          this.#events.once[eventName]?.(messageData)
-          this.#events.once[eventName] = undefined
-        }
-      })
-
-      this.#connection = connection
+    if (!connection) {
+      throw new WebSocketConnectionFailedError()
     }
+
+    connection.addEventListener('message', receivedMessage => {
+      const messageData = JSON.parse(receivedMessage.data)
+      
+      const eventName = String(messageData.event)
+
+      if (eventName in this.#events.once) {
+        this.#events.once[eventName]?.(messageData)
+        this.#events.once[eventName] = undefined
+      }
+    })
+
+    this.#connection = connection
     
     return new Promise<void>((resolve) => {
       this.once('accept-connection', messageData => {
