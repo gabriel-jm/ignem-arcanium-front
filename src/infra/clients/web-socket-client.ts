@@ -83,7 +83,9 @@ export class WebSocketClient implements WebSocketConnectionClient {
     })
   }
 
-  send(params: SendMessageStoreParams): void {
+  async send(params: SendMessageStoreParams) {
+    !this.#connection && await this.createConnection()
+
     const message = JSON.stringify({
       event: params.event,
       headers: {

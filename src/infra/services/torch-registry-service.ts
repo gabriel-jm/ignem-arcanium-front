@@ -20,7 +20,7 @@ export class TorchRegistryService implements FindAllTorchRegistriesService {
         reject(new ServiceError(payload))
       })
   
-      this.sendMessageStore.send({
+      await this.sendMessageStore.send({
         event: 'find-all-torch-registries'
       })
     })

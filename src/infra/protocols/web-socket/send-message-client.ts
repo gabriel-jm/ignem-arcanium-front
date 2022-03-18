@@ -5,5 +5,5 @@ export interface SendMessageStoreParams {
 }
 
 export interface SendMessageClient {
-  send(params: SendMessageStoreParams): void
+  send(params: SendMessageStoreParams): Promise<void>
 }
