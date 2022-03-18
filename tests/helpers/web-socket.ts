@@ -14,7 +14,7 @@ export function mockNativeWebSocket(): [SpyInstanceFn, Record<'addEventListener'
 
 export function mockSendMessageClient() {
   return {
-    send: vi.fn()
+    send: vi.fn(() => Promise.resolve())
   }
 }
 
@@ -22,7 +22,8 @@ export function mockAddMessageListenerOnceClient(event: MessageOnceListenerPaylo
   return {
     result: event,
     once: vi.fn((_eventName, listener) => {
-      listener(event)
+      setTimeout(() => listener(event), 10)
+      return Promise.resolve()
     })
   }
 }
