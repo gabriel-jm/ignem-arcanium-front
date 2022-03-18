@@ -8,9 +8,11 @@ export class TorchRegistryService implements FindAllTorchRegistriesService {
     private readonly sendMessageStore: SendMessageClient
   ) {}
   
-  async findAll(): Promise<FindAllTorchRegistriesServiceResult[]> {
-    return new Promise((resolve, reject) => {
-      this.addMessageListenerOnceStore.once('find-all-torch-registries-response', payload => {
+  findAll(): Promise<FindAllTorchRegistriesServiceResult[]> {
+    return new Promise(async (resolve, reject) => {
+      const responseEvent = 'find-all-torch-registries-response'
+
+      await this.addMessageListenerOnceStore.once(responseEvent, payload => {
         if (payload.statusCode === 200) {
           resolve(payload.data as FindAllTorchRegistriesServiceResult[])
         }
