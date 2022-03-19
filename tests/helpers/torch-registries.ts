@@ -23,3 +23,10 @@ export function mockFindAllTorchRegistries() {
     findAll: vi.fn(() => Promise.resolve(result))
   }
 }
+
+export function mockCreateTorchRegistryService() {
+  return {
+    result: 'any_torch_registry_id',
+    create: vi.fn(() => Promise.resolve('any_torch_registry_id'))
+  }
+}
