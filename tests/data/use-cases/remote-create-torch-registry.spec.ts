@@ -27,4 +27,16 @@ describe('RemoteCreateTorchRegistry', () => {
       torchCharge: 2
     })
   })
+
+  it('should return the create torch registry id on success', async () => {
+    const { sut, createTorchRegistryServiceSpy } = makeSut()
+
+    const response = await sut.create({
+      characterName: 'any_character_name',
+      torchCount: 2,
+      torchCharge: 2
+    })
+
+    expect(response).toBe(createTorchRegistryServiceSpy.result)
+  })
 })
