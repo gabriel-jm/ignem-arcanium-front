@@ -30,3 +30,10 @@ export function mockCreateTorchRegistryService() {
     create: vi.fn(() => Promise.resolve('any_torch_registry_id'))
   }
 }
+
+export function mockCreateTorchRegistry() {
+  return {
+    result: 'any_id',
+    create: vi.fn(() => Promise.resolve('any_id'))
+  }
+}
