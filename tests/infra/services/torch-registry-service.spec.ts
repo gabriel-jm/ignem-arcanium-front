@@ -116,5 +116,40 @@ describe('TorchRegistryService', () => {
         data: dummyCreateParams
       })
     })
+
+    it('should throw a ServiceError if statusCode is different than 201', async () => {
+      const data = {
+        error: {
+          name: 'DatabaseError',
+          details: [
+            'Some operation has not been succeeded, please try again later'
+          ]
+        }
+      }
+      const { sut, addMessageListenerOnceClientSpy } = makeSut({
+        event: 'create-torch-registry-response',
+        statusCode: 400,
+        data
+      })
+  
+      const promise = sut.create(dummyCreateParams)
+  
+      await expect(promise).rejects.toThrowError(new ServiceError(addMessageListenerOnceClientSpy.result))
+    })
+  
+    it('should return the data from received message', async () => {
+      const { sut, addMessageListenerOnceClientSpy } = makeSut({
+        event: 'create-torch-registry-response',
+        statusCode: 201,
+        data: {
+          id: 'any_id',
+          ...dummyCreateParams
+        }
+      })
+  
+      const response = await sut.create(dummyCreateParams)
+  
+      expect(response).toEqual(addMessageListenerOnceClientSpy.result.data)
+    })
   })
 })
