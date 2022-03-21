@@ -81,19 +81,40 @@ describe('TorchRegistryService', () => {
   })
 
   describe('create()', () => {
+    const dummyCreateParams = {
+      characterName: 'any_character_name',
+      torchCount: 2,
+      torchCharge: 2
+    }
+
     it('should call AddMessageListenerOnceClient with correct values', async () => {
-      const { sut, addMessageListenerOnceClientSpy } = makeSut()
-  
-      await sut.create({
-        characterName: 'any_character_name',
-        torchCount: 2,
-        torchCharge: 2
+      const { sut, addMessageListenerOnceClientSpy } = makeSut({
+        event: 'create-torch-registry-response',
+        statusCode: 201,
+        data: undefined
       })
+  
+      await sut.create(dummyCreateParams)
   
       expect(addMessageListenerOnceClientSpy.once).toHaveBeenCalledWith(
         'create-torch-registry-response',
         expect.any(Function)
       )
+    })
+
+    it('should call SendMessageClient with correct values', async () => {
+      const { sut, sendMessageClientSpy } = makeSut({
+        event: 'create-torch-registry-response',
+        statusCode: 201,
+        data: undefined
+      })
+  
+      await sut.create(dummyCreateParams)
+  
+      expect(sendMessageClientSpy.send).toHaveBeenCalledWith({
+        event: 'create-torch-registry',
+        data: dummyCreateParams
+      })
     })
   })
 })

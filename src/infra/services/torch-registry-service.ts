@@ -28,18 +28,31 @@ export class TorchRegistryService implements FindAllTorchRegistriesService {
     })
   }
 
-  create(params: CreateTorchRegistryServiceParams) {
+  async create(params: CreateTorchRegistryServiceParams) {
     const promise = new Promise(async (resolve, reject) => {
       await this.addMessageListenerOnceClient.once(
         'create-torch-registry-response',
         payload => {
+          console.log(payload)
+
           if (payload.statusCode === 201) {
-            resolve(payload.data)
+            return resolve(payload.data)
           }
 
           reject(new ServiceError(payload))
         }
       )
     })
+
+    await this.sendMessageClient.send({
+      event: 'create-torch-registry',
+      data: {
+        characterName: params.characterName,
+        torchCount: params.torchCount,
+        torchCharge: params.torchCharge
+      }
+    })
+
+    return promise
   }
 }
