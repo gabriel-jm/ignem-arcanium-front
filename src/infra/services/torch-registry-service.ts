@@ -36,8 +36,6 @@ export class TorchRegistryService implements FindAllTorchRegistriesService {
         await this.addMessageListenerOnceClient.once(
           'create-torch-registry-response',
           payload => {
-            console.log(payload)
-  
             if (payload.statusCode === 201) {
               return resolve(payload.data)
             }
@@ -51,7 +49,8 @@ export class TorchRegistryService implements FindAllTorchRegistriesService {
           data: {
             characterName: params.characterName,
             torchCount: params.torchCount,
-            torchCharge: params.torchCharge
+            torchCharge: params.torchCharge,
+            isLit: false
           }
         })
       } catch(error) {

@@ -113,7 +113,10 @@ describe('TorchRegistryService', () => {
   
       expect(sendMessageClientSpy.send).toHaveBeenCalledWith({
         event: 'create-torch-registry',
-        data: dummyCreateParams
+        data: {
+          ...dummyCreateParams,
+          isLit: false
+        }
       })
     })
 
