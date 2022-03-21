@@ -1,4 +1,4 @@
-import { FindAllTorchRegistriesService, FindAllTorchRegistriesServiceResult } from '@/data/protocols'
+import { CreateTorchRegistryServiceParams, FindAllTorchRegistriesService, FindAllTorchRegistriesServiceResult } from '@/data/protocols'
 import { ServiceError } from '@/infra/errors'
 import { AddMessageListenerOnceClient, SendMessageClient } from '@/infra/protocols'
 
@@ -25,6 +25,21 @@ export class TorchRegistryService implements FindAllTorchRegistriesService {
           }),
           reject
         )
+    })
+  }
+
+  create(params: CreateTorchRegistryServiceParams) {
+    const promise = new Promise(async (resolve, reject) => {
+      await this.addMessageListenerOnceClient.once(
+        'create-torch-registry-response',
+        payload => {
+          if (payload.statusCode === 201) {
+            resolve(payload.data)
+          }
+
+          reject(new ServiceError(payload))
+        }
+      )
     })
   }
 }

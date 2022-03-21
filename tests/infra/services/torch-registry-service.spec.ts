@@ -3,13 +3,14 @@ import { TorchRegistryService } from '@/infra/services'
 import { mockAddMessageListenerOnceClient, mockSendMessageClient } from '@/tests/helpers'
 
 function makeSut(
-  { statusCode, data }: { statusCode: number, data: unknown } = {
+  { event, statusCode, data }: { event: string, statusCode: number, data: unknown } = {
+    event: 'find-all-torch-registries-response',
     statusCode: 200,
     data: []
   }
 ) {
   const addMessageListenerOnceClientSpy = mockAddMessageListenerOnceClient({
-    event: 'find-all-torch-registries-response',
+    event,
     headers: {},
     statusCode,
     data
@@ -58,7 +59,11 @@ describe('TorchRegistryService', () => {
         ]
       }
     }
-    const { sut, addMessageListenerOnceClientSpy } = makeSut({ statusCode: 400, data })
+    const { sut, addMessageListenerOnceClientSpy } = makeSut({
+      event: 'find-all-torch-registries-response',
+      statusCode: 400,
+      data
+    })
 
     const promise = sut.findAll()
 
@@ -71,5 +76,20 @@ describe('TorchRegistryService', () => {
     const response = await sut.findAll()
 
     expect(response).toEqual(addMessageListenerOnceClientSpy.result.data)
+  })
+
+  it('should call AddMessageListenerOnceClient with correct values', async () => {
+    const { sut, addMessageListenerOnceClientSpy } = makeSut()
+
+    await sut.create({
+      characterName: 'any_character_name',
+      torchCount: 2,
+      torchCharge: 2
+    })
+
+    expect(addMessageListenerOnceClientSpy.once).toHaveBeenCalledWith(
+      'create-torch-registry-response',
+      expect.any(Function)
+    )
   })
 })
