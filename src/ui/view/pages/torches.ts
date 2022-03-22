@@ -111,6 +111,8 @@ export class IgnemTorchesPage extends IgnemElement {
         <div class="torch-list"></div>
         <p class="empty-torch-list">No torches registred!</p>
       </section>
+
+      <ignem-torch-side-modal />
     `
   }
 }

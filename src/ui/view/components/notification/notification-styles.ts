@@ -10,6 +10,7 @@ export const notificationStyles = css`
     top: 10px;
     right: 10px;
     animation: show 1s ease-in-out forwards;
+    z-index: 10;
   }
 
   :host(.success) {
