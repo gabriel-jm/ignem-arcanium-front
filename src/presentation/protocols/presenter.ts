@@ -4,6 +4,6 @@ export interface PresenterResult<T = unknown> {
   validationErrors: Record<string, string>[] | null
 }
 
-export interface Presenter {
-  handle(data?: unknown): Promise<PresenterResult>
+export interface Presenter<T = unknown> {
+  handle(data?: unknown): Promise<PresenterResult<T>>
 }
