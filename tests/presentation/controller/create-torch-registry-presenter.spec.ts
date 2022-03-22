@@ -1,3 +1,4 @@
+import { successResponse } from '@/presentation/helpers'
 import { CreateTorchRegistryPresenter } from '@/presentation/presenters'
 import { mockCreateTorchRegistry } from '@/tests/helpers'
 
@@ -12,16 +13,28 @@ function makeSut() {
 }
 
 describe('CreateTorchRegistryPresenter', () => {
+  const dummyCreateParams = {
+    characterName: 'any_name',
+    torchCount: 1,
+    torchCharge: 3,
+  }
+
   it('should call CreateTorchRegistry with correct values', async () => {
     const { sut, createTorchRegistrySpy } = makeSut()
-    const createParams = {
-      characterName: 'any_name',
-      torchCount: 1,
-      torchCharge: 3,
-    }
 
-    await sut.handle(createParams)
+    await sut.handle(dummyCreateParams)
 
-    expect(createTorchRegistrySpy.create).toHaveBeenCalledWith(createParams)
+    expect(createTorchRegistrySpy.create).toHaveBeenCalledWith(dummyCreateParams)
+  })
+
+  it('should return the torch registry data with the id on success', async () => {
+    const { sut, createTorchRegistrySpy } = makeSut()
+
+    const response = await sut.handle(dummyCreateParams)
+
+    expect(response).toEqual(successResponse({
+      id: createTorchRegistrySpy.result,
+      ...dummyCreateParams
+    }))
   })
 })
