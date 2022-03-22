@@ -48,15 +48,21 @@ export class IgnemTorchesPage extends IgnemElement {
       ${tooltipStyles}
 
       .container {
-        padding: 10px 26px;
+        padding: 20px 46px;
+      }
+
+      .torches-header {
+        border-bottom: 1px solid #aaa2;
+        padding-bottom: 12px;
+        margin-top: 10px;
+        margin-bottom: 30px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
       }
 
       .torches-title {
         font-size: 2rem;
-        border-bottom: 1px solid #ddd2;
-        padding-bottom: 12px;
-        margin-top: 10px;
-        margin-bottom: 30px;
       }
 
       .torch-list {
@@ -78,6 +84,18 @@ export class IgnemTorchesPage extends IgnemElement {
         font-size: 1.6rem;
         color: var(--unavailable-font-color);
       }
+
+      .btn-bordered {
+        --main-color: #888;
+        
+        color: var(--main-color);
+        border: 1px solid var(--main-color);
+        border-radius: 4px;
+        padding: 8px 10px;
+        background-color: transparent;
+        font-size: 1rem;
+        cursor: pointer;
+      }
     `
   }
 
@@ -86,7 +104,10 @@ export class IgnemTorchesPage extends IgnemElement {
       <ignem-header />
 
       <section class="container">
-        <h2 class="torches-title">Torches</h2>
+        <header class="torches-header">
+          <h2 class="torches-title">Torches</h2>
+          <button class="btn-bordered">&plus; New</button>
+        </header>
         <div class="torch-list"></div>
         <p class="empty-torch-list">No torches registred!</p>
       </section>

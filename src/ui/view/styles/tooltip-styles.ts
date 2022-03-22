@@ -21,8 +21,7 @@ export const tooltipStyles = css`
     opacity: 0;
     transform-origin: bottom;
     transform: translate(-50%, -100%) scale(0);
-    transition-delay: 200ms;
-    transition: all 100ms;
+    transition: all 100ms 250ms;
   }
 
   [data-tooltip]:hover::after {
