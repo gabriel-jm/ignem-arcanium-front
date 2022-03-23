@@ -18,11 +18,12 @@ export const sharedStyles = () => defineSharedStyles(css`
     padding: 10px 14px;
     border-radius: 4px;
     border: 0;
+    transition: all 150ms;
   }
 
-  .btn:hover {
+  /* .btn:hover {
     background-color: var(--btn-hover-bg-color);
-  }
+  } */
 
   .btn:focus {
     outline: 2px solid var(--btn-focus-outline-color);

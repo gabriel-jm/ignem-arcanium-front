@@ -1,5 +1,5 @@
 import { Presenter } from '@/presentation/protocols'
-import { IgnemElement } from '@/ui/view'
+import { IgnemElement, IgnemTorchSideModalElement } from '@/ui/view'
 import { containerStyles, tooltipStyles } from '@/ui/view/styles'
 import { css, html } from 'lithen-tag-functions'
 
@@ -100,19 +100,25 @@ export class IgnemTorchesPage extends IgnemElement {
   }
 
   render() {
+    const onBtnClick = () => {
+      this.select<IgnemTorchSideModalElement>('#form-modal')?.open()
+    }
+
     return html`
       <ignem-header />
 
       <section class="container">
         <header class="torches-header">
           <h2 class="torches-title">Torches</h2>
-          <button class="btn-bordered">&plus; New</button>
+          <button class="btn-bordered" on-click=${onBtnClick}>
+            &plus; New
+          </button>
         </header>
         <div class="torch-list"></div>
         <p class="empty-torch-list">No torches registred!</p>
       </section>
 
-      <ignem-torch-side-modal />
+      <ignem-torch-side-modal id="form-modal" />
     `
   }
 }
