@@ -100,25 +100,32 @@ export class IgnemTorchesPage extends IgnemElement {
   }
 
   render() {
-    const onBtnClick = () => {
+    function onBtnClick(this: IgnemTorchesPage) {
       this.select<IgnemTorchSideModalElement>('#form-modal')?.open()
+    }
+
+    function onFormSubmit(event: CustomEventInit) {
+      console.log(event)
     }
 
     return html`
       <ignem-header />
 
+      <ignem-torch-side-modal
+        id="form-modal"
+        on-form-submit=${onFormSubmit}
+      ></ignem-torch-side-modal>
+
       <section class="container">
         <header class="torches-header">
           <h2 class="torches-title">Torches</h2>
-          <button class="btn-bordered" on-click=${onBtnClick}>
+          <button class="btn-bordered" on-click=${onBtnClick.bind(this)}>
             &plus; New
           </button>
         </header>
         <div class="torch-list"></div>
         <p class="empty-torch-list">No torches registred!</p>
       </section>
-
-      <ignem-torch-side-modal id="form-modal" />
     `
   }
 }

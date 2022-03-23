@@ -5,6 +5,9 @@ export interface IgnemTorchSideModalElement extends IgnemElement {
   open(): void
 }
 
+/**
+ * @event -form-submit
+ */
 export class IgnemTorchSideModal extends IgnemElement {
   open() {
     this.classList.add('open')
@@ -81,6 +84,30 @@ export class IgnemTorchSideModal extends IgnemElement {
         cursor: pointer;
       }
 
+      form {
+        width: 100%;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        row-gap: 20px;
+        margin-top: 30px;
+      }
+
+      input {
+        width: 100%;
+      }
+
+      label {
+        margin-bottom: 6px;
+      }
+
+      label:first-child, .btn {
+        grid-column: span 3;
+      }
+
+      label:nth-child(2) {
+        margin-right: 10px;
+      }
+
       .input {
         --input-outline: var(--btn-focus-outline-color);
         --input-border-color: #555;
@@ -99,11 +126,33 @@ export class IgnemTorchSideModal extends IgnemElement {
       }
 
       .input.error {
-        --input-border-color: #804242;
+        --input-border-color: #a14747;
       }
 
       .input.error:focus {
-        --input-outline: #884141;
+        --input-outline: var(--danger);
+      }
+
+      .input-message {
+        height: 15px;
+        color: #a14747;
+        font-size: 0.85rem;
+      }
+
+      .input-message.animate {
+        animation: drop 500ms;
+      }
+
+      @keyframes drop {
+        from {
+          transform: translateY(-10px);
+          opacity: 0;
+        }
+
+        to {
+          transform: translateY(0);
+          opacity: 1;
+        }
       }
 
       @keyframes slide-left {
@@ -142,9 +191,26 @@ export class IgnemTorchSideModal extends IgnemElement {
       }
     })
 
-    const onInput: EventListener = (event) => {
+    const onInput: EventListener = event => {
       const input = event.target as HTMLInputElement
       input.value = input.value.replace(/\D+/g, '')
+    }
+
+    const onSubmit: EventListener = event => {
+      event.preventDefault()
+      const form = event.target as HTMLFormElement
+
+      const formData = {
+        characterName: form.characterName.value,
+        torchCount: Number(form.torchCount.value),
+        torchCharge: Number(form.torchCharge.value)
+      }
+
+      const customEvent = new CustomEvent('form-submit', {
+        detail: formData
+      })
+
+      this.dispatchEvent(customEvent)
     }
 
     return html`
@@ -157,22 +223,23 @@ export class IgnemTorchSideModal extends IgnemElement {
             </button>
           </header>
 
-          <form on-submit=${event => {
-            event.preventDefault()
-          }}>
+          <form on-submit=${onSubmit}>
             <label>
-              <p>Character Name</p>
+              <span>Character Name</span>
               <input class="input" name="characterName" />
+              <span class="input-message"></span>
             </label>
 
             <label>
               <p>Torch Count</p>
-              <input class="input error" name="torchCount" on-input=${onInput} />
+              <input class="input" name="torchCount" on-input=${onInput} />
+              <span class="input-message"></span>
             </label>
 
             <label>
               <p>Torch Charge</p>
-              <input class="input error" name="torchCharge" on-input=${onInput} />
+              <input class="input" name="torchCharge" on-input=${onInput} />
+              <span class="input-message"></span>
             </label>
 
             <button class="btn">Submit</button>
