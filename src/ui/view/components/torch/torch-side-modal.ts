@@ -81,6 +81,31 @@ export class IgnemTorchSideModal extends IgnemElement {
         cursor: pointer;
       }
 
+      .input {
+        --input-outline: var(--btn-focus-outline-color);
+        --input-border-color: #555;
+
+        background-color: var(--body-bg-color);
+        border: 1px solid var(--input-border-color);
+        border-radius: 4px;
+        color: var(--font-color);
+        font-size: 0.9rem;
+        padding: 4px 6px;
+        transition: all 300ms;
+      }
+
+      .input:focus {
+        box-shadow: 0 0 0 2px var(--input-outline);
+      }
+
+      .input.error {
+        --input-border-color: #804242;
+      }
+
+      .input.error:focus {
+        --input-outline: #884141;
+      }
+
       @keyframes slide-left {
         from {
           transform: translateX(100%);
@@ -117,6 +142,11 @@ export class IgnemTorchSideModal extends IgnemElement {
       }
     })
 
+    const onInput: EventListener = (event) => {
+      const input = event.target as HTMLInputElement
+      input.value = input.value.replace(/\D+/g, '')
+    }
+
     return html`
       <section class="container">
         <div class="side-modal-container">
@@ -132,17 +162,17 @@ export class IgnemTorchSideModal extends IgnemElement {
           }}>
             <label>
               <p>Character Name</p>
-              <input name="characterName" />
+              <input class="input" name="characterName" />
             </label>
 
             <label>
               <p>Torch Count</p>
-              <input type="number" name="characterName" />
+              <input class="input error" name="torchCount" on-input=${onInput} />
             </label>
 
             <label>
               <p>Torch Charge</p>
-              <input type="number" name="characterName" />
+              <input class="input error" name="torchCharge" on-input=${onInput} />
             </label>
 
             <button class="btn">Submit</button>
