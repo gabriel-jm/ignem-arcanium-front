@@ -1,4 +1,4 @@
-import { containerStyles, IgnemElement } from '@/ui/view'
+import { containerStyles, IgnemElement, inputStyles } from '@/ui/view'
 import { css, html } from 'lithen-tag-functions'
 
 export interface IgnemTorchSideModalElement extends IgnemElement {
@@ -20,6 +20,7 @@ export class IgnemTorchSideModal extends IgnemElement {
   styling() {
     return css`
       ${containerStyles}
+      ${inputStyles}
 
       :host {
         display: none;
@@ -92,10 +93,6 @@ export class IgnemTorchSideModal extends IgnemElement {
         margin-top: 30px;
       }
 
-      input {
-        width: 100%;
-      }
-
       label {
         margin-bottom: 6px;
       }
@@ -108,51 +105,12 @@ export class IgnemTorchSideModal extends IgnemElement {
         margin-right: 10px;
       }
 
-      .input {
-        --input-outline: var(--btn-focus-outline-color);
-        --input-border-color: #555;
-
-        background-color: var(--body-bg-color);
-        border: 1px solid var(--input-border-color);
-        border-radius: 4px;
-        color: var(--font-color);
-        font-size: 0.9rem;
-        padding: 4px 6px;
-        transition: all 300ms;
+      label:nth-child(3) {
+        margin-left: 10px;
       }
 
-      .input:focus {
-        box-shadow: 0 0 0 2px var(--input-outline);
-      }
-
-      .input.error {
-        --input-border-color: #a14747;
-      }
-
-      .input.error:focus {
-        --input-outline: var(--danger);
-      }
-
-      .input-message {
-        height: 15px;
-        color: #a14747;
-        font-size: 0.85rem;
-      }
-
-      .input-message.animate {
-        animation: drop 500ms;
-      }
-
-      @keyframes drop {
-        from {
-          transform: translateY(-10px);
-          opacity: 0;
-        }
-
-        to {
-          transform: translateY(0);
-          opacity: 1;
-        }
+      .btn {
+        margin-top: 12px;
       }
 
       @keyframes slide-left {
@@ -184,6 +142,15 @@ export class IgnemTorchSideModal extends IgnemElement {
   
   render() {
     this.classList.add('open')
+
+    this.on('click', event => {
+      const containerElement = this.select('.container')
+      const [clickedElement] = event.composedPath()
+      
+      if (clickedElement === this || clickedElement === containerElement) {
+        this.close()
+      }
+    })
 
     this.on('animationend', (event: AnimationEventInit) => {
       if (event.animationName === 'fade-out') {
