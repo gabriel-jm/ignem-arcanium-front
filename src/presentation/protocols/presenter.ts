@@ -1,7 +1,7 @@
 export interface PresenterResult<T = unknown> {
   ok: boolean
   data: T | null
-  validationErrors: Record<string, string>[] | null
+  validationErrors: string[] | null
 }
 
 export interface Presenter<T = unknown> {
