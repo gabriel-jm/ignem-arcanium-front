@@ -114,7 +114,7 @@ export class IgnemTorchesPage extends IgnemElement {
       <ignem-torch-side-modal
         id="form-modal"
         on-form-submit=${onFormSubmit}
-      ></ignem-torch-side-modal>
+      />
 
       <section class="container">
         <header class="torches-header">
