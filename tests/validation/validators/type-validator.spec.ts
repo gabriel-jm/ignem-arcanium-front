@@ -7,7 +7,7 @@ function makeSut(fields: Record<string, string | string[]>) {
 }
 
 describe('TypeValidator', () => {
-  it('should return an array of invalid type message', () => {
+  it('should return an object of invalid type message', () => {
     const sut = makeSut({
       list: 'array',
       num: 'number',
@@ -24,13 +24,13 @@ describe('TypeValidator', () => {
       bool: []
     })
 
-    expect(response).toEqual([
-      'list must be a array',
-      'num must be a number',
-      'obj must be a object',
-      'str must be a string',
-      'bool must be a boolean'
-    ])
+    expect(response).toEqual({
+      list: 'Must be a array',
+      num: 'Must be a number',
+      obj: 'Must be a object',
+      str: 'Must be a string',
+      bool: 'Must be a boolean'
+    })
   })
 
   it('should correct validate array values', () => {
@@ -50,7 +50,7 @@ describe('TypeValidator', () => {
       bool: true
     })
 
-    expect(response).toEqual([])
+    expect(response).toEqual(null)
   })
 
   it('should validate one of types passed as array', () => {
@@ -64,9 +64,9 @@ describe('TypeValidator', () => {
       value2: 'wrong-value'
     })
 
-    expect(response).toEqual([
-      'value1 must be a: string, object or boolean',
-      'value2 must be a: number or boolean'
-    ])
+    expect(response).toEqual({
+      value1: 'Must be a: string, object or boolean',
+      value2: 'Must be a: number or boolean'
+    })
   })
 })

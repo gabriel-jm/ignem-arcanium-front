@@ -58,11 +58,17 @@ export class ValidatorComposite implements Validator {
     })
   }
   
-  validate(input: any): string[] {
-    const validationsResults = this.#validators.map(validator => {
-      return validator.validate(input)
-    })
+  validate(input: any) {
+    const validatiorsResult = this.#validators.reduce((acc, validator) => {
+      const validationResult = validator.validate(input)
 
-    return validationsResults.flat()
+      if (!validationResult) return acc
+
+      return { ...acc, ...validationResult }
+    }, {})
+
+    if (!Object.keys(validatiorsResult).length) return null
+
+    return validatiorsResult
   }
 }

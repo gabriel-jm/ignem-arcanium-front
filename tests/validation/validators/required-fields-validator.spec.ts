@@ -12,10 +12,10 @@ describe('RequiredFieldsValidator', () => {
       field3: true
     })
 
-    expect(response).toEqual([
-      'field1 is required',
-      'field2 is required'
-    ])
+    expect(response).toEqual({
+      field1: 'Required field',
+      field2: 'Required field'
+    })
   })
 
   it('should return an empty array if all fields exists', () => {
@@ -23,6 +23,6 @@ describe('RequiredFieldsValidator', () => {
 
     const reponse = sut.validate({ field: true })
 
-    expect(reponse).toEqual([])
+    expect(reponse).toEqual(null)
   })
 })

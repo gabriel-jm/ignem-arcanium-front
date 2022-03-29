@@ -12,10 +12,10 @@ describe('ValueInBetweenValidator', () => {
 
     const response = sut.validate({ count: 12, days: 0 })
 
-    expect(response).toEqual([
-      'count must be in between 0 and 10',
-      'days must be in between 1 and 30'
-    ])
+    expect(response).toEqual({
+      count: 'Must be in between 0 and 10',
+      days: 'Must be in between 1 and 30'
+    })
   })
 
   it('should return an empty array if value is in between min and max', () => {
@@ -23,6 +23,6 @@ describe('ValueInBetweenValidator', () => {
 
     const response = sut.validate({ count: 8 })
 
-    expect(response).toEqual([])
+    expect(response).toEqual(null)
   })
 })

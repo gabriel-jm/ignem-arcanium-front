@@ -3,7 +3,7 @@ import { Validator } from '@/validation/protocols'
 export class TypeValidator implements Validator {
   constructor(private readonly fields: Record<string, string | string[]>) {}
   
-  validate(input: any): string[] {
+  validate(input: any) {
     const invalidFields = Object.keys(this.fields).filter(field => {
       const value = input[field]
       const fieldValue = this.fields[field]
@@ -20,14 +20,18 @@ export class TypeValidator implements Validator {
       return isInvalid
     })
 
-    return invalidFields.map(field => {
+    if (!invalidFields.length) return null
+
+    return invalidFields.reduce((acc, field) => {
       const fieldValue = this.fields[field]
       const isArray = Array.isArray(fieldValue)
       const types = !isArray ? fieldValue : fieldValue.reduce((acc, value, index, arr) => {
         return acc + (index ? (index + 1 === arr.length ? ' or ' : ', ') : '') + value
       }, '')
 
-      return `${field} must be ${isArray ? 'a:' : 'a'} ${types}`
-    })
+      const message = `Must be ${isArray ? 'a:' : 'a'} ${types}`
+
+      return { ...acc, [field]: message }
+    }, {})
   }
 }

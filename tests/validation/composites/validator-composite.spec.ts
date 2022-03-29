@@ -13,7 +13,7 @@ describe('ValidatorComposite', () => {
       characterName: 'any_name'
     })
 
-    expect(response).toEqual([])
+    expect(response).toEqual(null)
   })
 
   it('should return a list of validation errors on failure', () => {
@@ -34,8 +34,8 @@ describe('ValidatorComposite', () => {
       torchCharge: 10
     })
 
-    expect(response).toEqual([
-      'torchCharge must be in between 0 and 6'
-    ])
+    expect(response).toEqual({
+      torchCharge: 'Must be in between 0 and 6'
+    })
   })
 })
