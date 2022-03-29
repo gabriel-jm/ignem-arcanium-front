@@ -13,3 +13,11 @@ export function failureResponse(data: any) {
     validationErrors: null
   }
 }
+
+export function validationErrorResponse(errorsRecord: Record<string, string>) {
+  return {
+    ok: false,
+    data: null,
+    validationErrors: errorsRecord
+  }
+}

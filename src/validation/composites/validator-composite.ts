@@ -11,6 +11,40 @@ export class ValidatorComposite implements Validator {
     required: RequiredFieldsValidator,
     valueInBetween: ValueInBetweenValidator
   }
+  #validatorAdderByType: Record<string, Function> = {
+    type: (
+      validatorsFields: Record<string, any>,
+      fieldName: string,
+      expectedValue: unknown
+    ) => {
+      if (!('type' in validatorsFields)) {
+        validatorsFields.type = {}
+      }
+
+      validatorsFields.type[fieldName] = expectedValue
+    },
+    required: (
+      validatorsFields: Record<string, any>,
+      fieldName: string
+    ) => {
+      if (!('required' in validatorsFields)) {
+        validatorsFields.required = []
+      }
+
+      validatorsFields.required.push(fieldName)
+    },
+    valueInBetween: (
+      validatorsFields: Record<string, any>,
+      fieldName: string,
+      expectedValue: unknown
+    ) => {
+      if (!('valueInBetween' in validatorsFields)) {
+        validatorsFields.valueInBetween = {}
+      }
+
+      validatorsFields.valueInBetween[fieldName] = expectedValue
+    }
+  }
   #validators: Validator[] = []
 
   constructor (private readonly validationSchema: Record<string, Record<string, unknown>>) {
@@ -22,29 +56,11 @@ export class ValidatorComposite implements Validator {
 
     Object.entries(this.validationSchema).forEach(([fieldName, value]) => {
       Object.entries(value).forEach(([validatorType, expectedValue]) => {
-        if (validatorType === 'type') {
-          if (!(validatorType in validatorsFields)) {
-            validatorsFields.type = {}
-          }
-
-          validatorsFields.type[fieldName] = expectedValue
-        }
-
-        if (expectedValue && validatorType === 'required') {
-          if (!(validatorType in validatorsFields)) {
-            validatorsFields.required = []
-          }
-
-          validatorsFields.required.push(fieldName)
-        }
-
-        if (validatorType === 'valueInBetween') {
-          if (!(validatorType in validatorsFields)) {
-            validatorsFields.valueInBetween = {}
-          }
-
-          validatorsFields.valueInBetween[fieldName] = expectedValue
-        }
+        this.#validatorAdderByType[validatorType]?.(
+          validatorsFields,
+          fieldName,
+          expectedValue
+        )
       })
     })
 
