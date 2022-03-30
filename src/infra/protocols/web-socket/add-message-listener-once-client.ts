@@ -1,12 +1,15 @@
-export interface MessageOnceListenerPayload {
+export interface MessageOnceListenerPayload<T> {
   event: string
   statusCode: number
   headers: Record<string, unknown>
-  data: unknown
+  data: T
 }
 
-export type MessageOnceListener = (payload: MessageOnceListenerPayload) => void
+export type MessageOnceListener<T> = (payload: MessageOnceListenerPayload<T>) => void
 
 export interface AddMessageListenerOnceClient {
-  once(eventName: string, listener: MessageOnceListener): Promise<void>
+  once<T = unknown>(
+    eventName: string,
+    listener: MessageOnceListener<T>
+  ): Promise<void>
 }

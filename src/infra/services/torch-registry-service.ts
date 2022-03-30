@@ -30,14 +30,14 @@ export class TorchRegistryService implements FindAllTorchRegistriesService {
     })
   }
 
-  async create(params: CreateTorchRegistryServiceParams) {
+  async create(params: CreateTorchRegistryServiceParams): Promise<string> {
     return new Promise(async (resolve, reject) => {
       try {
-        await this.addMessageListenerOnceClient.once(
+        await this.addMessageListenerOnceClient.once<Record<'id', string>>(
           'create-torch-registry-response',
           payload => {
             if (payload.statusCode === 201) {
-              return resolve(payload.data)
+              return resolve(payload.data.id)
             }
   
             reject(new ServiceError(payload))
