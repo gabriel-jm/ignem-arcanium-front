@@ -116,7 +116,11 @@ export class IgnemTorchesPage extends IgnemElement {
 
       const result = await this.#createTorchRegistryPresenter.handle(formData)
 
-      console.log(result)
+      if (!result.ok && result.validationErrors) {
+        this.select<IgnemTorchSideModalElement>('#form-modal')?.setErrors(
+          result.validationErrors
+        )
+      }
     }
 
     return html`

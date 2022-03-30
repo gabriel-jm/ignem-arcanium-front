@@ -28,13 +28,11 @@ export const inputStyles = css`
   }
 
   .input-message {
+    display: block;
     height: 15px;
+    width: auto;
     color: #a14747;
     font-size: 0.85rem;
-  }
-
-  .input-message.animate {
-    animation: drop 500ms;
   }
 
   @keyframes drop {

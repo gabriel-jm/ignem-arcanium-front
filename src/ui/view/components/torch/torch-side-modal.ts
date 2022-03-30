@@ -1,7 +1,9 @@
 import { IgnemElement, IgnemSideModalElement, inputStyles } from '@/ui/view'
 import { css, html } from 'lithen-tag-functions'
 
-export interface IgnemTorchSideModalElement extends IgnemSideModalElement {}
+export interface IgnemTorchSideModalElement extends IgnemSideModalElement {
+  setErrors(errorsRecord: Record<string, string>): void
+}
 
 /**
  * @event -form-submit
@@ -20,6 +22,18 @@ export class IgnemTorchSideModal extends IgnemElement {
 
   close() {
     this.#sideModal?.close()
+  }
+
+  setErrors(errorsRecord: Record<string, string>) {
+    const form = this.select<HTMLFormElement>('form')!
+
+    Object.entries(errorsRecord).forEach(([field, error]) => {
+      const inputMessageSpan = this.select(`input[name=${field}] ~ span`)!
+      const input = form[field] as HTMLInputElement
+      input.classList.add('error')
+
+      inputMessageSpan.textContent = error
+    })
   }
 
   styling() {
