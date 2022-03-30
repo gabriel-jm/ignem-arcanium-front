@@ -91,7 +91,7 @@ describe('TorchRegistryService', () => {
       const { sut, addMessageListenerOnceClientSpy } = makeSut({
         event: 'create-torch-registry-response',
         statusCode: 201,
-        data: undefined
+        data: { id: 'any_id' }
       })
   
       await sut.create(dummyCreateParams)
@@ -106,7 +106,7 @@ describe('TorchRegistryService', () => {
       const { sut, sendMessageClientSpy } = makeSut({
         event: 'create-torch-registry-response',
         statusCode: 201,
-        data: undefined
+        data: { id: 'any_id' }
       })
   
       await sut.create(dummyCreateParams)
@@ -152,7 +152,7 @@ describe('TorchRegistryService', () => {
   
       const response = await sut.create(dummyCreateParams)
   
-      expect(response).toEqual(addMessageListenerOnceClientSpy.result.data)
+      expect(response).toEqual(addMessageListenerOnceClientSpy.result.data.id)
     })
   })
 })

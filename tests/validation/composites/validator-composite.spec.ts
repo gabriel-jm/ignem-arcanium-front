@@ -38,4 +38,38 @@ describe('ValidatorComposite', () => {
       torchCharge: 'Must be in between 0 and 6'
     })
   })
+
+  it('should return the first and that only validation error by field', () => {
+    const sut = new ValidatorComposite({
+      characterName: {
+        required: true,
+        type: 'string',
+      },
+      torchCount: {
+        required: true,
+        type: 'number'
+      },
+      torchCharge: {
+        required: true,
+        type: 'number',
+        valueInBetween: [0, 6]
+      },
+      isLit: {
+        type: 'boolean',
+        required: true
+      }
+    })
+
+    const response = sut.validate({
+      characterName: 0,
+      torchCharge: 12
+    })
+
+    expect(response).toEqual({
+      characterName: 'Must be a string',
+      torchCount: 'Required field',
+      torchCharge: 'Must be in between 0 and 6',
+      isLit: 'Required field'
+    })
+  })
 })

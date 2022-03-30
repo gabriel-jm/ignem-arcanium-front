@@ -78,9 +78,19 @@ export class ValidatorComposite implements Validator {
     const validatiorsResult = this.#validators.reduce((acc, validator) => {
       const validationResult = validator.validate(input)
 
-      if (!validationResult) return acc
+      if (!validationResult) return { ...acc }
 
-      return { ...acc, ...validationResult }
+      const filteredValidationResult = Object
+        .entries(validationResult)
+        .reduce((accumulator, [key, value]) => {
+          if (!(key in acc)) {
+            return { ...accumulator, [key]: value }
+          }
+
+          return accumulator
+        }, {})
+
+      return { ...acc, ...filteredValidationResult }
     }, {})
 
     if (!Object.keys(validatiorsResult).length) return null
