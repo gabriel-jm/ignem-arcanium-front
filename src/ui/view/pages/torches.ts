@@ -13,10 +13,15 @@ interface TorchRegistry {
 
 export class IgnemTorchesPage extends IgnemElement {
   #findAllTorchRegistriesPresenter: Presenter
+  #createTorchRegistryPresenter: Presenter
 
-  constructor(findAllTorchRegistriesPresenter: Presenter) {
+  constructor(
+    findAllTorchRegistriesPresenter: Presenter,
+    createTorchRegistryPresenter: Presenter
+  ) {
     super()
     this.#findAllTorchRegistriesPresenter = findAllTorchRegistriesPresenter
+    this.#createTorchRegistryPresenter = createTorchRegistryPresenter
     this.applyRender()
   }
 
@@ -104,8 +109,14 @@ export class IgnemTorchesPage extends IgnemElement {
       this.select<IgnemTorchSideModalElement>('#form-modal')?.open()
     }
 
-    function onFormSubmit(event: CustomEventInit) {
-      console.log(event)
+    const onFormSubmit = async ( event: CustomEventInit) => {
+      const formData = event.detail
+
+      console.log(formData)
+
+      const result = await this.#createTorchRegistryPresenter.handle(formData)
+
+      console.log(result)
     }
 
     return html`
