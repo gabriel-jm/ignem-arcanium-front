@@ -5,7 +5,11 @@ export class RequiredFieldsValidator implements Validator {
   
   validate(input: any) {
     const missingFields = this.fields.filter(field => {
-      return !(field in input)
+      const inputValue = input[field]
+
+      return inputValue === null
+        || inputValue === undefined
+        || inputValue === ''
     })
 
     if (!missingFields.length) return null

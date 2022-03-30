@@ -9,6 +9,7 @@ describe('RequiredFieldsValidator', () => {
     const sut = makeSut(['field1', 'field2'])
 
     const response = sut.validate({
+      field1: null,
       field3: true
     })
 
