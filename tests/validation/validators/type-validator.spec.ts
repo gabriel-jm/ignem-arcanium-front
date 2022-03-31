@@ -18,7 +18,7 @@ describe('TypeValidator', () => {
 
     const response = sut.validate({
       list: 0,
-      num: true,
+      num: NaN,
       obj: '',
       str: {},
       bool: []

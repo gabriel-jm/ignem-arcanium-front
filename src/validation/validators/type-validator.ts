@@ -2,6 +2,16 @@ import { Validator } from '@/validation/protocols'
 
 export class TypeValidator implements Validator {
   constructor(private readonly fields: Record<string, string | string[]>) {}
+
+  getType(value: any) {
+    const valueType = typeof value
+
+    if (valueType === 'number' && isNaN(value)) {
+      return 'NaN'
+    }
+
+    return valueType
+  }
   
   validate(input: any) {
     const invalidFields = Object.keys(this.fields).filter(field => {
@@ -14,7 +24,7 @@ export class TypeValidator implements Validator {
           return !Array.isArray(value)
         }
   
-        return !(typeof value === type)
+        return !(this.getType(value) === type)
       })
 
       return isInvalid
