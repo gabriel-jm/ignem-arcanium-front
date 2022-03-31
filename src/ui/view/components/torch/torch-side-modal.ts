@@ -3,6 +3,7 @@ import { css, html } from 'lithen-tag-functions'
 
 export interface IgnemTorchSideModalElement extends IgnemSideModalElement {
   setErrors(errorsRecord: Record<string, string>): void
+  removeErrors(): void
 }
 
 /**
@@ -27,12 +28,33 @@ export class IgnemTorchSideModal extends IgnemElement {
   setErrors(errorsRecord: Record<string, string>) {
     const form = this.select<HTMLFormElement>('form')!
 
+    this.removeErrors()
+
     Object.entries(errorsRecord).forEach(([field, error]) => {
       const inputMessageSpan = this.select(`input[name=${field}] ~ span`)!
       const input = form[field] as HTMLInputElement
       input.classList.add('error')
 
       inputMessageSpan.textContent = error
+    })
+  }
+
+  removeErrors() {
+    const form = this.select<HTMLFormElement>('form')!
+
+    const formElements = Array.from(form.elements)
+
+    formElements.forEach(element => {
+      const errorInput = element.classList.contains('error')
+
+      if (!errorInput || element.nodeName !== 'INPUT') return
+
+      const input = element as HTMLInputElement
+      
+      input.classList.remove('error')
+      
+      const inputMessageSpan = this.select(`input[name=${input.name}] ~ span`)!
+      inputMessageSpan.textContent = ''
     })
   }
 

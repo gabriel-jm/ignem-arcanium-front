@@ -112,15 +112,13 @@ export class IgnemTorchesPage extends IgnemElement {
     const onFormSubmit = async ( event: CustomEventInit) => {
       const formData = event.detail
 
-      console.log(formData)
-
       const result = await this.#createTorchRegistryPresenter.handle(formData)
 
-      if (!result.ok && result.validationErrors) {
-        this.select<IgnemTorchSideModalElement>('#form-modal')?.setErrors(
-          result.validationErrors
-        )
-      }
+      const formModal = this.select<IgnemTorchSideModalElement>('#form-modal')
+
+      result.validationErrors
+        ? formModal?.setErrors(result.validationErrors)
+        : formModal?.removeErrors()
     }
 
     return html`
