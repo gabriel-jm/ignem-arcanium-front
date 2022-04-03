@@ -36,7 +36,7 @@ export class TorchRegistryService implements FindAllTorchRegistriesService {
         await this.addMessageListenerOnceClient.once<Record<'id', string>>(
           'create-torch-registry-response',
           payload => {
-            if (payload.statusCode === 201) {
+            if (payload.statusCode < 400) {
               return resolve(payload.data.id)
             }
   

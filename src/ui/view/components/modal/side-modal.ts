@@ -24,7 +24,7 @@ export class IgnemSideModal extends IgnemElement {
         opacity: 0;
         background-color: #0007;
         z-index: 2;
-        position: absolute;
+        position: fixed;
         overflow: hidden;
         top: 0;
         left: 0;
