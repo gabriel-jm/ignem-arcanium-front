@@ -1,3 +1,4 @@
+import { successResponse } from '@/presentation/helpers'
 import { FindAllTorchRegistriesPresenter } from '@/presentation/presenters'
 import { mockFindAllTorchRegistries } from '@/tests/helpers'
 
@@ -25,10 +26,6 @@ describe('FindAllTorchRegistriesPresenter', () => {
 
     const response = await sut.handle()
 
-    expect(response).toEqual({
-      ok: true,
-      data: findAllTorchRegistriesSpy.result,
-      validationErrors: null
-    })
+    expect(response).toEqual(successResponse(findAllTorchRegistriesSpy.result))
   })
 })

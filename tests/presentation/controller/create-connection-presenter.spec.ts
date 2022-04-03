@@ -1,3 +1,4 @@
+import { successResponse } from '@/presentation/helpers'
 import { CreateConnectionPresenter } from '@/presentation/presenters'
 import { mockCreateConnection } from '@/tests/helpers'
 
@@ -25,10 +26,6 @@ describe('CreateConnectionPresenter', () => {
 
     const response = await sut.handle()
 
-    expect(response).toEqual({
-      ok: true,
-      data: null,
-      validationErrors: null
-    })
+    expect(response).toEqual(successResponse(null))
   })
 })
