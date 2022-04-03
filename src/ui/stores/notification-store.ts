@@ -1,7 +1,7 @@
-import { WarningNotificationStore } from '@/ui/protocols'
+import { SuccessNotificationStore, WarningNotificationStore } from '@/ui/protocols'
 import { IgnemNotification } from '@/ui/view'
 
-export class NotificationStore implements WarningNotificationStore {
+export class NotificationStore implements WarningNotificationStore, SuccessNotificationStore {
   static #instance: NotificationStore
   
   constructor() {
@@ -10,6 +10,14 @@ export class NotificationStore implements WarningNotificationStore {
     }
 
     return NotificationStore.#instance
+  }
+
+  notify(label: string, message: string): void {
+    document.body.append(new IgnemNotification({
+      label,
+      message,
+      type: 'success'
+    }))
   }
 
   warn(label: string, message: string) {
