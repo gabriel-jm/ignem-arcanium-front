@@ -1,4 +1,5 @@
 import { Presenter } from '@/presentation/protocols'
+import { SuccessNotificationStore } from '@/ui/protocols'
 import { IgnemElement, IgnemTorchSideModalElement } from '@/ui/view'
 import { containerStyles, tooltipStyles } from '@/ui/view/styles'
 import { css, html } from 'lithen-tag-functions'
@@ -13,15 +14,17 @@ interface TorchRegistry {
 
 export class IgnemTorchesPage extends IgnemElement {
   #findAllTorchRegistriesPresenter: Presenter
-  #createTorchRegistryPresenter: Presenter
+  #createTorchRegistryPresenter!: Presenter
 
   constructor(
     findAllTorchRegistriesPresenter: Presenter,
-    createTorchRegistryPresenter: Presenter
+    createTorchRegistryPresenter: Presenter,
+    private readonly successNotificationStore: SuccessNotificationStore
   ) {
     super()
     this.#findAllTorchRegistriesPresenter = findAllTorchRegistriesPresenter
     this.#createTorchRegistryPresenter = createTorchRegistryPresenter
+    
     this.applyRender()
   }
 
@@ -109,16 +112,24 @@ export class IgnemTorchesPage extends IgnemElement {
       this.select<IgnemTorchSideModalElement>('#form-modal')?.open()
     }
 
-    const onFormSubmit = async ( event: CustomEventInit) => {
+    const onFormSubmit = async (event: CustomEventInit) => {
       const formData = event.detail
 
       const result = await this.#createTorchRegistryPresenter.handle(formData)
 
       const formModal = this.select<IgnemTorchSideModalElement>('#form-modal')
 
-      result.validationErrors
-        ? formModal?.setErrors(result.validationErrors)
-        : formModal?.removeErrors()
+      if (result.validationErrors) {
+        formModal?.setErrors(result.validationErrors)
+        return
+      }
+
+      formModal?.removeErrors()
+      this.successNotificationStore.notify(
+        'Created',
+        'Torch registry created with success'
+      )
+      formModal?.close()
     }
 
     return html`

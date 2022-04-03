@@ -97,8 +97,6 @@ export class IgnemTorchRegistry extends IgnemElement {
       ></li>
     `)
 
-    console.log(isLit)
-
     return html`
       <div class="torch-card ${isTorchLit && 'lit'}">
         ${isTorchLit
