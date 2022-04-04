@@ -1,4 +1,5 @@
 import { ErrorHandlingPresenterDecorator } from '@/main/decorators'
+import { failureResponse } from '@/presentation/helpers'
 import { mockPresenter, mockWarningNotificationStore } from '@/tests/helpers'
 
 function makeSut() {
@@ -33,5 +34,25 @@ describe('ErrorHandlingPresenterDecorator', () => {
     await sut.handle({})
 
     expect(notifierSpy.warn).toHaveBeenCalledWith('Error', 'Internal error. Try again later!')
+  })
+
+  it('should return a failue response on error catch', async () => {
+    const { sut, presenterSpy } = makeSut()
+    const error = new Error('Error message')
+    presenterSpy.handle.mockRejectedValueOnce(error)
+
+    const response = await sut.handle({})
+
+    expect(response).toEqual(failureResponse({
+      errorMessage: error.message
+    }))
+  })
+
+  it('should return the Presenter response on success', async () => {
+    const { sut, presenterSpy } = makeSut()
+
+    const response = await sut.handle({})
+
+    expect(response).toEqual(presenterSpy.result)
   })
 })

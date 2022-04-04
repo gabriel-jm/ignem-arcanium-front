@@ -19,7 +19,7 @@ export class ErrorHandlingPresenterDecorator implements Presenter {
 
       this.warnNotificationStore.warn('Error', message)
 
-      return failureResponse(null)
+      return failureResponse({ errorMessage: message })
     }
   }
 }
