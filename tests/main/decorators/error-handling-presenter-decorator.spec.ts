@@ -23,4 +23,15 @@ describe('ErrorHandlingPresenterDecorator', () => {
 
     expect(notifierSpy.warn).toHaveBeenCalledWith('Error', error.message)
   })
+
+  it('should call NotificationStore with default message when error does not have one', async () => {
+    const { sut, presenterSpy, notifierSpy } = makeSut()
+    const error = new Error()
+    error.message = ''
+    presenterSpy.handle.mockRejectedValueOnce(error)
+
+    await sut.handle({})
+
+    expect(notifierSpy.warn).toHaveBeenCalledWith('Error', 'Internal error. Try again later!')
+  })
 })

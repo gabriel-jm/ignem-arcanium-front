@@ -15,7 +15,9 @@ export class ErrorHandlingPresenterDecorator implements Presenter {
       return result
     } catch(err) {
       const error = err as Error
-      this.warnNotificationStore.warn('Error', error.message ?? 'Unknown error')
+      const message = error.message || 'Internal error. Try again later!'
+
+      this.warnNotificationStore.warn('Error', message)
 
       return failureResponse(null)
     }
