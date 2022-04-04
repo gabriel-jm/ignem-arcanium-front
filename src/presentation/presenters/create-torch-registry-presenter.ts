@@ -22,7 +22,8 @@ export class CreateTorchRegistryPresenter implements Presenter {
 
     return successResponse({
       id: torchRegistryId,
-      ...torchRegistryData
+      ...torchRegistryData,
+      isLit: false
     })
   }
 

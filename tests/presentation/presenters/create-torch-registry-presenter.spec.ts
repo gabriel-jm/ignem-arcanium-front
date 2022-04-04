@@ -34,7 +34,8 @@ describe('CreateTorchRegistryPresenter', () => {
 
     expect(response).toEqual(successResponse({
       id: createTorchRegistrySpy.result,
-      ...dummyCreateParams
+      ...dummyCreateParams,
+      isLit: false
     }))
   })
 })
