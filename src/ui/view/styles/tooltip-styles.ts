@@ -17,11 +17,12 @@ export const tooltipStyles = css`
     background-color: #252525;
     border: 1px solid #252525;
     border-radius: 4px;
+    box-shadow: 0 1px 4px #111c;
     pointer-events: none;
     opacity: 0;
     transform-origin: bottom;
     transform: translate(-50%, -100%) scale(0);
-    transition: all 100ms 250ms;
+    transition: all 100ms 350ms;
   }
 
   [data-tooltip]:hover::after {

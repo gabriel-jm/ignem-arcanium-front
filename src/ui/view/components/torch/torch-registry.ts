@@ -1,4 +1,4 @@
-import { IgnemElement } from '@/ui/view'
+import { IgnemElement, tooltipStyles } from '@/ui/view'
 import { css, html } from 'lithen-tag-functions'
 import { torchLitIcon } from './torch-lit-icon'
 import { torchOffIcon } from './torch-off-icon'
@@ -12,6 +12,8 @@ export class IgnemTorchRegistry extends IgnemElement {
   
   styling() {
     return css`
+      ${tooltipStyles}
+
       .torch-card {
         --lit-color: #c09f34;
         --off-color: #333;
@@ -24,7 +26,8 @@ export class IgnemTorchRegistry extends IgnemElement {
         border-radius: 4px;
         box-sizing: border-box;
         background-color: #1b1b1b;
-        box-shadow: 0 0 0 3px var(--off-color),
+        box-shadow:
+          0 0 0 3px var(--off-color),
           0 0 3px 1px #1114
         ;
         cursor: default;
@@ -47,7 +50,11 @@ export class IgnemTorchRegistry extends IgnemElement {
         align-items: center;
       }
 
-      .torch-owner > h3 {
+      .torch-owner h3 {
+        width: 170px;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
         font-size: 1.8rem;
       }
 
@@ -102,6 +109,8 @@ export class IgnemTorchRegistry extends IgnemElement {
       ></li>
     `)
 
+    const characterName = this.getAttribute('character-name')
+
     return html`
       <div class="torch-card ${isLit && 'lit'}">
         ${isLit
@@ -110,8 +119,12 @@ export class IgnemTorchRegistry extends IgnemElement {
         }
         <div>
           <div class="torch-owner">
-            <h3 data-tooltip="Character name">${this.getAttribute('character-name')}</h3>
-            <p data-tooltip="Torch count">${this.getAttribute('torch-count')}</p>
+            <div data-tooltip="${characterName}">
+              <h3>${characterName}</h3>
+            </div>
+            <p data-tooltip="Torch count">
+              ${this.getAttribute('torch-count')}
+            </p>
           </div>
           <ul data-tooltip="Torch charge" class="torch-charges">
             ${list}

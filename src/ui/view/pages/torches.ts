@@ -1,7 +1,7 @@
 import { Presenter } from '@/presentation/protocols'
 import { SuccessNotificationStore } from '@/ui/protocols'
 import { IgnemElement, IgnemTorchSideModalElement } from '@/ui/view'
-import { containerStyles, tooltipStyles } from '@/ui/view/styles'
+import { containerStyles } from '@/ui/view/styles'
 import { css, html } from 'lithen-tag-functions'
 
 interface TorchRegistry {
@@ -54,7 +54,6 @@ export class IgnemTorchesPage extends IgnemElement {
   styling() {
     return css`
       ${containerStyles}
-      ${tooltipStyles}
 
       .container {
         padding: 20px 46px;
@@ -86,6 +85,7 @@ export class IgnemTorchesPage extends IgnemElement {
       .torch-list ignem-torch-registry {
         flex: 1;
         flex-basis: 300px;
+        max-width: 300px;
       }
 
       .empty-torch-list {
