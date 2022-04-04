@@ -78,6 +78,17 @@ describe('TorchRegistryService', () => {
   
       expect(response).toEqual(addMessageListenerOnceClientSpy.result.data)
     })
+
+    it('should reject promise if some error occurs', async () => {
+      const { sut, addMessageListenerOnceClientSpy } = makeSut()
+      addMessageListenerOnceClientSpy.once.mockImplementationOnce(() => {
+        throw new Error()
+      })
+
+      const promise = sut.findAll()
+
+      await expect(promise).rejects.toThrowError(new Error())
+    })
   })
 
   describe('create()', () => {
@@ -153,6 +164,17 @@ describe('TorchRegistryService', () => {
       const response = await sut.create(dummyCreateParams)
   
       expect(response).toEqual(addMessageListenerOnceClientSpy.result.data.id)
+    })
+
+    it('should reject promise if some error occurs', async () => {
+      const { sut, sendMessageClientSpy } = makeSut()
+      sendMessageClientSpy.send.mockImplementationOnce(() => {
+        throw new Error()
+      })
+
+      const promise = sut.create(dummyCreateParams)
+
+      await expect(promise).rejects.toThrowError(new Error())
     })
   })
 })
