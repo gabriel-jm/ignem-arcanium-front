@@ -1,4 +1,5 @@
 import { ValidationPresenterDecorator } from '@/main/decorators'
+import { validationErrorResponse } from '@/presentation/helpers'
 import { mockPresenter, mockValidator } from '@/tests/helpers'
 
 function makeSut() {
@@ -22,5 +23,16 @@ describe('ValidationPresenterDecorator', () => {
     await sut.handle(params)
 
     expect(validatorSpy.validate).toHaveBeenCalledWith(params)
+  })
+
+  it('should return a validation error response if validator return errors', async () => {
+    const { sut, validatorSpy } = makeSut()
+    validatorSpy.validate.mockReturnValueOnce({ field: 'Required field' })
+
+    const response = await sut.handle()
+
+    expect(response).toEqual(validationErrorResponse({
+      field: 'Required field'
+    }))
   })
 })
