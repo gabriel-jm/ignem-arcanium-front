@@ -94,8 +94,7 @@ export class IgnemTorchRegistry extends IgnemElement {
   }
 
   render() {
-    const isLit = this.getAttribute('is-lit')
-    const isTorchLit = isLit === 'true'
+    const isLit = this.hasAttribute('is-lit')
     const torchCharge = Number(this.getAttribute('torch-charge'))
     const list = Array.from({ length: 6 }).map((_value, index) => html`
       <li
@@ -104,8 +103,8 @@ export class IgnemTorchRegistry extends IgnemElement {
     `)
 
     return html`
-      <div class="torch-card ${isTorchLit && 'lit'}">
-        ${isTorchLit
+      <div class="torch-card ${isLit && 'lit'}">
+        ${isLit
           ? torchLitIcon('torch-icon')
           : torchOffIcon('torch-icon')
         }

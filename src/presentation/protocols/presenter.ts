@@ -1,6 +1,6 @@
 export interface PresenterResult<T = unknown> {
   ok: boolean
-  data: T | null
+  data: T
   validationErrors: Record<string, string> | null
 }
 

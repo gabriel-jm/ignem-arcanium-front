@@ -9,16 +9,16 @@ interface TorchRegistry {
   characterName: string
   torchCount: number
   torchCharge: number
-  isLit: string
+  isLit: boolean
 }
 
 export class IgnemTorchesPage extends IgnemElement {
-  #findAllTorchRegistriesPresenter: Presenter
-  #createTorchRegistryPresenter!: Presenter
+  #findAllTorchRegistriesPresenter: Presenter<TorchRegistry[]>
+  #createTorchRegistryPresenter: Presenter<TorchRegistry>
 
   constructor(
-    findAllTorchRegistriesPresenter: Presenter,
-    createTorchRegistryPresenter: Presenter,
+    findAllTorchRegistriesPresenter: Presenter<TorchRegistry[]>,
+    createTorchRegistryPresenter: Presenter<TorchRegistry>,
     private readonly successNotificationStore: SuccessNotificationStore
   ) {
     super()
@@ -30,7 +30,7 @@ export class IgnemTorchesPage extends IgnemElement {
 
   async connectedCallback() {
     const findResult = await this.#findAllTorchRegistriesPresenter.handle()
-    const data = findResult.data as TorchRegistry[]
+    const data = findResult.data
 
     if (!findResult.ok || !data?.length) return
 
@@ -41,7 +41,7 @@ export class IgnemTorchesPage extends IgnemElement {
           character-name="${item.characterName}"
           torch-count="${item.torchCount}"
           torch-charge="${item.torchCharge}"
-          is-lit="${item.isLit}"
+          ${item.isLit && 'is-lit'}
         />
       `
     })
@@ -109,7 +109,7 @@ export class IgnemTorchesPage extends IgnemElement {
   }
 
   render() {
-    function onBtnClick(this: IgnemTorchesPage) {
+    const onBtnClick = () => {
       this.select<IgnemTorchSideModalElement>('#form-modal')?.open()
     }
 
@@ -134,7 +134,7 @@ export class IgnemTorchesPage extends IgnemElement {
       )
       formModal?.close()
 
-      const torchRegistry = result.data as TorchRegistry
+      const torchRegistry = result.data
 
       this.select('.torch-list')?.append(html`
         <ignem-torch-registry
@@ -142,7 +142,7 @@ export class IgnemTorchesPage extends IgnemElement {
           character-name="${torchRegistry.characterName}"
           torch-count="${torchRegistry.torchCount}"
           torch-charge="${torchRegistry.torchCharge}"
-          is-lit="${torchRegistry.isLit}"
+          ${torchRegistry.isLit && 'is-lit'}
         />
       `)
     }
@@ -158,7 +158,7 @@ export class IgnemTorchesPage extends IgnemElement {
       <section class="container">
         <header class="torches-header">
           <h2 class="torches-title">Torches</h2>
-          <button class="btn-bordered" on-click=${onBtnClick.bind(this)}>
+          <button class="btn-bordered" on-click=${onBtnClick}>
             &plus; New
           </button>
         </header>
