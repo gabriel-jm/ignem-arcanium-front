@@ -68,7 +68,12 @@ describe('TorchRegistryService', () => {
   
       const promise = sut.findAll()
   
-      await expect(promise).rejects.toThrowError(new ServiceError(addMessageListenerOnceClientSpy.result))
+      await expect(promise).rejects.toThrowError(
+        new ServiceError(
+          addMessageListenerOnceClientSpy.result,
+          'Internal error on searching for torch registries'
+        )
+      )
     })
   
     it('should return the data from received message', async () => {
@@ -148,7 +153,12 @@ describe('TorchRegistryService', () => {
   
       const promise = sut.create(dummyCreateParams)
   
-      await expect(promise).rejects.toThrowError(new ServiceError(addMessageListenerOnceClientSpy.result))
+      await expect(promise).rejects.toThrowError(
+        new ServiceError(
+          addMessageListenerOnceClientSpy.result,
+          'Internal error on creating a torch registry'
+        )
+      )
     })
   
     it('should return the data from received message', async () => {

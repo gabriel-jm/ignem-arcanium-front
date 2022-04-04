@@ -14,11 +14,11 @@ export class TorchRegistryService implements FindAllTorchRegistriesService {
         const responseEvent = 'find-all-torch-registries-response'
 
         await this.addMessageListenerOnceClient.once(responseEvent, payload => {
-          if (payload.statusCode === 200) {
+          if (payload.statusCode < 400) {
             resolve(payload.data as FindAllTorchRegistriesServiceResult[])
           }
 
-          reject(new ServiceError(payload))
+          reject(new ServiceError(payload, 'Internal error on searching for torch registries'))
         })
 
         await this.sendMessageClient.send({
@@ -40,7 +40,12 @@ export class TorchRegistryService implements FindAllTorchRegistriesService {
               return resolve(payload.data.id)
             }
   
-            reject(new ServiceError(payload))
+            reject(
+              new ServiceError(
+                payload,
+                'Internal error on creating a torch registry'
+              )
+            )
           }
         )
   
