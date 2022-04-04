@@ -37,6 +37,7 @@ export class IgnemTorchesPage extends IgnemElement {
     const torchRegistries = data.map(item => {
       return html`
         <ignem-torch-registry
+          id="${item.id}"
           character-name="${item.characterName}"
           torch-count="${item.torchCount}"
           torch-charge="${item.torchCharge}"

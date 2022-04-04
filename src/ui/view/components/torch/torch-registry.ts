@@ -4,6 +4,12 @@ import { torchLitIcon } from './torch-lit-icon'
 import { torchOffIcon } from './torch-off-icon'
 
 export class IgnemTorchRegistry extends IgnemElement {
+  #id = this.getAttribute('id') || ''
+
+  get id() {
+    return this.#id
+  }
+  
   styling() {
     return css`
       .torch-card {
