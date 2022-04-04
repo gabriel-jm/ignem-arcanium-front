@@ -16,9 +16,10 @@ function makeSut() {
 }
 
 describe('ValidationPresenterDecorator', () => {
+  const params = { value: 'data' }
+
   it('should call Validator with correct values', async () => {
     const { sut, validatorSpy } = makeSut()
-    const params = { value: 'data' }
 
     await sut.handle(params)
 
@@ -34,5 +35,13 @@ describe('ValidationPresenterDecorator', () => {
     expect(response).toEqual(validationErrorResponse({
       field: 'Required field'
     }))
+  })
+  
+  it('should call Presenter on success', async () => {
+    const { sut, presenterSpy } = makeSut()
+
+    await sut.handle(params)
+
+    expect(presenterSpy.handle).toHaveBeenCalledWith(params)
   })
 })
