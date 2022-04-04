@@ -3,11 +3,32 @@ import { css, html } from 'lithen-tag-functions'
 import { torchLitIcon } from './torch-lit-icon'
 import { torchOffIcon } from './torch-off-icon'
 
+export interface IgnemTorchRegistryProps {
+  id: string
+  characterName: string
+  torchCount: number
+  torchCharge: number
+  isLit: boolean
+}
+
 export class IgnemTorchRegistry extends IgnemElement {
   #id = this.getAttribute('id') || ''
 
   get id() {
     return this.#id
+  }
+
+  constructor(props: IgnemTorchRegistryProps) {
+    super({ preventRenderApplying: true })
+    this.setAttributes({
+      ...props,
+      'character-name': props.characterName,
+      'torch-count': props.torchCount,
+      'torch-charge': props.torchCharge,
+      'is-lit': props.isLit
+    })
+
+    this.applyRender()
   }
   
   styling() {
@@ -35,7 +56,8 @@ export class IgnemTorchRegistry extends IgnemElement {
       }
 
       .torch-card.lit {
-        box-shadow: 0 0 0 3px var(--lit-color),
+        box-shadow:
+          0 0 0 3px var(--lit-color),
           0 0 6px 2px #eed151c7
         ;
       }

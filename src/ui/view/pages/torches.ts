@@ -1,6 +1,6 @@
 import { Presenter } from '@/presentation/protocols'
 import { SuccessNotificationStore } from '@/ui/protocols'
-import { IgnemElement, IgnemTorchSideModalElement } from '@/ui/view'
+import { IgnemElement, IgnemTorchRegistry, IgnemTorchSideModalElement } from '@/ui/view'
 import { containerStyles } from '@/ui/view/styles'
 import { css, html } from 'lithen-tag-functions'
 
@@ -34,18 +34,12 @@ export class IgnemTorchesPage extends IgnemElement {
 
     if (!findResult.ok || !data?.length) return
 
-    const torchRegistries = data.map(item => {
-      return html`
-        <ignem-torch-registry
-          id="${item.id}"
-          character-name="${item.characterName}"
-          torch-count="${item.torchCount}"
-          torch-charge="${item.torchCharge}"
-          ${item.isLit && 'is-lit'}
-        />
-      `
-    })
+    const torchRegistries = data.map(item => new IgnemTorchRegistry(item))
 
+    this.#addTorchRegistryElement(...torchRegistries)
+  }
+
+  #addTorchRegistryElement(...torchRegistries: (Element | DocumentFragment)[]) {
     this.select('.empty-torch-list')?.remove()
 
     this.select('.torch-list')?.append(...torchRegistries)
@@ -136,15 +130,7 @@ export class IgnemTorchesPage extends IgnemElement {
 
       const torchRegistry = result.data
 
-      this.select('.torch-list')?.append(html`
-        <ignem-torch-registry
-          id="${torchRegistry.id}"
-          character-name="${torchRegistry.characterName}"
-          torch-count="${torchRegistry.torchCount}"
-          torch-charge="${torchRegistry.torchCharge}"
-          ${torchRegistry.isLit && 'is-lit'}
-        />
-      `)
+      this.select('.torch-list')?.append(new IgnemTorchRegistry(torchRegistry))
     }
 
     return html`
