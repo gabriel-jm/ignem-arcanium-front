@@ -133,6 +133,18 @@ export class IgnemTorchesPage extends IgnemElement {
         'Torch registry created with success'
       )
       formModal?.close()
+
+      const torchRegistry = result.data as TorchRegistry
+
+      this.select('.torch-list')?.append(html`
+        <ignem-torch-registry
+          id="${torchRegistry.id}"
+          character-name="${torchRegistry.characterName}"
+          torch-count="${torchRegistry.torchCount}"
+          torch-charge="${torchRegistry.torchCharge}"
+          is-lit="${torchRegistry.isLit}"
+        />
+      `)
     }
 
     return html`
