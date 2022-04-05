@@ -6,9 +6,6 @@ export const notificationStyles = css`
     --icon-color: #bbb;
     --bg-color: #1a1a1a;
 
-    position: fixed;
-    top: 10px;
-    right: 10px;
     animation: show 1s ease-in-out forwards;
     z-index: 10;
   }

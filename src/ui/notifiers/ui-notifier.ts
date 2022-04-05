@@ -1,9 +1,13 @@
 import { SuccessNotifier, WarningNotifier } from '@/ui/protocols'
-import { IgnemNotification } from '@/ui/view'
+import { IgnemNotification, IgnemNotificationContainerElement } from '@/ui/view'
 
 export class UiNotifier implements WarningNotifier, SuccessNotifier {
+  #container: IgnemNotificationContainerElement = document.querySelector(
+    'ignem-notification-container'
+  )!
+
   notifySuccess(label: string, message: string): void {
-    document.body.append(new IgnemNotification({
+    this.#container.addNotification(new IgnemNotification({
       label,
       message,
       type: 'success'
@@ -11,7 +15,7 @@ export class UiNotifier implements WarningNotifier, SuccessNotifier {
   }
 
   notifyWarning(label: string, message: string) {
-    document.body.append(new IgnemNotification({
+    this.#container.addNotification(new IgnemNotification({
       label,
       message,
       type: 'warning'
