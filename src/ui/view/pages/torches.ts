@@ -112,14 +112,14 @@ export class IgnemTorchesPage extends IgnemElement {
 
       const result = await this.#createTorchRegistryPresenter.handle<TorchRegistry>(formData)
 
-      if (!result.ok && !result.validationErrors) return
-
       const formModal = this.select<IgnemTorchSideModalElement>('#form-modal')
 
       if (result.validationErrors) {
         formModal?.setErrors(result.validationErrors)
         return
       }
+
+      if (!result.ok) return
 
       formModal?.removeErrors()
       this.successNotifier.notifySuccess(

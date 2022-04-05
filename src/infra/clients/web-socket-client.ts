@@ -45,7 +45,7 @@ export class WebSocketClient implements WebSocketConnectionClient {
     WebSocketClient.#serverUrl = value
   }
   
-  async once(eventName: string, listener: MessageOnceListener) {
+  async once(eventName: string, listener: MessageOnceListener<any>) {
     !this.#connection && await this.createConnection()
 
     this.#events.once[eventName] = listener
