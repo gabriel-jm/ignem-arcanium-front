@@ -1,5 +1,5 @@
 import { validationErrorResponse } from '@/presentation/helpers'
-import { Presenter, PresenterResult } from '@/presentation/protocols'
+import { Presenter } from '@/presentation/protocols'
 import { Validator } from '@/validation/protocols'
 
 export class ValidationPresenterDecorator implements Presenter {
@@ -8,7 +8,7 @@ export class ValidationPresenterDecorator implements Presenter {
     private readonly validator: Validator
   ) {}
 
-  async handle(data?: unknown): Promise<PresenterResult<unknown>> {
+  async handle(data?: unknown) {
     const validationErrors = this.validator.validate(data)
 
     if (validationErrors) {

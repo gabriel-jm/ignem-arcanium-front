@@ -1,5 +1,5 @@
 import { failureResponse } from '@/presentation/helpers'
-import { Presenter, PresenterResult } from '@/presentation/protocols'
+import { Presenter } from '@/presentation/protocols'
 import { WarningNotifier } from '@/ui/protocols'
 
 export class ErrorHandlingPresenterDecorator implements Presenter {
@@ -7,8 +7,8 @@ export class ErrorHandlingPresenterDecorator implements Presenter {
     private readonly warnNotificationStore: WarningNotifier,
     private readonly presenter: Presenter
   ) {}
-  
-  async handle(data?: unknown): Promise<PresenterResult<unknown>> {
+
+  async handle(data?: unknown) {
     try {
       const result = await this.presenter.handle(data)
 

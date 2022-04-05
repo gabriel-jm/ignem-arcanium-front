@@ -1,5 +1,5 @@
 import { Presenter } from '@/presentation/protocols'
-import { SuccessNotificationStore } from '@/ui/protocols'
+import { SuccessNotifier } from '@/ui/protocols'
 import { IgnemElement, IgnemTorchRegistry, IgnemTorchSideModalElement } from '@/ui/view'
 import { containerStyles } from '@/ui/view/styles'
 import { css, html } from 'lithen-tag-functions'
@@ -13,13 +13,13 @@ interface TorchRegistry {
 }
 
 export class IgnemTorchesPage extends IgnemElement {
-  #findAllTorchRegistriesPresenter: Presenter<TorchRegistry[]>
-  #createTorchRegistryPresenter: Presenter<TorchRegistry>
+  #findAllTorchRegistriesPresenter: Presenter
+  #createTorchRegistryPresenter: Presenter
 
   constructor(
-    findAllTorchRegistriesPresenter: Presenter<TorchRegistry[]>,
-    createTorchRegistryPresenter: Presenter<TorchRegistry>,
-    private readonly successNotificationStore: SuccessNotificationStore
+    findAllTorchRegistriesPresenter: Presenter,
+    createTorchRegistryPresenter: Presenter,
+    private readonly successNotifier: SuccessNotifier
   ) {
     super()
     this.#findAllTorchRegistriesPresenter = findAllTorchRegistriesPresenter
@@ -29,7 +29,7 @@ export class IgnemTorchesPage extends IgnemElement {
   }
 
   async connectedCallback() {
-    const findResult = await this.#findAllTorchRegistriesPresenter.handle()
+    const findResult = await this.#findAllTorchRegistriesPresenter.handle<TorchRegistry[]>()
     const data = findResult.data
 
     if (!findResult.ok || !data?.length) return
@@ -110,7 +110,7 @@ export class IgnemTorchesPage extends IgnemElement {
     const onFormSubmit = async (event: CustomEventInit) => {
       const formData = event.detail
 
-      const result = await this.#createTorchRegistryPresenter.handle(formData)
+      const result = await this.#createTorchRegistryPresenter.handle<TorchRegistry>(formData)
 
       if (!result.ok && !result.validationErrors) return
 
@@ -122,7 +122,7 @@ export class IgnemTorchesPage extends IgnemElement {
       }
 
       formModal?.removeErrors()
-      this.successNotificationStore.notify(
+      this.successNotifier.notifySuccess(
         'Created',
         'Torch registry created with success'
       )
