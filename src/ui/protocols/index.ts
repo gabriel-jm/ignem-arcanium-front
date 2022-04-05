@@ -1,2 +1,2 @@
-export * from './warning-notification-store'
-export * from './success-notification-store'
+export * from './warning-notifier'
+export * from './success-notifier'

@@ -1,10 +1,10 @@
 import { failureResponse } from '@/presentation/helpers'
 import { Presenter, PresenterResult } from '@/presentation/protocols'
-import { WarningNotificationStore } from '@/ui/protocols'
+import { WarningNotifier } from '@/ui/protocols'
 
 export class ErrorHandlingPresenterDecorator implements Presenter {
   constructor(
-    private readonly warnNotificationStore: WarningNotificationStore,
+    private readonly warnNotificationStore: WarningNotifier,
     private readonly presenter: Presenter
   ) {}
   
@@ -17,7 +17,7 @@ export class ErrorHandlingPresenterDecorator implements Presenter {
       const error = err as Error
       const message = error.message || 'Internal error. Try again later!'
 
-      this.warnNotificationStore.warn('Error', message)
+      this.warnNotificationStore.notifyWarning('Error', message)
 
       return failureResponse({ errorMessage: message })
     }

@@ -2,7 +2,7 @@ import {
   makeCreateTorchRegistryPresenter,
   makeFindAllTorchRegistriesPresenter
 } from '@/main/factories/presenters'
-import { NotificationStore } from '@/ui/stores'
+import { UiNotifier } from '@/ui/notifiers'
 import { IgnemTorchesPage } from '@/ui/view'
 
 export function makeTorchesPage() {
@@ -12,7 +12,7 @@ export function makeTorchesPage() {
   const torchesPage = new IgnemTorchesPage(
     findAllTorchRegistriesPresenter,
     createTorchRegistryPresenter,
-    new NotificationStore()
+    new UiNotifier()
   )
 
   return torchesPage

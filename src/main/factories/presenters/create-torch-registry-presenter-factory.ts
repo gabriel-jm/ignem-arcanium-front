@@ -3,7 +3,7 @@ import { TorchRegistryService } from '@/infra/services'
 import { ErrorHandlingPresenterDecorator, ValidationPresenterDecorator } from '@/main/decorators'
 import { makeWebSocketClient } from '@/main/factories/clients'
 import { CreateTorchRegistryPresenter } from '@/presentation/presenters'
-import { NotificationStore } from '@/ui/stores'
+import { UiNotifier } from '@/ui/notifiers'
 import { ValidatorComposite } from '@/validation/composites'
 
 export function makeCreateTorchRegistryPresenter() {
@@ -14,7 +14,7 @@ export function makeCreateTorchRegistryPresenter() {
   const presenter = new CreateTorchRegistryPresenter(createTorchRegistry)
 
   return new ErrorHandlingPresenterDecorator(
-    new NotificationStore(),
+    new UiNotifier(),
     new ValidationPresenterDecorator(
       presenter,
       new ValidatorComposite({

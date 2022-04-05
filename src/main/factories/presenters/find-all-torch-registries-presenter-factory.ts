@@ -3,7 +3,7 @@ import { TorchRegistryService } from '@/infra/services'
 import { ErrorHandlingPresenterDecorator } from '@/main/decorators'
 import { makeWebSocketClient } from '@/main/factories/clients'
 import { FindAllTorchRegistriesPresenter } from '@/presentation/presenters'
-import { NotificationStore } from '@/ui/stores'
+import { UiNotifier } from '@/ui/notifiers'
 
 export function makeFindAllTorchRegistriesPresenter() {
   const wsClient = makeWebSocketClient()
@@ -14,7 +14,7 @@ export function makeFindAllTorchRegistriesPresenter() {
   )
 
   return new ErrorHandlingPresenterDecorator(
-    new NotificationStore(),
+    new UiNotifier(),
     findAllTorchRegistriesPresenter
   )
 }

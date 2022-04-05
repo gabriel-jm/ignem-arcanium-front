@@ -1,10 +1,10 @@
 import { ErrorHandlingPresenterDecorator } from '@/main/decorators'
 import { failureResponse } from '@/presentation/helpers'
-import { mockPresenter, mockWarningNotificationStore } from '@/tests/helpers'
+import { mockPresenter, mockWarningNotifier } from '@/tests/helpers'
 
 function makeSut() {
   const presenterSpy = mockPresenter()
-  const notifierSpy = mockWarningNotificationStore()
+  const notifierSpy = mockWarningNotifier()
   const sut = new ErrorHandlingPresenterDecorator(notifierSpy, presenterSpy)
 
   return {
@@ -22,7 +22,7 @@ describe('ErrorHandlingPresenterDecorator', () => {
 
     await sut.handle({})
 
-    expect(notifierSpy.warn).toHaveBeenCalledWith('Error', error.message)
+    expect(notifierSpy.notifyWarning).toHaveBeenCalledWith('Error', error.message)
   })
 
   it('should call NotificationStore with default message when error does not have one', async () => {
@@ -33,7 +33,7 @@ describe('ErrorHandlingPresenterDecorator', () => {
 
     await sut.handle({})
 
-    expect(notifierSpy.warn).toHaveBeenCalledWith('Error', 'Internal error. Try again later!')
+    expect(notifierSpy.notifyWarning).toHaveBeenCalledWith('Error', 'Internal error. Try again later!')
   })
 
   it('should return a failue response on error catch', async () => {

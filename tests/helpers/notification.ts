@@ -1,5 +1,5 @@
-export function mockWarningNotificationStore() {
+export function mockWarningNotifier() {
   return {
-    warn: vi.fn()
+    notifyWarning: vi.fn()
   }  
 }
