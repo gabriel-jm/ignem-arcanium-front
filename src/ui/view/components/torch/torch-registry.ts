@@ -1,7 +1,9 @@
-import { IgnemElement, tooltipStyles } from '@/ui/view'
-import { css, html } from 'lithen-tag-functions'
+import { featherIcon, IgnemElement } from '@/ui/view'
+import { html } from 'lithen-tag-functions'
 import { torchLitIcon } from './torch-lit-icon'
 import { torchOffIcon } from './torch-off-icon'
+import { IgnemTorchBtnElement } from './torch-btn'
+import { torchRegistryStyles } from './torch-registry-styles'
 
 export interface IgnemTorchRegistryProps {
   id: string
@@ -30,96 +32,13 @@ export class IgnemTorchRegistry extends IgnemElement {
 
     this.applyRender()
   }
+
+  #toogleEdit() {
+    return this.select('.torch-card')?.classList.toggle('edit')
+  }
   
   styling() {
-    return css`
-      ${tooltipStyles}
-
-      .torch-card {
-        --lit-color: #c09f34;
-        --off-color: #333;
-
-        display: flex;
-        align-items: center;
-        gap: 0 18px;
-        padding: 12px 14px;
-        border: 0;
-        border-radius: 4px;
-        box-sizing: border-box;
-        background-color: #1b1b1b;
-        box-shadow:
-          0 0 0 3px var(--off-color),
-          0 0 3px 1px #1114
-        ;
-        cursor: default;
-        transition: 300ms all;
-      }
-
-      .torch-card.lit {
-        box-shadow:
-          0 0 0 3px var(--lit-color),
-          0 0 6px 2px #eed151c7
-        ;
-      }
-
-      .torch-card > div {
-        flex: 1;
-      }
-
-      .torch-owner {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-      }
-
-      .torch-owner h3 {
-        width: 170px;
-        text-overflow: ellipsis;
-        overflow: hidden;
-        white-space: nowrap;
-        font-size: 1.8rem;
-      }
-
-      .torch-owner > p {
-        font-size: 1.45rem;
-        font-weight: bold;
-      }
-
-      .torch-charges {
-        display: flex;
-        height: 5px;
-        justify-content: stretch;
-        align-items: center;
-        gap: 0 6px;
-        padding: 8px 0 4px;
-        box-sizing: content-box;
-      }
-
-      .charge-count {
-        height: 100%;
-        width: 100%;
-        background-color: #121212;
-        border-radius: 50px;
-      }
-
-      .charge-count.filled {
-        background-color: var(--off-color);
-      }
-
-      .torch-card.lit .charge-count.filled {
-        background-color: var(--lit-color);
-      }
-
-      .torch-icon {
-        display: block;
-        width: 4rem;
-        fill: var(--off-color);
-      }
-
-      .torch-card.lit .torch-icon {
-        fill: var(--lit-color);
-      }
-    `
+    return torchRegistryStyles
   }
 
   render() {
@@ -133,8 +52,20 @@ export class IgnemTorchRegistry extends IgnemElement {
 
     const characterName = this.getAttribute('character-name')
 
+    const onClickEditTorch = () => {
+      const isEditing = this.#toogleEdit()
+      const torchBtn = this.select<IgnemTorchBtnElement>('.edit-torch-btn')
+      torchBtn?.changeTooltip(isEditing ? 'Cancel' : 'Edit')
+    }
+
     return html`
       <div class="torch-card ${isLit && 'lit'}">
+        <ignem-torch-button
+          class="edit-torch-btn"
+          on-click=${onClickEditTorch}
+        >
+          ${featherIcon()}
+        </ignem-torch-button>
         ${isLit
           ? torchLitIcon('torch-icon')
           : torchOffIcon('torch-icon')
