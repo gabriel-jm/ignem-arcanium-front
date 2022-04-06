@@ -11,7 +11,7 @@ export const torchRegistryStyles = css`
   .torch-card {
     --lit-color: #c09f34;
     --off-color: #333;
-    --edit-color: #2fa0cc;
+    --edit-color: #0e6e94;
 
     display: flex;
     align-items: center;
@@ -111,6 +111,6 @@ export const torchRegistryStyles = css`
     top: -10px;
     right: -10px;
     transform: scale(0);
-    transition: all 300ms 250ms ease;
+    transition: all 300ms 350ms ease;
   }
 `

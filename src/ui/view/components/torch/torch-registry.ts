@@ -1,4 +1,4 @@
-import { featherIcon, IgnemElement } from '@/ui/view'
+import { closeIcon, featherIcon, IgnemElement } from '@/ui/view'
 import { html } from 'lithen-tag-functions'
 import { torchLitIcon } from './torch-lit-icon'
 import { torchOffIcon } from './torch-off-icon'
@@ -33,8 +33,14 @@ export class IgnemTorchRegistry extends IgnemElement {
     this.applyRender()
   }
 
-  #toogleEdit() {
-    return this.select('.torch-card')?.classList.toggle('edit')
+  #toggleEdit() {
+    const hasClass = this.select('.torch-card')?.classList.toggle('edit')
+
+    this.select('ignem-torch-button')?.replaceChildren(
+      hasClass ? closeIcon() : featherIcon()
+    )
+    
+    return hasClass
   }
   
   styling() {
@@ -53,7 +59,7 @@ export class IgnemTorchRegistry extends IgnemElement {
     const characterName = this.getAttribute('character-name')
 
     const onClickEditTorch = () => {
-      const isEditing = this.#toogleEdit()
+      const isEditing = this.#toggleEdit()
       const torchBtn = this.select<IgnemTorchBtnElement>('.edit-torch-btn')
       torchBtn?.changeTooltip(isEditing ? 'Cancel' : 'Edit')
     }
