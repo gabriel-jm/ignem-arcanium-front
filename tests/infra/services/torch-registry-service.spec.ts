@@ -187,4 +187,27 @@ describe('TorchRegistryService', () => {
       await expect(promise).rejects.toThrowError(new Error())
     })
   })
+
+  describe('update()', () => {
+    const dummyUpdateParams = {
+      id: 'any_id',
+      torchCharge: 2,
+      isLit: true
+    }
+
+    it('should call AddMessageListenerOnceClient with correct values', async () => {
+      const { sut, addMessageListenerOnceClientSpy } = makeSut({
+        event: 'update-torch-registry-response',
+        statusCode: 200,
+        data: null
+      })
+  
+      await sut.update(dummyUpdateParams)
+  
+      expect(addMessageListenerOnceClientSpy.once).toHaveBeenCalledWith(
+        'update-torch-registry-response',
+        expect.any(Function)
+      )
+    })
+  })
 })

@@ -1,4 +1,4 @@
-import { CreateTorchRegistryServiceParams, FindAllTorchRegistriesService, FindAllTorchRegistriesServiceResult } from '@/data/protocols'
+import { CreateTorchRegistryServiceParams, FindAllTorchRegistriesService, FindAllTorchRegistriesServiceResult, UpdateTorchRegistryServiceParams } from '@/data/protocols'
 import { ServiceError } from '@/infra/errors'
 import { AddMessageListenerOnceClient, SendMessageClient } from '@/infra/protocols'
 
@@ -56,6 +56,39 @@ export class TorchRegistryService implements FindAllTorchRegistriesService {
             torchCount: params.torchCount,
             torchCharge: params.torchCharge,
             isLit: false
+          }
+        })
+      } catch(error) {
+        reject(error)
+      }
+    })
+  }
+
+  update(params: UpdateTorchRegistryServiceParams) {
+    return new Promise(async (resolve, reject) => {
+      try {
+        await this.addMessageListenerOnceClient.once(
+          'update-torch-registry-response',
+          payload => {
+            if (payload.statusCode < 400) {
+              resolve(null)
+            }
+
+            reject(
+              new ServiceError(
+                payload,
+                'Internal error on update torch registry'
+              )
+            )
+          }
+        )
+
+        await this.sendMessageClient.send({
+          event: 'update-torch-registry',
+          data: {
+            id: params.id,
+            ...params.torchCharge && { torchCharge: params.torchCharge },
+            ...params.isLit && { isLit: params.isLit }
           }
         })
       } catch(error) {
