@@ -37,3 +37,9 @@ export function mockCreateTorchRegistry() {
     create: vi.fn(() => Promise.resolve('any_id'))
   }
 }
+
+export function mockUpdateTorchRegistryService() {
+  return {
+    update: vi.fn(() => Promise.resolve())
+  }
+}
