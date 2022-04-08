@@ -43,3 +43,9 @@ export function mockUpdateTorchRegistryService() {
     update: vi.fn(() => Promise.resolve())
   }
 }
+
+export function mockUpdateTorchRegistry() {
+  return {
+    update: vi.fn(() => Promise.resolve())
+  }
+}
