@@ -1,7 +1,7 @@
 import '../wrapper'
 import { css, html } from 'lithen-tag-functions'
 
-export function menuIcon(className?: string) {
+export function menuIcon() {
   const styles = css`
     :host {
       width: 26px;
@@ -13,7 +13,7 @@ export function menuIcon(className?: string) {
   `
 
   return html`
-    <ignem-wrapper ${className && `class="${className}"`} css="${styles}">
+    <ignem-wrapper class="menu-icon" css="${styles}">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="24"

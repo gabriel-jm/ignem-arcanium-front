@@ -34,7 +34,7 @@ export class IgnemHeader extends IgnemElement {
     return html`
       <header class="header">
         <div class="container">
-          ${menuIcon('menu-icon')}
+          ${menuIcon()}
           <h1 class="title">Ignem Arcanium</h1>
         </div>
       </header>

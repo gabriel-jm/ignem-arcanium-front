@@ -1,8 +1,8 @@
 import '../wrapper'
 import { html } from 'lithen-tag-functions'
 
-export const torchOffIcon = (className?: string) => html`
-  <ignem-wrapper ${className && `class="${className}"`}>
+export const torchOffIcon = () => html`
+  <ignem-wrapper class="torch-icon">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         x="0px"
