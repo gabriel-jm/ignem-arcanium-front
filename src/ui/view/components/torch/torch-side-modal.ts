@@ -23,6 +23,10 @@ export class IgnemTorchSideModal extends IgnemElement {
 
   close() {
     this.#sideModal?.close()
+    const form = this.select<HTMLFormElement>('form')!
+
+    form.reset()
+    this.removeErrors()
   }
 
   setErrors(errorsRecord: Record<string, string>) {
@@ -136,7 +140,7 @@ export class IgnemTorchSideModal extends IgnemElement {
     }
 
     return html`
-      <ignem-side-modal>
+      <ignem-side-modal on-click-outside=${this.close.bind(this)}>
         <header class="modal-header">
           <h3 class="modal-title">Create Torch Registry</h3>
           <button class="close-btn" on-click=${this.close.bind(this)}>

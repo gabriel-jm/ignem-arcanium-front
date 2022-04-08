@@ -6,6 +6,9 @@ export interface IgnemSideModalElement extends IgnemElement {
   close(): void
 }
 
+/**
+ * @event -click-outside
+ */
 export class IgnemSideModal extends IgnemElement {
   open() {
     this.classList.add('open')
@@ -96,7 +99,7 @@ export class IgnemSideModal extends IgnemElement {
       const [clickedElement] = event.composedPath()
       
       if (clickedElement === this || clickedElement === containerElement) {
-        this.close()
+        this.dispatchEvent(new Event('click-outside'))
       }
     })
 

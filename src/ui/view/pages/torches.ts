@@ -121,7 +121,6 @@ export class IgnemTorchesPage extends IgnemElement {
 
       if (!result.ok) return
 
-      formModal?.removeErrors()
       this.successNotifier.notifySuccess(
         'Created',
         'Torch registry created with success'
