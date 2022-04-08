@@ -1,5 +1,5 @@
 import { Presenter } from '@/presentation/protocols'
-import { IgnemElement } from '@/ui/view'
+import { buttonStyles, IgnemElement } from '@/ui/view'
 import { router } from 'lithen-router'
 import { css, html } from 'lithen-tag-functions'
 
@@ -14,6 +14,8 @@ export class IgnemHomePage extends IgnemElement {
 
   styling() {
     return css`
+      ${buttonStyles}
+
       :host {
         display: flex;
         flex-direction: column;
