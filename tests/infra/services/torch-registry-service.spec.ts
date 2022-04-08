@@ -209,5 +209,35 @@ describe('TorchRegistryService', () => {
         expect.any(Function)
       )
     })
+
+    it('should call SendMessageClient with correct values', async () => {
+      const { sut, sendMessageClientSpy } = makeSut({
+        event: 'update-torch-registry-response',
+        statusCode: 200,
+        data: { id: 'any_id' }
+      })
+  
+      await sut.update(dummyUpdateParams)
+  
+      expect(sendMessageClientSpy.send).toHaveBeenCalledWith({
+        event: 'update-torch-registry',
+        data: {
+          id: dummyUpdateParams.id,
+          torchCharge: dummyUpdateParams.torchCharge,
+          isLit: dummyUpdateParams.isLit
+        }
+      })
+    })
+
+    it('should reject promise if some error occurs', async () => {
+      const { sut, sendMessageClientSpy } = makeSut()
+      sendMessageClientSpy.send.mockImplementationOnce(() => {
+        throw new Error()
+      })
+
+      const promise = sut.update(dummyUpdateParams)
+
+      await expect(promise).rejects.toThrowError(new Error())
+    })
   })
 })
