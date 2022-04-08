@@ -65,13 +65,13 @@ export class TorchRegistryService implements FindAllTorchRegistriesService {
   }
 
   update(params: UpdateTorchRegistryServiceParams) {
-    return new Promise(async (resolve, reject) => {
+    return new Promise<void>(async (resolve, reject) => {
       try {
         await this.addMessageListenerOnceClient.once(
           'update-torch-registry-response',
           payload => {
             if (payload.statusCode < 400) {
-              resolve(null)
+              resolve()
             }
 
             reject(
