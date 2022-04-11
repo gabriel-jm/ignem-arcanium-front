@@ -1,10 +1,10 @@
-import { WebSocketConnectionFailedError } from '@/infra/errors'
+import { ServiceError, WebSocketConnectionFailedError } from '@/infra/errors'
 import {
-  AddMessageListenerOnceClient,
   CreateConnectionClient,
   MessageOnceListener,
   SendMessageClient,
-  SendMessageStoreParams
+  SendMessageClientParams,
+  SendMessageClientResult,
 } from '@/infra/protocols'
 
 interface WebSocketClientEventHandlerParams {
@@ -19,8 +19,7 @@ interface WebSocketClientEvents {
 }
 
 type WebSocketConnectionClient = (
-  AddMessageListenerOnceClient
-  & SendMessageClient
+  SendMessageClient
   & CreateConnectionClient
 )
 
@@ -45,7 +44,7 @@ export class WebSocketClient implements WebSocketConnectionClient {
     WebSocketClient.#serverUrl = value
   }
   
-  async once(eventName: string, listener: MessageOnceListener<any>) {
+  async #once(eventName: string, listener: MessageOnceListener<any>) {
     !this.#connection && await this.createConnection()
 
     this.#events.once[eventName] = listener
@@ -74,7 +73,7 @@ export class WebSocketClient implements WebSocketConnectionClient {
     this.#connection = connection
     
     return new Promise<void>((resolve) => {
-      this.once('accept-connection', messageData => {
+      this.#once('accept-connection', messageData => {
         const headers = messageData.headers as { connectionId: string }
         this.#connectionId = headers.connectionId
 
@@ -83,19 +82,41 @@ export class WebSocketClient implements WebSocketConnectionClient {
     })
   }
 
-  async send(params: SendMessageStoreParams) {
+  async sendMessage<T = unknown>(params: SendMessageClientParams): Promise<SendMessageClientResult<T>> {
     !this.#connection && await this.createConnection()
 
-    const message = JSON.stringify({
-      event: params.event,
-      headers: {
-        connectionId: this.#connectionId,
-        ...params.headers
-      },
-      data: params.data ?? null
+    return new Promise(async (resolve, reject) => {
+      try {
+        await this.#once(
+          params.responseEvent,
+          payload => {
+            if (payload.statusCode < 400) {
+              return resolve(payload)
+            }
+  
+            reject(
+              new ServiceError(
+                payload,
+                params.errorMessage
+              )
+            )
+          }
+        )
+  
+        const message = JSON.stringify({
+          event: params.event,
+          headers: {
+            connectionId: this.#connectionId,
+            ...params.headers
+          },
+          data: params.data ?? null
+        })
+    
+        this.#connection.send(message)
+      } catch(error) {
+        reject(error)
+      }
     })
-
-    this.#connection.send(message)
   }
 
   #connectionAttempt(serverUrl: string) {

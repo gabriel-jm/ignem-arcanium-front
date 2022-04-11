@@ -1,98 +1,52 @@
-import { CreateTorchRegistryServiceParams, FindAllTorchRegistriesService, FindAllTorchRegistriesServiceResult, UpdateTorchRegistryServiceParams } from '@/data/protocols'
-import { ServiceError } from '@/infra/errors'
-import { AddMessageListenerOnceClient, SendMessageClient } from '@/infra/protocols'
+import {
+  CreateTorchRegistryServiceParams,
+  FindAllTorchRegistriesService,
+  FindAllTorchRegistriesServiceResult,
+  UpdateTorchRegistryServiceParams
+} from '@/data/protocols'
+import { SendMessageClient } from '@/infra/protocols'
 
 export class TorchRegistryService implements FindAllTorchRegistriesService {
   constructor(
-    private readonly addMessageListenerOnceClient: AddMessageListenerOnceClient,
     private readonly sendMessageClient: SendMessageClient
   ) {}
   
-  findAll(): Promise<FindAllTorchRegistriesServiceResult[]> {
-    return new Promise(async (resolve, reject) => {
-      try {
-        const responseEvent = 'find-all-torch-registries-response'
+  async findAll(): Promise<FindAllTorchRegistriesServiceResult[]> {
+    const torchRegistries = await this.sendMessageClient
+      .sendMessage<FindAllTorchRegistriesServiceResult[]>({
+        event: 'find-all-torch-registries',
+        responseEvent: 'find-all-torch-registries-response',
+        errorMessage: 'Internal error on searching for torch registries'
+      })
 
-        await this.addMessageListenerOnceClient.once(responseEvent, payload => {
-          if (payload.statusCode < 400) {
-            resolve(payload.data as FindAllTorchRegistriesServiceResult[])
-          }
-
-          reject(new ServiceError(payload, 'Internal error on searching for torch registries'))
-        })
-
-        await this.sendMessageClient.send({
-          event: 'find-all-torch-registries'
-        })
-      } catch (error) {
-        reject(error)
-      }
-    })
+    return torchRegistries.data
   }
 
   async create(params: CreateTorchRegistryServiceParams): Promise<string> {
-    return new Promise(async (resolve, reject) => {
-      try {
-        await this.addMessageListenerOnceClient.once<Record<'id', string>>(
-          'create-torch-registry-response',
-          payload => {
-            if (payload.statusCode < 400) {
-              return resolve(payload.data.id)
-            }
-  
-            reject(
-              new ServiceError(
-                payload,
-                'Internal error on creating a torch registry'
-              )
-            )
-          }
-        )
-  
-        await this.sendMessageClient.send({
-          event: 'create-torch-registry',
-          data: {
-            characterName: params.characterName,
-            torchCount: params.torchCount,
-            torchCharge: params.torchCharge,
-            isLit: false
-          }
-        })
-      } catch(error) {
-        reject(error)
+    const torchRegistry = await this.sendMessageClient.sendMessage<Record<'id', string>>({
+      event: 'create-torch-registry',
+      responseEvent: 'create-torch-registry-response',
+      errorMessage: 'Internal error on creating a torch registry',
+      data: {
+        characterName: params.characterName,
+        torchCount: params.torchCount,
+        torchCharge: params.torchCharge,
+        isLit: false
       }
     })
+
+    return torchRegistry.data.id
   }
 
-  update(params: UpdateTorchRegistryServiceParams) {
-    return new Promise<void>(async (resolve, reject) => {
-      try {
-        await this.addMessageListenerOnceClient.once(
-          'update-torch-registry-response',
-          payload => {
-            if (payload.statusCode < 400) {
-              resolve()
-            }
-
-            reject(
-              new ServiceError(
-                payload,
-                'Internal error on update torch registry'
-              )
-            )
-          }
-        )
-
-        await this.sendMessageClient.send({
-          event: 'update-torch-registry',
-          data: {
-            id: params.id,
-            ...params.torchCharge && { torchCharge: params.torchCharge },
-            ...params.isLit && { isLit: params.isLit }
-          }
-        })
-      } catch(error) {
-        reject(error)
+  async update(params: UpdateTorchRegistryServiceParams) {
+    await this.sendMessageClient.sendMessage({
+      event: 'update-torch-registry',
+      responseEvent: 'update-torch-registry-response',
+      errorMessage: 'Internal error on update torch registry',
+      data: {
+        id: params.id,
+        ...params.torchCharge && { torchCharge: params.torchCharge },
+        ...params.isLit && { isLit: params.isLit }
       }
     })
   }
