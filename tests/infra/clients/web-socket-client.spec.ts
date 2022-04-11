@@ -1,5 +1,5 @@
 import { WebSocketClient } from '@/infra/clients'
-import { WebSocketConnectionFailedError } from '@/infra/errors'
+import { ServiceError, WebSocketConnectionFailedError } from '@/infra/errors'
 import { mockNativeWebSocket } from '@/tests/helpers'
 
 const [WebSocketSpy, fakeWebSocketInstance] = mockNativeWebSocket()
@@ -134,6 +134,32 @@ describe('WebSocketClient', () => {
         headers: { connectionId: 'any_connection_id', field: 'any_value' },
         data: { message: 'any_message' }
       }))
+    })
+    
+    it('should throw an ServiceError if returned status code is 400 or greater', async () => {
+      const sut = new WebSocketClient()
+      setTimeout(() => {
+        onMessageCallback({
+          data: JSON.stringify({
+            event: 'any_response_event',
+            statusCode: 400,
+            headers: { connectionId: 'any_connection_id' },
+            data: { error: 'any_error' }
+          })
+        })
+      }, 200)
+
+      const promise = sut.sendMessage({
+        event: 'any_event',
+        responseEvent: 'any_response_event'
+      })
+
+      await expect(promise).rejects.toThrowError(new ServiceError({
+        event: 'any_response_event',
+        statusCode: 400,
+        headers: { connectionId: 'any_connection_id' },
+        data: { error: 'any_error' }
+      }, 'Internal error, please try again later'))
     })
   })
 })
