@@ -1,98 +1,51 @@
 import { ServiceError } from '@/infra/errors'
 import { TorchRegistryService } from '@/infra/services'
-import { mockAddMessageListenerOnceClient, mockSendMessageClient } from '@/tests/helpers'
+import { mockReceivedMessageResult, mockSendMessageClient } from '@/tests/helpers'
 
-function makeSut(
-  { event, statusCode, data }: { event: string, statusCode: number, data: unknown } = {
-    event: 'find-all-torch-registries-response',
-    statusCode: 200,
-    data: []
-  }
-) {
-  const addMessageListenerOnceClientSpy = mockAddMessageListenerOnceClient({
-    event,
-    headers: {},
-    statusCode,
-    data
-  })
+function makeSut() {
   const sendMessageClientSpy = mockSendMessageClient()
   const sut = new TorchRegistryService(
-    addMessageListenerOnceClientSpy,
     sendMessageClientSpy
   )
 
   return {
     sut,
-    addMessageListenerOnceClientSpy,
     sendMessageClientSpy
   }
 }
 
 describe('TorchRegistryService', () => {
   describe('findAll()', () => {
-    it('should call AddMessageListenerOnceClient with correct values', async () => {
-      const { sut, addMessageListenerOnceClientSpy } = makeSut()
-  
-      await sut.findAll()
-  
-      expect(addMessageListenerOnceClientSpy.once).toHaveBeenCalledWith(
-        'find-all-torch-registries-response',
-        expect.any(Function)
-      )
-    })
-  
     it('should call SendMessageClient with correct values', async () => {
       const { sut, sendMessageClientSpy } = makeSut()
   
       await sut.findAll()
   
-      expect(sendMessageClientSpy.send).toHaveBeenCalledWith({
-        event: 'find-all-torch-registries'
+      expect(sendMessageClientSpy.sendMessage).toHaveBeenCalledWith({
+        event: 'find-all-torch-registries',
+        responseEvent: 'find-all-torch-registries-response',
+        errorMessage: 'Internal error on searching for torch registries'
       })
     })
   
-    it('should throw a ServiceError if statusCode is different than 200', async () => {
-      const data = {
-        error: {
-          name: 'DatabaseError',
-          details: [
-            'Some operation has not been succeeded, please try again later'
-          ]
-        }
-      }
-      const { sut, addMessageListenerOnceClientSpy } = makeSut({
-        event: 'find-all-torch-registries-response',
-        statusCode: 400,
-        data
+    it('should throw a ServiceError if SendMessageClient throws', async () => {
+      const { sut, sendMessageClientSpy } = makeSut()
+      const serviceError = new ServiceError(mockReceivedMessageResult(), 'Internal error')
+      sendMessageClientSpy.sendMessage.mockImplementationOnce(() => {
+        throw serviceError
       })
   
       const promise = sut.findAll()
   
-      await expect(promise).rejects.toThrowError(
-        new ServiceError(
-          addMessageListenerOnceClientSpy.result,
-          'Internal error on searching for torch registries'
-        )
-      )
+      await expect(promise).rejects.toThrowError(serviceError)
     })
   
     it('should return the data from received message', async () => {
-      const { sut, addMessageListenerOnceClientSpy } = makeSut()
+      const { sut, sendMessageClientSpy } = makeSut()
   
       const response = await sut.findAll()
   
-      expect(response).toEqual(addMessageListenerOnceClientSpy.result.data)
-    })
-
-    it('should reject promise if some error occurs', async () => {
-      const { sut, addMessageListenerOnceClientSpy } = makeSut()
-      addMessageListenerOnceClientSpy.once.mockImplementationOnce(() => {
-        throw new Error()
-      })
-
-      const promise = sut.findAll()
-
-      await expect(promise).rejects.toThrowError(new Error())
+      expect(response).toEqual(sendMessageClientSpy.result.data)
     })
   })
 
@@ -103,88 +56,45 @@ describe('TorchRegistryService', () => {
       torchCharge: 2
     }
 
-    it('should call AddMessageListenerOnceClient with correct values', async () => {
-      const { sut, addMessageListenerOnceClientSpy } = makeSut({
-        event: 'create-torch-registry-response',
-        statusCode: 201,
-        data: { id: 'any_id' }
-      })
-  
-      await sut.create(dummyCreateParams)
-  
-      expect(addMessageListenerOnceClientSpy.once).toHaveBeenCalledWith(
-        'create-torch-registry-response',
-        expect.any(Function)
-      )
-    })
-
     it('should call SendMessageClient with correct values', async () => {
-      const { sut, sendMessageClientSpy } = makeSut({
-        event: 'create-torch-registry-response',
-        statusCode: 201,
-        data: { id: 'any_id' }
-      })
+      const { sut, sendMessageClientSpy } = makeSut()
   
       await sut.create(dummyCreateParams)
   
-      expect(sendMessageClientSpy.send).toHaveBeenCalledWith({
+      expect(sendMessageClientSpy.sendMessage).toHaveBeenCalledWith({
         event: 'create-torch-registry',
+        responseEvent: 'create-torch-registry-response',
+        errorMessage: 'Internal error on creating a torch registry',
         data: {
-          ...dummyCreateParams,
+          characterName: dummyCreateParams.characterName,
+          torchCount: dummyCreateParams.torchCount,
+          torchCharge: dummyCreateParams.torchCharge,
           isLit: false
         }
       })
     })
 
-    it('should throw a ServiceError if statusCode is different than 201', async () => {
-      const data = {
-        error: {
-          name: 'DatabaseError',
-          details: [
-            'Some operation has not been succeeded, please try again later'
-          ]
-        }
-      }
-      const { sut, addMessageListenerOnceClientSpy } = makeSut({
-        event: 'create-torch-registry-response',
-        statusCode: 400,
-        data
+    it('should throw a ServiceError if SendMessageClient throws', async () => {
+      const { sut, sendMessageClientSpy } = makeSut()
+      const serviceError = new ServiceError(mockReceivedMessageResult(), 'Internal error')
+      sendMessageClientSpy.sendMessage.mockImplementationOnce(() => {
+        throw serviceError
       })
   
       const promise = sut.create(dummyCreateParams)
   
-      await expect(promise).rejects.toThrowError(
-        new ServiceError(
-          addMessageListenerOnceClientSpy.result,
-          'Internal error on creating a torch registry'
-        )
-      )
+      await expect(promise).rejects.toThrowError(serviceError)
     })
   
     it('should return the data from received message', async () => {
-      const { sut, addMessageListenerOnceClientSpy } = makeSut({
-        event: 'create-torch-registry-response',
-        statusCode: 201,
-        data: {
-          id: 'any_id',
-          ...dummyCreateParams
-        }
-      })
+      const { sut, sendMessageClientSpy } = makeSut()
+      sendMessageClientSpy.sendMessage.mockResolvedValueOnce(
+        mockReceivedMessageResult({ id: 'any_id' })
+      )
   
       const response = await sut.create(dummyCreateParams)
   
-      expect(response).toEqual(addMessageListenerOnceClientSpy.result.data.id)
-    })
-
-    it('should reject promise if some error occurs', async () => {
-      const { sut, sendMessageClientSpy } = makeSut()
-      sendMessageClientSpy.send.mockImplementationOnce(() => {
-        throw new Error()
-      })
-
-      const promise = sut.create(dummyCreateParams)
-
-      await expect(promise).rejects.toThrowError(new Error())
+      expect(response).toBe('any_id')
     })
   })
 
@@ -195,32 +105,15 @@ describe('TorchRegistryService', () => {
       isLit: true
     }
 
-    it('should call AddMessageListenerOnceClient with correct values', async () => {
-      const { sut, addMessageListenerOnceClientSpy } = makeSut({
-        event: 'update-torch-registry-response',
-        statusCode: 200,
-        data: null
-      })
-  
-      await sut.update(dummyUpdateParams)
-  
-      expect(addMessageListenerOnceClientSpy.once).toHaveBeenCalledWith(
-        'update-torch-registry-response',
-        expect.any(Function)
-      )
-    })
-
     it('should call SendMessageClient with correct values', async () => {
-      const { sut, sendMessageClientSpy } = makeSut({
-        event: 'update-torch-registry-response',
-        statusCode: 200,
-        data: { id: 'any_id' }
-      })
+      const { sut, sendMessageClientSpy } = makeSut()
   
       await sut.update(dummyUpdateParams)
   
-      expect(sendMessageClientSpy.send).toHaveBeenCalledWith({
+      expect(sendMessageClientSpy.sendMessage).toHaveBeenCalledWith({
         event: 'update-torch-registry',
+        responseEvent: 'update-torch-registry-response',
+        errorMessage: 'Internal error on update torch registry',
         data: {
           id: dummyUpdateParams.id,
           torchCharge: dummyUpdateParams.torchCharge,
@@ -229,15 +122,16 @@ describe('TorchRegistryService', () => {
       })
     })
 
-    it('should reject promise if some error occurs', async () => {
+    it('should throw a ServiceError if SendMessageClient throws', async () => {
       const { sut, sendMessageClientSpy } = makeSut()
-      sendMessageClientSpy.send.mockImplementationOnce(() => {
-        throw new Error()
+      const serviceError = new ServiceError(mockReceivedMessageResult(), 'Internal error')
+      sendMessageClientSpy.sendMessage.mockImplementationOnce(() => {
+        throw serviceError
       })
-
+  
       const promise = sut.update(dummyUpdateParams)
-
-      await expect(promise).rejects.toThrowError(new Error())
+  
+      await expect(promise).rejects.toThrowError(serviceError)
     })
   })
 })

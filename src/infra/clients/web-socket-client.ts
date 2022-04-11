@@ -97,7 +97,7 @@ export class WebSocketClient implements WebSocketConnectionClient {
             reject(
               new ServiceError(
                 payload,
-                params.errorMessage
+                params.errorMessage ?? 'Internal error, please try again later'
               )
             )
           }

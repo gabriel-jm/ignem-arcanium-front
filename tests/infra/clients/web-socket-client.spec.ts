@@ -16,6 +16,8 @@ function fakeWebSocketSuccessBehavior(eventName: string, cb: Function) {
 
     setTimeout(() => {
       cb({
+        event: 'any_event',
+        statusCode: 200,
         data: JSON.stringify({
           event: 'accept-connection',
           headers: { connectionId: 'any_connection_id' },
@@ -79,21 +81,23 @@ describe('WebSocketClient', () => {
     })
   })
 
-  describe('send()', () => {
-    it('should call send method from native WebSocket correctly when only the event is provided', () => {
+  describe('sendMessage()', () => {
+    it('should call send method from native WebSocket correctly when only the event is provided', async () => {
       const sut = new WebSocketClient()
       setTimeout(() => {
         onMessageCallback({
           data: JSON.stringify({
-            event: 'accept-connection',
+            event: 'any_response_event',
+            statusCode: 200,
             headers: { connectionId: 'any_connection_id' },
             data: null
           })
         })
       }, 200)
 
-      sut.send({
-        event: 'any_event'
+      await sut.sendMessage({
+        event: 'any_event',
+        responseEvent: 'any_response_event'
       })
 
       expect(fakeWebSocketInstance.send).toHaveBeenCalledWith(JSON.stringify({
@@ -105,11 +109,22 @@ describe('WebSocketClient', () => {
       }))
     })
 
-    it('should call send method from native WebSocket with specific passed values', () => {
+    it('should call send method from native WebSocket with specific passed values', async () => {
       const sut = new WebSocketClient()
+      setTimeout(() => {
+        onMessageCallback({
+          data: JSON.stringify({
+            event: 'any_response_event',
+            statusCode: 200,
+            headers: { connectionId: 'any_connection_id' },
+            data: null
+          })
+        })
+      }, 200)
 
-      sut.send({
+      await sut.sendMessage({
         event: 'any_event',
+        responseEvent: 'any_response_event',
         headers: { field: 'any_value' },
         data: { message: 'any_message' }
       })

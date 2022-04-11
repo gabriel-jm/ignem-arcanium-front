@@ -1,4 +1,3 @@
-import { MessageOnceListenerPayload } from '@/infra/protocols'
 import { SpyInstanceFn } from 'vitest'
 
 export function mockNativeWebSocket(): [SpyInstanceFn, Record<'addEventListener' | 'send', SpyInstanceFn>] {
@@ -12,19 +11,21 @@ export function mockNativeWebSocket(): [SpyInstanceFn, Record<'addEventListener'
   return [WebSocketSpy, fakeWebSocketInstance]
 }
 
-export function mockSendMessageClient() {
+export function mockReceivedMessageResult(data: any = {}) {
   return {
-    send: vi.fn(() => Promise.resolve())
+    event: 'any_event',
+    statusCode: 200,
+    headers: {},
+    data
   }
 }
 
-export function mockAddMessageListenerOnceClient(event: MessageOnceListenerPayload) {
+export function mockSendMessageClient() {
+  const result = mockReceivedMessageResult()
+
   return {
-    result: event,
-    once: vi.fn((_eventName, listener) => {
-      setTimeout(() => listener(event), 10)
-      return Promise.resolve()
-    })
+    result,
+    sendMessage: vi.fn(() => Promise.resolve(result))
   }
 }
 
