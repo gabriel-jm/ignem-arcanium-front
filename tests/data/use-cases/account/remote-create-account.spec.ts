@@ -29,4 +29,14 @@ describe('RemoteCreateAccount', () => {
       password: dummyCreateParams.password
     })
   })
+
+  it('should return an object with account id on success', async () => {
+    const { sut, createAccountServiceSpy } = makeSut()
+
+    const response = await sut.create(dummyCreateParams)
+
+    expect(response).toEqual({
+      accountId: createAccountServiceSpy.result.accountId
+    })
+  })
 })

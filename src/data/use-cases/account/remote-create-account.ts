@@ -5,12 +5,12 @@ export class RemoteCreateAccount implements CreateAccount {
   constructor(private readonly createAccountService: CreateAccountService) {}
 
   async create(params: CreateAccountParams): Promise<CreateAccountResult> {
-    await this.createAccountService.create({
+    const creationResult = await this.createAccountService.create({
       name: params.name,
       email: params.email,
       password: params.password
     })
 
-    return { accountId: '' }
+    return { accountId: creationResult.accountId }
   }
 }
