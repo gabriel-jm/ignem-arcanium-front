@@ -27,11 +27,11 @@ export class IgnemHomePage extends IgnemElement {
 
   render() {
     const onClick = async () => {
-      const connectionResult = await this.#createConnectionPresenter.handle()
+      // const connectionResult = await this.#createConnectionPresenter.handle()
 
-      if (connectionResult.ok) {
-        router.goTo('/torches')
-      }
+      // if (connectionResult.ok) {
+        router.goTo('/login')
+      // }
     }
 
     return html`
