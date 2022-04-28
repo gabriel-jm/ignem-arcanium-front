@@ -1,5 +1,6 @@
 import { IgnemElement } from '@/ui/view'
 import { router } from 'lithen-router'
+import { ElementFactory } from 'lithen-router/build/routing/interfaces/route-definer'
 
 export class IgnemRoot extends IgnemElement {
   constructor() {
@@ -14,11 +15,11 @@ export class IgnemRoot extends IgnemElement {
 
   reRender() {
     const firstElement = this.root.firstChild
-    const component = router.matchRoute() as HTMLElement
+    const componentFactory = router.matchRoute() as ElementFactory
+    const component = componentFactory()
 
-    firstElement
-      ? this.root.replaceChild(component, firstElement)
-      : this.root.appendChild(component)
+    firstElement?.remove()
+    this.root.appendChild(component)
   }
 }
 
