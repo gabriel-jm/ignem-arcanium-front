@@ -115,7 +115,7 @@ export class IgnemTorchesPage extends IgnemElement {
       const formModal = this.select<IgnemTorchSideModalElement>('#form-modal')
 
       if (result.validationErrors) {
-        formModal?.setErrors(result.validationErrors)
+        formModal?.form.setErrors(result.validationErrors)
         return
       }
 

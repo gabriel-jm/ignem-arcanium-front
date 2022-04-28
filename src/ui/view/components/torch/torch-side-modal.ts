@@ -1,9 +1,9 @@
 import { buttonStyles, IgnemElement, IgnemSideModalElement, inputStyles } from '@/ui/view'
+import { IgnemFormElement } from '@/ui/view/components'
 import { css, html } from 'lithen-tag-functions'
 
 export interface IgnemTorchSideModalElement extends IgnemSideModalElement {
-  setErrors(errorsRecord: Record<string, string>): void
-  removeErrors(): void
+  get form(): IgnemFormElement
 }
 
 /**
@@ -11,10 +11,16 @@ export interface IgnemTorchSideModalElement extends IgnemSideModalElement {
  */
 export class IgnemTorchSideModal extends IgnemElement {
   #sideModal?: IgnemSideModalElement
+  #form: IgnemFormElement
 
   constructor() {
     super()
     this.#sideModal = this.select('ignem-side-modal')
+    this.#form = this.select<IgnemFormElement>('form[is=ignem-form]')!
+  }
+
+  get form() {
+    return this.#form
   }
 
   open() {
@@ -23,43 +29,9 @@ export class IgnemTorchSideModal extends IgnemElement {
 
   close() {
     this.#sideModal?.close()
-    const form = this.select<HTMLFormElement>('form')!
 
-    form.reset()
-    this.removeErrors()
-  }
-
-  setErrors(errorsRecord: Record<string, string>) {
-    const form = this.select<HTMLFormElement>('form')!
-
-    this.removeErrors()
-
-    Object.entries(errorsRecord).forEach(([field, error]) => {
-      const inputMessageSpan = this.select(`input[name=${field}] ~ span`)!
-      const input = form[field] as HTMLInputElement
-      input.classList.add('error')
-
-      inputMessageSpan.textContent = error
-    })
-  }
-
-  removeErrors() {
-    const form = this.select<HTMLFormElement>('form')!
-
-    const formElements = Array.from(form.elements)
-
-    formElements.forEach(element => {
-      const errorInput = element.classList.contains('error')
-
-      if (!errorInput || element.nodeName !== 'INPUT') return
-
-      const input = element as HTMLInputElement
-      
-      input.classList.remove('error')
-      
-      const inputMessageSpan = this.select(`input[name=${input.name}] ~ span`)!
-      inputMessageSpan.textContent = ''
-    })
+    this.#form.reset()
+    this.#form.removeErrors()
   }
 
   styling() {
@@ -148,7 +120,7 @@ export class IgnemTorchSideModal extends IgnemElement {
           </button>
         </header>
 
-        <form on-submit=${onSubmit}>
+        <form is="ignem-form" on-submit=${onSubmit}>
           <label>
             <span>Character Name</span>
             <input class="input" name="characterName" />
