@@ -11,8 +11,8 @@ export const inputStyles = css`
     border-radius: 4px;
     color: var(--font-color);
     font-size: 0.9rem;
-    padding: 4px 6px;
-    transition: all 300ms;
+    padding: 6px 10px;
+    transition: all 250ms;
   }
 
   .input:focus {
