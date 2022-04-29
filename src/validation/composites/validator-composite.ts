@@ -1,17 +1,19 @@
 import { Validator } from '@/validation/protocols'
 import {
-  RequiredFieldsValidator,
-  TypeValidator,
-  ValueInBetweenValidator
+  requiredFieldsValidator,
+  typeValidator,
+  valueInBetweenValidator
 } from '@/validation/validators'
 
-export class ValidatorComposite implements Validator {
-  #validatorsByType: Record<string, Validator['constructor']> = {
-    type: TypeValidator,
-    required: RequiredFieldsValidator,
-    valueInBetween: ValueInBetweenValidator
+export function validatorComposite(
+  validationSchema: Record<string, Record<string, unknown>>
+): Validator {
+  const validatorsByType: Record<string, Validator['constructor']> = {
+    type: typeValidator,
+    required: requiredFieldsValidator,
+    valueInBetween: valueInBetweenValidator
   }
-  #validatorAdderByType: Record<string, Function> = {
+  const validatorAdderByType: Record<string, Function> = {
     type: (
       validatorsFields: Record<string, any>,
       fieldName: string,
@@ -45,38 +47,29 @@ export class ValidatorComposite implements Validator {
       validatorsFields.valueInBetween[fieldName] = expectedValue
     }
   }
-  #validators: Validator[] = []
+  const validators: Validator[] = []
 
-  constructor (private readonly validationSchema: Record<string, Record<string, unknown>>) {
-    this.buildValidators()
-  }
+  const validatorsFields: Record<string, any> = {}
 
-  buildValidators() {
-    const validatorsFields: Record<string, any> = {}
-
-    Object.entries(this.validationSchema).forEach(([fieldName, value]) => {
-      Object.entries(value).forEach(([validatorType, expectedValue]) => {
-        this.#validatorAdderByType[validatorType]?.(
-          validatorsFields,
-          fieldName,
-          expectedValue
-        )
-      })
-    })
-
-    Object.entries(validatorsFields).forEach(([validatorType, params]) => {
-      const validator = Reflect.construct(
-        this.#validatorsByType[validatorType],
-        [params]
+  Object.entries(validationSchema).forEach(([fieldName, value]) => {
+    Object.entries(value).forEach(([validatorType, expectedValue]) => {
+      validatorAdderByType[validatorType]?.(
+        validatorsFields,
+        fieldName,
+        expectedValue
       )
-      
-      this.#validators.push(validator)
     })
-  }
+  })
+
+  Object.entries(validatorsFields).forEach(([validatorType, params]) => {
+    const validator = validatorsByType[validatorType](params)
+    
+    validators.push(validator)
+  })
   
-  validate(input: any) {
-    const validatiorsResult = this.#validators.reduce((acc, validator) => {
-      const validationResult = validator.validate(input)
+  return (input: any) => {
+    const validatiorsResult = validators.reduce((acc, validator) => {
+      const validationResult = validator(input)
 
       if (!validationResult) return { ...acc }
 

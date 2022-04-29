@@ -9,7 +9,7 @@ export class ValidationPresenterDecorator implements Presenter {
   ) {}
 
   async handle(data?: unknown) {
-    const validationErrors = this.validator.validate(data)
+    const validationErrors = this.validator(data)
 
     if (validationErrors) {
       return validationErrorResponse(validationErrors)

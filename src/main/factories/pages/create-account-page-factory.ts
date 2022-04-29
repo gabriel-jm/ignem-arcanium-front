@@ -5,7 +5,7 @@ import { ErrorHandlingPresenterDecorator, ValidationPresenterDecorator } from '@
 import { CreateAccountPresenter } from '@/presentation/presenters'
 import { UiNotifier } from '@/ui/notifiers'
 import { IgnemCreateAccountPage } from '@/ui/view'
-import { ValidatorComposite } from '@/validation/composites'
+import { validatorComposite } from '@/validation/composites'
 
 export function makeCreateAccountPage() {
   const httpClient = new FetchHTTPClient(import.meta.env.VITE_SERVER_URL)
@@ -17,7 +17,7 @@ export function makeCreateAccountPage() {
     new UiNotifier(),
     new ValidationPresenterDecorator(
       presenter,
-      new ValidatorComposite({
+      validatorComposite({
         name: {
           type: 'string',
           required: true
