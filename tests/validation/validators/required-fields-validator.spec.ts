@@ -1,14 +1,14 @@
-import { RequiredFieldsValidator } from '@/validation/validators'
+import { requiredFieldsValidator } from '@/validation/validators'
 
 function makeSut(fields: string[]) {
-  return new RequiredFieldsValidator(fields)
+  return requiredFieldsValidator(fields)
 }
 
 describe('RequiredFieldsValidator', () => {
   it('should return an array of the missing fields', () => {
     const sut = makeSut(['field1', 'field2'])
 
-    const response = sut.validate({
+    const response = sut({
       field1: null,
       field3: true
     })
@@ -22,7 +22,7 @@ describe('RequiredFieldsValidator', () => {
   it('should return an empty array if all fields exists', () => {
     const sut = makeSut(['field'])
 
-    const reponse = sut.validate({ field: true })
+    const reponse = sut({ field: true })
 
     expect(reponse).toEqual(null)
   })
