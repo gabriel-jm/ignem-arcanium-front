@@ -1,12 +1,10 @@
-import { TypeValidator } from '@/validation/validators/type-validator'
+import { typeValidator } from '@/validation/validators/type-validator'
 
 function makeSut(fields: Record<string, string | string[]>) {
-  const sut = new TypeValidator(fields)
-
-  return sut
+  return typeValidator(fields)
 }
 
-describe('TypeValidator', () => {
+describe('typeValidator', () => {
   it('should return an object of invalid type message', () => {
     const sut = makeSut({
       list: 'array',
@@ -16,7 +14,7 @@ describe('TypeValidator', () => {
       bool: 'boolean'
     })
 
-    const response = sut.validate({
+    const response = sut({
       list: 0,
       num: NaN,
       obj: '',
@@ -42,7 +40,7 @@ describe('TypeValidator', () => {
       bool: 'boolean'
     })
 
-    const response = sut.validate({
+    const response = sut({
       list: [],
       num: 10,
       obj: {},
@@ -59,7 +57,7 @@ describe('TypeValidator', () => {
       value2: ['number', 'boolean']
     })
 
-    const response = sut.validate({
+    const response = sut({
       value1: 10,
       value2: 'wrong-value'
     })

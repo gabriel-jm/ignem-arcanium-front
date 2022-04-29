@@ -4,7 +4,7 @@ function makeSut(fields: string[]) {
   return requiredFieldsValidator(fields)
 }
 
-describe('RequiredFieldsValidator', () => {
+describe('requiredFieldsValidator', () => {
   it('should return an array of the missing fields', () => {
     const sut = makeSut(['field1', 'field2'])
 
