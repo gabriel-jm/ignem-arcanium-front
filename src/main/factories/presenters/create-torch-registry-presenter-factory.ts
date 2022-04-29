@@ -4,11 +4,11 @@ import { ErrorHandlingPresenterDecorator, ValidationPresenterDecorator } from '@
 import { makeWebSocketClient } from '@/main/factories/clients'
 import { CreateTorchRegistryPresenter } from '@/presentation/presenters'
 import { UiNotifier } from '@/ui/notifiers'
-import { ValidatorComposite } from '@/validation/composites'
+import { validatorComposite } from '@/validation/composites'
 
 export function makeCreateTorchRegistryPresenter() {
   const wsClient = makeWebSocketClient()
-  const torchRegistryService = new TorchRegistryService(wsClient, wsClient)
+  const torchRegistryService = new TorchRegistryService(wsClient)
   const createTorchRegistry = new RemoteCreateTorchRegistry(torchRegistryService)
 
   const presenter = new CreateTorchRegistryPresenter(createTorchRegistry)
@@ -17,7 +17,7 @@ export function makeCreateTorchRegistryPresenter() {
     new UiNotifier(),
     new ValidationPresenterDecorator(
       presenter,
-      new ValidatorComposite({
+      validatorComposite({
         characterName: {
           required: true,
           type: 'string'

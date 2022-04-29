@@ -7,7 +7,7 @@ import { UiNotifier } from '@/ui/notifiers'
 
 export function makeFindAllTorchRegistriesPresenter() {
   const wsClient = makeWebSocketClient()
-  const torchRegistryService = new TorchRegistryService(wsClient, wsClient)
+  const torchRegistryService = new TorchRegistryService(wsClient)
   const remoteFindAllTorchRegistries = new RemoteFindAllTorchRegistries(torchRegistryService)
   const findAllTorchRegistriesPresenter = new FindAllTorchRegistriesPresenter(
     remoteFindAllTorchRegistries
