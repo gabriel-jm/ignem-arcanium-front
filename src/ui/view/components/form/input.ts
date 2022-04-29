@@ -1,20 +1,26 @@
+import { toHtmlAttributes } from '@/ui/helpers'
 import { html, raw } from 'lithen-tag-functions'
 
-interface IgnemInputProps {
+type IgnemInputProps = {
   label?: string
   className?: string
   name: string
+  type?: string
   placeholder?: string
 }
 
-export const ignemInput = (props: IgnemInputProps) => html`
-  <label>
-    ${props.label && raw`<span>${props.label}</span>`}
-    <input
-      ${props.className && `class="${props.className}"`}
-      name="${props.name}"
-      ${props.placeholder && `placeholder="${props.placeholder}"`}
-    />
-    <span class="input-message"></span>
-  </label>
-`
+export function ignemInput(props: IgnemInputProps) {
+  const { label, className, ...attributes } = props
+
+  return html`
+    <label>
+      ${label && raw`<span>${label}</span>`}
+      <input
+        ${className && `class="${className}"`}
+        ${toHtmlAttributes(attributes)}
+      />
+      <span class="input-message"></span>
+    </label>
+  `
+}
+
