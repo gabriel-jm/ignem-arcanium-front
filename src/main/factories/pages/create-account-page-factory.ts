@@ -12,9 +12,11 @@ export function makeCreateAccountPage() {
   const accountService = new AccountService(httpClient)
   const accountUsecase = new RemoteCreateAccount(accountService)
   const presenter = new CreateAccountPresenter(accountUsecase)
+
+  const uiNotifier = new UiNotifier()
   
   const decoratedPresenter = new ErrorHandlingPresenterDecorator(
-    new UiNotifier(),
+    uiNotifier,
     new ValidationPresenterDecorator(
       presenter,
       validatorComposite({
@@ -34,5 +36,5 @@ export function makeCreateAccountPage() {
     )
   )
 
-  return new IgnemCreateAccountPage(decoratedPresenter)
+  return new IgnemCreateAccountPage(decoratedPresenter, uiNotifier)
 }

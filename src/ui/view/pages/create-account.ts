@@ -1,16 +1,24 @@
 import { Presenter } from '@/presentation/protocols'
+import { SuccessNotifier } from '@/ui/protocols'
 import { buttonStyles, containerStyles, inputStyles } from '@/ui/view'
 import { IgnemFormElement } from '@/ui/view/components'
+import { ignemInput } from '@/ui/view/components/form/input'
 import { IgnemElement } from '@/ui/view/ignem-element'
+import { router } from 'lithen-router'
 import { css, html } from 'lithen-tag-functions'
 
 export class IgnemCreateAccountPage extends IgnemElement {
   #createAccountPresenter: Presenter
+  #successNotifier: SuccessNotifier
   #btnBlocked = false
 
-  constructor(createAccountPresenter: Presenter) {
+  constructor(
+    createAccountPresenter: Presenter,
+    successNotifier: SuccessNotifier
+  ) {
     super()
     this.#createAccountPresenter = createAccountPresenter
+    this.#successNotifier = successNotifier
 
     this.applyRender()
   }
@@ -85,9 +93,18 @@ export class IgnemCreateAccountPage extends IgnemElement {
           ...errors.name && { userName: errors.name }
         })
       }
+      
+      if (!result.validationErrors) {
+        form.removeErrors()
+      }
 
       if (result.ok) {
-        form.removeErrors()
+        form.reset()
+        this.#successNotifier.notifySuccess(
+          'Created',
+          'Account created with success'
+        )
+        router.goTo('/torches')
       }
 
       this.#block = false
@@ -98,36 +115,27 @@ export class IgnemCreateAccountPage extends IgnemElement {
         <form is="ignem-form" class="account-form" on-submit=${handleSubmit}>
           <h1 class="form-title">Create Account</h1>
           
-          <label>
-            <span>Name</span>
-            <input
-              class="input"
-              name="userName"
-              placeholder="Name"
-            />
-            <span class="input-message"></span>
-          </label>
+          ${ignemInput({
+            label: 'Name',
+            name: 'userName',
+            className: 'input',
+            placeholder: 'Name'
+          })}
 
-          <label>
-            <span>E-Mail</span>
-            <input
-              class="input"
-              name="email"
-              placeholder="E-Mail"
-            />
-            <span class="input-message"></span>
-          </label>
+          ${ignemInput({
+            label: 'E-Mail',
+            name: 'email',
+            className: 'input',
+            placeholder: 'E-Mail'
+          })}
 
-          <label>
-            <span>Password</span>
-            <input
-              type="password"
-              class="input"
-              name="password"
-              placeholder="Password"
-            />
-            <span class="input-message"></span>
-          </label>
+          ${ignemInput({
+            label: 'Password',
+            className: 'input',
+            name: 'password',
+            type: 'password',
+            placeholder: 'Password'
+          })}
 
           <button class="btn">Create</button>
         </form>
