@@ -1,4 +1,4 @@
-import { CreateAccount } from '@/domain/use-cases'
+import { CreateAccount } from '@/domain/protocols/use-cases'
 import { successResponse } from '@/presentation/helpers'
 import { Presenter, PresenterResult } from '@/presentation/protocols'
 

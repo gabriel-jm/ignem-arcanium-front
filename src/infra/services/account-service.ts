@@ -1,4 +1,4 @@
-import { CreateAccountService, CreateAccountServiceParams, CreateAccountServiceResult } from '@/data/protocols'
+import { CreateAccountService, CreateAccountServiceParams, CreateAccountServiceResult } from '@/domain/protocols'
 import { ServiceError } from '@/infra/errors'
 import { HTTPClient } from '@/infra/protocols'
 

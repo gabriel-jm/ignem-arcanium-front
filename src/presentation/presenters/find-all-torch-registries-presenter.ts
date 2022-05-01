@@ -1,4 +1,4 @@
-import { FindAllTorchRegistries } from '@/domain/use-cases'
+import { FindAllTorchRegistries } from '@/domain/protocols/use-cases'
 import { successResponse } from '@/presentation/helpers'
 import { Presenter } from '@/presentation/protocols'
 

@@ -1,5 +1,5 @@
-import { CreateTorchRegistryService } from '@/data/protocols'
-import { CreateTorchRegistry, CreateTorchRegistryParams } from '@/domain/use-cases'
+import { CreateTorchRegistryService } from '@/domain/protocols/services'
+import { CreateTorchRegistry, CreateTorchRegistryParams } from '@/domain/protocols/use-cases'
 
 export class RemoteCreateTorchRegistry implements CreateTorchRegistry {
   constructor(private readonly createTorchRegistryService: CreateTorchRegistryService) {}

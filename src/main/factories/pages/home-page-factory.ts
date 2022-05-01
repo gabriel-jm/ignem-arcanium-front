@@ -1,4 +1,4 @@
-import { RemoteCreateConnection } from '@/data/use-cases'
+import { RemoteCreateConnection } from '@/domain/use-cases'
 import { WebSocketClient } from '@/infra/clients'
 import { WebSocketConnectionService } from '@/infra/services'
 import { ErrorHandlingPresenterDecorator } from '@/main/decorators'

@@ -1,4 +1,4 @@
-import { RemoteCreateAccount } from '@/data/use-cases'
+import { RemoteCreateAccount } from '@/domain/use-cases'
 import { mockCreateAccountService } from '@/tests/helpers'
 
 function makeSut() {

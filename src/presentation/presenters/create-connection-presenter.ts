@@ -1,4 +1,4 @@
-import { CreateConnection } from '@/domain/use-cases'
+import { CreateConnection } from '@/domain/protocols/use-cases'
 import { successResponse } from '@/presentation/helpers'
 import { Presenter } from '@/presentation/protocols'
 

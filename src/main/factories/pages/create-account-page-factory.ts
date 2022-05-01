@@ -1,4 +1,4 @@
-import { RemoteCreateAccount } from '@/data/use-cases'
+import { RemoteCreateAccount } from '@/domain/use-cases'
 import { FetchHTTPClient } from '@/infra/clients'
 import { AccountService } from '@/infra/services'
 import { ErrorHandlingPresenterDecorator, ValidationPresenterDecorator } from '@/main/decorators'

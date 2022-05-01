@@ -3,7 +3,7 @@ import {
   FindAllTorchRegistriesService,
   FindAllTorchRegistriesServiceResult,
   UpdateTorchRegistryServiceParams
-} from '@/data/protocols'
+} from '@/domain/protocols'
 import { SendMessageClient } from '@/infra/protocols'
 
 export class TorchRegistryService implements FindAllTorchRegistriesService {

@@ -1,5 +1,5 @@
-import { CreateAccountService } from '@/data/protocols'
-import { CreateAccount, CreateAccountParams, CreateAccountResult } from '@/domain/use-cases'
+import { CreateAccountService } from '@/domain/protocols/services'
+import { CreateAccount, CreateAccountParams, CreateAccountResult } from '@/domain/protocols/use-cases'
 
 export class RemoteCreateAccount implements CreateAccount {
   constructor(private readonly createAccountService: CreateAccountService) {}

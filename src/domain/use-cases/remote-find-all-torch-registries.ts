@@ -1,5 +1,5 @@
-import { FindAllTorchRegistriesService } from '@/data/protocols'
-import { FindAllTorchRegistries, FindAllTorchRegistriesResult } from '@/domain/use-cases'
+import { FindAllTorchRegistriesService } from '@/domain/protocols/services'
+import { FindAllTorchRegistries, FindAllTorchRegistriesResult } from '@/domain/protocols/use-cases'
 
 export class RemoteFindAllTorchRegistries implements FindAllTorchRegistries {
   constructor(private readonly findAllTorchRegistriesService: FindAllTorchRegistriesService) {}

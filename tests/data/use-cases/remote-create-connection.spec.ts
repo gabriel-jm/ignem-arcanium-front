@@ -1,4 +1,4 @@
-import { RemoteCreateConnection } from '@/data/use-cases'
+import { RemoteCreateConnection } from '@/domain/use-cases'
 import { mockCreateConnectionService } from '@/tests/helpers'
 
 function makeSut() {

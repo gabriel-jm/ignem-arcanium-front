@@ -1,4 +1,4 @@
-import { RemoteFindAllTorchRegistries } from '@/data/use-cases'
+import { RemoteFindAllTorchRegistries } from '@/domain/use-cases'
 import { TorchRegistryService } from '@/infra/services'
 import { ErrorHandlingPresenterDecorator } from '@/main/decorators'
 import { makeWebSocketClient } from '@/main/factories/clients'

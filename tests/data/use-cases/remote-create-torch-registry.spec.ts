@@ -1,4 +1,4 @@
-import { RemoteCreateTorchRegistry } from '@/data/use-cases'
+import { RemoteCreateTorchRegistry } from '@/domain/use-cases'
 import { mockCreateTorchRegistryService } from '@/tests/helpers'
 
 function makeSut() {

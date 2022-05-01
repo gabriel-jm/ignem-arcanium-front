@@ -1,4 +1,4 @@
-import { FindAllTorchRegistriesResult } from '@/domain/use-cases'
+import { FindAllTorchRegistriesResult } from '@/domain/protocols/use-cases'
 
 export type FindAllTorchRegistriesServiceResult = FindAllTorchRegistriesResult
 

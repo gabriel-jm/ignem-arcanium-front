@@ -1,4 +1,4 @@
-import { CreateTorchRegistry } from '@/domain/use-cases'
+import { CreateTorchRegistry } from '@/domain/protocols/use-cases'
 import { successResponse } from '@/presentation/helpers'
 import { Presenter } from '@/presentation/protocols'
 

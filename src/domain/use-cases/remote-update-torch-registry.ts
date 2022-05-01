@@ -1,5 +1,5 @@
-import { UpdateTorchRegistryService } from '@/data/protocols'
-import { UpdateTorchRegistry, UpdateTorchRegistryParams } from '@/domain/use-cases'
+import { UpdateTorchRegistryService } from '@/domain/protocols/services'
+import { UpdateTorchRegistry, UpdateTorchRegistryParams } from '@/domain/protocols/use-cases'
 
 export class RemoteUpdateTorchRegistry implements UpdateTorchRegistry {
   constructor(private readonly updateTorchRegistryService: UpdateTorchRegistryService) {}
