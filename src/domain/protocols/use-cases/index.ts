@@ -4,3 +4,4 @@ export * from './create-torch-registry'
 export * from './update-torch-registry'
 
 export * from './account/create-account'
+export * from './account/account-login'
