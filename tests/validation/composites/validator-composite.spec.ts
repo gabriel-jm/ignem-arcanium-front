@@ -1,15 +1,15 @@
-import { ValidatorComposite } from '@/validation/composites'
+import { validatorComposite } from '@/validation/composites'
 
 describe('ValidatorComposite', () => {
   it('should not return a value on validation success', () => {
-    const sut = new ValidatorComposite({
+    const sut = validatorComposite({
       characterName: {
         type: 'string',
         required: true
       }
     })
 
-    const response = sut.validate({
+    const response = sut({
       characterName: 'any_name'
     })
 
@@ -17,7 +17,7 @@ describe('ValidatorComposite', () => {
   })
 
   it('should return a list of validation errors on failure', () => {
-    const sut = new ValidatorComposite({
+    const sut = validatorComposite({
       characterName: {
         type: 'string',
         required: true
@@ -29,7 +29,7 @@ describe('ValidatorComposite', () => {
       }
     })
 
-    const response = sut.validate({
+    const response = sut({
       characterName: 'any_name',
       torchCharge: 10
     })
@@ -40,7 +40,7 @@ describe('ValidatorComposite', () => {
   })
 
   it('should return the first and that only validation error by field', () => {
-    const sut = new ValidatorComposite({
+    const sut = validatorComposite({
       characterName: {
         required: true,
         type: 'string',
@@ -60,7 +60,7 @@ describe('ValidatorComposite', () => {
       }
     })
 
-    const response = sut.validate({
+    const response = sut({
       characterName: 0,
       torchCharge: 12
     })

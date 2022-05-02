@@ -23,12 +23,12 @@ describe('ValidationPresenterDecorator', () => {
 
     await sut.handle(params)
 
-    expect(validatorSpy.validate).toHaveBeenCalledWith(params)
+    expect(validatorSpy).toHaveBeenCalledWith(params)
   })
 
   it('should return a validation error response if validator return errors', async () => {
     const { sut, validatorSpy } = makeSut()
-    validatorSpy.validate.mockReturnValueOnce({ field: 'Required field' })
+    validatorSpy.mockReturnValueOnce({ field: 'Required field' })
 
     const response = await sut.handle()
 
