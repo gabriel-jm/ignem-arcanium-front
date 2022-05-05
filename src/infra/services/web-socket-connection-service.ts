@@ -1,4 +1,4 @@
-import { CreateConnectionService } from '@/domain/protocols'
+import { CreateConnectionService } from '@/domain/protocols/services'
 import { CreateConnectionClient } from '@/infra/protocols'
 
 export class WebSocketConnectionService implements CreateConnectionService {
