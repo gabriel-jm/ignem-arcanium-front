@@ -23,10 +23,12 @@ export class AccountService implements CreateAccountService, AccountLoginService
     })
 
     if (response.statusCode >= 400) {
+      const isServerError = response.statusCode >= 500
+
       throw new ServiceError(
         response.body,
         'Error on login',
-        true
+        !isServerError
       )
     }
 
