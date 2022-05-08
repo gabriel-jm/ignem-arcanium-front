@@ -1,3 +1,3 @@
 export interface CacheStore {
-  load<T = unknown>(key: string): T
+  save(key: string, data: Record<string, unknown>): void
 }

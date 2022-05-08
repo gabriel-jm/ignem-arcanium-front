@@ -9,12 +9,12 @@ export class RemoteAccountLogin implements AccountLogin {
   ) {}
 
   async login(params: AccountLoginParams): Promise<AccountLoginResult> {
-    
-
     const accessCredentials = await this.accountLoginService.login({
       email: params.email,
       password: params.password
     })
+
+    this.cacheStore.save('token', { token: accessCredentials.token })
 
     return { name: accessCredentials.name }
   }

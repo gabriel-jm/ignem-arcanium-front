@@ -1,13 +1,15 @@
 import { RemoteAccountLogin } from '@/domain/use-cases'
-import { mockAccountLoginService } from '@/tests/helpers'
+import { mockAccountLoginService, mockCacheStore } from '@/tests/helpers'
 
 function makeSut() {
   const accountLoginServiceSpy = mockAccountLoginService()
-  const sut = new RemoteAccountLogin(accountLoginServiceSpy)
+  const cacheStoreSpy = mockCacheStore()
+  const sut = new RemoteAccountLogin(accountLoginServiceSpy, cacheStoreSpy)
 
   return {
     sut,
-    accountLoginServiceSpy
+    accountLoginServiceSpy,
+    cacheStoreSpy
   }
 }
 
@@ -26,5 +28,18 @@ describe('RemoteAccountLogin', () => {
       email: dummyLoginParams.email,
       password: dummyLoginParams.password
     })
+  })
+
+  it('should call CacheStore.save with correct values', async () => {
+    const { sut, accountLoginServiceSpy, cacheStoreSpy } = makeSut()
+
+    await sut.login(dummyLoginParams)
+
+    expect(cacheStoreSpy.save).toHaveBeenCalledWith(
+      'token',
+      {
+        token: accountLoginServiceSpy.result.token
+      }
+    )
   })
 })
