@@ -3,8 +3,16 @@ import { css, html } from 'lithen-tag-functions'
 import { IgnemElement } from '@/ui/view/ignem-element'
 import { ignemInput } from '@/ui/view/components'
 import { containerStyles, buttonStyles, inputStyles } from '@/ui/view/styles'
+import { Presenter } from '@/presentation/protocols'
 
 export class IgnemLoginPage extends IgnemElement {
+  #accountLoginPresenter: Presenter;
+
+  constructor(accountLoginPresenter: Presenter) {
+    super()
+    this.#accountLoginPresenter = accountLoginPresenter
+  }
+
   styling() {
     return css`
       ${[containerStyles, buttonStyles, inputStyles]}
@@ -45,8 +53,21 @@ export class IgnemLoginPage extends IgnemElement {
   }
 
   render() {
-    function handleSubmit() {
-      router.goTo('/create-account')
+    const handleSubmit = async (event: Event) => {
+      event.preventDefault()
+
+      const form = this.select<HTMLFormElement>('form')
+
+      const formData = {
+        email: form?.email.value,
+        password: form?.password.value
+      }
+
+      const result = await this.#accountLoginPresenter.handle(formData)
+
+      if (result.ok) {
+        router.goTo('/torches')
+      }
     }
   
     return html`
