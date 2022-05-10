@@ -39,6 +39,7 @@ export class IgnemLoginPage extends IgnemElement {
         display: flex;
         justify-content: center;
         align-items: center;
+        background: linear-gradient(to bottom right, #0d0d0d, #121212);
       }
 
       .login-form {
@@ -65,6 +66,45 @@ export class IgnemLoginPage extends IgnemElement {
       .btn:disabled {
         pointer-events: none;
         filter: brightness(0.6);
+      }
+
+      .or {
+        color: var(--sub-font-color);
+        margin: 30px 0;
+        text-align: center;
+        position: relative;
+        z-index: 2;
+      }
+
+      /*.or::after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 0;
+        width: 100%;
+        height: 1px;
+        display: block;
+        background-color: var(--sub-font-color);
+      }*/
+
+      .or > span {
+        display: inline-block;
+        background-color: transparent;
+        width: 80px;
+      }
+
+      .link {
+        display: block;
+        text-decoration: underline;
+        background-color: transparent;
+        border: 0;
+        font-size: 1.2rem;
+        font-weight: normal;
+        font-family: var(--font-family);
+        width: 100%;
+        text-align: center;
+        cursor: pointer;
+        color: var(--sub-font-color);
       }
     `
   }
@@ -97,7 +137,7 @@ export class IgnemLoginPage extends IgnemElement {
           'Success',
           'Logged in with success'
         )
-        router.goTo('/torches')
+;        router.goTo('/torches')
       }
 
       this.#block = false
@@ -124,6 +164,17 @@ export class IgnemLoginPage extends IgnemElement {
           })}
 
           <button class="btn">Send</button>
+
+          <p class="or">
+            <span>OR</span>
+          </p>
+
+          <button
+            class="link"
+            on-click=${() => router.goTo('/create-account')}
+          >
+            Create account
+          </button>
         </form>
       </section>
     `
