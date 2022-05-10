@@ -1,16 +1,33 @@
 import { router } from 'lithen-router'
 import { css, html } from 'lithen-tag-functions'
 import { IgnemElement } from '@/ui/view/ignem-element'
-import { ignemInput } from '@/ui/view/components'
+import { IgnemFormElement, ignemInput } from '@/ui/view/components'
 import { containerStyles, buttonStyles, inputStyles } from '@/ui/view/styles'
 import { Presenter } from '@/presentation/protocols'
+import { SetAccountStore } from '@/ui/protocols/stores'
+import { SuccessNotifier } from '@/ui/protocols'
 
 export class IgnemLoginPage extends IgnemElement {
-  #accountLoginPresenter: Presenter;
+  #accountLoginPresenter: Presenter
+  #setAccountStore: SetAccountStore
+  #successNotifier: SuccessNotifier
+  #btnBlocked = false
 
-  constructor(accountLoginPresenter: Presenter) {
+  constructor(
+    accountLoginPresenter: Presenter,
+    setAccountStore: SetAccountStore,
+    successNotifier: SuccessNotifier
+  ) {
     super()
     this.#accountLoginPresenter = accountLoginPresenter
+    this.#setAccountStore = setAccountStore
+    this.#successNotifier = successNotifier
+  }
+
+  set #block(value: boolean) {
+    this.#btnBlocked = value
+    value && this.select('.btn')?.setAttribute('disabled', '')
+    !value && this.select('.btn')?.removeAttribute('disabled')
   }
 
   styling() {
@@ -56,7 +73,11 @@ export class IgnemLoginPage extends IgnemElement {
     const handleSubmit = async (event: Event) => {
       event.preventDefault()
 
-      const form = this.select<HTMLFormElement>('form')
+      if (this.#btnBlocked) return
+
+      this.#block = true
+
+      const form = this.select<IgnemFormElement>('form')
 
       const formData = {
         email: form?.email.value,
@@ -65,9 +86,21 @@ export class IgnemLoginPage extends IgnemElement {
 
       const result = await this.#accountLoginPresenter.handle(formData)
 
+      form?.setErrors(result.validationErrors)
+
       if (result.ok) {
+        this.#setAccountStore.account = {
+          name: result.data.name
+        }
+        form?.reset()
+        this.#successNotifier.notifySuccess(
+          'Success',
+          'Logged in with success'
+        )
         router.goTo('/torches')
       }
+
+      this.#block = false
     }
   
     return html`
@@ -90,7 +123,7 @@ export class IgnemLoginPage extends IgnemElement {
             placeholder: 'Password'
           })}
 
-          <button class="btn">Create</button>
+          <button class="btn">Send</button>
         </form>
       </section>
     `

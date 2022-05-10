@@ -85,18 +85,12 @@ export class IgnemCreateAccountPage extends IgnemElement {
 
       const result = await this.#createAccountPresenter.handle(formData)
 
-      if (result.validationErrors) {
-        const { validationErrors: errors } = result
+      const { validationErrors: errors } = result
 
-        form.setErrors({
-          ...errors,
-          ...errors.name && { userName: errors.name }
-        })
-      }
-      
-      if (!result.validationErrors) {
-        form.removeErrors()
-      }
+      form.setErrors({
+        ...errors,
+        ...errors?.name && { userName: errors.name }
+      })
 
       if (result.ok) {
         form.reset()
@@ -137,7 +131,7 @@ export class IgnemCreateAccountPage extends IgnemElement {
             placeholder: 'Password'
           })}
 
-          <button class="btn">Create</button>
+          <button class="btn">Send</button>
         </form>
       </section>
     `

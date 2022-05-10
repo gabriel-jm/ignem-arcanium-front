@@ -1,5 +1,5 @@
 export interface IgnemFormElement extends HTMLFormElement {
-  setErrors(errorsRecord: Record<string, string>): void
+  setErrors(errorsRecord: Record<string, string> | null): void
   removeErrors(): void
 }
 
@@ -12,8 +12,10 @@ export class IgnemForm extends HTMLFormElement {
     return this.querySelector(query) as T
   }
 
-  setErrors(errorsRecord: Record<string, string>) {
+  setErrors(errorsRecord?: Record<string, string>) {
     this.removeErrors()
+
+    if (!errorsRecord) return
 
     Object.entries(errorsRecord).forEach(([field, error]) => {
       const inputMessageSpan = this.select(`input[name=${field}] ~ span`)!
