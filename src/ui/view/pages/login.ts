@@ -39,7 +39,6 @@ export class IgnemLoginPage extends IgnemElement {
         display: flex;
         justify-content: center;
         align-items: center;
-        background: linear-gradient(to bottom right, #0d0d0d, #121212);
       }
 
       .login-form {
@@ -68,29 +67,22 @@ export class IgnemLoginPage extends IgnemElement {
         filter: brightness(0.6);
       }
 
-      .or {
-        color: var(--sub-font-color);
+      .or-group {
+        display: flex;
+        align-items: center;
         margin: 30px 0;
-        text-align: center;
-        position: relative;
-        z-index: 2;
+        color: var(--sub-font-color);
       }
 
-      /*.or::after {
-        content: '';
-        position: absolute;
-        top: 50%;
-        left: 0;
+      .or-group > .line {
         width: 100%;
         height: 1px;
-        display: block;
         background-color: var(--sub-font-color);
-      }*/
+      }
 
-      .or > span {
-        display: inline-block;
-        background-color: transparent;
-        width: 80px;
+      .or-group > :not(.line) {
+        width: 200px;
+        text-align: center
       }
 
       .link {
@@ -98,7 +90,7 @@ export class IgnemLoginPage extends IgnemElement {
         text-decoration: underline;
         background-color: transparent;
         border: 0;
-        font-size: 1.2rem;
+        font-size: 1.1rem;
         font-weight: normal;
         font-family: var(--font-family);
         width: 100%;
@@ -137,7 +129,7 @@ export class IgnemLoginPage extends IgnemElement {
           'Success',
           'Logged in with success'
         )
-;        router.goTo('/torches')
+        router.goTo('/torches')
       }
 
       this.#block = false
@@ -165,9 +157,11 @@ export class IgnemLoginPage extends IgnemElement {
 
           <button class="btn">Send</button>
 
-          <p class="or">
+          <div class="or-group">
+            <span class="line"></span>
             <span>OR</span>
-          </p>
+            <span class="line"></span>
+          </div>
 
           <button
             class="link"
