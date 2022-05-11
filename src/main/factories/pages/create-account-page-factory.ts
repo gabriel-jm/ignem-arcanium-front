@@ -4,6 +4,7 @@ import { AccountService } from '@/infra/services'
 import { ErrorHandlingPresenterDecorator, ValidationPresenterDecorator } from '@/main/decorators'
 import { CreateAccountPresenter } from '@/presentation/presenters'
 import { UiNotifier } from '@/ui/notifiers'
+import { AccountStore } from '@/ui/stores'
 import { IgnemCreateAccountPage } from '@/ui/view'
 import { validatorComposite } from '@/validation/composites'
 
@@ -14,6 +15,7 @@ export function makeCreateAccountPage() {
   const presenter = new CreateAccountPresenter(accountUsecase)
 
   const uiNotifier = new UiNotifier()
+  const accountStore = new AccountStore()
   
   const decoratedPresenter = new ErrorHandlingPresenterDecorator(
     uiNotifier,
@@ -36,5 +38,9 @@ export function makeCreateAccountPage() {
     )
   )
 
-  return new IgnemCreateAccountPage(decoratedPresenter, uiNotifier)
+  return new IgnemCreateAccountPage(
+    decoratedPresenter,
+    uiNotifier,
+    accountStore
+  )
 }

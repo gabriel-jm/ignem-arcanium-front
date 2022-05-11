@@ -1,5 +1,6 @@
 import { Presenter } from '@/presentation/protocols'
 import { SuccessNotifier } from '@/ui/protocols'
+import { SetAccountStore } from '@/ui/protocols/stores'
 import { buttonStyles, containerStyles, inputStyles } from '@/ui/view'
 import { IgnemFormElement } from '@/ui/view/components'
 import { ignemInput } from '@/ui/view/components/form/input'
@@ -10,17 +11,18 @@ import { css, html } from 'lithen-tag-functions'
 export class IgnemCreateAccountPage extends IgnemElement {
   #createAccountPresenter: Presenter
   #successNotifier: SuccessNotifier
+  #setAccountStore: SetAccountStore
   #btnBlocked = false
 
   constructor(
     createAccountPresenter: Presenter,
-    successNotifier: SuccessNotifier
+    successNotifier: SuccessNotifier,
+    setAccountStore: SetAccountStore
   ) {
     super()
     this.#createAccountPresenter = createAccountPresenter
     this.#successNotifier = successNotifier
-
-    this.applyRender()
+    this.#setAccountStore = setAccountStore
   }
 
   set #block(value: boolean) {
@@ -65,6 +67,26 @@ export class IgnemCreateAccountPage extends IgnemElement {
         pointer-events: none;
         filter: brightness(0.6);
       }
+
+      .login-message {
+        margin-top: 28px;
+        font-size: 0.9rem;
+        color: var(--sub-font-color);
+        text-align: center;
+      }
+
+      .link {
+        text-decoration: underline;
+        background-color: transparent;
+        border: 0;
+        font-size: 0.9rem;
+        font-weight: normal;
+        font-family: var(--font-family);
+        width: 100%;
+        text-align: center;
+        cursor: pointer;
+        color: var(--sub-font-color);
+      }
     `
   }
   
@@ -93,6 +115,10 @@ export class IgnemCreateAccountPage extends IgnemElement {
       })
 
       if (result.ok) {
+        this.#setAccountStore.account = {
+          name: result.data.name
+        }
+
         form.reset()
         this.#successNotifier.notifySuccess(
           'Created',
@@ -132,6 +158,15 @@ export class IgnemCreateAccountPage extends IgnemElement {
           })}
 
           <button class="btn">Send</button>
+          <p class="login-message">
+            Already have an account? &nbsp;
+            <span
+              class="link"
+              on-click=${() => router.goTo('/login')}
+            >
+              Log in
+            </span>
+          </p>
         </form>
       </section>
     `
