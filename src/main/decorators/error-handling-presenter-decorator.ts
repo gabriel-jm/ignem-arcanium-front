@@ -14,12 +14,14 @@ export class ErrorHandlingPresenterDecorator implements Presenter {
 
       return result
     } catch(err) {
-      const error = err as Error
+      const error = err as Error & { skipNotification?: boolean }
       const message = error.message || 'Internal error. Try again later!'
 
-      this.warnNotificationStore.notifyWarning('Error', message)
+      if (!error.skipNotification) {
+        this.warnNotificationStore.notifyWarning('Error', message)
+      }
 
-      return failureResponse({ errorMessage: message })
+      return failureResponse({ errorMessage: message, error })
     }
   }
 }

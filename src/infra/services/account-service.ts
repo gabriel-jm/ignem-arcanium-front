@@ -13,7 +13,7 @@ export class AccountService implements CreateAccountService, AccountLoginService
   constructor(private readonly httpClient: HTTPClient) {}
 
   async login(params: AccountLoginServiceParams) {
-    const response = await this.httpClient.request<AccountLoginServiceResult>({
+    const response = await this.httpClient.request<AccountLoginServiceResult | { error: { details: string[] } }>({
       method: 'post',
       path: '/login',
       body: {
@@ -25,14 +25,16 @@ export class AccountService implements CreateAccountService, AccountLoginService
     if (response.statusCode >= 400) {
       const isServerError = response.statusCode >= 500
 
+      const errorResponse = response.body as { error: { details: string[] } };
+
       throw new ServiceError(
         response.body,
-        'Error on login',
+        errorResponse.error.details[0] ?? 'Error on login',
         !isServerError
       )
     }
 
-    return response.body
+    return response.body as AccountLoginServiceResult
   }
   
   async create(params: CreateAccountServiceParams): Promise<CreateAccountServiceResult> {
