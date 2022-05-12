@@ -5,7 +5,7 @@ export interface CreateAccountParams {
 }
 
 export interface CreateAccountResult {
-  accountId: string
+  name: string
 }
 
 export interface CreateAccount {

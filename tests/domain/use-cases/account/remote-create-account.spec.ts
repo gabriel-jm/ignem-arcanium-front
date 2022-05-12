@@ -1,13 +1,15 @@
 import { RemoteCreateAccount } from '@/domain/use-cases'
-import { mockCreateAccountService } from '@/tests/helpers'
+import { mockCacheStore, mockCreateAccountService } from '@/tests/helpers'
 
 function makeSut() {
   const createAccountServiceSpy = mockCreateAccountService()
-  const sut = new RemoteCreateAccount(createAccountServiceSpy)
+  const cacheStoreSpy = mockCacheStore()
+  const sut = new RemoteCreateAccount(createAccountServiceSpy, cacheStoreSpy)
 
   return {
     sut,
-    createAccountServiceSpy
+    createAccountServiceSpy,
+    cacheStoreSpy
   }
 }
 
@@ -30,13 +32,23 @@ describe('RemoteCreateAccount', () => {
     })
   })
 
+  it('should call CacheStore.save with correct values', async () => {
+    const { sut, createAccountServiceSpy, cacheStoreSpy } = makeSut()
+
+    await sut.create(dummyCreateParams)
+
+    expect(cacheStoreSpy.save).toHaveBeenCalledWith('token', {
+      token: createAccountServiceSpy.result.token
+    })
+  })
+
   it('should return an object with account id on success', async () => {
     const { sut, createAccountServiceSpy } = makeSut()
 
     const response = await sut.create(dummyCreateParams)
 
     expect(response).toEqual({
-      accountId: createAccountServiceSpy.result.accountId
+      name: createAccountServiceSpy.result.name
     })
   })
 })

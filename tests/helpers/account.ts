@@ -1,14 +1,24 @@
 export function mockCreateAccount() {
+  const result = {
+    name: 'any_name',
+    token: 'any_token'
+  }
+  
   return {
-    result: { accountId: 'any_account_id' },
-    create: vi.fn(() => Promise.resolve({ accountId: 'any_account_id' }))
+    result,
+    create: vi.fn(() => Promise.resolve(result))
   }
 }
 
 export function mockCreateAccountService() {
+  const result = {
+    name: 'any_name',
+    token: 'any_token'
+  }
+  
   return {
-    result: { accountId: 'any_account_id' },
-    create: vi.fn(() => Promise.resolve({ accountId: 'any_account_id' }))
+    result,
+    create: vi.fn(() => Promise.resolve(result))
   }
 }
 

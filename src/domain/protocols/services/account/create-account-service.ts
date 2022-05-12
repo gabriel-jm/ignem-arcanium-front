@@ -5,7 +5,8 @@ export interface CreateAccountServiceParams {
 }
 
 export interface CreateAccountServiceResult {
-  accountId: string
+  name: string
+  token: string
 }
 
 export interface CreateAccountService {

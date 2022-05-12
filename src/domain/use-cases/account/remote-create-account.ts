@@ -1,8 +1,12 @@
+import { CacheStore } from '@/domain/protocols/cache'
 import { CreateAccountService } from '@/domain/protocols/services'
 import { CreateAccount, CreateAccountParams, CreateAccountResult } from '@/domain/protocols/use-cases'
 
 export class RemoteCreateAccount implements CreateAccount {
-  constructor(private readonly createAccountService: CreateAccountService) {}
+  constructor(
+    private readonly createAccountService: CreateAccountService,
+    private readonly cacheStore: CacheStore
+  ) {}
 
   async create(params: CreateAccountParams): Promise<CreateAccountResult> {
     const creationResult = await this.createAccountService.create({
@@ -11,6 +15,8 @@ export class RemoteCreateAccount implements CreateAccount {
       password: params.password
     })
 
-    return { accountId: creationResult.accountId }
+    this.cacheStore.save('token', { token: creationResult.token })
+
+    return { name: creationResult.name }
   }
 }
