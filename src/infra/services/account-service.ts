@@ -6,7 +6,7 @@ import {
   CreateAccountServiceParams,
   CreateAccountServiceResult
 } from '@/domain/protocols/services'
-import { ServiceError } from '@/infra/errors'
+import { HTTPServiceError } from '@/infra/errors'
 import { HTTPClient } from '@/infra/protocols'
 
 export class AccountService implements CreateAccountService, AccountLoginService {
@@ -23,15 +23,7 @@ export class AccountService implements CreateAccountService, AccountLoginService
     })
 
     if (response.statusCode >= 400) {
-      const isServerError = response.statusCode >= 500
-
-      const errorResponse = response.body as { error: { details: string[] } };
-
-      throw new ServiceError(
-        response.body,
-        errorResponse.error.details[0] ?? 'Error on login',
-        !isServerError
-      )
+      throw new HTTPServiceError(response, 'Error on login')
     }
 
     return response.body as AccountLoginServiceResult
@@ -49,7 +41,7 @@ export class AccountService implements CreateAccountService, AccountLoginService
     })
 
     if (response.statusCode >= 400) {
-      throw new ServiceError(response.body, 'Internal error on creating an account')
+      throw new HTTPServiceError(response, 'Internal error on creating an account')
     }
 
     return response.body

@@ -124,6 +124,7 @@ export class IgnemLoginPage extends IgnemElement {
         this.#setAccountStore.account = {
           name: result.data.name
         }
+        
         form?.reset()
         this.#successNotifier.notifySuccess(
           'Success',

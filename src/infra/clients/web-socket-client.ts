@@ -1,4 +1,4 @@
-import { ServiceError, WebSocketConnectionFailedError } from '@/infra/errors'
+import { WsServiceError, WebSocketConnectionFailedError } from '@/infra/errors'
 import {
   CreateConnectionClient,
   MessageOnceListener,
@@ -95,7 +95,7 @@ export class WebSocketClient implements WebSocketConnectionClient {
             }
   
             reject(
-              new ServiceError(
+              new WsServiceError(
                 payload,
                 params.errorMessage ?? 'Internal error, please try again later'
               )

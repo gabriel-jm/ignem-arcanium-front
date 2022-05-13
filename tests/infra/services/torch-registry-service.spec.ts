@@ -1,4 +1,4 @@
-import { ServiceError } from '@/infra/errors'
+import { WsServiceError } from '@/infra/errors'
 import { TorchRegistryService } from '@/infra/services'
 import { mockReceivedMessageResult, mockSendMessageClient } from '@/tests/helpers'
 
@@ -30,7 +30,7 @@ describe('TorchRegistryService', () => {
   
     it('should throw a ServiceError if SendMessageClient throws', async () => {
       const { sut, sendMessageClientSpy } = makeSut()
-      const serviceError = new ServiceError(mockReceivedMessageResult(), 'Internal error')
+      const serviceError = new WsServiceError(mockReceivedMessageResult(), 'Internal error')
       sendMessageClientSpy.sendMessage.mockImplementationOnce(() => {
         throw serviceError
       })
@@ -76,7 +76,7 @@ describe('TorchRegistryService', () => {
 
     it('should throw a ServiceError if SendMessageClient throws', async () => {
       const { sut, sendMessageClientSpy } = makeSut()
-      const serviceError = new ServiceError(mockReceivedMessageResult(), 'Internal error')
+      const serviceError = new WsServiceError(mockReceivedMessageResult(), 'Internal error')
       sendMessageClientSpy.sendMessage.mockImplementationOnce(() => {
         throw serviceError
       })
@@ -124,7 +124,7 @@ describe('TorchRegistryService', () => {
 
     it('should throw a ServiceError if SendMessageClient throws', async () => {
       const { sut, sendMessageClientSpy } = makeSut()
-      const serviceError = new ServiceError(mockReceivedMessageResult(), 'Internal error')
+      const serviceError = new WsServiceError(mockReceivedMessageResult(), 'Internal error')
       sendMessageClientSpy.sendMessage.mockImplementationOnce(() => {
         throw serviceError
       })

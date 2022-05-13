@@ -44,7 +44,8 @@ describe('ErrorHandlingPresenterDecorator', () => {
     const response = await sut.handle({})
 
     expect(response).toEqual(failureResponse({
-      errorMessage: error.message
+      errorMessage: error.message,
+      error
     }))
   })
 

@@ -1,4 +1,4 @@
-import { ServiceError } from '@/infra/errors'
+import { HTTPServiceError } from '@/infra/errors'
 import { AccountService } from '@/infra/services/account-service'
 
 function makeSut() {
@@ -42,17 +42,20 @@ describe('AccountService', () => {
   
     it('should throw a ServiceError if statusCode from response is greater or equal to 400', async () => {
       const { sut, httpClientSpy } = makeSut()
-      httpClientSpy.request.mockResolvedValueOnce({
+      const httpResponse = {
         statusCode: 400,
         body: {
-          error: 'any_error'
+          error: {
+            details: ['any_error']
+          }
         }
-      })
+      }
+      httpClientSpy.request.mockResolvedValueOnce(httpResponse)
   
       const promise = sut.create(dummyCreateParams)
   
-      await expect(promise).rejects.toThrowError(new ServiceError(
-        { error: 'any_error' },
+      await expect(promise).rejects.toThrowError(new HTTPServiceError(
+        httpResponse,
         'Internal error on creating an account'
       ))
     })
@@ -81,17 +84,20 @@ describe('AccountService', () => {
 
     it('should throw a ServiceError with skip true if it is a user error', async () => {
       const { sut, httpClientSpy } = makeSut()
-      httpClientSpy.request.mockResolvedValueOnce({
+      const httpResponse = {
         statusCode: 400,
         body: {
-          error: 'any_error'
+          error: {
+            details: ['any_error']
+          }
         }
-      })
+      }
+      httpClientSpy.request.mockResolvedValueOnce(httpResponse)
   
       const promise = sut.login(dummyLoginParams)
   
-      await expect(promise).rejects.toThrowError(new ServiceError(
-        { error: 'any_error' },
+      await expect(promise).rejects.toThrowError(new HTTPServiceError(
+        httpResponse,
         'Error on login',
         true
       ))
@@ -99,17 +105,20 @@ describe('AccountService', () => {
 
     it('should throw a ServiceError with skip false if it is a server error', async () => {
       const { sut, httpClientSpy } = makeSut()
-      httpClientSpy.request.mockResolvedValueOnce({
+      const httpResponse = {
         statusCode: 500,
         body: {
-          error: 'any_error'
+          error: {
+            details: ['any_error']
+          }
         }
-      })
+      }
+      httpClientSpy.request.mockResolvedValueOnce(httpResponse)
   
       const promise = sut.login(dummyLoginParams)
   
-      await expect(promise).rejects.toThrowError(new ServiceError(
-        { error: 'any_error' },
+      await expect(promise).rejects.toThrowError(new HTTPServiceError(
+        httpResponse,
         'Error on login',
         false
       ))
