@@ -21,7 +21,7 @@
     "vitest": "^0.10.0"
   },
   "dependencies": {
-    "lithen-router": "^1.0.3",
+    "lithen-router": "^2.0.0",
     "lithen-super-element": "^3.2.0",
     "lithen-tag-functions": "^2.0.0"
   }
