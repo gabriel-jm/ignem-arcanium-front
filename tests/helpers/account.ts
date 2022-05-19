@@ -33,3 +33,9 @@ export function mockAccountLoginService() {
     login: vi.fn(() => Promise.resolve(result))
   }
 }
+
+export function mockVerifyTokenService() {
+  return {
+    verify: vi.fn(() => Promise.resolve())
+  }
+}

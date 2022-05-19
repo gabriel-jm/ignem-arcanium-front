@@ -1,5 +1,6 @@
 export * from './account/account-login'
 export * from './account/create-account'
+export * from './account/verify-token'
 
 export * from './connection/create-connection'
 

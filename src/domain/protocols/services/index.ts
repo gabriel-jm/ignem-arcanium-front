@@ -5,3 +5,4 @@ export * from './update-torch-registry-service'
 
 export * from './account/create-account-service'
 export * from './account/account-login-service'
+export * from './account/verify-token-service'
