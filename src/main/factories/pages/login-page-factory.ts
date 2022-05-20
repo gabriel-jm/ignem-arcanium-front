@@ -3,18 +3,16 @@ import {
   ValidationPresenterDecorator
 } from '@/main/decorators'
 import { RemoteAccountLogin } from '@/domain/use-cases'
-import { FetchHTTPClient } from '@/infra/clients'
-import { AccountService } from '@/infra/services'
 import { LocalStorageCacheStore } from '@/infra/stores'
 import { GenericPresenter } from '@/presentation/presenters'
 import { UiNotifier } from '@/ui/notifiers'
 import { IgnemLoginPage } from '@/ui/view'
 import { validatorComposite } from '@/validation/composites'
 import { AccountStore } from '@/ui/stores'
+import { makeAccountService } from '@/main/factories/services'
 
 export function makeLoginPage() {
-  const httpClient = new FetchHTTPClient(import.meta.env.VITE_SERVER_URL)
-  const accountService = new AccountService(httpClient)
+  const accountService = makeAccountService()
   const localStorageCacheStore = new LocalStorageCacheStore()
   const loginUsecase = new RemoteAccountLogin(accountService, localStorageCacheStore)
   const presenter = new GenericPresenter(loginUsecase.login.bind(loginUsecase))
