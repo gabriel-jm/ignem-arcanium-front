@@ -39,3 +39,9 @@ export function mockVerifyTokenService() {
     verify: vi.fn(() => Promise.resolve())
   }
 }
+
+export function mockVerifyToken() {
+  return {
+    verify: vi.fn(() => Promise.resolve())
+  }
+}
