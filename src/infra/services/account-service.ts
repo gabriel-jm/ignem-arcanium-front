@@ -13,7 +13,7 @@ export class AccountService implements CreateAccountService, AccountLoginService
   constructor(private readonly httpClient: HTTPClient) {}
 
   async login(params: AccountLoginServiceParams) {
-    const response = await this.httpClient.request<AccountLoginServiceResult | { error: { details: string[] } }>({
+    const response = await this.httpClient.request<AccountLoginServiceResult>({
       method: 'post',
       path: '/login',
       body: {
@@ -42,6 +42,20 @@ export class AccountService implements CreateAccountService, AccountLoginService
 
     if (response.statusCode >= 400) {
       throw new HTTPServiceError(response, 'Internal error on creating an account')
+    }
+
+    return response.body
+  }
+
+  async verify(token: string) {
+    const response = await this.httpClient.request({
+      method: 'post',
+      path: '/verify',
+      body: { token }
+    })
+
+    if (response.statusCode >= 400) {
+      throw new HTTPServiceError(response, 'Sorry we could not authenticate your user')
     }
 
     return response.body

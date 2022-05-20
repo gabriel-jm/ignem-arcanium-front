@@ -124,4 +124,40 @@ describe('AccountService', () => {
       ))
     })
   })
+
+  describe('verify()', () => {
+    const dummyVerifyParams = 'any_token'
+
+    it('should call HTTPClient with correct values', async () => {
+      const { sut, httpClientSpy } = makeSut()
+  
+      await sut.verify(dummyVerifyParams)
+  
+      expect(httpClientSpy.request).toHaveBeenCalledWith({
+        method: 'post',
+        path: '/verify',
+        body: { token: dummyVerifyParams }
+      })
+    })
+
+    it('should throw a ServiceError if statusCode from response is greater or equal to 400', async () => {
+      const { sut, httpClientSpy } = makeSut()
+      const httpResponse = {
+        statusCode: 400,
+        body: {
+          error: {
+            details: ['any_error']
+          }
+        }
+      }
+      httpClientSpy.request.mockResolvedValueOnce(httpResponse)
+  
+      const promise = sut.verify(dummyVerifyParams)
+  
+      await expect(promise).rejects.toThrowError(new HTTPServiceError(
+        httpResponse,
+        'Sorry we could not authenticate your user'
+      ))
+    })
+  })
 })
