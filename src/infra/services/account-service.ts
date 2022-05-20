@@ -57,7 +57,5 @@ export class AccountService implements CreateAccountService, AccountLoginService
     if (response.statusCode >= 400) {
       throw new HTTPServiceError(response, 'Sorry we could not authenticate your user')
     }
-
-    return response.body
   }
 }
