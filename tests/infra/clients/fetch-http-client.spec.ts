@@ -46,6 +46,21 @@ describe('FetchHTTPClient', () => {
     })
   })
 
+  it('should return body as null if response status code is 204', async () => {
+    const { sut, fetchSpy } = makeSut()
+    fetchSpy.mockResolvedValueOnce({ status: 204 } as any)
+
+    const response = await sut.request({
+      method: 'get',
+      path: '/'
+    })
+
+    expect(response).toEqual({
+      statusCode: 204,
+      body: null
+    })
+  })
+
   it('should parse return the status code and body on success', async () => {
     const { sut } = makeSut()
 

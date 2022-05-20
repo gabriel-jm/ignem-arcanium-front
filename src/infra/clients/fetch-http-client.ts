@@ -14,7 +14,9 @@ export class FetchHTTPClient implements HTTPClient {
       body: params.body ? JSON.stringify(params.body) : null
     })
 
-    const body = await response.json()
+    const body = response.status !== 204
+      ? await response.json()
+      : null
 
     return {
       statusCode: response.status,

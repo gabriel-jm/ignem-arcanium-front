@@ -5,7 +5,7 @@ function makeSut() {
   const matchRoute = vi.spyOn(router, 'matchRoute')
   const dummyDiv = document.createElement('div')
   matchRoute.mockImplementation(() => {
-    return () => dummyDiv
+    return () => Promise.resolve(dummyDiv)
   })
   
   const routerSpy = {
@@ -31,12 +31,14 @@ describe('IgnemRoot', () => {
     expect(routerSpy.matchRoute).toHaveBeenCalledWith()
   })
 
-  it('should call appendChild if RootPage has no child element', () => {
+  it('should call appendChild if RootPage has no child element', async () => {
     const { sut, dummyDiv } = makeSut()
     const appendChildSpy = vi.spyOn(sut.root, 'appendChild')
 
     window.dispatchEvent(new Event('load'))
 
-    expect(appendChildSpy).toHaveBeenCalledWith(dummyDiv)
+    setTimeout(() => {
+      expect(appendChildSpy).toHaveBeenCalledWith(dummyDiv)
+    }, 1)
   })
 })

@@ -1,7 +1,7 @@
 import { IgnemElement } from '@/ui/view'
 import { router } from 'lithen-router'
 
-type ElementFactory = () => Element | null
+type ElementFactory = () => Promise<Element | null>
 
 export class IgnemRoot extends IgnemElement {
   constructor() {
@@ -14,9 +14,9 @@ export class IgnemRoot extends IgnemElement {
     this.reRender()
   }
 
-  reRender() {
+  async reRender() {
     const componentFactory = router.matchRoute() as ElementFactory
-    const component = componentFactory()
+    const component = await componentFactory()
 
     if (!component) return
 
