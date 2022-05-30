@@ -1,6 +1,6 @@
 export * from './root'
 export * from './not-found'
-export * from './home'
+export * from './intro'
 export * from './torches'
 export * from './login'
 export * from './create-account'
