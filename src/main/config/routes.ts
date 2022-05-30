@@ -1,6 +1,7 @@
 import { auth } from '@/main/decorators'
 import {
   makeCreateAccountPage,
+  makeHomePage,
   makeIntroductionPage,
   makeLoginPage,
   makeTorchesPage
@@ -10,8 +11,9 @@ import { router } from 'lithen-router'
 
 export const configRoutes = () => router.defineRoutes({
   '/': makeIntroductionPage,
-  '/torches': auth(makeTorchesPage),
   '/login': makeLoginPage,
   '/create-account': makeCreateAccountPage,
+  '/home': auth(makeHomePage),
+  '/torches': auth(makeTorchesPage),
   notFound: () => new IgnemNotFoundPage()
 })

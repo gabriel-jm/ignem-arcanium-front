@@ -1,5 +1,5 @@
-import { IgnemIntroductionPage } from '@/ui/view'
+import { IgnemHomePage } from '@/ui/view/pages/home'
 
-export function makeIntroductionPage() {
-  return new IgnemIntroductionPage()
+export function makeHomePage() {
+  return new IgnemHomePage()
 }
