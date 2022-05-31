@@ -40,10 +40,10 @@ describe('CreateAccountPresenter', () => {
   })
 
   it('should return an ok response on success', async () => {
-    const { sut, createAccountSpy } = makeSut()
+    const { sut } = makeSut()
 
     const response = await sut.handle(dummyCreateParams)
 
-    expect(response).toEqual(successResponse(createAccountSpy.result))
+    expect(response).toEqual(successResponse(null))
   })
 })

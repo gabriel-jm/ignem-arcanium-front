@@ -34,6 +34,17 @@ export function mockAccountLoginService() {
   }
 }
 
+export function mockAccountLogin() {
+  const result = {
+    name: 'any_name'
+  }
+  
+  return {
+    result,
+    login: vi.fn(() => Promise.resolve(result))
+  }
+}
+
 export function mockVerifyTokenService() {
   return {
     verify: vi.fn(() => Promise.resolve())

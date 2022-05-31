@@ -4,23 +4,19 @@ import { IgnemElement } from '@/ui/view/ignem-element'
 import { IgnemFormElement, ignemInput } from '@/ui/view/components'
 import { containerStyles, buttonStyles, inputStyles } from '@/ui/view/styles'
 import { Presenter } from '@/presentation/protocols'
-import { SetAccountStore } from '@/ui/protocols/stores'
 import { SuccessNotifier } from '@/ui/protocols'
 
 export class IgnemLoginPage extends IgnemElement {
   #accountLoginPresenter: Presenter
-  #setAccountStore: SetAccountStore
   #successNotifier: SuccessNotifier
   #btnBlocked = false
 
   constructor(
     accountLoginPresenter: Presenter,
-    setAccountStore: SetAccountStore,
     successNotifier: SuccessNotifier
   ) {
     super()
     this.#accountLoginPresenter = accountLoginPresenter
-    this.#setAccountStore = setAccountStore
     this.#successNotifier = successNotifier
   }
 
@@ -121,10 +117,6 @@ export class IgnemLoginPage extends IgnemElement {
       form?.setErrors(result.validationErrors)
 
       if (result.ok) {
-        this.#setAccountStore.account = {
-          name: result.data.name
-        }
-        
         form?.reset()
         this.#successNotifier.notifySuccess(
           'Success',

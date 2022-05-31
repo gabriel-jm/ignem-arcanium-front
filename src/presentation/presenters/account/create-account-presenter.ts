@@ -26,6 +26,6 @@ export class CreateAccountPresenter implements Presenter {
       name: accountData.name
     }
 
-    return successResponse(accountData)
+    return successResponse(null)
   }
 }
