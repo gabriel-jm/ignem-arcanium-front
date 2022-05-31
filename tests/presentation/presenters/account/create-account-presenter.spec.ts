@@ -1,14 +1,16 @@
 import { successResponse } from '@/presentation/helpers'
 import { CreateAccountPresenter } from '@/presentation/presenters'
-import { mockCreateAccount } from '@/tests/helpers'
+import { mockCreateAccount, mockSetAccountStore } from '@/tests/helpers'
 
 function makeSut() {
   const createAccountSpy = mockCreateAccount()
-  const sut = new CreateAccountPresenter(createAccountSpy)
+  const setAccountStoreSpy = mockSetAccountStore()
+  const sut = new CreateAccountPresenter(createAccountSpy, setAccountStoreSpy)
 
   return {
     sut,
-    createAccountSpy
+    createAccountSpy,
+    setAccountStoreSpy
   }
 }
 
@@ -25,6 +27,16 @@ describe('CreateAccountPresenter', () => {
     await sut.handle(dummyCreateParams)
 
     expect(createAccountSpy.create).toHaveBeenCalledWith(dummyCreateParams)
+  })
+
+  it('should call SetAccountStore with correct values', async () => {
+    const { sut, createAccountSpy, setAccountStoreSpy } = makeSut()
+
+    await sut.handle(dummyCreateParams)
+
+    expect(setAccountStoreSpy.setAccountValue).toEqual({
+      name: createAccountSpy.result.name
+    })
   })
 
   it('should return an ok response on success', async () => {

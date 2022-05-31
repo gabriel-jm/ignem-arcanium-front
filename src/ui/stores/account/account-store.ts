@@ -12,7 +12,11 @@ export class AccountStore implements SetAccountStore {
     return AccountStore.#instance
   }
 
-  set account(value: AccountData) {
+  set account(value: AccountData | null) {
     this.#account = value
+  }
+
+  get account() {
+    return this.#account
   }
 }

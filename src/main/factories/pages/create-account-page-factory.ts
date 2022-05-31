@@ -12,10 +12,9 @@ export function makeCreateAccountPage() {
   const accountService = makeAccountService()
   const localStorageCacheStore = new LocalStorageCacheStore()
   const accountUsecase = new RemoteCreateAccount(accountService, localStorageCacheStore)
-  const presenter = new CreateAccountPresenter(accountUsecase)
+  const presenter = new CreateAccountPresenter(accountUsecase, new AccountStore())
 
   const uiNotifier = new UiNotifier()
-  const accountStore = new AccountStore()
   
   const decoratedPresenter = new ErrorHandlingPresenterDecorator(
     uiNotifier,
@@ -40,7 +39,6 @@ export function makeCreateAccountPage() {
 
   return new IgnemCreateAccountPage(
     decoratedPresenter,
-    uiNotifier,
-    accountStore
+    uiNotifier
   )
 }

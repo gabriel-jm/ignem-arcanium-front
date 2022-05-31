@@ -45,3 +45,12 @@ export function mockVerifyToken() {
     verify: vi.fn(() => Promise.resolve())
   }
 }
+
+export function mockSetAccountStore() {
+  return {
+    setAccountValue: null,
+    set account(value: any) {
+      this.setAccountValue = value
+    }
+  }
+}

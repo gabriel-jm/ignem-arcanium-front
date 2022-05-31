@@ -3,5 +3,5 @@ export interface AccountData {
 }
 
 export interface SetAccountStore {
-  set account(value: AccountData)
+  set account(value: AccountData | null)
 }

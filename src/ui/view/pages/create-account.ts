@@ -1,6 +1,5 @@
 import { Presenter } from '@/presentation/protocols'
 import { SuccessNotifier } from '@/ui/protocols'
-import { SetAccountStore } from '@/ui/protocols/stores'
 import { buttonStyles, containerStyles, inputStyles } from '@/ui/view'
 import { IgnemFormElement } from '@/ui/view/components'
 import { ignemInput } from '@/ui/view/components/form/input'
@@ -11,18 +10,15 @@ import { css, html } from 'lithen-tag-functions'
 export class IgnemCreateAccountPage extends IgnemElement {
   #createAccountPresenter: Presenter
   #successNotifier: SuccessNotifier
-  #setAccountStore: SetAccountStore
   #btnBlocked = false
 
   constructor(
     createAccountPresenter: Presenter,
-    successNotifier: SuccessNotifier,
-    setAccountStore: SetAccountStore
+    successNotifier: SuccessNotifier
   ) {
     super()
     this.#createAccountPresenter = createAccountPresenter
     this.#successNotifier = successNotifier
-    this.#setAccountStore = setAccountStore
   }
 
   set #block(value: boolean) {
@@ -115,16 +111,12 @@ export class IgnemCreateAccountPage extends IgnemElement {
       })
 
       if (result.ok) {
-        this.#setAccountStore.account = {
-          name: result.data.name
-        }
-
         form.reset()
         this.#successNotifier.notifySuccess(
           'Created',
           'Account created with success'
         )
-        router.goTo('/torches')
+        router.goTo('/home')
       }
 
       this.#block = false

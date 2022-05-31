@@ -130,7 +130,7 @@ export class IgnemLoginPage extends IgnemElement {
           'Success',
           'Logged in with success'
         )
-        router.goTo('/torches')
+        router.goTo('/home')
       }
 
       this.#block = false
