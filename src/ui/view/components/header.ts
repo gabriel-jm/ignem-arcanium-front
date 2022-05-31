@@ -1,8 +1,16 @@
+import { AccountStore } from '@/ui/stores'
 import { IgnemElement, menuIcon } from '@/ui/view'
 import { containerStyles } from '@/ui/view/styles'
 import { css, html } from 'lithen-tag-functions'
 
 export class IgnemHeader extends IgnemElement {
+  #accountStore = new AccountStore()
+
+  constructor() {
+    super({ preventRenderApplying: true })
+    this.applyRender()
+  }
+
   styling() {
     return css`
       ${containerStyles}
@@ -36,6 +44,7 @@ export class IgnemHeader extends IgnemElement {
         <div class="container">
           ${menuIcon()}
           <h1 class="title">Ignem Arcanium</h1>
+          <h3>${this.#accountStore.account?.name}</h3>
         </div>
       </header>
     `

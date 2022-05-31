@@ -1,3 +1,8 @@
+export interface VerifyTokenResult {
+  id: string
+  name: string
+}
+
 export interface VerifyToken {
-  verify(): Promise<void>
+  verify(): Promise<VerifyTokenResult>
 }
