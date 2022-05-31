@@ -52,8 +52,14 @@ export function mockVerifyTokenService() {
 }
 
 export function mockVerifyToken() {
+  const result = {
+    id: 'any_id',
+    name: 'any_name'
+  }
+
   return {
-    verify: vi.fn(() => Promise.resolve())
+    result,
+    verify: vi.fn(() => Promise.resolve(result))
   }
 }
 
