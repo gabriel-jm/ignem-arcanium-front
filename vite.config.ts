@@ -15,6 +15,9 @@ export default defineConfig({
       inline: [
         "lithen-super-element"
       ]
+    },
+    coverage: {
+      exclude: ['src/main']
     }
   }
 })
