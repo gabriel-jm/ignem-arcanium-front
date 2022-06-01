@@ -69,10 +69,21 @@ export class IgnemHeader extends IgnemElement {
           </div>
           <div>
             <h3>${accountName}</h3>
-            ${logOutIcon()}
+            <span on-click=${() => {
+              this.select<HTMLElement & { showModal(): void }>('dialog')?.showModal()
+            }}>
+              ${logOutIcon()}
+            </span>  
           </div>
         </section>
       </header>
+      <dialog>
+        Do you want to log out?
+        <button>Yes</button>
+        <button on-click=${() => {
+          this.select<HTMLElement & { close(): void }>('dialog')?.close()
+        }}>No</button>
+      </dialog>
     `
   }
 }
