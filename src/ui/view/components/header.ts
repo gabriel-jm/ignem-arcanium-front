@@ -1,5 +1,5 @@
 import { AccountStore } from '@/ui/stores'
-import { IgnemElement, menuIcon } from '@/ui/view'
+import { IgnemElement, menuIcon, logOutIcon } from '@/ui/view'
 import { containerStyles } from '@/ui/view/styles'
 import { css, html } from 'lithen-tag-functions'
 
@@ -24,6 +24,13 @@ export class IgnemHeader extends IgnemElement {
       .container {
         display: flex;
         align-items: center;
+        justify-content: space-between;
+      }
+
+      .container > div {
+        display: flex;
+        align-items: center;
+        justify-content: center;
       }
 
       .title {
@@ -35,17 +42,36 @@ export class IgnemHeader extends IgnemElement {
         cursor: pointer;
         margin-right: 16px;
       }
+
+      .log-out-icon {
+        font-size: 0.8rem;
+        margin-left: 16px;
+        cursor: pointer;
+        padding: 6px;
+        border-radius: 4px;
+      }
+
+      .log-out-icon:hover {
+        background-color: #222;
+      }
     `
   }
 
   render() {
+    const accountName = this.#accountStore.account?.name
+
     return html`
       <header class="header">
-        <div class="container">
-          ${menuIcon()}
-          <h1 class="title">Ignem Arcanium</h1>
-          <h3>${this.#accountStore.account?.name}</h3>
-        </div>
+        <section class="container">
+          <div>
+            ${menuIcon()}
+            <h1 class="title">Ignem Arcanium</h1>
+          </div>
+          <div>
+            <h3>${accountName}</h3>
+            ${logOutIcon()}
+          </div>
+        </section>
       </header>
     `
   }
