@@ -3,6 +3,7 @@ export * from './connection/create-connection-presenter'
 export * from './account/create-account-presenter'
 export * from './account/verify-token-presenter'
 export * from './account/login-presenter'
+export * from './account/logout-presenter'
 
 export * from './generic/generic-presenter'
 

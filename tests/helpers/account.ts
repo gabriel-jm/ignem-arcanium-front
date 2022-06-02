@@ -71,3 +71,9 @@ export function mockSetAccountStore() {
     }
   }
 }
+
+export function mockAccountLogout() {
+  return {
+    logout: vi.fn(() => Promise.resolve())
+  }
+}
