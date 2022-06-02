@@ -18,4 +18,8 @@ export class LocalStorageCacheStore implements CacheStore {
 
     localStorage.setItem(`@ignem-arcanium:${key}`, jsonData)
   }
+
+  remove(key: string): void {
+    localStorage.removeItem(`@ignem-arcanium:${key}`)
+  }
 }

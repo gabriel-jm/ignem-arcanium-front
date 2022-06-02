@@ -3,12 +3,14 @@ import { LocalStorageCacheStore } from '@/infra/stores'
 function makeSut() {
   const setItemSpy = vi.spyOn(localStorage, 'setItem')
   const getItemSpy = vi.spyOn(localStorage, 'getItem')
+  const removeItemSpy = vi.spyOn(localStorage, 'removeItem')
   const sut = new LocalStorageCacheStore()
 
   return {
     sut,
     setItemSpy,
-    getItemSpy
+    getItemSpy,
+    removeItemSpy
   }
 }
 
@@ -51,6 +53,16 @@ describe('LocalStorageCacheStore', () => {
       const response = sut.get('any_key')
 
       expect(response).toEqual({ data: true })
+    })
+  })
+
+  describe('remove()', () => {
+    it('should call localStorage.removeItem with correct values', () => {
+      const { sut, removeItemSpy } = makeSut()
+
+      sut.remove('any_key')
+
+      expect(removeItemSpy).toHaveBeenCalledWith('@ignem-arcanium:any_key')
     })
   })
 })
