@@ -1,6 +1,7 @@
 export * from './account/remote-create-account'
 export * from './account/remote-account-login'
 export * from './account/remote-verfiy-token'
+export * from './account/local-account-logout'
 
 export * from './connection/remote-create-connection'
 
