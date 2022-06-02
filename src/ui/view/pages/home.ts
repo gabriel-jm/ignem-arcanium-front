@@ -26,7 +26,7 @@ export class IgnemHomePage extends IgnemElement {
     const accountName = this.#accountStore.account?.name
 
     return html`
-      <ignem-header />
+      <ignem-header  />
 
       <section class="container">
         <h1>Welcome ${accountName}!</h1>

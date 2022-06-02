@@ -1,8 +1,10 @@
+import { Presenter } from '@/presentation/protocols'
 import { AccountData, SetAccountStore } from '@/ui/protocols/stores'
 
 export class AccountStore implements SetAccountStore {
   static #instance: AccountStore
   #account: Record<'name', string> | null = null
+  #logoutPresenter: Presenter | null = null
 
   constructor() {
     if (!AccountStore.#instance) {
@@ -18,5 +20,13 @@ export class AccountStore implements SetAccountStore {
 
   get account() {
     return this.#account
+  }
+
+  set logoutPresenter(value: Presenter) {
+    this.#logoutPresenter = value
+  }
+
+  logout() {
+    this.#logoutPresenter?.handle()
   }
 }

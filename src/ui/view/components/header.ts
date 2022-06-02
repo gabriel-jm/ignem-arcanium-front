@@ -116,6 +116,7 @@ export class IgnemHeader extends IgnemElement {
 
     const openDialog = () => this.select<DialogElement>('dialog')?.showModal()
     const closeDialog = () => this.select<DialogElement>('dialog')?.close()
+    const confirmDialog = () => this.#accountStore.logout()
 
     return html`
       <header class="header">
@@ -134,7 +135,7 @@ export class IgnemHeader extends IgnemElement {
       </header>
       <dialog class="log-out-dialog">
         <p>Confirm log out?</p>
-        <button>Yes</button>
+        <button on-click=${confirmDialog}>Yes</button>
         <button on-click=${closeDialog}>No</button>
       </dialog>
     `
