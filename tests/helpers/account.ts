@@ -77,3 +77,10 @@ export function mockAccountLogout() {
     logout: vi.fn(() => Promise.resolve())
   }
 }
+
+export function mockCheckTokenExists() {
+  return {
+    result: true,
+    check: vi.fn(() => true)
+  }
+}

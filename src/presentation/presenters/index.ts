@@ -4,6 +4,7 @@ export * from './account/create-account-presenter'
 export * from './account/verify-token-presenter'
 export * from './account/login-presenter'
 export * from './account/logout-presenter'
+export * from './account/check-token-exists-presenter'
 
 export * from './generic/generic-presenter'
 
