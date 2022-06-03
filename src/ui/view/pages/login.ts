@@ -8,16 +8,23 @@ import { SuccessNotifier } from '@/ui/protocols'
 
 export class IgnemLoginPage extends IgnemElement {
   #accountLoginPresenter: Presenter
+  #checkTokenExists: Presenter
   #successNotifier: SuccessNotifier
   #btnBlocked = false
 
   constructor(
     accountLoginPresenter: Presenter,
+    checkTokenExists: Presenter,
     successNotifier: SuccessNotifier
   ) {
     super()
     this.#accountLoginPresenter = accountLoginPresenter
+    this.#checkTokenExists = checkTokenExists
     this.#successNotifier = successNotifier
+  }
+
+  async connectedCallback() {
+    this.#checkTokenExists.handle()
   }
 
   set #block(value: boolean) {
