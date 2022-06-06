@@ -1,0 +1,26 @@
+export function fakeCharacter() {
+  return {
+    id: 'any_id',
+    name: 'any_name',
+    icon: 'any_icon',
+    level: 1,
+    gold: 10,
+    hp: 10,
+    mp: 10,
+    strength: 1,
+    dexterity: 2,
+    constitution: 3,
+    intelligence: 4,
+    wisdom: 5,
+    charism: 6,
+  }
+}
+
+export function mockFindAllCharactersService() {
+  const result = [fakeCharacter()]
+
+  return {
+    result,
+    findAll: vi.fn(() => Promise.resolve(result))
+  }
+}
