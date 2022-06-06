@@ -24,3 +24,12 @@ export function mockFindAllCharactersService() {
     findAll: vi.fn(() => Promise.resolve(result))
   }
 }
+
+export function mockFindAllCharacters() {
+  const result = [fakeCharacter()]
+
+  return {
+    result,
+    findAll: vi.fn(() => Promise.resolve(result))
+  }
+}
