@@ -65,14 +65,14 @@ export class IgnemHeader extends IgnemElement {
       .log-out-dialog {
         margin: auto;
         margin-top: 5%;
-        border: 1px solid #555;
+        border: 1px solid var(--container-border-color);
         border-radius: 5px;
         background-color: var(--body-bg-color);
         box-shadow: 0 3px 5px #121212;
       }
 
       .log-out-dialog[open] {
-        animation: show-dialog 500ms;
+        animation: show-dialog 300ms ease-out;
       }
       
       .log-out-dialog p {
@@ -86,7 +86,7 @@ export class IgnemHeader extends IgnemElement {
         width: 50%;
         background-color: transparent;
         border: 0;
-        border-top: 1px solid #555;
+        border-top: 1px solid var(--container-border-color);
         font-size: 1rem;
         color: var(--font-color);
         cursor: pointer;
@@ -94,7 +94,11 @@ export class IgnemHeader extends IgnemElement {
       }
 
       .log-out-dialog button:first-of-type {
-        border-right: 1px solid #555;
+        border-right: 1px solid var(--container-border-color);
+      }
+
+      .log-out-dialog.close {
+        animation: close-dialog 300ms ease-out;
       }
 
       @keyframes show-dialog {
@@ -108,6 +112,13 @@ export class IgnemHeader extends IgnemElement {
           opacity: 1;
         }
       }
+
+      @keyframes close-dialog {
+        to {
+          transform: translateY(-20px);
+          opacity: 0;
+        }
+      }
     `
   }
 
@@ -115,7 +126,14 @@ export class IgnemHeader extends IgnemElement {
     const accountName = this.#accountStore.account?.name
 
     const openDialog = () => this.select<DialogElement>('dialog')?.showModal()
-    const closeDialog = () => this.select<DialogElement>('dialog')?.close()
+    const setCloseClass = () => this.select('dialog')?.classList.add('close')
+    const closeDialog = (event: AnimationEventInit) => {
+      if (event.animationName === 'close-dialog') {
+        const dialog = this.select<DialogElement>('dialog')
+        dialog?.close()
+        dialog?.classList.remove('close')
+      }
+    }
     const confirmDialog = () => this.#accountStore.logout()
 
     return html`
@@ -133,10 +151,10 @@ export class IgnemHeader extends IgnemElement {
           </div>
         </section>
       </header>
-      <dialog class="log-out-dialog">
+      <dialog on-animationend=${closeDialog} class="log-out-dialog">
         <p>Confirm log out?</p>
         <button on-click=${confirmDialog}>Yes</button>
-        <button on-click=${closeDialog}>No</button>
+        <button on-click=${setCloseClass}>No</button>
       </dialog>
     `
   }

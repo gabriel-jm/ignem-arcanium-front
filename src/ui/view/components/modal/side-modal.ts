@@ -56,7 +56,7 @@ export class IgnemSideModal extends IgnemElement {
         margin-left: auto;
         background-color: var(--body-bg-color);
         box-sizing: border-box;
-        border: 1px solid #3f3f3f;
+        border: 1px solid var(--container-border-color);
         border-radius: 4px;
         padding: 10px 14px;
         animation: slide-left 600ms ease-in-out;
