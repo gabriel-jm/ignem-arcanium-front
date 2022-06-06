@@ -1,5 +1,5 @@
 export * from './icons'
-export * from './header'
+export * from './header/header'
 export * from './wrapper'
 export * from './torch/torch-registry'
 export * from './torch/torch-side-modal'
