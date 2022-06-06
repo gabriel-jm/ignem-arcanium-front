@@ -10,14 +10,14 @@ export class IgnemNotFoundPage extends IgnemElement {
         flex-direction: column;
         justify-content: center;
         align-items: center;
-      } 
+      }
     `
   }
 
   render() {
     return html`
       <h1>Page Not Found</h1>
-      <button class="btn" on-click=${() => router.goTo('/')}>
+      <button class="btn" on-click=${() => router.goTo('/home')}>
         Home
       </button>
     `

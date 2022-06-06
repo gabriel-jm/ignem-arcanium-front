@@ -2,7 +2,8 @@ import '@/ui/view'
 import { AccountStore } from '@/ui/stores'
 import { IgnemElement } from '@/ui/view/ignem-element'
 import { css, html } from 'lithen-tag-functions'
-import { containerStyles } from '@/ui/view/styles'
+import { buttonStyles, containerStyles } from '@/ui/view/styles'
+import { router } from 'lithen-router'
 
 export class IgnemHomePage extends IgnemElement {
   #accountStore = new AccountStore()
@@ -14,7 +15,7 @@ export class IgnemHomePage extends IgnemElement {
 
   styling() {
     return css`
-      ${containerStyles}
+      ${[containerStyles, buttonStyles]}
 
       .container {
         padding: 25px;
@@ -31,11 +32,16 @@ export class IgnemHomePage extends IgnemElement {
       <section class="container">
         <h2>Welcome ${accountName}!</h2>
 
-        <h2>Characters</h2>
-
-        <div>
-          
-        </div>
+        <ul>
+          <li>
+            <button
+              class="btn"
+              on-click=${() => router.goTo('/characters')}
+            >
+              Characters
+            </button>
+          </li>
+        </ul>
       </section>
     `
   }
