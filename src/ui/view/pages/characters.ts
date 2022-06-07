@@ -60,6 +60,10 @@ export class IgnemCharactersPage extends IgnemElement {
         font-size: 1.5rem;
       }
 
+      .level {
+        color: #5b90a5;
+      }
+
       .gold {
         font-weight: bold;
         color: #e7b81d;
@@ -75,8 +79,16 @@ export class IgnemCharactersPage extends IgnemElement {
             <img width="80px" height="80px" src="${character.icon}" />
           </figure>
           <div class="character-info">
-            <h4>${character.name} | Level ${character.level}</h4>
-            <p>Gold &nbsp;<span class="gold">${character.gold}</span></p>
+            <h4>${character.name}</h4>
+            <div>
+              <span class="level">Level ${character.level}</span>
+              <span>
+                Gold &nbsp;
+                <span class="gold">
+                  ${character.gold}
+                </span>
+              </span>
+            </div>
             <li>Strength ${character.strength}</li>
             <li>Dexterity ${character.dexterity}</li>
             <li>Constitution ${character.constitution}</li>
