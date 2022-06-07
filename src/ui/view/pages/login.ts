@@ -6,6 +6,8 @@ import { containerStyles, buttonStyles, inputStyles } from '@/ui/view/styles'
 import { Presenter } from '@/presentation/protocols'
 import { SuccessNotifier } from '@/ui/protocols'
 
+let tokenChecked = false
+
 export class IgnemLoginPage extends IgnemElement {
   #accountLoginPresenter: Presenter
   #checkTokenExists: Presenter
@@ -24,13 +26,15 @@ export class IgnemLoginPage extends IgnemElement {
   }
 
   async connectedCallback() {
-    this.#checkTokenExists.handle()
+    if (!tokenChecked) {
+      this.#checkTokenExists.handle()
+      tokenChecked = true
+    }
   }
 
   set #block(value: boolean) {
     this.#btnBlocked = value
-    value && this.select('.btn')?.setAttribute('disabled', '')
-    !value && this.select('.btn')?.removeAttribute('disabled')
+    this.select<HTMLButtonElement>('.btn')!.disabled = value
   }
 
   styling() {
