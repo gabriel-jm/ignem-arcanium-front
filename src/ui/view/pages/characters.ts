@@ -22,7 +22,7 @@ const charactersList = [
   {
     id: 'any_id',
     name: 'Mage',
-    icon: 'https://cdn-icons-png.flaticon.com/512/3819/3819284.png',
+    icon: '/mage.svg',
     level: 1,
     gold: 10,
     hp: 10,
@@ -42,13 +42,33 @@ export class IgnemCharactersPage extends IgnemElement {
       ${containerStyles}
 
       .container {
-        padding: 25px;
+        padding: 1.6rem;
+      }
+
+      .characters-title {
+        font-size: 2rem;
+        border-bottom: 1px solid var(--container-border-color);
+        padding-left: 6px;
+        padding-bottom: 10px;
+        margin-bottom: 30px;
+      }
+
+      .characters-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        padding: 0 10px;
       }
 
       .character-card {
-        border: 1px solid var(--container-border-color);
+        min-width: 250px;
+        border: 0;
         border-radius: 4px;
-        background-color: #1a1a1a;
+        background: linear-gradient(
+          to top right,
+        #1c1c1c,
+        #161616 50%
+        );
         display: flex;
         justify-content: flex-start;
         gap: 20px;
@@ -61,12 +81,40 @@ export class IgnemCharactersPage extends IgnemElement {
       }
 
       .level {
+        font-weight: bold;
+        font-size: 0.85rem;
         color: #5b90a5;
       }
 
       .gold {
         font-weight: bold;
-        color: #e7b81d;
+        font-size: 0.85rem;
+        color: #ebc855;
+      }
+
+      .stats-list {
+        display: flex;
+        gap: 4px;
+        font-size: 0.85rem;
+        margin-top: 10px;
+        flex-wrap: wrap;
+
+      }
+
+      .stats-list li {
+        width: 50px;
+        text-align: center;
+        color: var(--font-color);
+        font-weight: bold;
+        background-color: #111;
+        border-radius: 2px;
+        padding: 3px 5px;
+      }
+
+      @media screen (max-width: 450px) {
+        :host {
+          font-size: 14px;
+        }
       }
     `
   }
@@ -82,19 +130,27 @@ export class IgnemCharactersPage extends IgnemElement {
             <h4>${character.name}</h4>
             <div>
               <span class="level">Level ${character.level}</span>
-              <span>
-                Gold &nbsp;
-                <span class="gold">
-                  ${character.gold}
-                </span>
-              </span>
+              <svg style="margin: 0 10px;" width="12" height="12">
+                <rect
+                  x="7"
+                  y="-2"
+                  width="5"
+                  height="5"
+                  rx="1"
+                  transform="rotate(45)"
+                  fill="var(--font-color)"
+                />
+              </svg>
+              <span class="gold">Gold ${character.gold}</span>
             </div>
-            <li>Strength ${character.strength}</li>
-            <li>Dexterity ${character.dexterity}</li>
-            <li>Constitution ${character.constitution}</li>
-            <li>Intelligence ${character.intelligence}</li>
-            <li>Wisdom ${character.wisdom}</li>
-            <li>Charism ${character.charism}</li>
+            <ul class="stats-list">
+              <li>Str ${character.strength}</li>
+              <li>Dex ${character.dexterity}</li>
+              <li>Con ${character.constitution}</li>
+              <li>Int ${character.intelligence}</li>
+              <li>Wis ${character.wisdom}</li>
+              <li>Cha ${character.charism}</li>
+            </ul>
           </div>
         </div>
       `
@@ -104,12 +160,10 @@ export class IgnemCharactersPage extends IgnemElement {
       <ignem-header />
 
       <section class="container">
-        <h2>Characters</h2>
+        <h2 class="characters-title">Characters</h2>
 
-        <div>
-          <div>
-            ${charactersElements}
-          </div>
+        <div class="characters-list">
+          ${charactersElements}
         </div>
       </section>
     `
