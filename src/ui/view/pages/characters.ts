@@ -1,58 +1,46 @@
+import { Presenter } from '@/presentation/protocols'
 import '@/ui/view'
 import { containerStyles, characterCardStyles } from '@/ui/view'
 import { breadcrumbs, characterCard } from '@/ui/view/components'
 import { IgnemElement } from '@/ui/view/ignem-element'
 import { css, html } from 'lithen-tag-functions'
 
-const charactersList = [
-  {
-    id: 'any_id',
-    name: 'Warrior',
-    icon: 'https://cdn-icons-png.flaticon.com/512/3819/3819284.png',
-    level: 1,
-    gold: 10,
-    hp: 10,
-    mp: 10,
-    strength: 1,
-    dexterity: 1,
-    constitution: 1,
-    intelligence: 1,
-    wisdom: 1,
-    charism: 1
-  },
-  {
-    id: 'any_id',
-    name: 'Mage',
-    icon: '/mage.svg',
-    level: 1,
-    gold: 10,
-    hp: 10,
-    mp: 10,
-    strength: 1,
-    dexterity: 1,
-    constitution: 1,
-    intelligence: 1,
-    wisdom: 1,
-    charism: 1
-  },
-  {
-    id: 'any_id',
-    name: 'Warrior',
-    icon: 'https://cdn-icons-png.flaticon.com/512/3819/3819284.png',
-    level: 1,
-    gold: 10,
-    hp: 10,
-    mp: 10,
-    strength: 1,
-    dexterity: 1,
-    constitution: 1,
-    intelligence: 1,
-    wisdom: 1,
-    charism: 1
-  },
-]
+interface Character {
+  id: string
+  name: string
+  icon: string
+  level: number
+  gold: number
+  hp: number
+  mp: number
+  strength: number
+  dexterity: number
+  constitution: number
+  intelligence: number
+  wisdom: number
+  charism: number
+}
 
 export class IgnemCharactersPage extends IgnemElement {
+  #findAllCharactersPresenter: Presenter
+  
+  constructor(findAllCharactersPresenter: Presenter) {
+    super()
+    this.#findAllCharactersPresenter = findAllCharactersPresenter
+  }
+
+  async connectedCallback() {
+    const result = await this.#findAllCharactersPresenter.handle<Character[]>()
+
+    if (result.ok) {
+      const charactersList = result.data
+        .map(characterCard)
+        .concat(html`<button class="new-btn">&plus; New</button>`)
+
+      this.select('.characters-list')?.append(...charactersList)
+    }
+  }
+
   styling() {
     return css`
       ${[containerStyles, characterCardStyles]}
@@ -93,7 +81,6 @@ export class IgnemCharactersPage extends IgnemElement {
   }
   
   render() {
-    const charactersElements = charactersList.map(characterCard)
     const pathsRecord = {
       Home: '/home',
       Characters: 'current'
@@ -107,10 +94,7 @@ export class IgnemCharactersPage extends IgnemElement {
 
         <h2 class="characters-title">Characters</h2>
 
-        <div class="characters-list">
-          ${charactersElements}
-          <button class="new-btn">&plus; New</button>
-        </div>
+        <div class="characters-list"></div>
       </section>
     `
   }
