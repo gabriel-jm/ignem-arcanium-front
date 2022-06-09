@@ -17,6 +17,7 @@ interface CharacterCardProps {
 export const characterCardStyles = css`
   .character-card {
     min-width: 250px;
+    max-width: 440px;
     border: 0;
     border-radius: 4px;
     background-image: linear-gradient(
@@ -71,19 +72,13 @@ export const characterCardStyles = css`
     border-radius: 2px;
     padding: 3px 5px;
   }
-
-  @media screen (max-width: 450px) {
-    :host {
-      font-size: 14px;
-    }
-  }
 `
 
 export function characterCard(character: CharacterCardProps) {
   return html`
-    <div class="character-card" tabindex="-1">
+    <div class="character-card" tabindex="0">
       <figure>
-        <img width="80px" height="80px" src="${character.icon}" />
+        <img width="70px" height="70px" src="${character.icon}" />
       </figure>
       <div class="character-info">
         <h4>${character.name}</h4>

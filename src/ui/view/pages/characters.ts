@@ -56,6 +56,25 @@ export class IgnemCharactersPage extends IgnemElement {
         gap: 20px;
         padding: 0 10px;
       }
+
+      .new-btn {
+        border: 1px solid var(--container-border-color);
+        background-color: transparent;
+        color: var(--container-border-color);
+        flex: 1;
+        border-radius: 4px;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: all 250ms;
+        min-height: 114px;
+        min-width: 250px;
+        max-width: 440px;
+      }
+
+      .new-btn:hover, .new-btn:focus {
+        box-shadow: 0 0 1px 2px var(--container-border-color);
+        color: var(--sub-font-color);
+      }
     `
   }
   
@@ -76,6 +95,7 @@ export class IgnemCharactersPage extends IgnemElement {
 
         <div class="characters-list">
           ${charactersElements}
+          <button class="new-btn">&plus; New</button>
         </div>
       </section>
     `
