@@ -8,6 +8,7 @@ export * from './torch/torch-side-modal'
 export * from './torch/torch-btn'
 
 export * from './header/header'
+export * from './breadcrumbs/breadcrumbs'
 
 export * from './modal/side-modal'
 
