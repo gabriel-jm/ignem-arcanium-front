@@ -34,7 +34,22 @@ const charactersList = [
     intelligence: 1,
     wisdom: 1,
     charism: 1
-  }
+  },
+  {
+    id: 'any_id',
+    name: 'Warrior',
+    icon: 'https://cdn-icons-png.flaticon.com/512/3819/3819284.png',
+    level: 1,
+    gold: 10,
+    hp: 10,
+    mp: 10,
+    strength: 1,
+    dexterity: 1,
+    constitution: 1,
+    intelligence: 1,
+    wisdom: 1,
+    charism: 1
+  },
 ]
 
 export class IgnemCharactersPage extends IgnemElement {
@@ -53,22 +68,21 @@ export class IgnemCharactersPage extends IgnemElement {
       .characters-list {
         display: flex;
         flex-wrap: wrap;
-        gap: 20px;
-        padding: 0 10px;
+        gap: 16px;
       }
 
       .new-btn {
+        min-height: 114px;
+        min-width: 250px;
+        max-width: 425px;
+        flex: 1;
         border: 1px solid var(--container-border-color);
         background-color: transparent;
         color: var(--container-border-color);
-        flex: 1;
         border-radius: 4px;
         font-size: 1rem;
         cursor: pointer;
         transition: all 250ms;
-        min-height: 114px;
-        min-width: 250px;
-        max-width: 440px;
       }
 
       .new-btn:hover, .new-btn:focus {
@@ -82,7 +96,7 @@ export class IgnemCharactersPage extends IgnemElement {
     const charactersElements = charactersList.map(characterCard)
     const pathsRecord = {
       Home: '/home',
-      Characters: 'actual'
+      Characters: 'current'
     }
 
     return html`

@@ -16,20 +16,21 @@ interface CharacterCardProps {
 
 export const characterCardStyles = css`
   .character-card {
+    min-height: 114px;
     min-width: 250px;
-    max-width: 440px;
+    width: 425px;
     border: 0;
     border-radius: 4px;
     background-image: linear-gradient(
       to top right,
-      #212121,
-      #141414 40%
+      var(--body-bg-color),
+      #141414 45%
     );
     display: flex;
     justify-content: flex-start;
-    gap: 20px;
+    gap: 16px;
     align-items: center;
-    padding: 12px;
+    padding: 8px 12px;
     cursor: pointer;
     transition: all 250ms ease;
   }
@@ -56,21 +57,20 @@ export const characterCardStyles = css`
 
   .stats-list {
     display: flex;
-    gap: 4px;
+    gap: 3px;
     font-size: 0.85rem;
     margin-top: 10px;
     flex-wrap: wrap;
-
   }
 
   .stats-list li {
-    width: 50px;
+    width: 48px;
     text-align: center;
     color: var(--font-color);
     font-weight: bold;
     background-color: #111;
     border-radius: 2px;
-    padding: 3px 5px;
+    padding: 3px 4px;
   }
 `
 

@@ -22,7 +22,7 @@ export function breadcrumbs(props: BreadcrumbsProps) {
       cursor: default;
     }
 
-    span:not(.actual) {
+    span:not(.current) {
       margin: 0 16px;
     }
   `
@@ -34,8 +34,8 @@ export function breadcrumbs(props: BreadcrumbsProps) {
   return html`
     <ignem-wrapper css="${breadcrumbsStyles}">
       ${Object.entries(props).map(([name, path]) => {
-        if (path === 'actual') {
-          return html`<span class="actual">${name}</span>`
+        if (path === 'current') {
+          return html`<span class="current">${name}</span>`
         }
 
         return html`
