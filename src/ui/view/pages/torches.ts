@@ -49,14 +49,9 @@ export class IgnemTorchesPage extends IgnemElement {
     return css`
       ${containerStyles}
 
-      .container {
-        padding: 20px 46px;
-      }
-
       .torches-header {
         border-bottom: 1px solid #aaa2;
         padding-bottom: 12px;
-        margin-top: 10px;
         margin-bottom: 30px;
         display: flex;
         justify-content: space-between;

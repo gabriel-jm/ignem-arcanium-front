@@ -6,8 +6,6 @@ interface CharacterCardProps {
   icon: string
   level: number
   gold: number
-  hp: number
-  mp: number
   strength: number
   dexterity: number
   constitution: number

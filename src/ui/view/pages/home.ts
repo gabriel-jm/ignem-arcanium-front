@@ -14,13 +14,7 @@ export class IgnemHomePage extends IgnemElement {
   }
 
   styling() {
-    return css`
-      ${[containerStyles, buttonStyles]}
-
-      .container {
-        padding: 25px;
-      }
-    `
+    return css`${[containerStyles, buttonStyles]}`
   }
 
   render() {
