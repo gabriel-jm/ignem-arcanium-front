@@ -1,5 +1,5 @@
 import { toHtmlAttributes } from '@/ui/helpers'
-import { html, raw } from 'lithen-tag-functions'
+import { raw } from 'lithen-tag-functions'
 
 type IgnemInputProps = {
   label?: string
@@ -12,7 +12,7 @@ type IgnemInputProps = {
 export function ignemInput(props: IgnemInputProps) {
   const { label, className, ...attributes } = props
 
-  return html`
+  return raw`
     <label>
       ${label && raw`<span>${label}</span>`}
       <input

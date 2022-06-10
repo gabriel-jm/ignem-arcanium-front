@@ -1,5 +1,5 @@
-import { Presenter } from '@/presentation/protocols'
 import '@/ui/view'
+import { Presenter } from '@/presentation/protocols'
 import { containerStyles, characterCardStyles } from '@/ui/view'
 import { breadcrumbs, characterCard } from '@/ui/view/components'
 import { IgnemElement } from '@/ui/view/ignem-element'

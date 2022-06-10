@@ -1,5 +1,5 @@
 import '../wrapper'
-import { css, html } from 'lithen-tag-functions'
+import { css, raw } from 'lithen-tag-functions'
 
 export function menuIcon() {
   const styles = css`
@@ -12,7 +12,7 @@ export function menuIcon() {
     }
   `
 
-  return html`
+  return raw`
     <ignem-wrapper class="menu-icon" css="${styles}">
       <svg
         xmlns="http://www.w3.org/2000/svg"

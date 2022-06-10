@@ -1,8 +1,8 @@
 import '@/ui/view'
 import { iconsStyles } from '@/ui/view/styles'
-import { html } from 'lithen-tag-functions'
+import { raw } from 'lithen-tag-functions'
 
-export const logOutIcon = () => html`
+export const logOutIcon = () => raw`
   <ignem-wrapper class="log-out-icon" css="${iconsStyles}">
     <svg
       xmlns="http://www.w3.org/2000/svg"

@@ -69,7 +69,7 @@ export class IgnemNotification extends IgnemElement {
     const message = this.getAttribute('message') ?? 'Unknown message'
     const type = this.getAttribute('type') ?? 'none'
 
-    const iconsByType: Record<string, DocumentFragment> = {
+    const iconsByType: Record<string, String> = {
       success: checkCircleIcon(),
       warning: alertIcon(),
       none: infoIcon(true)

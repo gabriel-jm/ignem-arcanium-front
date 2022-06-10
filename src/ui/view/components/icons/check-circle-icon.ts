@@ -1,5 +1,5 @@
 import '../wrapper'
-import { css, html } from 'lithen-tag-functions'
+import { css, raw } from 'lithen-tag-functions'
 import { iconsStyles } from '@/ui/view'
 
 export function checkCircleIcon() {
@@ -19,7 +19,7 @@ export function checkCircleIcon() {
     }
   `
 
-  return html`
+  return raw`
     <ignem-wrapper css="${styles}">
       <svg
         xmlns="http://www.w3.org/2000/svg"

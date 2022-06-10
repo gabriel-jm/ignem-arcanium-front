@@ -1,8 +1,8 @@
 import '@/ui/view/components/wrapper'
 import { iconsStyles } from '@/ui/view/styles'
-import { html } from 'lithen-tag-functions'
+import { raw } from 'lithen-tag-functions'
 
-export const featherIcon = () => html`
+export const featherIcon = () => raw`
   <ignem-wrapper class="feather-icon" css="${iconsStyles}">
     <svg
       xmlns="http://www.w3.org/2000/svg"

@@ -1,5 +1,5 @@
 import '../wrapper'
-import { css, html } from 'lithen-tag-functions'
+import { css, raw } from 'lithen-tag-functions'
 import { iconsStyles } from '@/ui/view'
 
 export function infoIcon(animate = false) {
@@ -19,7 +19,7 @@ export function infoIcon(animate = false) {
     }
   `
 
-  return html`
+  return raw`
     <ignem-wrapper ${animate && 'class="animate"'} css="${styles}">
       <svg
         xmlns="http://www.w3.org/2000/svg"

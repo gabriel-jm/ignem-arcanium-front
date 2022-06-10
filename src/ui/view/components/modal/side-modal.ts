@@ -1,5 +1,5 @@
 import { containerStyles, IgnemElement } from '@/ui/view'
-import { css, html } from 'lithen-tag-functions'
+import { css, raw } from 'lithen-tag-functions'
 
 export interface IgnemSideModalElement extends IgnemElement {
   open(): void
@@ -109,7 +109,7 @@ export class IgnemSideModal extends IgnemElement {
       }
     })
 
-    return html`
+    return raw`
       <section class="container">
         <div class="side-modal-container">
           <slot></slot>

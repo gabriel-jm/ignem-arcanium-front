@@ -36,7 +36,7 @@ export class IgnemTorchRegistry extends IgnemElement {
   #toggleEdit() {
     const hasClass = this.select('.torch-card')?.classList.toggle('edit')
 
-    this.select('ignem-torch-button')?.replaceChildren(
+    this.select('ignem-torch-button')!.innerHTML = String(
       hasClass ? closeIcon() : featherIcon()
     )
     

@@ -1,7 +1,7 @@
 import '../wrapper'
-import { html } from 'lithen-tag-functions'
+import { raw } from 'lithen-tag-functions'
 
-export const torchLitIcon = () => html`
+export const torchLitIcon = () => raw`
   <ignem-wrapper class="torch-icon">
     <svg
       xmlns="http://www.w3.org/2000/svg"
