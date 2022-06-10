@@ -19,6 +19,6 @@ describe('IgnemNotFoundPage', () => {
 
     sut.select('button')!.dispatchEvent(new Event('click'))
 
-    expect(routerSpy.goTo).toHaveBeenCalledWith('/')
+    expect(routerSpy.goTo).toHaveBeenCalledWith('/home')
   })
 })
