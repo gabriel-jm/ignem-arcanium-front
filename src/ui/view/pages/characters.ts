@@ -1,7 +1,7 @@
 import '@/ui/view'
 import { Presenter } from '@/presentation/protocols'
 import { containerStyles, characterCardStyles } from '@/ui/view'
-import { breadcrumbs, characterCard } from '@/ui/view/components'
+import { breadcrumbs, characterCard, IgnemCharacterModalElement } from '@/ui/view/components'
 import { IgnemElement } from '@/ui/view/ignem-element'
 import { css, html } from 'lithen-tag-functions'
 
@@ -32,10 +32,23 @@ export class IgnemCharactersPage extends IgnemElement {
   async connectedCallback() {
     const result = await this.#findAllCharactersPresenter.handle<Character[]>()
 
+    const openCharacterModal = () => {
+      const characterModal = this.select<IgnemCharacterModalElement>('ignem-character-modal')
+
+      characterModal?.dialog.showModal()
+    }
+
     if (result.ok) {
       const charactersList = result.data
         .map(characterCard)
-        .concat(html`<button class="new-btn">&plus; New</button>`)
+        .concat(html`
+          <button
+            class="new-btn"
+            on-click=${openCharacterModal}
+          >
+            &plus; New
+          </button>
+        `)
 
       this.select('.characters-list')?.append(...charactersList)
     }
@@ -95,6 +108,8 @@ export class IgnemCharactersPage extends IgnemElement {
         <h2 class="characters-title">Characters</h2>
 
         <div class="characters-list"></div>
+
+        <ignem-character-modal />
       </section>
     `
   }
