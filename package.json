@@ -8,21 +8,21 @@
     "build": "tsc && vite build",
     "preview": "vite preview",
     "test": "vitest",
-    "test:ui": "vitest --ui",
-    "coverage": "vitest run --coverage"
+    "coverage": "vitest run --coverage",
+    "check": "ncu"
   },
   "devDependencies": {
-    "@types/node": "^17.0.21",
-    "@vitest/ui": "^0.5.9",
-    "c8": "^7.11.0",
-    "happy-dom": "^2.45.0",
-    "typescript": "^4.6.3",
-    "vite": "^2.9.9",
-    "vitest": "^0.12.7"
+    "@types/node": "^17.0.41",
+    "c8": "^7.11.3",
+    "happy-dom": "^5.2.0",
+    "npm-check-updates": "^13.1.3",
+    "typescript": "^4.7.3",
+    "vite": "^2.9.12",
+    "vitest": "^0.14.2"
   },
   "dependencies": {
     "lithen-router": "^2.0.0",
     "lithen-super-element": "^3.2.0",
-    "lithen-tag-functions": "^2.0.0"
+    "lithen-tag-functions": "^3.0.0"
   }
 }
