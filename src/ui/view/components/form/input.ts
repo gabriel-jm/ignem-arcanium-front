@@ -16,7 +16,7 @@ export function ignemInput(props: IgnemInputProps) {
     <label>
       ${label && raw`<span>${label}</span>`}
       <input
-        ${className && `class="${className}"`}
+        ${className ? `class="${className}"` : 'class="input"'}
         ${toHtmlAttributes(attributes)}
       />
       <span class="input-message"></span>
