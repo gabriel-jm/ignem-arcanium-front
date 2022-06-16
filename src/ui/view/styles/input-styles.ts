@@ -1,6 +1,12 @@
 import { css } from 'lithen-tag-functions'
 
 export const inputStyles = css`
+  .input-container span {
+    display: inline-block;
+    padding-bottom: 4px;
+    font-size: 1.05rem;
+  }
+
   .input {
     --input-outline: var(--btn-focus-outline-color);
     --input-border-color: #555;

@@ -14,8 +14,10 @@ export const textBetweenDashesStyles = css`
     background-color: var(--sub-font-color);
   }
 
-  .text-between-dashes > :not(.line) {
-    width: 200px;
+  .text-between-dashes span {
+    display: inline-block;
+    width: min-content;
+    padding: 0 20px;
     text-align: center
   }
 `

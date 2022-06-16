@@ -8,5 +8,6 @@ export const sharedStyles = () => defineSharedStyles(css`
     outline: 0;
     box-sizing: border-box;
     list-style: none;
+    -webkit-tap-highlight-color: transparent;
   }
 `)
