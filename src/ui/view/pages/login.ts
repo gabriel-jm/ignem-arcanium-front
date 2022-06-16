@@ -1,7 +1,7 @@
 import { router } from 'lithen-router'
 import { css, html } from 'lithen-tag-functions'
 import { IgnemElement } from '@/ui/view/ignem-element'
-import { IgnemFormElement, ignemInput } from '@/ui/view/components'
+import { IgnemFormElement, ignemInput, textBetweenDashes, textBetweenDashesStyles } from '@/ui/view/components'
 import { containerStyles, buttonStyles, inputStyles } from '@/ui/view/styles'
 import { Presenter } from '@/presentation/protocols'
 import { SuccessNotifier } from '@/ui/protocols'
@@ -39,7 +39,7 @@ export class IgnemLoginPage extends IgnemElement {
 
   styling() {
     return css`
-      ${[containerStyles, buttonStyles, inputStyles]}
+      ${[containerStyles, buttonStyles, inputStyles, textBetweenDashesStyles]}
 
       .container {
         height: 100%;
@@ -72,24 +72,6 @@ export class IgnemLoginPage extends IgnemElement {
       .btn:disabled {
         pointer-events: none;
         filter: brightness(0.6);
-      }
-
-      .or-group {
-        display: flex;
-        align-items: center;
-        margin: 30px 0;
-        color: var(--sub-font-color);
-      }
-
-      .or-group > .line {
-        width: 100%;
-        height: 1px;
-        background-color: var(--sub-font-color);
-      }
-
-      .or-group > :not(.line) {
-        width: 200px;
-        text-align: center
       }
 
       .link {
@@ -161,11 +143,7 @@ export class IgnemLoginPage extends IgnemElement {
 
           <button class="btn">Send</button>
 
-          <div class="or-group">
-            <span class="line"></span>
-            <span>OR</span>
-            <span class="line"></span>
-          </div>
+          ${textBetweenDashes('OR')}
 
           <button
             class="link"
