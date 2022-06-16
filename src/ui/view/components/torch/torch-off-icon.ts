@@ -1,4 +1,4 @@
-import '../wrapper'
+import '../singles/wrapper'
 import { raw } from 'lithen-tag-functions'
 
 export const torchOffIcon = () => raw`
