@@ -1,8 +1,13 @@
-import { inputStyles, textBetweenDashesStyles } from '@/ui/view'
+import { inputStyles, textBetweenDashesStyles, buttonStyles, borderedButtonStyles } from '@/ui/view'
 import { css } from 'lithen-tag-functions'
 
 export const characterModalStyles = css`
-  ${[inputStyles, textBetweenDashesStyles]}
+  ${[
+    inputStyles,
+    textBetweenDashesStyles,
+    buttonStyles,
+    borderedButtonStyles
+  ]}
 
   .text-between-dashes {
     margin-bottom: 0px;
@@ -14,7 +19,6 @@ export const characterModalStyles = css`
   }
 
   dialog {
-    position: relative;
     margin: auto;
     width: 85%;
     height: 85%;
@@ -32,6 +36,13 @@ export const characterModalStyles = css`
 
   dialog.close {
     animation: close-dialog 200ms ease-in;
+  }
+
+  .modal-container {
+    position: relative;
+    height: 100%;
+    display: grid;
+    grid-template-rows: 60px auto 60px;
   }
 
   .modal-header {
@@ -55,8 +66,8 @@ export const characterModalStyles = css`
     color: var(--font-color);
   }
 
-  .characters-form {
-    padding: 30px;
+  .inputs, .attributes, .text-between-dashes, .buttons {
+    padding: 0 30px;
   }
 
   .inputs {
@@ -83,7 +94,7 @@ export const characterModalStyles = css`
     margin: 10px 0 30px 0;
   }
 
-  .characters-form .attributes {
+  .attributes {
     min-width: 100%;
     display: flex;
     flex-wrap: wrap;
@@ -130,6 +141,21 @@ export const characterModalStyles = css`
     color: var(--font-color);
   }
 
+  .buttons {
+    position: sticky;
+    bottom: 0px;
+    background-color: var(--body-bg-color);
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding-bottom: 16px;
+  }
+
+  .buttons button {
+    width: 130px;
+    margin-left: 20px;
+  }
+
   @keyframes close-dialog {
     to {
       transform: scale(0.15);
@@ -153,10 +179,6 @@ export const characterModalStyles = css`
     dialog {
       width: 100%;
       height: 100%;
-    }
-
-    .characters-form {
-      padding: 25px;
     }
     
     .attr-input-group {

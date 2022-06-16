@@ -84,10 +84,10 @@ export class IgnemTorchesPage extends IgnemElement {
       }
 
       .btn-bordered {
-        --main-color: #888;
         
-        color: var(--main-color);
-        border: 1px solid var(--main-color);
+        
+        color: var(--btn-bordered-border-color);
+        border: 1px solid var(--btn-bordered-border-color);
         border-radius: 4px;
         padding: 8px 10px;
         background-color: transparent;

@@ -72,14 +72,14 @@ export class IgnemCharacterModal extends IgnemElement {
 
     return html`
       <dialog on-animationend=${onCloseAnimation}>
-        <header class="modal-header">
-          <h2>Create Character</h2>
-          <button class="close-btn" on-click=${onCloseClick}>
-            ${closeIcon()}
-          </button>
-        </header>
+        <div class="modal-container">
+          <header class="modal-header">
+            <h2>Create Character</h2>
+            <button class="close-btn" on-click=${onCloseClick}>
+              ${closeIcon()}
+            </button>
+          </header>
 
-        <section class="modal-body">
           <form class="characters-form" is="ignem-form">
             <div class="inputs">
               ${ignemInput({
@@ -128,7 +128,14 @@ export class IgnemCharacterModal extends IgnemElement {
               ${attributesInputs}
             </div>
           </form>
-        </section>
+
+          <footer class="buttons">
+            <button class="btn">Save</button>
+            <button type="button" class="btn-bordered">
+              Cancel
+            </button>
+          </footer>
+        </div>
       </dialog>
     `
   }
