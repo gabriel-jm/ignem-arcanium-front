@@ -49,6 +49,41 @@ export class IgnemCharacterModal extends IgnemElement {
         color: var(--font-color);
       }
 
+      .modal-body {
+        overflow: scroll;
+      }
+
+      .characters-form {
+        display: flex;
+        padding: 30px;
+        flex-wrap: wrap;
+      }
+
+      .icon {
+        width: 300px;
+      }
+
+      .characters-form .attributes {
+        min-width: 100%;
+        display: flex;
+        gap: 10px;
+        font-weight: bold;
+        color: var(--body-bg-color);
+      }
+
+      .characters-form .attributes label {
+        background-color: #777;
+        padding: 4px 6px;
+        border-radius: 4px;
+      }
+
+      .characters-form .attributes input {
+        display: inline-block;
+        width: 30px;
+        border: 0;
+        padding: 2px 4px;
+      }
+
       @keyframes close-dialog {
         to {
           transform: scale(0.15);
@@ -92,61 +127,70 @@ export class IgnemCharacterModal extends IgnemElement {
           </button>
         </header>
 
-        <section>
-          <form is="ignem-form">
+        <section class="modal-body">
+          <form class="characters-form" is="ignem-form">
             ${ignemInput({
               label: 'Icon',
               name: 'icon',
-              type: 'file'
+              type: 'file',
+              className: 'icon'
             })}
 
-            ${ignemInput({
-              label: 'Name',
-              name: 'name',
-              placeholder: 'Character name'
-            })}
+            <div class="inputs">
+              ${ignemInput({
+                label: 'Name',
+                name: 'name',
+                placeholder: 'Character name'
+              })}
 
-            ${ignemInput({
-              label: 'Level',
-              name: 'level',
-              placeholder: 'Character level'
-            })}
-            
-            ${ignemInput({
-              label: 'Gold',
-              name: 'gold',
-              placeholder: 'Character gold'
-            })}
+              ${ignemInput({
+                label: 'Level',
+                name: 'level',
+                placeholder: 'Character level'
+              })}
+              
+              ${ignemInput({
+                label: 'Gold',
+                name: 'gold',
+                placeholder: 'Character gold'
+              })}
+            </div>
 
-            ${ignemInput({
-              label: 'Strength',
-              name: 'strength'
-            })}
+            <div class="attributes">
+              ${ignemInput({
+                label: 'Strength',
+                name: 'strength',
+                'on-input': () => {
+                  const nextInput = this.select<HTMLInputElement>('input[name=dexterity]')
+                  nextInput?.focus()
+                }
+              })}
 
-            ${ignemInput({
-              label: 'Dexterity',
-              name: 'dexterity'
-            })}
+              ${ignemInput({
+                label: 'Dexterity',
+                name: 'dexterity'
+              })}
 
-            ${ignemInput({
-              label: 'Constitution',
-              name: 'constitution'
-            })}
+              ${ignemInput({
+                label: 'Constitution',
+                name: 'constitution'
+              })}
 
-            ${ignemInput({
-              label: 'Intelligence',
-              name: 'intelligence'
-            })}
+              ${ignemInput({
+                label: 'Intelligence',
+                name: 'intelligence'
+              })}
 
-            ${ignemInput({
-              label: 'Wisdom',
-              name: 'wisdom'
-            })}
+              ${ignemInput({
+                label: 'Wisdom',
+                name: 'wisdom'
+              })}
 
-            ${ignemInput({
-              label: 'Charism',
-              name: 'charism'
-            })}
+              ${ignemInput({
+                label: 'Charism',
+                name: 'charism'
+              })}
+            </div>
           </form>
         </section>
       </dialog>
