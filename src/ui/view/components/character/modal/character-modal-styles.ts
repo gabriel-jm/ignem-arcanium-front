@@ -66,6 +66,10 @@ export const characterModalStyles = css`
     color: var(--font-color);
   }
 
+  .characters-form {
+    margin: 20px 0;
+  }
+
   .inputs, .attributes, .text-between-dashes, .buttons {
     padding: 0 30px;
   }
@@ -92,6 +96,7 @@ export const characterModalStyles = css`
     text-align: center;
     color: var(--sub-font-color);
     margin: 10px 0 30px 0;
+    padding: 0 16px;
   }
 
   .attributes {
@@ -144,16 +149,18 @@ export const characterModalStyles = css`
   .buttons {
     position: sticky;
     bottom: 0px;
+    padding-bottom: 16px;
     background-color: var(--body-bg-color);
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    padding-bottom: 16px;
+    flex-wrap: wrap;
+    gap: 20px;
   }
 
   .buttons button {
-    width: 130px;
-    margin-left: 20px;
+    width: 160px;
+    font-size: 1rem;
   }
 
   @keyframes close-dialog {
@@ -183,6 +190,16 @@ export const characterModalStyles = css`
     
     .attr-input-group {
       width: 90%;
+    }
+
+    .buttons {
+      padding: 8px 20px 8px 20px;
+      justify-content: stretch;
+      gap: 8px;
+    }
+
+    .buttons button {
+      flex: 1;
     }
   }
 `

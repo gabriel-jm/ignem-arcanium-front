@@ -3,6 +3,7 @@ import { css } from 'lithen-tag-functions'
 export const buttonStyles = css`
   .btn {
     font-family: 'Nunito', sans-serif;
+    font-size: 1rem;
     background-color: var(--btn-bg-color);
     cursor: pointer;
     color: var(--font-color);
@@ -28,6 +29,7 @@ export const buttonStyles = css`
 export const borderedButtonStyles = css`
   .btn-bordered {
     font-family: 'Nunito', sans-serif;
+    font-size: 1rem;
     background-color: transparent;
     cursor: pointer;
     color: var(--font-color);

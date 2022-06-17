@@ -18,6 +18,7 @@ export class IgnemCharacterModal extends IgnemElement {
 
   render() {
     const onCloseClick = () => {
+      this.select<HTMLFormElement>('form')?.reset()
       this.select('dialog')?.classList.add('close')
     }
 
@@ -131,7 +132,11 @@ export class IgnemCharacterModal extends IgnemElement {
 
           <footer class="buttons">
             <button class="btn">Save</button>
-            <button type="button" class="btn-bordered">
+            <button
+              type="button"
+              class="btn-bordered"
+              on-click=${onCloseClick}
+            >
               Cancel
             </button>
           </footer>

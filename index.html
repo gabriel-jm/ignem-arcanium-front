@@ -1,59 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <link rel="icon" type="image/svg+xml" href="data:image/svg;" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script async type="module" src="/src/main/index.ts"></script>
-    <title>Ignem Arcanium</title>
-    <style>
-      :root {
-        --max-content-width: 1380px;
-        --body-bg-color: #202020;
-        --font-color: #ddd;
-        --font-family: 'Nunito', sans-serif;
-        --sub-font-color: #777;
-        --unavailable-font-color: #626262;
 
-        --container-border-color: #3f3f3f;
+<head>
+  <meta charset="UTF-8" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg;" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script async type="module" src="/src/main/index.ts"></script>
+  <title>Ignem Arcanium</title>
+  <style>
+    :root {
+      --max-content-width: 1380px;
+      --body-bg-color: #202020;
+      --font-color: #ddd;
+      --font-family: 'Nunito', sans-serif;
+      --sub-font-color: #777;
+      --unavailable-font-color: #626262;
 
-        /* Colors */
-        --danger: #884141;
-        --black: #151515;
-        --blue: #0e6e94;
-        --ligth-blue: #64a7c2;
+      --container-border-color: #3f3f3f;
 
-        /* Button */
-        --btn-bg-color: var(--black);
-        --btn-hover-bg-color: #171717;
-        --btn-focus-outline-color: #aaaa;
-        --btn-active-bg-color: #1d1d1d;
-        --btn-bordered-border-color: #888;
-      }
+      /* Colors */
+      --danger: #884141;
+      --black: #151515;
+      --blue: #0e6e94;
+      --ligth-blue: #64a7c2;
 
-      html, body {
-        height: 100%;
-      }
+      /* Button */
+      --btn-bg-color: var(--black);
+      --btn-hover-bg-color: #171717;
+      --btn-focus-outline-color: #aaaa;
+      --btn-active-bg-color: #1d1d1d;
+      --btn-bordered-border-color: #6a6a6a;
+    }
 
-      body {
-        font-family: 'Nunito', sans-serif;
-        background-color: var(--body-bg-color);
-        color: var(--font-color);
-        margin: 0;
-        padding: 0;
-      }
+    html,
+    body {
+      height: 100%;
+    }
 
-      textarea, input, button {
-        font-family: 'Nunito', sans-serif;
-        color: var(--font-color);
-      }
-    </style>
-  </head>
-  <body>
-    <ignem-root></ignem-root>
-    <ignem-notification-container></ignem-notification-container>
-  </body>
+    body {
+      font-family: 'Nunito', sans-serif;
+      background-color: var(--body-bg-color);
+      color: var(--font-color);
+      margin: 0;
+      padding: 0;
+    }
+
+    textarea,
+    input,
+    button {
+      font-family: 'Nunito', sans-serif;
+      color: var(--font-color);
+    }
+  </style>
+</head>
+
+<body>
+  <ignem-root></ignem-root>
+  <ignem-notification-container></ignem-notification-container>
+</body>
+
 </html>
