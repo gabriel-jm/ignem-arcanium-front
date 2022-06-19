@@ -33,3 +33,12 @@ export function mockFindAllCharacters() {
     findAll: vi.fn(() => Promise.resolve(result))
   }
 }
+
+export function mockCreateCharacterService() {
+  const result = { id: 'any_id' }
+
+  return {
+    result,
+    create: vi.fn(() => Promise.resolve(result))
+  }
+}
