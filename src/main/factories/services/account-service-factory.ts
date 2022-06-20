@@ -1,7 +1,7 @@
-import { FetchHTTPClient } from '@/infra/clients'
 import { AccountService } from '@/infra/services'
+import { makeFetchHTTPClient } from '@/main/factories/clients'
 
 export function makeAccountService() {
-  const httpClient = new FetchHTTPClient(import.meta.env.VITE_SERVER_URL)
+  const httpClient = makeFetchHTTPClient()
   return new AccountService(httpClient)
 }
