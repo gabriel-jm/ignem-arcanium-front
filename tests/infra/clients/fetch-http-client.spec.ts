@@ -1,4 +1,6 @@
 import { FetchHTTPClient } from '@/infra/clients'
+import { UnauthorizedError } from '@/infra/errors'
+import { mockCacheStore } from '@/tests/helpers'
 
 function makeSut() {
   const fetchSpy = vi.spyOn(window, 'fetch')
@@ -9,16 +11,32 @@ function makeSut() {
     }
   } as Response))
   const fakeURL = 'http://any-url.com'
-  const sut = new FetchHTTPClient(fakeURL)
+
+  const cacheStoreSpy = mockCacheStore()
+  cacheStoreSpy.get.mockReturnValue({ token: 'any_token' })
+  
+  const sut = new FetchHTTPClient(fakeURL, cacheStoreSpy)
 
   return {
     sut,
     fetchSpy,
-    fakeURL
+    fakeURL,
+    cacheStoreSpy
   }
 }
 
 describe('FetchHTTPClient', () => {
+  it('should call CacheStore.get with correct values', async () => {
+    const { sut, cacheStoreSpy } = makeSut()
+
+    await sut.request({
+      method: 'get',
+      path: '/'
+    })
+
+    expect(cacheStoreSpy.get).toHaveBeenCalledWith('token')
+  })
+
   it('should call native fetch with correct values', async () => {
     const { sut, fakeURL, fetchSpy } = makeSut()
 
@@ -38,12 +56,27 @@ describe('FetchHTTPClient', () => {
       mode: 'cors',
       headers: {
         'Content-Type': 'application/json',
+        Authorization: 'Bearer any_token',
         auth: 'any_token'
       },
       body: JSON.stringify({
         any: 'data'
       })
     })
+  })
+
+  it('should throw an UnauthorizedError if the http response status code is 401', async () => {
+    const { sut, fetchSpy } = makeSut()
+    fetchSpy.mockResolvedValueOnce(<Response>{
+      status: 401
+    })
+
+    const promise = sut.request({
+      method: 'get',
+      path: '/'
+    })
+
+    await expect(promise).rejects.toThrowError(new UnauthorizedError())
   })
 
   it('should return body as null if response status code is 204', async () => {
