@@ -22,6 +22,10 @@ export class AccountStore implements SetAccountStore {
     return this.#account
   }
 
+  get logoutPresenter() {
+    return this.#logoutPresenter as Presenter
+  }
+
   set logoutPresenter(value: Presenter) {
     this.#logoutPresenter = value
   }

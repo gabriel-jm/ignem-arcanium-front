@@ -9,6 +9,8 @@ import { AccountStore } from '@/ui/stores'
 export function setAccountStorePresenters() {
   const accountStore = new AccountStore()
 
+  if (accountStore.logoutPresenter) return
+
   const localStorageCacheStore = new LocalStorageCacheStore()
   const localAccountLogout = new LocalAccountLogout(localStorageCacheStore)
   const logoutPresenter = new LogoutPresenter(
