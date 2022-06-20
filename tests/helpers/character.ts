@@ -42,3 +42,12 @@ export function mockCreateCharacterService() {
     create: vi.fn(() => Promise.resolve(result))
   }
 }
+
+export function mockCreateCharacter() {
+  const result = fakeCharacter()
+
+  return {
+    result,
+    create: vi.fn(() => Promise.resolve(result))
+  }
+}
