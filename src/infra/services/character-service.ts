@@ -13,25 +13,14 @@ type Service = FindAllCharactersService & CreateCharacterService
 
 export class CharacterService implements Service {
   constructor(
-    private readonly cacheStore: CacheStore,
     private readonly httpClient: HTTPClient
   ) {}
 
   async findAll(): Promise<FindAllCharactersServiceResult[]> {
-    const tokenData = this.cacheStore.get<Record<'token', string>>('token')
-
     const response = await this.httpClient.request<FindAllCharactersServiceResult[]>({
       method: 'get',
-      path: '/characters',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${tokenData?.token ?? ''}`
-      }
+      path: '/characters'
     })
-
-    if (response.statusCode === 401) {
-      throw new UnauthorizedError()
-    }
 
     if (response.statusCode >= 400) {
       throw new HTTPServiceError(response, 'Internal error on searching characters')
@@ -41,21 +30,11 @@ export class CharacterService implements Service {
   }
 
   async create(params: CreateCharacterServiceParams) {
-    const tokenData = this.cacheStore.get<Record<'token', string>>('token')
-
     const response = await this.httpClient.request<CreateCharacterServiceResult>({
       method: 'post',
       path: '/characters',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${tokenData?.token ?? ''}`
-      },
       body: params
     })
-
-    if (response.statusCode === 401) {
-      throw new UnauthorizedError()
-    }
 
     if (response.statusCode >= 400) {
       throw new HTTPServiceError(response, 'Internal error on creating the character')

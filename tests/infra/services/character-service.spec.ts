@@ -3,28 +3,17 @@ import { CharacterService } from '@/infra/services'
 import { fakeCharacter, mockCacheStore, mockHTTPClient } from '@/tests/helpers'
 
 function makeSut() {
-  const cacheStoreSpy = mockCacheStore()
-  cacheStoreSpy.get.mockReturnValue({ token: 'any_token' })
   const httpClientSpy = mockHTTPClient([])
-  const sut = new CharacterService(cacheStoreSpy, httpClientSpy)
+  const sut = new CharacterService(httpClientSpy)
 
   return {
     sut,
-    cacheStoreSpy,
     httpClientSpy
   }
 }
 
 describe('CharacterService', () => {
   describe('findAll()', () => {
-    it('should call CacheStore.get with correct values', async () => {
-      const { sut, cacheStoreSpy } = makeSut()
-
-      await sut.findAll()
-
-      expect(cacheStoreSpy.get).toHaveBeenCalledWith('token')
-    })
-
     it('should call HTTPClient with correct values', async () => {
       const { sut, httpClientSpy } = makeSut()
 
@@ -32,40 +21,8 @@ describe('CharacterService', () => {
 
       expect(httpClientSpy.request).toHaveBeenCalledWith({
         method: 'get',
-        path: '/characters',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: 'Bearer any_token'
-        }
+        path: '/characters'
       })
-    })
-
-    it('should call HTTPClient with no Authorization token if CacheStore.get returns null', async () => {
-      const { sut, cacheStoreSpy, httpClientSpy } = makeSut()
-      cacheStoreSpy.get.mockReturnValueOnce(null)
-
-      await sut.findAll()
-
-      expect(httpClientSpy.request).toHaveBeenCalledWith({
-        method: 'get',
-        path: '/characters',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: 'Bearer '
-        }
-      })
-    })
-
-    it('should throw an UnauthorizedError if the http response status code is 401', async () => {
-      const { sut, httpClientSpy } = makeSut()
-      httpClientSpy.request.mockResolvedValueOnce({
-        ...httpClientSpy.result,
-        statusCode: 401
-      })
-
-      const promise = sut.findAll()
-
-      await expect(promise).rejects.toThrowError(new UnauthorizedError())
     })
 
     it('should throw a HTTPServiceError if the http response status code is 400 or greater', async () => {
@@ -95,14 +52,6 @@ describe('CharacterService', () => {
   describe('create()', () => {
     const { id, ...createCharacterServiceParams } = fakeCharacter()
 
-    it('should call CacheStore.get with correct values', async () => {
-      const { sut, cacheStoreSpy } = makeSut()
-
-      await sut.create(createCharacterServiceParams)
-
-      expect(cacheStoreSpy.get).toHaveBeenCalledWith('token')
-    })
-
     it('should call HTTPClient with correct values', async () => {
       const { sut, httpClientSpy } = makeSut()
 
@@ -111,41 +60,8 @@ describe('CharacterService', () => {
       expect(httpClientSpy.request).toHaveBeenCalledWith({
         method: 'post',
         path: '/characters',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: 'Bearer any_token'
-        },
         body: createCharacterServiceParams
       })
-    })
-
-    it('should call HTTPClient with no Authorization token if CacheStore.get returns null', async () => {
-      const { sut, cacheStoreSpy, httpClientSpy } = makeSut()
-      cacheStoreSpy.get.mockReturnValueOnce(null)
-
-      await sut.create(createCharacterServiceParams)
-
-      expect(httpClientSpy.request).toHaveBeenCalledWith({
-        method: 'post',
-        path: '/characters',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: 'Bearer '
-        },
-        body: createCharacterServiceParams
-      })
-    })
-
-    it('should throw an UnauthorizedError if the http response status code is 401', async () => {
-      const { sut, httpClientSpy } = makeSut()
-      httpClientSpy.request.mockResolvedValueOnce({
-        ...httpClientSpy.result,
-        statusCode: 401
-      })
-
-      const promise = sut.create(createCharacterServiceParams)
-
-      await expect(promise).rejects.toThrowError(new UnauthorizedError())
     })
 
     it('should throw a HTTPServiceError if the http response status code is 400 or greater', async () => {
