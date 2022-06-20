@@ -1,9 +1,17 @@
 import { CacheStore } from '@/domain/protocols/cache'
-import { FindAllCharactersService, FindAllCharactersServiceResult } from '@/domain/protocols/services'
+import {
+  CreateCharacterService,
+  CreateCharacterServiceParams,
+  CreateCharacterServiceResult,
+  FindAllCharactersService,
+  FindAllCharactersServiceResult
+} from '@/domain/protocols/services'
 import { HTTPServiceError, UnauthorizedError } from '@/infra/errors'
 import { HTTPClient } from '@/infra/protocols'
 
-export class CharacterService implements FindAllCharactersService {
+type Service = FindAllCharactersService & CreateCharacterService
+
+export class CharacterService implements Service {
   constructor(
     private readonly cacheStore: CacheStore,
     private readonly httpClient: HTTPClient
@@ -27,6 +35,30 @@ export class CharacterService implements FindAllCharactersService {
 
     if (response.statusCode >= 400) {
       throw new HTTPServiceError(response, 'Internal error on searching characters')
+    }
+
+    return response.body
+  }
+
+  async create(params: CreateCharacterServiceParams) {
+    const tokenData = this.cacheStore.get<Record<'token', string>>('token')
+
+    const response = await this.httpClient.request<CreateCharacterServiceResult>({
+      method: 'post',
+      path: '/characters',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${tokenData?.token ?? ''}`
+      },
+      body: params
+    })
+
+    if (response.statusCode === 401) {
+      throw new UnauthorizedError()
+    }
+
+    if (response.statusCode >= 400) {
+      throw new HTTPServiceError(response, 'Internal error on creating the character')
     }
 
     return response.body
