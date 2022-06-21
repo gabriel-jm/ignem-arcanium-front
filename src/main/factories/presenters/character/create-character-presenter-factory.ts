@@ -10,6 +10,11 @@ const requiredNumber = {
   required: true
 }
 
+const requiredAttributeNumber = {
+  ...requiredNumber,
+  valueInBetween: [0, 6]
+}
+
 export function makeCreateCharacterPresenter() {
   const charactersService = makeCharacterService()
   const remoteCreateCharacter = new RemoteCreateCharacter(charactersService)
@@ -27,12 +32,12 @@ export function makeCreateCharacterPresenter() {
         gold: requiredNumber,
         hp: requiredNumber,
         mp: requiredNumber,
-        strength: requiredNumber,
-        dexterity: requiredNumber,
-        constitution: requiredNumber,
-        intelligence: requiredNumber,
-        wisdom: requiredNumber,
-        charism: requiredNumber
+        strength: requiredAttributeNumber,
+        dexterity: requiredAttributeNumber,
+        constitution: requiredAttributeNumber,
+        intelligence: requiredAttributeNumber,
+        wisdom: requiredAttributeNumber,
+        charism: requiredAttributeNumber
       })
     )
   )

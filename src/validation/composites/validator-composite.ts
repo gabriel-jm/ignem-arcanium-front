@@ -5,48 +5,49 @@ import {
   valueInBetweenValidator
 } from '@/validation/validators'
 
+const validatorsByType: Record<string, Validator['constructor']> = {
+  type: typeValidator,
+  required: requiredFieldsValidator,
+  valueInBetween: valueInBetweenValidator
+}
+const validatorAdderByType: Record<string, Function> = {
+  type: (
+    validatorsFields: Record<string, any>,
+    fieldName: string,
+    expectedValue: unknown
+  ) => {
+    if (!('type' in validatorsFields)) {
+      validatorsFields.type = {}
+    }
+
+    validatorsFields.type[fieldName] = expectedValue
+  },
+  required: (
+    validatorsFields: Record<string, any>,
+    fieldName: string
+  ) => {
+    if (!('required' in validatorsFields)) {
+      validatorsFields.required = []
+    }
+
+    validatorsFields.required.push(fieldName)
+  },
+  valueInBetween: (
+    validatorsFields: Record<string, any>,
+    fieldName: string,
+    expectedValue: unknown
+  ) => {
+    if (!('valueInBetween' in validatorsFields)) {
+      validatorsFields.valueInBetween = {}
+    }
+
+    validatorsFields.valueInBetween[fieldName] = expectedValue
+  }
+}
+
 export function validatorComposite(
   validationSchema: Record<string, Record<string, unknown>>
 ): Validator {
-  const validatorsByType: Record<string, Validator['constructor']> = {
-    type: typeValidator,
-    required: requiredFieldsValidator,
-    valueInBetween: valueInBetweenValidator
-  }
-  const validatorAdderByType: Record<string, Function> = {
-    type: (
-      validatorsFields: Record<string, any>,
-      fieldName: string,
-      expectedValue: unknown
-    ) => {
-      if (!('type' in validatorsFields)) {
-        validatorsFields.type = {}
-      }
-
-      validatorsFields.type[fieldName] = expectedValue
-    },
-    required: (
-      validatorsFields: Record<string, any>,
-      fieldName: string
-    ) => {
-      if (!('required' in validatorsFields)) {
-        validatorsFields.required = []
-      }
-
-      validatorsFields.required.push(fieldName)
-    },
-    valueInBetween: (
-      validatorsFields: Record<string, any>,
-      fieldName: string,
-      expectedValue: unknown
-    ) => {
-      if (!('valueInBetween' in validatorsFields)) {
-        validatorsFields.valueInBetween = {}
-      }
-
-      validatorsFields.valueInBetween[fieldName] = expectedValue
-    }
-  }
   const validators: Validator[] = []
 
   const validatorsFields: Record<string, any> = {}
