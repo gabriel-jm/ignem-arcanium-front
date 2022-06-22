@@ -45,6 +45,12 @@ const validatorAdderByType: Record<string, Function> = {
   }
 }
 
+const validatorsPriority: Record<string, number> = {
+  type: 0,
+  required: 10,
+  valueInBetween: 5
+}
+
 export function validatorComposite(
   validationSchema: Record<string, Record<string, unknown>>
 ): Validator {
@@ -52,14 +58,27 @@ export function validatorComposite(
 
   const validatorsFields: Record<string, any> = {}
 
+  Object.keys(validationSchema)
+
   Object.entries(validationSchema).forEach(([fieldName, value]) => {
-    Object.entries(value).forEach(([validatorType, expectedValue]) => {
-      validatorAdderByType[validatorType]?.(
-        validatorsFields,
-        fieldName,
-        expectedValue
-      )
-    })
+    Object
+      .keys(value)
+      .sort((a, b) => {
+        if(validatorsPriority[a] > validatorsPriority[b]) {
+          return 0
+        }
+
+        return 1
+      })
+      .forEach(validatorType => {
+        const expectedValue = value[validatorType]
+
+        validatorAdderByType[validatorType]?.(
+          validatorsFields,
+          fieldName,
+          expectedValue
+        )
+      })
   })
 
   Object.entries(validatorsFields).forEach(([validatorType, params]) => {
