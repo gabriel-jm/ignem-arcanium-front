@@ -65,10 +65,10 @@ export function validatorComposite(
       .keys(value)
       .sort((a, b) => {
         if(validatorsPriority[a] > validatorsPriority[b]) {
-          return 0
+          return -1
         }
 
-        return 1
+        return 0
       })
       .forEach(validatorType => {
         const expectedValue = value[validatorType]

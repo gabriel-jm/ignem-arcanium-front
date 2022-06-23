@@ -28,6 +28,7 @@ export const characterModalStyles = css`
     animation: show-dialog 250ms;
     color: var(--font-color);
     box-shadow: 0 2px 5px 3px #050505aa;
+    overflow: hidden;
   }
 
   dialog::backdrop {
@@ -42,7 +43,7 @@ export const characterModalStyles = css`
     position: relative;
     height: 100%;
     display: grid;
-    grid-template-rows: 60px auto 60px;
+    grid-template-rows: 60px auto 70px;
   }
 
   .modal-header {
@@ -68,6 +69,7 @@ export const characterModalStyles = css`
 
   .characters-form {
     margin: 20px 0;
+    overflow-y: auto;
   }
 
   .inputs, .attributes, .text-between-dashes, .buttons {
@@ -146,10 +148,14 @@ export const characterModalStyles = css`
     color: var(--font-color);
   }
 
+  .attr-input-group.error {
+    background-color: var(--danger);
+  }
+
   .buttons {
     position: sticky;
     bottom: 0px;
-    padding-bottom: 16px;
+    padding: 10px;
     background-color: var(--body-bg-color);
     display: flex;
     justify-content: flex-end;

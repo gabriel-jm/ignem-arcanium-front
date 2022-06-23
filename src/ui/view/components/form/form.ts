@@ -1,5 +1,5 @@
 export interface IgnemFormElement extends HTMLFormElement {
-  setErrors(errorsRecord: Record<string, string> | null): void
+  setErrors(errorsRecord?: Record<string, string> | null): void
   removeErrors(): void
 }
 
@@ -18,14 +18,14 @@ export class IgnemForm extends HTMLFormElement {
     if (!errorsRecord) return
 
     Object.entries(errorsRecord).forEach(([field, error]) => {
-      const inputMessageSpan = this.select(`input[name=${field}] ~ span`)!
+      const inputMessageSpan = this.select(`input[name=${field}] ~ span`)
       const input = this[field] as HTMLInputElement
 
-      if(!input) return
+      input?.classList.add('error')
 
-      input.classList.add('error')
-
-      inputMessageSpan.textContent = error
+      if (inputMessageSpan) {
+        inputMessageSpan.textContent = error
+      }
     })
   }
 
@@ -39,10 +39,12 @@ export class IgnemForm extends HTMLFormElement {
 
       const input = element as HTMLInputElement
       
-      input.classList.remove('error')
+      input?.classList.remove('error')
       
-      const inputMessageSpan = this.select(`input[name=${input.name}] ~ span`)!
-      inputMessageSpan.textContent = ''
+      const inputMessageSpan = this.select(`input[name=${input.name}] ~ span`)
+      if (inputMessageSpan) {
+        inputMessageSpan.textContent = ''
+      }
     })
   }
 }

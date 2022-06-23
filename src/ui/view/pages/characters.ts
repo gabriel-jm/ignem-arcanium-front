@@ -4,6 +4,7 @@ import { containerStyles, characterCardStyles } from '@/ui/view'
 import { breadcrumbs, characterCard, IgnemCharacterModalElement } from '@/ui/view/components'
 import { IgnemElement } from '@/ui/view/ignem-element'
 import { css, html } from 'lithen-tag-functions'
+import { SuccessNotifier } from '@/ui/protocols'
 
 interface Character {
   id: string
@@ -23,10 +24,18 @@ interface Character {
 
 export class IgnemCharactersPage extends IgnemElement {
   #findAllCharactersPresenter: Presenter
+  #createCharacterPresenter: Presenter
+  #successNotifier: SuccessNotifier
   
-  constructor(findAllCharactersPresenter: Presenter) {
+  constructor(
+    findAllCharactersPresenter: Presenter,
+    createCharacterPresenter: Presenter,
+    successNotifier: SuccessNotifier
+  ) {
     super()
     this.#findAllCharactersPresenter = findAllCharactersPresenter
+    this.#createCharacterPresenter = createCharacterPresenter
+    this.#successNotifier = successNotifier
   }
 
   async connectedCallback() {
@@ -54,6 +63,28 @@ export class IgnemCharactersPage extends IgnemElement {
     }
   }
 
+  #onCharacterCreated = async (event: CustomEvent) => {
+    const modal = event.target as IgnemCharacterModalElement
+    const formData = event.detail
+
+    const result = await this.#createCharacterPresenter.handle(formData)
+
+    modal.setErrors(result.validationErrors)
+
+    if (result.ok) {
+      modal.dialog.close()
+      modal.form.reset()
+      this.select('.characters-list')?.insertBefore(
+        characterCard(result.data),
+        this.select('button')!
+      )
+      this.#successNotifier.notifySuccess(
+        'Created',
+        'Character created with success'
+      )
+    }
+  }
+
   styling() {
     return css`
       ${[containerStyles, characterCardStyles]}
@@ -76,7 +107,8 @@ export class IgnemCharactersPage extends IgnemElement {
         min-height: 114px;
         min-width: 250px;
         max-width: 425px;
-        flex: 1;
+        width: 100%;
+        flex-shrink: 0;
         border: 1px solid var(--container-border-color);
         background-color: transparent;
         color: var(--container-border-color);
@@ -89,6 +121,12 @@ export class IgnemCharactersPage extends IgnemElement {
       .new-btn:hover, .new-btn:focus {
         box-shadow: 0 0 1px 2px var(--container-border-color);
         color: var(--sub-font-color);
+      }
+
+      @media only screen and (max-width: 1024px) {
+        .characters-list {
+          justify-content: center;
+        }
       }
     `
   }
@@ -109,7 +147,9 @@ export class IgnemCharactersPage extends IgnemElement {
 
         <div class="characters-list"></div>
 
-        <ignem-character-modal />
+        <ignem-character-modal on-character-created=${(e) => {
+          this.#onCharacterCreated(e as CustomEvent)
+        }} />
       </section>
     `
   }

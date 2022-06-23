@@ -12,7 +12,7 @@ const requiredNumber = {
 
 const requiredAttributeNumber = {
   ...requiredNumber,
-  valueInBetween: [0, 6]
+  valueInBetween: [1, 6]
 }
 
 export function makeCreateCharacterPresenter() {
