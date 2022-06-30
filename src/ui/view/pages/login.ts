@@ -23,9 +23,11 @@ export class IgnemLoginPage extends IgnemElement {
     this.#accountLoginPresenter = accountLoginPresenter
     this.#checkTokenExists = checkTokenExists
     this.#successNotifier = successNotifier
+
+    this.init()
   }
 
-  async connectedCallback() {
+  async init() {
     if (!tokenChecked) {
       this.#checkTokenExists.handle()
       tokenChecked = true

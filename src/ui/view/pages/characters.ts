@@ -1,7 +1,7 @@
 import '@/ui/view'
 import { Presenter } from '@/presentation/protocols'
 import { containerStyles, characterCardStyles } from '@/ui/view'
-import { breadcrumbs, characterCard, IgnemCharacterModalElement } from '@/ui/view/components'
+import { breadcrumbs, characterCard, IgnemCharacterModalElement, loadingIcon } from '@/ui/view/components'
 import { IgnemElement } from '@/ui/view/ignem-element'
 import { css, html } from 'lithen-tag-functions'
 import { SuccessNotifier } from '@/ui/protocols'
@@ -36,16 +36,20 @@ export class IgnemCharactersPage extends IgnemElement {
     this.#findAllCharactersPresenter = findAllCharactersPresenter
     this.#createCharacterPresenter = createCharacterPresenter
     this.#successNotifier = successNotifier
+
+    this.init()
   }
 
-  async connectedCallback() {
-    const result = await this.#findAllCharactersPresenter.handle<Character[]>()
-
+  async init() {
     const openCharacterModal = () => {
       const characterModal = this.select<IgnemCharacterModalElement>('ignem-character-modal')
 
       characterModal?.dialog.showModal()
     }
+
+    const result = await this.#findAllCharactersPresenter.handle<Character[]>()
+
+    this.select('.loading-icon')?.remove()
 
     if (result.ok) {
       const charactersList = result.data
@@ -57,7 +61,7 @@ export class IgnemCharactersPage extends IgnemElement {
           >
             &plus; New
           </button>
-        `)
+        `)       
 
       this.select('.characters-list')?.append(...charactersList)
     }
@@ -145,7 +149,9 @@ export class IgnemCharactersPage extends IgnemElement {
 
         <h2 class="characters-title">Characters</h2>
 
-        <div class="characters-list"></div>
+        <div class="characters-list">
+          ${loadingIcon()}
+        </div>
 
         <ignem-character-modal on-character-created=${(e) => {
           this.#onCharacterCreated(e as CustomEvent)

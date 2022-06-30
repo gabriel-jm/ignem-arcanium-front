@@ -1,6 +1,6 @@
 import { Presenter } from '@/presentation/protocols'
 import { SuccessNotifier } from '@/ui/protocols'
-import { IgnemElement, IgnemTorchRegistry, IgnemTorchSideModalElement } from '@/ui/view'
+import { closeIcon, IgnemElement, IgnemTorchRegistry, IgnemTorchSideModalElement, loadingIcon } from '@/ui/view'
 import { containerStyles } from '@/ui/view/styles'
 import { css, html } from 'lithen-tag-functions'
 
@@ -26,9 +26,10 @@ export class IgnemTorchesPage extends IgnemElement {
     this.#createTorchRegistryPresenter = createTorchRegistryPresenter
     
     this.applyRender()
+    this.init()
   }
 
-  async connectedCallback() {
+  async init() {
     const findResult = await this.#findAllTorchRegistriesPresenter.handle<TorchRegistry[]>()
     const data = findResult.data
 
@@ -40,7 +41,12 @@ export class IgnemTorchesPage extends IgnemElement {
   }
 
   #addTorchRegistryElement(...torchRegistries: (Element | DocumentFragment)[]) {
-    this.select('.empty-torch-list')?.remove()
+    this.select('.loading-icon')?.remove()
+    
+    if (torchRegistries.length) {
+      this.select('.empty-torch-list')!.textContent = 'No torches registred!'
+      return
+    }
 
     this.select('.torch-list')?.append(...torchRegistries)
   }
@@ -81,11 +87,11 @@ export class IgnemTorchesPage extends IgnemElement {
         text-align: center;
         font-size: 1.6rem;
         color: var(--unavailable-font-color);
+        display: flex;
+        justify-content: center;
       }
 
       .btn-bordered {
-        
-        
         color: var(--btn-bordered-border-color);
         border: 1px solid var(--btn-bordered-border-color);
         border-radius: 4px;
@@ -93,6 +99,11 @@ export class IgnemTorchesPage extends IgnemElement {
         background-color: transparent;
         font-size: 1rem;
         cursor: pointer;
+      }
+
+      .loading-icon {
+        width: 60px;
+        height: 60px;
       }
     `
   }
@@ -143,7 +154,9 @@ export class IgnemTorchesPage extends IgnemElement {
           </button>
         </header>
         <div class="torch-list"></div>
-        <p class="empty-torch-list">No torches registred!</p>
+        <p class="empty-torch-list">
+          ${loadingIcon()}
+        </p>
       </section>
     `
   }
