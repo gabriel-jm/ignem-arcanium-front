@@ -33,7 +33,7 @@ export class IgnemTorchesPage extends IgnemElement {
     const findResult = await this.#findAllTorchRegistriesPresenter.handle<TorchRegistry[]>()
     const data = findResult.data
 
-    if (!findResult.ok || !data?.length) return
+    if (!findResult.ok) return
 
     const torchRegistries = data.map(item => new IgnemTorchRegistry(item))
 
