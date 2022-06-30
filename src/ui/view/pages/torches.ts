@@ -43,7 +43,7 @@ export class IgnemTorchesPage extends IgnemElement {
   #addTorchRegistryElement(...torchRegistries: (Element | DocumentFragment)[]) {
     this.select('.loading-icon')?.remove()
     
-    if (torchRegistries.length) {
+    if (!torchRegistries.length) {
       this.select('.empty-torch-list')!.textContent = 'No torches registred!'
       return
     }
