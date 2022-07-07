@@ -1,11 +1,11 @@
-import { SpyInstanceFn } from 'vitest'
+import { SpyInstance } from 'vitest'
 
-export function mockNativeWebSocket(): [SpyInstanceFn, Record<'addEventListener' | 'send', SpyInstanceFn>] {
+export function mockNativeWebSocket(): [SpyInstance, Record<'addEventListener' | 'send', SpyInstance>] {
   const fakeWebSocketInstance = {
     addEventListener: vi.fn(),
     send: vi.fn()
   }
-  const WebSocketSpy = vi.spyOn(globalThis, 'WebSocket') as SpyInstanceFn
+  const WebSocketSpy = vi.spyOn(globalThis, 'WebSocket') as SpyInstance
   WebSocketSpy.mockImplementation(() => fakeWebSocketInstance)
 
   return [WebSocketSpy, fakeWebSocketInstance]

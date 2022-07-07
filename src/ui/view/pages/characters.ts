@@ -153,9 +153,7 @@ export class IgnemCharactersPage extends IgnemElement {
           ${loadingIcon()}
         </div>
 
-        <ignem-character-modal on-character-created=${(e) => {
-          this.#onCharacterCreated(e as CustomEvent)
-        }} />
+        <ignem-character-modal on-character-created=${this.#onCharacterCreated} />
       </section>
     `
   }
