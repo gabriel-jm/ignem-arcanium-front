@@ -39,7 +39,7 @@ export const characterCardStyles = css`
     box-shadow: 0 0 1px 2px var(--container-border-color);
   }
 
-  .character-info h4 {
+  .character-info h1 {
     font-size: 1.5rem;
   }
 
@@ -78,10 +78,15 @@ export function characterCard(character: CharacterCardProps) {
   return html`
     <div class="character-card" tabindex="0">
       <figure>
-        <img width="70px" height="70px" src="${character.icon}" />
+        <img
+          width="70px"
+          height="70px"
+          src="${character.icon}"
+          alt="Character icon"
+        />
       </figure>
       <div class="character-info">
-        <h4>${character.name}</h4>
+        <h1>${character.name}</h1>
         <div>
           <span class="level">Level ${character.level}</span>
           <svg style="margin: 0 10px;" width="12" height="12">

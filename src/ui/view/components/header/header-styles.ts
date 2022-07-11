@@ -34,6 +34,7 @@ export const headerStyles = css`
   }
 
   .account-name {
+    font-size: 1.2rem;
     max-width: 100px;
     white-space: nowrap;
     text-overflow: ellipsis;

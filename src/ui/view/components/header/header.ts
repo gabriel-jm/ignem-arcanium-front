@@ -37,7 +37,7 @@ export class IgnemHeader extends IgnemElement {
             <h1 class="title">Ignem Arcanium</h1>
           </div>
           <div>
-            <h3 class="account-name">${accountName}</h3>
+            <h1 class="account-name">${accountName}</h1>
             <span on-click=${openDialog}>
               ${logOutIcon()}
             </span>  

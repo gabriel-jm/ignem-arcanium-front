@@ -6,23 +6,20 @@ type BreadcrumbsProps = Record<string, string>
 
 export function breadcrumbs(props: BreadcrumbsProps) {
   const breadcrumbsStyles = css`
-    a, span {
-      color: var(--sub-font-color);
-    }
-
-    a {
-      cursor: pointer;
-    }
-
-    a:hover {
-      text-decoration: underline;
-    }
-
     span {
+      color: var(--sub-font-color);
       cursor: default;
     }
 
-    span:not(.current) {
+    .link {
+      cursor: pointer;
+    }
+
+    .link:hover {
+      text-decoration: underline;
+    }
+
+    .slash {
       margin: 0 16px;
     }
   `
@@ -39,8 +36,13 @@ export function breadcrumbs(props: BreadcrumbsProps) {
         }
 
         return html`
-          <a on-click=${onClick(path)}>${name}</a>
-          <span>/</span>
+          <span
+            class="link"
+            on-click=${onClick(path)}
+          >
+            ${name}
+          </span>
+          <span class="slash">/</span>
         `
       })}
     </ignem-wrapper>
