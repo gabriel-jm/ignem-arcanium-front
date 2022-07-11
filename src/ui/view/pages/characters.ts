@@ -37,6 +37,7 @@ export class IgnemCharactersPage extends IgnemElement {
     this.#createCharacterPresenter = createCharacterPresenter
     this.#successNotifier = successNotifier
 
+    this.applyRender()
     this.init()
   }
 
