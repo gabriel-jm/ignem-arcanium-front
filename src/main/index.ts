@@ -1,11 +1,11 @@
 import { configRoutes } from '@/main/config/routes'
 import { sharedStyles } from '@/ui/view'
 
-async function init() {
+function init() {
+  import('@/ui/view')
+  
   sharedStyles()
   configRoutes()
-
-  await import('@/ui/view')
 }
 
 init()

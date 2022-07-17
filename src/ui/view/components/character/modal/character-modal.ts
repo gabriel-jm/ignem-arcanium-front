@@ -1,4 +1,10 @@
-import { ignemInput, closeIcon, textBetweenDashes, InputMasks, IgnemFormElement } from '@/ui/view'
+import {
+  ignemInput,
+  closeIcon,
+  textBetweenDashes,
+  InputMasks,
+  IgnemFormElement
+} from '@/ui/view'
 import { characterModalStyles } from './character-modal-styles'
 import { IgnemElement } from '@/ui/view/ignem-element'
 import { html } from 'lithen-tag-functions'
@@ -74,6 +80,10 @@ export class IgnemCharacterModal extends IgnemElement {
         input.value = inputValue
 
         if (!inputValue) return
+        
+        if (input.parentElement?.classList.contains('error')) {
+          input.parentElement?.classList.remove('error')
+        }
 
         if (nextAttribute) {
           const query = `input[name=${nextAttribute}]`
@@ -139,40 +149,42 @@ export class IgnemCharacterModal extends IgnemElement {
 
           <form class="characters-form" is="ignem-form">
             <div class="inputs">
-              ${ignemInput({
-                label: 'Name',
-                name: 'name',
-                placeholder: 'Character name',
-                className: 'input name'
-              })}
+              ${[
+                ignemInput({
+                  label: 'Name',
+                  name: 'name',
+                  placeholder: 'Character name',
+                  className: 'input name'
+                }),
 
-              ${ignemInput({
-                label: 'Level',
-                name: 'level',
-                placeholder: 'Ex: 1',
-                mask: InputMasks.ONLY_NUMBERS
-              })}
+                ignemInput({
+                  label: 'Level',
+                  name: 'level',
+                  placeholder: 'Ex: 1',
+                  mask: InputMasks.ONLY_NUMBERS
+                }),
 
-              ${ignemInput({
-                label: 'Health Points',
-                name: 'hp',
-                placeholder: 'Ex: 10',
-                mask: InputMasks.ONLY_NUMBERS
-              })}
+                ignemInput({
+                  label: 'Health Points',
+                  name: 'hp',
+                  placeholder: 'Ex: 10',
+                  mask: InputMasks.ONLY_NUMBERS
+                }),
 
-              ${ignemInput({
-                label: 'Magic Points',
-                name: 'mp',
-                placeholder: 'Ex: 10',
-                mask: InputMasks.ONLY_NUMBERS
-              })}
+                ignemInput({
+                  label: 'Magic Points',
+                  name: 'mp',
+                  placeholder: 'Ex: 10',
+                  mask: InputMasks.ONLY_NUMBERS
+                }),
               
-              ${ignemInput({
-                label: 'Gold',
-                name: 'gold',
-                placeholder: 'Ex: 100',
-                mask: InputMasks.ONLY_NUMBERS
-              })}
+                ignemInput({
+                  label: 'Gold',
+                  name: 'gold',
+                  placeholder: 'Ex: 100',
+                  mask: InputMasks.ONLY_NUMBERS
+                })
+              ]}
             </div>
 
             ${textBetweenDashes('Attributes')}

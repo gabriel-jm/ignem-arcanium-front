@@ -34,11 +34,10 @@ export const inputStyles = css`
   }
 
   .input-message {
-    display: block;
-    height: 15px;
-    width: auto;
+    font-size: 0.9rem;
+    height: 0.9rem;
+    width: fit-content;
     color: #a14747;
-    font-size: 0.85rem;
   }
 
   @keyframes drop {

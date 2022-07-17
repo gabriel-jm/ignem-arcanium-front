@@ -18,13 +18,15 @@ export class IgnemForm extends HTMLFormElement {
     if (!errorsRecord) return
 
     Object.entries(errorsRecord).forEach(([field, error]) => {
-      const inputMessageSpan = this.select(`input[name=${field}] ~ span`)
       const input = this[field] as HTMLInputElement
 
       input?.classList.add('error')
 
-      if (inputMessageSpan) {
-        inputMessageSpan.textContent = error
+      const inputMessageElement = this.select(
+        `input[name=${field}] ~ .input-message`
+      )
+      if (inputMessageElement) {
+        inputMessageElement.textContent = error
       }
     })
   }
@@ -41,9 +43,11 @@ export class IgnemForm extends HTMLFormElement {
       
       input?.classList.remove('error')
       
-      const inputMessageSpan = this.select(`input[name=${input.name}] ~ span`)
-      if (inputMessageSpan) {
-        inputMessageSpan.textContent = ''
+      const inputMessageElement = this.select(
+        `input[name=${input.name}] ~ .input-message`
+      )
+      if (inputMessageElement) {
+        inputMessageElement.textContent = ''
       }
     })
   }

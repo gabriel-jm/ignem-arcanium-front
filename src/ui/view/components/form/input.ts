@@ -19,8 +19,14 @@ export function ignemInput(props: IgnemInputProps) {
 
   function onInput(event: Event) {
     const input = event.target as HTMLInputElement
+
     if (mask) {
       input.value = input.value.trim().replace(mask, '')
+    }
+
+    if (input.value && input.classList.contains('error')) {
+      input.classList.remove('error')
+      input.nextElementSibling!.textContent = ''
     }
   }
 
@@ -32,7 +38,7 @@ export function ignemInput(props: IgnemInputProps) {
         on-input=${onInput}
         ${toHtmlAttributes(attributes)}
       />
-      <span class="input-message"></span>
+      <p class="input-message"></p>
     </label>
   ` 
 }

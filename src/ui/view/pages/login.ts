@@ -1,7 +1,12 @@
 import { router } from 'lithen-router'
 import { css, html } from 'lithen-tag-functions'
 import { IgnemElement } from '@/ui/view/ignem-element'
-import { IgnemFormElement, ignemInput, textBetweenDashes, textBetweenDashesStyles } from '@/ui/view/components'
+import {
+  IgnemFormElement,
+  ignemInput,
+  textBetweenDashes,
+  textBetweenDashesStyles
+} from '@/ui/view/components'
 import { containerStyles, buttonStyles, inputStyles } from '@/ui/view/styles'
 import { Presenter } from '@/presentation/protocols'
 import { SuccessNotifier } from '@/ui/protocols'
@@ -40,8 +45,15 @@ export class IgnemLoginPage extends IgnemElement {
   }
 
   styling() {
+    const additionalStyles = [
+      containerStyles,
+      buttonStyles,
+      inputStyles,
+      textBetweenDashesStyles
+    ]
+
     return css`
-      ${[containerStyles, buttonStyles, inputStyles, textBetweenDashesStyles]}
+      ${additionalStyles}
 
       .container {
         height: 100%;
@@ -128,20 +140,22 @@ export class IgnemLoginPage extends IgnemElement {
         <form is="ignem-form" class="login-form" on-submit=${handleSubmit}>
           <h1 class="form-title">Login</h1>
 
-          ${ignemInput({
-            label: 'E-Mail',
-            name: 'email',
-            className: 'input',
-            placeholder: 'E-Mail'
-          })}
-
-          ${ignemInput({
-            label: 'Password',
-            className: 'input',
-            name: 'password',
-            type: 'password',
-            placeholder: 'Password'
-          })}
+          ${[
+            ignemInput({
+              label: 'E-Mail',
+              name: 'email',
+              className: 'input',
+              placeholder: 'E-Mail'
+            }),
+            
+            ignemInput({
+              label: 'Password',
+              className: 'input',
+              name: 'password',
+              type: 'password',
+              placeholder: 'Password'
+            })
+          ]}
 
           <button class="btn">Send</button>
 
