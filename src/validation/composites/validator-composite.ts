@@ -10,6 +10,13 @@ const validatorsByType: Record<string, Validator['constructor']> = {
   required: requiredFieldsValidator,
   valueInBetween: valueInBetweenValidator
 }
+
+const validatorsPriority: Record<string, number> = {
+  type: 0,
+  valueInBetween: 5,
+  required: 10
+}
+
 const validatorAdderByType: Record<string, Function> = {
   type: (
     validatorsFields: Record<string, any>,
@@ -45,20 +52,12 @@ const validatorAdderByType: Record<string, Function> = {
   }
 }
 
-const validatorsPriority: Record<string, number> = {
-  type: 0,
-  valueInBetween: 5,
-  required: 10
-}
-
 export function validatorComposite(
   validationSchema: Record<string, Record<string, unknown>>
 ): Validator {
   const validators: Validator[] = []
 
   const validatorsFields: Record<string, any> = {}
-
-  Object.keys(validationSchema)
 
   Object.entries(validationSchema).forEach(([fieldName, value]) => {
     Object
@@ -85,8 +84,11 @@ export function validatorComposite(
       })
   })
 
+  console.log(validators, validatorsFields)
+
   Object.entries(validatorsFields).forEach(([validatorType, params]) => {
-    const validator = validatorsByType[validatorType](params)
+    const validatorFactory = Reflect.get(validatorsByType, validatorType)
+    const validator = validatorFactory(params)
     
     validators.push(validator)
   })
