@@ -47,8 +47,8 @@ const validatorAdderByType: Record<string, Function> = {
 
 const validatorsPriority: Record<string, number> = {
   type: 0,
-  required: 10,
-  valueInBetween: 5
+  valueInBetween: 5,
+  required: 10
 }
 
 export function validatorComposite(
@@ -64,6 +64,10 @@ export function validatorComposite(
     Object
       .keys(value)
       .sort((a, b) => {
+        if(validatorsPriority[a] < validatorsPriority[b]) {
+          return 1
+        }
+
         if(validatorsPriority[a] > validatorsPriority[b]) {
           return -1
         }
