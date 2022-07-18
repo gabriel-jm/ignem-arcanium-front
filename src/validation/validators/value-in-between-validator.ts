@@ -1,24 +1,14 @@
 import { Validator } from '@/validation/protocols'
 
-export function valueInBetweenValidator(
-  fields: Record<string, [number, number]>
-) : Validator {
-  return (input: any) => {
-    const invalidFields = Object.keys(fields).filter(field => {
-      const [min, max] = fields[field]
-      const value = input[field]
-      const isInBetween = value >= min && value <= max
+export const valueInBetweenValidator: Validator = (
+  input: any,
+  field: string,
+  values: [number, number]
+) => {
+  const [min, max] = values
+  const inputValue = Reflect.get(input, field)
 
-      return !isInBetween
-    })
+  const isInBetween = inputValue >= min && inputValue <= max
 
-    if (!invalidFields.length) return null
-
-    return invalidFields.reduce((acc, field) => {
-      const [min, max] = fields[field]
-      const message = `Must be in between ${min} and ${max}`
-
-      return { ...acc, [field]: message }
-    }, {})
-  }
+  return isInBetween ? null : `Must be in between ${min} and ${max}`
 }

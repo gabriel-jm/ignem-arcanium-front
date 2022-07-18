@@ -10,36 +10,24 @@ function getType(value: any) {
   return valueType
 }
 
-export function typeValidator(fields: Record<string, string | string[]>) : Validator {
-  return (input: any) => {
-    const invalidFields = Object.keys(fields).filter(field => {
-      const value = input[field]
-      const fieldValue = fields[field]
-      const types = !Array.isArray(fieldValue) ? [fieldValue] : fieldValue
+export const typeValidator: Validator = (
+  input: any,
+  field: string,
+  types: string | string[]
+) => {
+  const isArray = Array.isArray(types)
+  const typeList = isArray ? types : [types]
+  const inputValue = Reflect.get(input, field)
 
-      const isInvalid = types.every(type => {
-        if (type === 'array') {
-          return !Array.isArray(value)
-        }
-  
-        return !(getType(value) === type)
-      })
+  const typeOfValue = getType(inputValue)
 
-      return isInvalid
-    })
+  const hasAllowedType = typeList.some(type => {
+    if (type === 'array') {
+      return Array.isArray(inputValue)
+    }
 
-    if (!invalidFields.length) return null
+    return typeOfValue === type
+  })
 
-    return invalidFields.reduce((acc, field) => {
-      const fieldValue = fields[field]
-      const isArray = Array.isArray(fieldValue)
-      const types = !isArray ? fieldValue : fieldValue.reduce((acc, value, index, arr) => {
-        return acc + (index ? (index + 1 === arr.length ? ' or ' : ', ') : '') + value
-      }, '')
-
-      const message = `Must be ${isArray ? 'a:' : 'a'} ${types}`
-
-      return { ...acc, [field]: message }
-    }, {})
-  }
+  return hasAllowedType ? null : `Must be ${isArray ? 'one of:' : 'a'} ${typeList.join(', ')}`
 }

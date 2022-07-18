@@ -3,7 +3,6 @@ import { ErrorHandlingPresenterDecorator, ValidationPresenterDecorator } from '@
 import { makeCharacterService } from '@/main/factories/services'
 import { CreateCharacterPresenter } from '@/presentation/presenters'
 import { UiNotifier } from '@/ui/notifiers'
-import { validatorComposite } from '@/validation/composites'
 
 const requiredNumber = {
   type: 'number',
@@ -23,7 +22,7 @@ export function makeCreateCharacterPresenter() {
     new UiNotifier(),
     new ValidationPresenterDecorator(
       new CreateCharacterPresenter(remoteCreateCharacter),
-      validatorComposite({
+      {
         name: {
           type: 'string',
           required: true
@@ -38,7 +37,7 @@ export function makeCreateCharacterPresenter() {
         intelligence: requiredAttributeNumber,
         wisdom: requiredAttributeNumber,
         charism: requiredAttributeNumber
-      })
+      }
     )
   )
 }

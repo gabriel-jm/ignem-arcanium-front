@@ -4,7 +4,6 @@ import { ErrorHandlingPresenterDecorator, ValidationPresenterDecorator } from '@
 import { makeWebSocketClient } from '@/main/factories/clients'
 import { UpdateTorchRegistryPresenter } from '@/presentation/presenters'
 import { UiNotifier } from '@/ui/notifiers'
-import { validatorComposite } from '@/validation/composites'
 
 export function makeUpdateTorchRegistryPresenter() {
   const wsClient = makeWebSocketClient()
@@ -16,7 +15,7 @@ export function makeUpdateTorchRegistryPresenter() {
     new UiNotifier(),
     new ValidationPresenterDecorator(
       updateTorchRegistryPresenter,
-      validatorComposite({
+      {
         id: {
           type: 'string',
           required: true
@@ -27,7 +26,7 @@ export function makeUpdateTorchRegistryPresenter() {
         isLit: {
           type: 'boolean'
         }
-      })
+      }
     )
   )
 }

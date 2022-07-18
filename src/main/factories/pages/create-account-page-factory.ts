@@ -6,7 +6,6 @@ import { CreateAccountPresenter } from '@/presentation/presenters'
 import { UiNotifier } from '@/ui/notifiers'
 import { AccountStore } from '@/ui/stores'
 import { IgnemCreateAccountPage } from '@/ui/view'
-import { validatorComposite } from '@/validation/composites'
 
 export function makeCreateAccountPage() {
   const accountService = makeAccountService()
@@ -20,7 +19,7 @@ export function makeCreateAccountPage() {
     uiNotifier,
     new ValidationPresenterDecorator(
       presenter,
-      validatorComposite({
+      {
         name: {
           type: 'string',
           required: true
@@ -33,7 +32,7 @@ export function makeCreateAccountPage() {
           type: 'string',
           required: true
         }
-      })
+      }
     )
   )
 

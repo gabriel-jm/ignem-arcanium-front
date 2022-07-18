@@ -4,7 +4,6 @@ import { ErrorHandlingPresenterDecorator, ValidationPresenterDecorator } from '@
 import { makeWebSocketClient } from '@/main/factories/clients'
 import { CreateTorchRegistryPresenter } from '@/presentation/presenters'
 import { UiNotifier } from '@/ui/notifiers'
-import { validatorComposite } from '@/validation/composites'
 
 export function makeCreateTorchRegistryPresenter() {
   const wsClient = makeWebSocketClient()
@@ -17,7 +16,7 @@ export function makeCreateTorchRegistryPresenter() {
     new UiNotifier(),
     new ValidationPresenterDecorator(
       presenter,
-      validatorComposite({
+      {
         characterName: {
           required: true,
           type: 'string'
@@ -31,7 +30,7 @@ export function makeCreateTorchRegistryPresenter() {
           type: 'number',
           valueInBetween: [0, 6]
         }
-      })
+      }
     )
   )
 }

@@ -1,6 +1,6 @@
 import { Validator } from '@/validation/protocols'
 
-export const requiredFieldsValidator: Validator<string> = (
+export const requiredFieldValidator: Validator = (
   input: any, field: string
 ) => {
   const inputValue = Reflect.get(input, field)
@@ -9,5 +9,5 @@ export const requiredFieldsValidator: Validator<string> = (
     || inputValue === undefined
     || inputValue === ''
 
-  return isValueMissing ? { [field]: 'Required field' } : null
+  return isValueMissing ? 'Required field' : null
 }

@@ -1,3 +1,3 @@
-export type ValidationResult = Record<string, string> | null
+export type ValidationResult = string | null
 
-export type Validator<T = unknown> = (input: any, ...auxData: T[]) => ValidationResult
+export type Validator = (input: any, ...auxData: any) => ValidationResult

@@ -5,7 +5,6 @@ import { makeAccountService } from '@/main/factories/services'
 import { LoginPresenter } from '@/presentation/presenters'
 import { UiNotifier } from '@/ui/notifiers'
 import { AccountStore } from '@/ui/stores'
-import { validatorComposite } from '@/validation/composites'
 
 export function makeLoginPresenter() {
   const accountService = makeAccountService()
@@ -19,7 +18,7 @@ export function makeLoginPresenter() {
     uiNotifier,
     new ValidationPresenterDecorator(
       loginPresenter,
-      validatorComposite({
+      {
         email: {
           type: 'string',
           required: true
@@ -28,7 +27,7 @@ export function makeLoginPresenter() {
           type: 'string',
           required: true
         }
-      })
+      }
     )
   )
 
