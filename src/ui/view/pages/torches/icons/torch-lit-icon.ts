@@ -1,4 +1,4 @@
-import '../singles/wrapper'
+import '@/ui/view/components'
 import { raw } from 'lithen-tag-functions'
 
 export const torchLitIcon = () => raw`

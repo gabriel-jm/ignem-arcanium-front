@@ -1,8 +1,12 @@
+import './side-modal/ignem-torch-side-modal'
+import './torch-registry/ignem-torch-registry'
+import { css, html } from 'lithen-tag-functions'
 import { Presenter } from '@/presentation/protocols'
 import { SuccessNotifier } from '@/ui/protocols'
-import { closeIcon, IgnemElement, IgnemTorchRegistry, IgnemTorchSideModalElement, loadingIcon } from '@/ui/view'
+import { IgnemElement, loadingIcon } from '@/ui/view'
 import { containerStyles } from '@/ui/view/styles'
-import { css, html } from 'lithen-tag-functions'
+import { IgnemTorchSideModalElement } from './side-modal/ignem-torch-side-modal'
+import { IgnemTorchRegistry } from './torch-registry/ignem-torch-registry'
 
 interface TorchRegistry {
   id: string

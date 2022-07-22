@@ -1,8 +1,8 @@
 import { closeIcon, featherIcon, IgnemElement } from '@/ui/view'
 import { html } from 'lithen-tag-functions'
-import { torchLitIcon } from './torch-lit-icon'
-import { torchOffIcon } from './torch-off-icon'
-import { IgnemTorchBtnElement } from './torch-btn'
+import { torchLitIcon } from '../icons/torch-lit-icon'
+import { torchOffIcon } from '../icons/torch-off-icon'
+import { IgnemTorchBtnElement } from '../ignem-torch-btn'
 import { torchRegistryStyles } from './torch-registry-styles'
 
 export interface IgnemTorchRegistryProps {

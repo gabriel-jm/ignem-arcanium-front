@@ -1,4 +1,4 @@
-import '@/ui/view'
+import '@/ui/view/components'
 import { AccountStore } from '@/ui/stores'
 import { IgnemElement } from '@/ui/view/ignem-element'
 import { css, html } from 'lithen-tag-functions'
