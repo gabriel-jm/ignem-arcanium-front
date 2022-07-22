@@ -20,7 +20,7 @@ export class IgnemForm extends HTMLFormElement {
     Object.entries(errorsRecord).forEach(([field, error]) => {
       const input = this[field] as HTMLInputElement
 
-      input?.classList.add('error')
+      input?.classList?.add('error')
 
       const inputMessageElement = this.select(
         `input[name=${field}] ~ .input-message`
