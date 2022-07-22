@@ -58,6 +58,8 @@ export function validatorFacade(
       }
     }
 
-    return Object.fromEntries(result.entries())
+    return result.size
+      ? Object.fromEntries(result.entries())
+      : null
   }
 }

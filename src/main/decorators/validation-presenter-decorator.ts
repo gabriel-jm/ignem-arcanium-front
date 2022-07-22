@@ -3,14 +3,17 @@ import { Presenter } from '@/presentation/protocols'
 import { validatorFacade } from '@/validation/facades'
 
 export class ValidationPresenterDecorator implements Presenter {
+  private readonly validator: (input: unknown) => any
+  
   constructor(
     private readonly presenter: Presenter,
-    private readonly validationSchema: Record<string, Record<string, unknown>>
-  ) {}
+    validationSchema: Record<string, Record<string, unknown>>
+  ) {
+    this.validator = validatorFacade(validationSchema)
+  }
 
   async handle(data?: unknown) {
-    const validator = validatorFacade(this.validationSchema)
-    const validationErrors = validator(data)
+    const validationErrors = this.validator(data)
 
     if (validationErrors) {
       return validationErrorResponse(validationErrors)
