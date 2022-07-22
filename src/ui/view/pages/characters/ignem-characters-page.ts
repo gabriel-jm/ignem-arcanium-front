@@ -1,10 +1,13 @@
 import '@/ui/view'
+import './modal/ignem-character-modal'
 import { Presenter } from '@/presentation/protocols'
-import { containerStyles, characterCardStyles } from '@/ui/view'
-import { breadcrumbs, characterCard, IgnemCharacterModalElement, loadingIcon } from '@/ui/view/components'
+import { containerStyles } from '@/ui/view'
+import { breadcrumbs, loadingIcon } from '@/ui/view/components'
 import { IgnemElement } from '@/ui/view/ignem-element'
 import { css, html } from 'lithen-tag-functions'
 import { SuccessNotifier } from '@/ui/protocols'
+import { IgnemCharacterModalElement } from './modal/ignem-character-modal'
+import { characterCard, characterCardStyles } from './card/character-card'
 
 interface Character {
   id: string
