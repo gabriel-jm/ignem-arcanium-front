@@ -1,5 +1,5 @@
 import { CheckTokenExists } from '@/domain/protocols/use-cases'
-import { successResponse } from '@/presentation/helpers'
+import { failureResponse, successResponse } from '@/presentation/helpers'
 import { Presenter, Router } from '@/presentation/protocols'
 
 export class CheckTokenExistsPresenter implements Presenter {
@@ -13,8 +13,10 @@ export class CheckTokenExistsPresenter implements Presenter {
 
     if (hasToken) {
       this.router.navigate('/home')
+
+      return Promise.resolve(successResponse(null))
     }
 
-    return Promise.resolve(successResponse(null))
+    return Promise.resolve(failureResponse(null))
   }
 }

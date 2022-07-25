@@ -1,4 +1,4 @@
-import { successResponse } from '@/presentation/helpers'
+import { failureResponse, successResponse } from '@/presentation/helpers'
 import { CheckTokenExistsPresenter } from '@/presentation/presenters'
 import { mockCheckTokenExists, mockRouter } from '@/tests/helpers'
 
@@ -31,11 +31,20 @@ describe('CheckTokenExistsPresenter', () => {
     expect(routerSpy.navigate).toHaveBeenCalledWith('/home')
   })
 
-  it('should return an empty success response', async () => {
+  it('should return an empty success response if CheckTokenExists returns true', async () => {
     const { sut } = makeSut()
 
     const response = await sut.handle()
 
     expect(response).toEqual(successResponse(null))
+  })
+
+  it('should return an empty failure response if CheckTokenExists returns false', async () => {
+    const { sut, checkTokenExistsSpy } = makeSut()
+    checkTokenExistsSpy.check.mockReturnValueOnce(false)
+
+    const response = await sut.handle()
+
+    expect(response).toEqual(failureResponse(null))
   })
 })

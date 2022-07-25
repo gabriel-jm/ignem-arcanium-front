@@ -4,6 +4,7 @@ import { IgnemElement } from '@/ui/view/ignem-element'
 import {
   IgnemFormElement,
   ignemInput,
+  loadingIcon,
   textBetweenDashes,
   textBetweenDashesStyles
 } from '@/ui/view/components'
@@ -34,8 +35,14 @@ export class IgnemLoginPage extends IgnemElement {
 
   async init() {
     if (!tokenChecked) {
-      this.#checkTokenExists.handle()
       tokenChecked = true
+      const result = await this.#checkTokenExists.handle()
+
+      if (!result.ok) {
+        this.select('.loading')?.classList.add('hide')
+      }
+    } else {
+      this.select('.loading')?.classList.add('hide')
     }
   }
 
@@ -101,6 +108,26 @@ export class IgnemLoginPage extends IgnemElement {
         cursor: pointer;
         color: var(--sub-font-color);
       }
+
+      .loading {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background-color: #0005;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .loading.hide {
+        display: none;
+      }
+
+      .loading .loading-icon {
+        width: 80px;
+      }
     `
   }
 
@@ -136,6 +163,7 @@ export class IgnemLoginPage extends IgnemElement {
     }
   
     return html`
+      <div class="loading">${loadingIcon()}</div>
       <section class="container">
         <form is="ignem-form" class="login-form" on-submit=${handleSubmit}>
           <h1 class="form-title">Login</h1>
