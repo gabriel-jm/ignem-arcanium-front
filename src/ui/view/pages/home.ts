@@ -14,7 +14,13 @@ export class IgnemHomePage extends IgnemElement {
   }
 
   styling() {
-    return css`${[containerStyles, buttonStyles]}`
+    return css`
+      ${[containerStyles, buttonStyles]}
+
+      ul {
+        margin-top: 20px;
+      }
+    `
   }
 
   render() {
