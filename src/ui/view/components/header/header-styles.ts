@@ -26,6 +26,7 @@ export const headerStyles = css`
   .title {
     font-size: 1.4rem;
     margin: 0;
+    cursor: pointer;
   }
 
   .menu-icon {

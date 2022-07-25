@@ -2,6 +2,7 @@ import { html } from 'lithen-tag-functions'
 import { AccountStore } from '@/ui/stores'
 import { IgnemElement, menuIcon, logOutIcon } from '@/ui/view'
 import { headerStyles } from './header-styles'
+import { router } from 'lithen-router'
 
 export class IgnemHeader extends IgnemElement {
   #accountStore = new AccountStore()
@@ -33,8 +34,13 @@ export class IgnemHeader extends IgnemElement {
       <header class="header">
         <section class="container">
           <div>
-            ${menuIcon()}
-            <h1 class="title">Ignem Arcanium</h1>
+            <!-- ${menuIcon()} -->
+            <h1
+              class="title"
+              on-click=${() => router.goTo('/home')}
+            >
+              Ignem Arcanium
+            </h1>
           </div>
           <div>
             <h1 class="account-name">${accountName}</h1>
