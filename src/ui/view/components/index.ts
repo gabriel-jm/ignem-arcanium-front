@@ -7,5 +7,5 @@ export * from './header/header'
 
 export * from './modal/side-modal'
 
-export * from './form/form'
+export * from './form/ignem-form'
 export * from './form/input'
