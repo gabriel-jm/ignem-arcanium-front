@@ -95,11 +95,11 @@ export class IgnemCreateAccountPage extends IgnemElement {
       this.#block = true
 
       const form = this.select<IgnemFormElement>('form')!
-      const formData = {
-        name: form.userName.value,
-        email: form.email.value,
-        password: form.password.value
-      }
+      const formData = form.getData({
+        name: 'string',
+        email: 'string',
+        password: 'string'
+      })
 
       const result = await this.#createAccountPresenter.handle(formData)
 
@@ -127,27 +127,29 @@ export class IgnemCreateAccountPage extends IgnemElement {
         <form is="ignem-form" class="account-form" on-submit=${handleSubmit}>
           <h1 class="form-title">Create Account</h1>
           
-          ${ignemInput({
-            label: 'Name',
-            name: 'userName',
-            className: 'input',
-            placeholder: 'Name'
-          })}
+          ${[
+            ignemInput({
+              label: 'Name',
+              name: 'name',
+              className: 'input',
+              placeholder: 'Name'
+            }),
 
-          ${ignemInput({
-            label: 'E-Mail',
-            name: 'email',
-            className: 'input',
-            placeholder: 'E-Mail'
-          })}
+            ignemInput({
+              label: 'E-Mail',
+              name: 'email',
+              className: 'input',
+              placeholder: 'E-Mail'
+            }),
 
-          ${ignemInput({
-            label: 'Password',
-            className: 'input',
-            name: 'password',
-            type: 'password',
-            placeholder: 'Password'
-          })}
+            ignemInput({
+              label: 'Password',
+              className: 'input',
+              name: 'password',
+              type: 'password',
+              placeholder: 'Password'
+            })
+          ]}
 
           <button class="btn">Send</button>
           <p class="login-message">
