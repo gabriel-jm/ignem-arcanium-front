@@ -5,7 +5,7 @@ import * as validatorFacadeAll from '@/validation/facades'
 
 function makeSut(validationSchema = {}) {
   const validatorSpy = vi.fn<any>(() => null)
-  const validatorFacadeSpy = vi.spyOn(validatorFacadeAll, 'validatorFacade')
+  const validatorFacadeSpy = vi.spyOn(validatorFacadeAll, 'createValidator')
   validatorFacadeSpy.mockReturnValue(validatorSpy)
   
   const presenterSpy = mockPresenter()

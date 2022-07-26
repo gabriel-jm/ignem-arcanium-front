@@ -1,6 +1,6 @@
 import { validationErrorResponse } from '@/presentation/helpers'
 import { Presenter } from '@/presentation/protocols'
-import { validatorFacade } from '@/validation/facades'
+import { createValidator } from '@/validation/facades'
 
 export class ValidationPresenterDecorator implements Presenter {
   private readonly validator: (input: unknown) => any
@@ -9,7 +9,7 @@ export class ValidationPresenterDecorator implements Presenter {
     private readonly presenter: Presenter,
     validationSchema: Record<string, Record<string, unknown>>
   ) {
-    this.validator = validatorFacade(validationSchema)
+    this.validator = createValidator(validationSchema)
   }
 
   async handle(data?: unknown) {

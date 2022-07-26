@@ -1,8 +1,8 @@
-import { validatorFacade } from '@/validation/facades'
+import { createValidator } from '@/validation/facades'
 
-describe('validatorFacade', () => {
+describe('createValidator', () => {
   it('should return the correct validation errors', () => {
-    const validator = validatorFacade({
+    const validator = createValidator({
       field1: {
         type: 'number',
         required: true

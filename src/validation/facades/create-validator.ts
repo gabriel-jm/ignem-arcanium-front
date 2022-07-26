@@ -22,7 +22,7 @@ const validatorsByType: ValidatorsByType = {
   valueInBetween: valueInBetweenValidator
 }
 
-export function validatorFacade(
+export function createValidator(
   validationSchema: Record<string, Record<string, unknown>>
 ) {
   return (input: any) => {

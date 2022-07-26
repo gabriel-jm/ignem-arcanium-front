@@ -1,1 +1,1 @@
-export * from './validator-facade'
+export * from './create-validator'
