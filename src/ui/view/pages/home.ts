@@ -6,13 +6,6 @@ import { buttonStyles, containerStyles } from '@/ui/view/styles'
 import { router } from 'lithen-router'
 
 export class IgnemHomePage extends IgnemElement {
-  #accountStore = new AccountStore()
-
-  constructor() {
-    super({ preventRenderApplying: true })
-    this.applyRender()
-  }
-
   styling() {
     return css`
       ${[containerStyles, buttonStyles]}
@@ -24,7 +17,8 @@ export class IgnemHomePage extends IgnemElement {
   }
 
   render() {
-    const accountName = this.#accountStore.account?.name
+    const accountStore = new AccountStore()
+    const accountName = accountStore.account?.name
 
     return html`
       <ignem-header />
