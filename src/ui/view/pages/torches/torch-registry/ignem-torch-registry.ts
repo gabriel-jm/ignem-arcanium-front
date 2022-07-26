@@ -72,10 +72,9 @@ export class IgnemTorchRegistry extends IgnemElement {
         >
           ${featherIcon()}
         </ignem-torch-button>
-        ${isLit
-          ? torchLitIcon()
-          : torchOffIcon()
-        }
+
+        ${isLit ? torchLitIcon() : torchOffIcon()}
+        
         <div>
           <div class="torch-owner">
             <div data-tooltip="${characterName}">

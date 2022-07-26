@@ -95,14 +95,12 @@ export class IgnemTorchSideModal extends IgnemElement {
 
     const onSubmit: EventListener = event => {
       event.preventDefault()
-      const form = event.target as HTMLFormElement
-      const { characterName, torchCount, torchCharge } = form
-
-      const formData = {
-        characterName: characterName.value,
-        torchCount: torchCount.value ? Number(torchCount.value) : null,
-        torchCharge: torchCharge.value ? Number(torchCharge.value) : null
-      }
+      const form = event.target as IgnemFormElement
+      const formData = form.getData({
+        characterName: 'string',
+        torchCount: 'number',
+        torchCharge: 'number'
+      })
 
       const customEvent = new CustomEvent('form-submit', {
         detail: formData

@@ -21,7 +21,7 @@ const attributes = [
   'constitution',
   'intelligence',
   'wisdom',
-  'charism'
+  'charisma'
 ]
 
 /**
@@ -95,27 +95,19 @@ export class IgnemCharacterModal extends IgnemElement {
     }
 
     const onSubmit = () => {
-      const form = this.form
-
-      function toNumber(inputName: string) {
-        const inputValue = form[inputName].value
-
-        return inputValue && Number(inputValue)
-      }
-      
-      const formData = {
-        name: (form.elements.namedItem('name') as HTMLInputElement)?.value,
-        level: toNumber('level'),
-        gold: toNumber('gold'),
-        hp: toNumber('hp'),
-        mp: toNumber('mp'),
-        strength: toNumber('strength'),
-        dexterity: toNumber('dexterity'),
-        constitution: toNumber('constitution'),
-        intelligence: toNumber('intelligence'),
-        wisdom: toNumber('wisdom'),
-        charism: toNumber('charism')
-      }
+      const formData = this.form.getData({
+        name: 'string',
+        level: 'number',
+        gold: 'number',
+        hp: 'number',
+        mp: 'number',
+        strength: 'number',
+        dexterity: 'number',
+        constitution: 'number',
+        intelligence: 'number',
+        wisdom: 'number',
+        charisma: 'number'
+      })
 
       this.dispatchEvent(new CustomEvent('character-created', {
         detail: formData

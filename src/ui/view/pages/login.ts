@@ -141,10 +141,10 @@ export class IgnemLoginPage extends IgnemElement {
 
       const form = this.select<IgnemFormElement>('form')
 
-      const formData = {
-        email: form?.email.value,
-        password: form?.password.value
-      }
+      const formData = form?.getData({
+        email: 'string',
+        password: 'string'
+      })
 
       const result = await this.#accountLoginPresenter.handle(formData)
 

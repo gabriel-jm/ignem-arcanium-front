@@ -113,16 +113,21 @@ export class IgnemTorchesPage extends IgnemElement {
   }
 
   render() {
+    type ModalElement = IgnemTorchSideModalElement
+
     const onBtnClick = () => {
-      this.select<IgnemTorchSideModalElement>('#form-modal')?.open()
+      this.select<ModalElement>('#form-modal')?.open()
     }
 
     const onFormSubmit = async (event: CustomEventInit) => {
       const formData = event.detail
 
-      const result = await this.#createTorchRegistryPresenter.handle<TorchRegistry>(formData)
+      const result = await this.#createTorchRegistryPresenter
+        .handle<TorchRegistry>(formData)
 
-      const formModal = this.select<IgnemTorchSideModalElement>('#form-modal')
+      const formModal = this.select<ModalElement>(
+        '#form-modal'
+      )
 
       if (result.validationErrors) {
         formModal?.form.setErrors(result.validationErrors)
@@ -137,9 +142,9 @@ export class IgnemTorchesPage extends IgnemElement {
       )
       formModal?.close()
 
-      const torchRegistry = result.data
-
-      this.select('.torch-list')?.append(new IgnemTorchRegistry(torchRegistry))
+      this.select('.torch-list')?.append(
+        new IgnemTorchRegistry(result.data)
+      )
     }
 
     return html`
