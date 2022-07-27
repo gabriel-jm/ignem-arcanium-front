@@ -1,5 +1,5 @@
 import { setAccountStorePresenters } from '@/main/factories/stores'
-import { IgnemHomePage } from '@/ui/view/pages/home'
+import { IgnemHomePage } from '@/ui/view/pages'
 
 export function makeHomePage() {
   setAccountStorePresenters()
