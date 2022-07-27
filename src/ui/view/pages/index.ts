@@ -1,4 +1,4 @@
-export * from './root'
+export * from './root/ignem-root'
 export * from './not-found/ignem-not-found-page'
 export * from './intro/ignem-introduction-page'
 export * from './torches/ignem-torches-page'
