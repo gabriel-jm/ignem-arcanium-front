@@ -1,11 +1,11 @@
 import { Presenter } from '@/presentation/protocols'
 import { SuccessNotifier } from '@/ui/protocols'
-import { buttonStyles, containerStyles, inputStyles } from '@/ui/view'
 import { IgnemFormElement } from '@/ui/view/components'
 import { ignemInput } from '@/ui/view/components/form/input'
 import { IgnemElement } from '@/ui/view/ignem-element'
+import { createAccountStyles } from './create-account-styles'
 import { router } from 'lithen-router'
-import { css, html } from 'lithen-tag-functions'
+import { html } from 'lithen-tag-functions'
 
 export class IgnemCreateAccountPage extends IgnemElement {
   #createAccountPresenter: Presenter
@@ -28,62 +28,7 @@ export class IgnemCreateAccountPage extends IgnemElement {
   }
 
   styling() {
-    return css`
-      ${[containerStyles, buttonStyles, inputStyles]}
-
-      .container {
-        height: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-      }
-
-      .account-form {
-        max-width: 320px;
-        padding: 20px;
-      }
-
-      .form-title {
-        font-size: 2.4rem;
-        text-align: center;
-        margin-bottom: 45px;
-      }
-
-      .account-form label {
-        display: block;
-        margin: 8px 0;
-      }
-
-      .btn {
-        width: 100%;
-        margin-top: 16px;
-      }
-
-      .btn:disabled {
-        pointer-events: none;
-        filter: brightness(0.6);
-      }
-
-      .login-message {
-        margin-top: 28px;
-        font-size: 0.9rem;
-        color: var(--sub-font-color);
-        text-align: center;
-      }
-
-      .link {
-        text-decoration: underline;
-        background-color: transparent;
-        border: 0;
-        font-size: 0.9rem;
-        font-weight: normal;
-        font-family: var(--font-family);
-        width: 100%;
-        text-align: center;
-        cursor: pointer;
-        color: var(--sub-font-color);
-      }
-    `
+    return createAccountStyles
   }
   
   render() {
