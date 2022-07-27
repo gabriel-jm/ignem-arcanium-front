@@ -1,6 +1,6 @@
 export * from './root'
 export * from './not-found'
-export * from './intro'
+export * from './intro/ignem-introduction-page'
 export * from './torches/ignem-torches-page'
 export * from './login/ignem-login-page'
 export * from './create-account/ignem-create-account-page'
