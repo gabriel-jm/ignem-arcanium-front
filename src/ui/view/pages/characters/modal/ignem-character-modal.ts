@@ -73,13 +73,14 @@ export class IgnemCharacterModal extends IgnemElement {
     }
 
     const onInputAttribute = (nextAttribute?: string) => {
-      return (e: Event) => {
+      return (e: InputEvent) => {
+        e.preventDefault()
         const input = e.target as HTMLInputElement
-        const inputValue = input.value.trim().replace(/[^1-6]{1}/g, '')
+        const inputData = e.data?.replace(/[^1-6]/g, '') ?? ''
 
-        input.value = inputValue
-
-        if (!inputValue) return
+        input.value = inputData
+        
+        if (!input.value) return
         
         if (input.parentElement?.classList.contains('error')) {
           input.parentElement?.classList.remove('error')
@@ -123,7 +124,7 @@ export class IgnemCharacterModal extends IgnemElement {
           <input
             name="${attr}"
             type="number"
-            on-input=${onInputAttribute(arr[index + 1])}
+            on-input=${onInputAttribute(arr[index + 1]) as EventListener}
           />
         </label>
       `

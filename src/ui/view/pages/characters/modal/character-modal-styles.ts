@@ -151,6 +151,10 @@ export const characterModalStyles = css`
   .attr-input-group.error {
     background-color: var(--danger);
   }
+  
+  .attr-input-group.error:focus-within {
+    box-shadow: 0 0 0 2px var(--semitransparent-danger);
+  }
 
   .buttons {
     position: sticky;

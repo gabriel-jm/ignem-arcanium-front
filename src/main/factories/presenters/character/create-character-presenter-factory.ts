@@ -36,7 +36,7 @@ export function makeCreateCharacterPresenter() {
         constitution: requiredAttributeNumber,
         intelligence: requiredAttributeNumber,
         wisdom: requiredAttributeNumber,
-        charism: requiredAttributeNumber
+        charisma: requiredAttributeNumber
       }
     )
   )
