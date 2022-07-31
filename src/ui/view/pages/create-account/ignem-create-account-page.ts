@@ -1,6 +1,6 @@
 import { Presenter } from '@/presentation/protocols'
 import { SuccessNotifier } from '@/ui/protocols'
-import { IgnemFormElement } from '@/ui/view/components'
+import { IgnemFormElement, lockButtonUntil } from '@/ui/view/components'
 import { ignemInput } from '@/ui/view/components/form/input'
 import { IgnemElement } from '@/ui/view/ignem-element'
 import { createAccountStyles } from './create-account-styles'
@@ -10,7 +10,6 @@ import { html } from 'lithen-tag-functions'
 export class IgnemCreateAccountPage extends IgnemElement {
   #createAccountPresenter: Presenter
   #successNotifier: SuccessNotifier
-  #btnBlocked = false
 
   constructor(
     createAccountPresenter: Presenter,
@@ -21,24 +20,13 @@ export class IgnemCreateAccountPage extends IgnemElement {
     this.#successNotifier = successNotifier
   }
 
-  set #block(value: boolean) {
-    this.#btnBlocked = value
-    value && this.select('.btn')?.setAttribute('disabled', '')
-    !value && this.select('.btn')?.removeAttribute('disabled')
-  }
-
   styling() {
     return createAccountStyles
   }
   
   render() {
-    const handleSubmit = async (event: Event) => {
-      event.preventDefault()
-
-      if (this.#btnBlocked) return
-
-      this.#block = true
-
+    const getButton = this.select.bind(this, '.btn')
+    const handleSubmit = lockButtonUntil(getButton, async () => {
       const form = this.select<IgnemFormElement>('form')!
       const formData = form.getData({
         name: 'string',
@@ -63,9 +51,7 @@ export class IgnemCreateAccountPage extends IgnemElement {
         )
         router.goTo('/home')
       }
-
-      this.#block = false
-    }
+    })
 
     return html`
       <section class="container">

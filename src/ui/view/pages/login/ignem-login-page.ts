@@ -5,19 +5,19 @@ import {
   IgnemFormElement,
   ignemInput,
   loadingIcon,
+  lockButtonUntil,
   textBetweenDashes
 } from '@/ui/view/components'
 import { Presenter } from '@/presentation/protocols'
 import { SuccessNotifier } from '@/ui/protocols'
 import { loginStyles } from '@/ui/view/pages/login/login-styles'
 
-let tokenChecked = false
-
 export class IgnemLoginPage extends IgnemElement {
+  static tokenChecked = false
+
   #accountLoginPresenter: Presenter
   #checkTokenExists: Presenter
   #successNotifier: SuccessNotifier
-  #btnBlocked = false
 
   constructor(
     accountLoginPresenter: Presenter,
@@ -33,8 +33,8 @@ export class IgnemLoginPage extends IgnemElement {
   }
 
   async init() {
-    if (!tokenChecked) {
-      tokenChecked = true
+    if (!IgnemLoginPage.tokenChecked) {
+      IgnemLoginPage.tokenChecked = true
       const result = await this.#checkTokenExists.handle()
 
       if (!result.ok) {
@@ -45,23 +45,13 @@ export class IgnemLoginPage extends IgnemElement {
     }
   }
 
-  set #block(value: boolean) {
-    this.#btnBlocked = value
-    this.select<HTMLButtonElement>('.btn')!.disabled = value
-  }
-
   styling() {
     return loginStyles
   }
 
   render() {
-    const handleSubmit = async (event: Event) => {
-      event.preventDefault()
-
-      if (this.#btnBlocked) return
-
-      this.#block = true
-
+    const getButton = this.select.bind(this, '.link')
+    const handleSubmit = lockButtonUntil(getButton, async () => {
       const form = this.select<IgnemFormElement>('form')
 
       const formData = form?.getData({
@@ -81,9 +71,7 @@ export class IgnemLoginPage extends IgnemElement {
         )
         router.goTo('/home')
       }
-
-      this.#block = false
-    }
+    })
   
     return html`
       <div class="loading">${loadingIcon()}</div>
