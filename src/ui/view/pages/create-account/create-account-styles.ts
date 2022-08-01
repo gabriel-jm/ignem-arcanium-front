@@ -1,8 +1,8 @@
-import { containerStyles, buttonStyles, inputStyles } from '@/ui/view/styles'
+import { containerStyles, buttonStyles, inputAndSelectStyles } from '@/ui/view/styles'
 import { css } from 'lithen-tag-functions'
 
 export const createAccountStyles = css`
-  ${[containerStyles, buttonStyles, inputStyles]}
+  ${[containerStyles, buttonStyles, inputAndSelectStyles]}
 
   .container {
     height: 100%;

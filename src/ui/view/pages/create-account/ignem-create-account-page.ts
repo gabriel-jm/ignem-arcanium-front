@@ -1,7 +1,6 @@
 import { Presenter } from '@/presentation/protocols'
 import { SuccessNotifier } from '@/ui/protocols'
-import { IgnemFormElement, lockButtonUntil } from '@/ui/view/components'
-import { ignemInput } from '@/ui/view/components/form/input'
+import { IgnemFormElement, ignemInput, lockButtonUntil } from '@/ui/view/components'
 import { IgnemElement } from '@/ui/view/ignem-element'
 import { createAccountStyles } from './create-account-styles'
 import { router } from 'lithen-router'

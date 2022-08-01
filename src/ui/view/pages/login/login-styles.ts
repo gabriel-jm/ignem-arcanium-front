@@ -1,11 +1,11 @@
 import { textBetweenDashesStyles } from '@/ui/view/components'
-import { containerStyles, buttonStyles, inputStyles } from '@/ui/view/styles'
+import { containerStyles, buttonStyles, inputAndSelectStyles } from '@/ui/view/styles'
 import { css } from 'lithen-tag-functions'
 
 const additionalStyles = [
   containerStyles,
   buttonStyles,
-  inputStyles,
+  inputAndSelectStyles,
   textBetweenDashesStyles
 ]
 

@@ -3,7 +3,7 @@ import { css } from 'lithen-tag-functions'
 export const buttonStyles = css`
   .btn {
     --btn-bg-color: var(--black);
-    --btn-focus-outline-color: #aaaa;
+    --btn-focus-outline-color: var(--outline-white);
     --btn-border-color: #6a6a6a;
 
     font-family: 'Nunito', sans-serif;
@@ -49,7 +49,7 @@ export const borderedButtonStyles = css`
   }
 
   .btn-bordered:hover {
-    --btn-bg-color: #6a6a6a1a;
+    --btn-bg-color: var(--transparent-white);
   }
 
   .btn-bordered:focus {

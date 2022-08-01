@@ -1,14 +1,14 @@
 import { css } from 'lithen-tag-functions'
 
-export const inputStyles = css`
-  .input-container span {
+export const inputAndSelectStyles = css`
+  .input-container span, .select-container span {
     display: inline-block;
     padding-bottom: 4px;
     font-size: 1.05rem;
   }
 
-  .input {
-    --input-outline: var(--btn-focus-outline-color);
+  .input, .select {
+    --input-outline: var(--outline-white);
     --input-border-color: #555;
 
     width: 100%;
@@ -21,15 +21,15 @@ export const inputStyles = css`
     transition: all 250ms;
   }
 
-  .input:focus {
+  .input:focus, .select:focus {
     box-shadow: 0 0 0 2px var(--input-outline);
   }
 
-  .input.error {
+  .input.error, .select.error {
     --input-border-color: #a14747;
   }
 
-  .input.error:focus {
+  .input.error:focus, .select.error:focus {
     --input-outline: var(--danger);
   }
 
@@ -38,17 +38,5 @@ export const inputStyles = css`
     height: 0.9rem;
     width: fit-content;
     color: #a14747;
-  }
-
-  @keyframes drop {
-    from {
-      transform: translateY(-10px);
-      opacity: 0;
-    }
-
-    to {
-      transform: translateY(0);
-      opacity: 1;
-    }
   }
 `
