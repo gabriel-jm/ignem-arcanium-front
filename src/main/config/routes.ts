@@ -1,12 +1,13 @@
 import { auth } from '@/main/decorators'
 import {
+  makeCharactersPage,
   makeCreateAccountPage,
+  makeCreateCharactersPage,
   makeHomePage,
   makeIntroductionPage,
   makeLoginPage,
   makeTorchesPage
 } from '@/main/factories/pages'
-import { makeCharactersPage } from '@/main/factories/pages/characters-page-factory'
 import { IgnemNotFoundPage } from '@/ui/view'
 import { router } from 'lithen-router'
 
@@ -16,6 +17,7 @@ export const configRoutes = () => router.defineRoutes({
   '/create-account': makeCreateAccountPage,
   '/home': auth(makeHomePage),
   '/characters': auth(makeCharactersPage),
+  '/characters/create': auth(makeCreateCharactersPage),
   '/torches': auth(makeTorchesPage),
   notFound: () => new IgnemNotFoundPage()
 })
