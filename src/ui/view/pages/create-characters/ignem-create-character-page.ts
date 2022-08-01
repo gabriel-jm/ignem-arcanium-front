@@ -1,12 +1,12 @@
 import '../../components/header/header'
 import { IgnemElement } from '@/ui/view/ignem-element'
 import { css, html } from 'lithen-tag-functions'
-import { containerStyles, inputAndSelectStyles } from '@/ui/view/styles'
+import { containerStyles, formControlStyles } from '@/ui/view/styles'
 import { breadcrumbs, ignemInput, ignemSelect } from '@/ui/view/components'
 
 export class IgnemCreateCharacterPage extends IgnemElement {
   styling() {
-    const aditionalStyles = [containerStyles, inputAndSelectStyles]
+    const aditionalStyles = [containerStyles, formControlStyles]
 
     return css`
       ${aditionalStyles}
@@ -42,7 +42,6 @@ export class IgnemCreateCharacterPage extends IgnemElement {
 
       .icon:hover {
         background-color: var(--transparent-white);
-        outline: 2px solid var(--outline-white);
       }
 
       .icon.selected {
@@ -98,7 +97,17 @@ export class IgnemCreateCharacterPage extends IgnemElement {
               label: 'Alignment',
               name: 'alignment',
               placeholder: 'Select alignment',
-              options: ['Lawful Good']
+              options: [
+                'Lawful Good',
+                'Lawful Neutral',
+                'Lawful Evil',
+                'Neutral Good',
+                'Neutral',
+                'Neutral Evil',
+                'Chaotic Good',
+                'Chaotic Neutral',
+                'Chaotic Evil'
+              ]
             }),
 
             ignemInput({

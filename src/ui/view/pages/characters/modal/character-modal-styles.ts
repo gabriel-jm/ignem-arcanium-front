@@ -1,9 +1,9 @@
-import { inputAndSelectStyles, textBetweenDashesStyles, buttonStyles, borderedButtonStyles } from '@/ui/view'
+import { formControlStyles, textBetweenDashesStyles, buttonStyles, borderedButtonStyles } from '@/ui/view'
 import { css } from 'lithen-tag-functions'
 
 export const characterModalStyles = css`
   ${[
-    inputAndSelectStyles,
+    formControlStyles,
     textBetweenDashesStyles,
     buttonStyles,
     borderedButtonStyles

@@ -1,4 +1,4 @@
-import { buttonStyles, IgnemElement, IgnemSideModalElement, inputAndSelectStyles } from '@/ui/view'
+import { buttonStyles, IgnemElement, IgnemSideModalElement, formControlStyles } from '@/ui/view'
 import { IgnemFormElement } from '@/ui/view/components'
 import { css, html } from 'lithen-tag-functions'
 
@@ -36,7 +36,7 @@ export class IgnemTorchSideModal extends IgnemElement {
 
   styling() {
     return css`
-      ${[inputAndSelectStyles, buttonStyles]}
+      ${[formControlStyles, buttonStyles]}
 
       .modal-header {
         display: flex;

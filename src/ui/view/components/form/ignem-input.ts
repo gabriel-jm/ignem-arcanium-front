@@ -31,14 +31,14 @@ export function ignemInput(props: IgnemInputProps) {
   }
 
   return html`
-    <label class="input-container">
+    <label class="form-control-container">
       ${label && raw`<span>${label}</span>`}
       <input
-        ${className ? `class="${className}"` : 'class="input"'}
+        class="${className || 'form-control'}"
         on-input=${onInput}
         ${toHtmlAttributes(attributes)}
       />
-      <p class="input-message"></p>
+      <p class="form-control-message"></p>
     </label>
   ` 
 }

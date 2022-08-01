@@ -80,7 +80,7 @@ export class IgnemForm extends HTMLFormElement {
       input?.classList?.add('error')
 
       const inputMessageElement = this.select(
-        `input[name=${field}] ~ .input-message`
+        `[name=${field}] ~ .form-control-message`
       )
 
       if (inputMessageElement) {
@@ -95,14 +95,14 @@ export class IgnemForm extends HTMLFormElement {
     formElements.forEach(element => {
       const errorInput = element.classList.contains('error')
 
-      if (!errorInput || element.nodeName !== 'INPUT') return
+      if (!errorInput || element.nodeName === 'BUTTON') return
 
       const input = element as HTMLInputElement
       
       input?.classList.remove('error')
       
       const inputMessageElement = this.select(
-        `input[name=${input.name}] ~ .input-message`
+        `[name=${input.name}] ~ .form-control-message`
       )
 
       if (inputMessageElement) {

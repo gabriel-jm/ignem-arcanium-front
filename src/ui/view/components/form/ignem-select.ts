@@ -16,11 +16,11 @@ export function ignemSelect({
   placeholder
 }: IgnemSelectProps) {
   return html`
-    <label class="select-container">
+    <label class="form-control-container">
       ${label && html`<span>${label}</span>`}
       <select
         name="${name}"
-        ${className ? `class="${className}"` : 'class="select"'}
+        class="${className || 'form-control'}"
       >
         ${placeholder && html`<option hidden>${placeholder}</option>`}
         ${options.map(option => html`
