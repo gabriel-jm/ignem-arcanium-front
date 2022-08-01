@@ -2,7 +2,7 @@ import { VerifyToken } from '@/domain/protocols/use-cases'
 import { successResponse } from '@/presentation/helpers'
 import { Presenter } from '@/presentation/protocols'
 import { Router } from '@/presentation/protocols/router'
-import { SetAccountStore } from '@/ui/protocols/stores'
+import { SetAccountStore } from '@/presentation/protocols/stores'
 
 export class VerifyTokenPresenter implements Presenter {
   constructor(

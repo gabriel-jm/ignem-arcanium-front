@@ -1,7 +1,7 @@
 import { AccountLogout } from '@/domain/protocols/use-cases'
 import { successResponse } from '@/presentation/helpers'
 import { Presenter, Router } from '@/presentation/protocols'
-import { SetAccountStore } from '@/ui/protocols/stores'
+import { SetAccountStore } from '@/presentation/protocols/stores'
 
 export class LogoutPresenter implements Presenter {
   constructor(

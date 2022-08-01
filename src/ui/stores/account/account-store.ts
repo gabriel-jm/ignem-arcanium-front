@@ -1,5 +1,5 @@
 import { Presenter } from '@/presentation/protocols'
-import { AccountData, SetAccountStore } from '@/ui/protocols/stores'
+import { AccountData, SetAccountStore } from '@/presentation/protocols/stores'
 
 export class AccountStore implements SetAccountStore {
   static #instance: AccountStore

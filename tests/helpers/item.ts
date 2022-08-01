@@ -16,3 +16,21 @@ export function mockListAllDefaultItemsService() {
     listAllDefault: vi.fn(() => Promise.resolve(result))
   }
 }
+
+export function mockListAllDefaultItems() {
+  const result = [fakeItem()]
+
+  return {
+    result,
+    listAll: vi.fn(() => Promise.resolve(result))
+  }
+}
+
+export function mockSetItemsStore() {
+  return {
+    setItemsValue: null,
+    set items(value: any) {
+      this.setItemsValue = value
+    }
+  }
+}

@@ -1,7 +1,7 @@
 import { AccountLogin } from '@/domain/protocols/use-cases'
 import { successResponse } from '@/presentation/helpers'
 import { Presenter } from '@/presentation/protocols'
-import { SetAccountStore } from '@/ui/protocols/stores'
+import { SetAccountStore } from '@/presentation/protocols/stores'
 
 interface LoginPresenterParams {
   email: string
