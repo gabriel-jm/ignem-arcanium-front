@@ -2,11 +2,17 @@ import '../../components/header/header'
 import { IgnemElement } from '@/ui/view/ignem-element'
 import { css, html } from 'lithen-tag-functions'
 import { containerStyles, formControlStyles } from '@/ui/view/styles'
-import { breadcrumbs, ignemInput, ignemSelect, ignemTextarea, InputMasks } from '@/ui/view/components'
+import { breadcrumbs, textBetweenDashes, textBetweenDashesStyles } from '@/ui/view/components'
+import { characterFirstForm, characterFirstFormStyles } from './forms/character-first-form'
+import { SuperElementRenderValues } from 'lithen-super-element'
 
 export class IgnemCreateCharacterPage extends IgnemElement {
   styling() {
-    const aditionalStyles = [containerStyles, formControlStyles]
+    const aditionalStyles = [
+      containerStyles,
+      formControlStyles,
+      textBetweenDashesStyles
+    ]
 
     return css`
       ${aditionalStyles}
@@ -19,56 +25,62 @@ export class IgnemCreateCharacterPage extends IgnemElement {
         margin-bottom: 30px;
       }
 
-      .icons-title {
-        margin-bottom: 10px;
-        font-size: 1.1rem;
-      }
+      ${characterFirstFormStyles}
 
-      .icons-container {
-        background-color: #1b1b1b;
-        padding: 10px 12px;
+      .attributes {
+        min-width: 100%;
         display: flex;
-        gap: 12px;
+        flex-wrap: wrap;
+        gap: 10px;
+        font-weight: bold;
+        justify-content: space-around;
+        padding: 0 30px;
+      }
+
+      .attr-input-group {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        font-size: 1rem;
+        width: 160px;
+        min-width: 160px;
+        background-color: #3a3a3a;
+        padding: 8px 10px;
         border-radius: 4px;
+        text-align: center;
+        transition: all 300ms ease-in-out;
       }
 
-      .icon {
-        width: 80px;
-        border: 1px solid var(--container-border-color);
+      .attr-input-group input {
+        display: inline-block;
+        width: 30px;
+        border: 0;
+        padding: 2px 4px;
         border-radius: 4px;
-        padding: 6px 12px;
-        cursor: pointer;
-        transition: background-color 200ms;
+        background-color: var(--body-bg-color);
+        color: var(--font-color);
+        font-size: 0.95rem;
+        text-align: center;
+        appearance: textfield;
       }
 
-      .icon img {
-        pointer-events: none;
+      .attr-input-group input::-webkit-outer-spin-button,
+      .attr-input-group input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
       }
 
-      .icon:hover {
-        background-color: var(--transparent-white);
+      .attr-input-group:focus-within {
+        box-shadow: 0 0 0 2px var(--outline-white);
+        color: var(--font-color);
       }
 
-      .icon.selected {
-        outline: 2px solid var(--outline-white);
+      .attr-input-group.error {
+        background-color: var(--danger);
       }
-
-      .first-form {
-        padding-top: 20px;
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 8px 16px;
-      }
-
-      .description {
-        grid-column: 1 / 3;
-      }
-
-      .form-control.description {
-        overflow: auto;
-        resize: vertical;
-        max-height: 200px;
-        min-height: 100px;
+      
+      .attr-input-group.error:focus-within {
+        box-shadow: 0 0 0 2px var(--semitransparent-danger);
       }
 
       @media screen and (max-width: 375px) {
@@ -80,30 +92,59 @@ export class IgnemCreateCharacterPage extends IgnemElement {
     `
   }
   
-  render() {
+  render(): SuperElementRenderValues {
     const breadcrumbProps = {
       Home: '/home',
       Characters: '/characters',
       'Create Character': 'current'
     }
 
-    const onClickIcon = (event: Event) => {
-      const iconElement = event.target as HTMLElement
-      const selectedIcon = this.select('.icon.selected')
-      
-      if (iconElement !== selectedIcon) {
-        selectedIcon?.classList.remove('selected')
-        iconElement.classList.add('selected')
+    const attributes = [
+      'strength',
+      'dexterity',
+      'constitution',
+      'intelligence',
+      'wisdom',
+      'charisma'
+    ]
+
+    const onInputAttribute = (nextAttribute?: string) => {
+      return (e: InputEvent) => {
+        e.preventDefault()
+        const input = e.target as HTMLInputElement
+        const inputData = e.data?.replace(/[^1-6]/g, '') ?? ''
+
+        input.value = inputData
+        
+        if (!input.value) return
+        
+        if (input.parentElement?.classList.contains('error')) {
+          input.parentElement?.classList.remove('error')
+        }
+
+        if (nextAttribute) {
+          const query = `input[name=${nextAttribute}]`
+          this.select<HTMLInputElement>(query)?.focus()
+        } else {
+          input.blur()
+        }
       }
     }
 
-    const iconPaths = ['/mage.svg', '/mage.svg']
+    const attributeInputs = attributes.map((attr, index, arr) => {
+      const captalizedAttribute = attr[0].toUpperCase() + attr.substring(1)
 
-    const icons = iconPaths.map(iconPath => html`
-      <figure class="icon" on-click=${onClickIcon}>
-        <img alt="A character icon" src="${iconPath}" />
-      </figure>
-    `)
+      return html`
+        <label class="attr-input-group" attr=${attr}>
+          <span>${captalizedAttribute}</span>
+          <input
+            name="${attr}"
+            type="number"
+            on-input=${onInputAttribute(arr[index + 1]) as EventListener}
+          />
+        </label>
+      `
+    })
 
     return html`
       <ignem-header />
@@ -111,62 +152,14 @@ export class IgnemCreateCharacterPage extends IgnemElement {
       <section class="container">
         ${breadcrumbs(breadcrumbProps)}
         <h1 class="characters-title">Create Character</h1>
-        
-        <p class="icons-title">
-          Choose an icon to represent your character
-        </p>
-        
-        <div class="icons-container">
-          ${icons}
-        </div>
+        <form is="ignem-form" class="character-form">
+          ${characterFirstForm(this)}
 
-        <form is="ignem-form" class="first-form">
-          ${[
-            ignemInput({
-              label: 'Name',
-              name: 'name',
-              placeholder: 'Enter your character name'
-            }),
-            
-            ignemSelect({
-              label: 'Alignment',
-              name: 'alignment',
-              placeholder: 'Select alignment',
-              options: [
-                'Lawful Good',
-                'Lawful Neutral',
-                'Lawful Evil',
-                'Neutral Good',
-                'Neutral',
-                'Neutral Evil',
-                'Chaotic Good',
-                'Chaotic Neutral',
-                'Chaotic Evil'
-              ]
-            }),
+          ${textBetweenDashes('Attributes')}
 
-            ignemInput({
-              label: 'Level',
-              name: 'level',
-              placeholder: 'Current character level',
-              mask: InputMasks.ONLY_NUMBERS
-            }),
-
-            ignemInput({
-              label: 'Gold',
-              name: 'gold',
-              placeholder: 'Gold amount',
-              mask: InputMasks.ONLY_NUMBERS
-            }),
-
-            ignemTextarea({
-              label: 'Description',
-              name: 'description',
-              placeholder: 'Describe your character and story',
-              containerClassName: 'description',
-              className: 'form-control description'
-            })
-          ]}
+          <div class="attributes">
+            ${attributeInputs}
+          </div>
         </form>
       </section>
     `
