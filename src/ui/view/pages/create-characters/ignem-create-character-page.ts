@@ -2,7 +2,7 @@ import '../../components/header/header'
 import { IgnemElement } from '@/ui/view/ignem-element'
 import { css, html } from 'lithen-tag-functions'
 import { containerStyles, formControlStyles } from '@/ui/view/styles'
-import { breadcrumbs, ignemInput, ignemSelect } from '@/ui/view/components'
+import { breadcrumbs, ignemInput, ignemSelect, ignemTextarea, InputMasks } from '@/ui/view/components'
 
 export class IgnemCreateCharacterPage extends IgnemElement {
   styling() {
@@ -19,11 +19,16 @@ export class IgnemCreateCharacterPage extends IgnemElement {
         margin-bottom: 30px;
       }
 
+      .icons-title {
+        margin-bottom: 10px;
+        font-size: 1.1rem;
+      }
+
       .icons-container {
         background-color: #1b1b1b;
         padding: 10px 12px;
         display: flex;
-        gap: 10px;
+        gap: 12px;
         border-radius: 4px;
       }
 
@@ -31,7 +36,7 @@ export class IgnemCreateCharacterPage extends IgnemElement {
         width: 80px;
         border: 1px solid var(--container-border-color);
         border-radius: 4px;
-        padding: 6px 10px;
+        padding: 6px 12px;
         cursor: pointer;
         transition: background-color 200ms;
       }
@@ -46,6 +51,31 @@ export class IgnemCreateCharacterPage extends IgnemElement {
 
       .icon.selected {
         outline: 2px solid var(--outline-white);
+      }
+
+      .first-form {
+        padding-top: 20px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px 16px;
+      }
+
+      .description {
+        grid-column: 1 / 3;
+      }
+
+      .form-control.description {
+        overflow: auto;
+        resize: vertical;
+        max-height: 200px;
+        min-height: 100px;
+      }
+
+      @media screen and (max-width: 375px) {
+        .first-form {
+          display: flex;
+          flex-direction: column;
+        }
       }
     `
   }
@@ -67,6 +97,14 @@ export class IgnemCreateCharacterPage extends IgnemElement {
       }
     }
 
+    const iconPaths = ['/mage.svg', '/mage.svg']
+
+    const icons = iconPaths.map(iconPath => html`
+      <figure class="icon" on-click=${onClickIcon}>
+        <img alt="A character icon" src="${iconPath}" />
+      </figure>
+    `)
+
     return html`
       <ignem-header />
 
@@ -74,18 +112,15 @@ export class IgnemCreateCharacterPage extends IgnemElement {
         ${breadcrumbs(breadcrumbProps)}
         <h1 class="characters-title">Create Character</h1>
         
-        <p>Choose an icon to represent your character</p>
+        <p class="icons-title">
+          Choose an icon to represent your character
+        </p>
         
         <div class="icons-container">
-          <figure class="icon" on-click=${onClickIcon}>
-            <img alt="A mage icon" src="/mage.svg" />
-          </figure>
-          <figure class="icon" on-click=${onClickIcon}>
-            <img alt="A mage icon" src="/mage.svg" />
-          </figure>
+          ${icons}
         </div>
 
-        <form>
+        <form is="ignem-form" class="first-form">
           ${[
             ignemInput({
               label: 'Name',
@@ -111,17 +146,26 @@ export class IgnemCreateCharacterPage extends IgnemElement {
             }),
 
             ignemInput({
-              label: 'Gold',
-              name: 'gold',
-              placeholder: 'Gold amount'
+              label: 'Level',
+              name: 'level',
+              placeholder: 'Current character level',
+              mask: InputMasks.ONLY_NUMBERS
             }),
 
-            html`
-              <label>
-                <span>Description</span>
-                <textarea></textarea>
-              </label>
-            `
+            ignemInput({
+              label: 'Gold',
+              name: 'gold',
+              placeholder: 'Gold amount',
+              mask: InputMasks.ONLY_NUMBERS
+            }),
+
+            ignemTextarea({
+              label: 'Description',
+              name: 'description',
+              placeholder: 'Describe your character and story',
+              containerClassName: 'description',
+              className: 'form-control description'
+            })
           ]}
         </form>
       </section>

@@ -8,6 +8,7 @@ import { css, html } from 'lithen-tag-functions'
 import { SuccessNotifier } from '@/ui/protocols'
 import { IgnemCharacterModalElement } from './modal/ignem-character-modal'
 import { characterCard, characterCardStyles } from './card/character-card'
+import { router } from 'lithen-router'
 
 interface Character {
   id: string
@@ -61,7 +62,7 @@ export class IgnemCharactersPage extends IgnemElement {
         .concat(html`
           <button
             class="new-btn"
-            on-click=${openCharacterModal}
+            on-click=${() => router.goTo('/characters/create')}
           >
             &plus; New
           </button>

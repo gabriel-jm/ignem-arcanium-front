@@ -20,13 +20,14 @@ export function ignemSelect({
       ${label && html`<span>${label}</span>`}
       <select
         name="${name}"
-        class="${className || 'form-control'}"
+        class="form-control ${className}"
       >
         ${placeholder && html`<option hidden>${placeholder}</option>`}
         ${options.map(option => html`
           <option value="${option}">${option}</option>
         `)}
       </select>
+      <p class="form-control-message"></p>
     </label>
   `
 }

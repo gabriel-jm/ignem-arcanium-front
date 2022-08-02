@@ -34,7 +34,7 @@ export function ignemInput(props: IgnemInputProps) {
     <label class="form-control-container">
       ${label && raw`<span>${label}</span>`}
       <input
-        class="${className || 'form-control'}"
+        class="form-control ${className}"
         on-input=${onInput}
         ${toHtmlAttributes(attributes)}
       />
