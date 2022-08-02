@@ -83,12 +83,12 @@ export const characterModalStyles = css`
     gap: 20px;
   }
 
-  .inputs .input-container {
+  .inputs .form-control-container {
     flex: 1;
     flex-basis: 100px;
   }
 
-  .inputs .input-container:first-of-type {
+  .inputs .form-control-container:first-of-type {
     flex: 3;
     flex-shrink: 0;
     flex-basis: 100%;

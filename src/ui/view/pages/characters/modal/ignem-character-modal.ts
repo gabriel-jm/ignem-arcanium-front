@@ -147,7 +147,7 @@ export class IgnemCharacterModal extends IgnemElement {
                   label: 'Name',
                   name: 'name',
                   placeholder: 'Character name',
-                  className: 'input name'
+                  className: 'form-control name'
                 }),
 
                 ignemInput({
