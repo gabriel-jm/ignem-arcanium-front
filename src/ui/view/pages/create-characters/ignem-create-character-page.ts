@@ -4,6 +4,7 @@ import { css, html } from 'lithen-tag-functions'
 import { containerStyles, formControlStyles } from '@/ui/view/styles'
 import { breadcrumbs, textBetweenDashes, textBetweenDashesStyles } from '@/ui/view/components'
 import { characterFirstForm, characterFirstFormStyles } from './forms/character-first-form'
+import { characterSecondForm, characterSecondFormStyles } from './forms/character-second-form'
 import { SuperElementRenderValues } from 'lithen-super-element'
 
 export class IgnemCreateCharacterPage extends IgnemElement {
@@ -11,7 +12,9 @@ export class IgnemCreateCharacterPage extends IgnemElement {
     const aditionalStyles = [
       containerStyles,
       formControlStyles,
-      textBetweenDashesStyles
+      textBetweenDashesStyles,
+      characterFirstFormStyles,
+      characterSecondFormStyles
     ]
 
     return css`
@@ -23,64 +26,6 @@ export class IgnemCreateCharacterPage extends IgnemElement {
         padding-top: 16px;
         padding-bottom: 16px;
         margin-bottom: 30px;
-      }
-
-      ${characterFirstFormStyles}
-
-      .attributes {
-        min-width: 100%;
-        display: flex;
-        flex-wrap: wrap;
-        gap: 10px;
-        font-weight: bold;
-        justify-content: space-around;
-        padding: 0 30px;
-      }
-
-      .attr-input-group {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        font-size: 1rem;
-        width: 160px;
-        min-width: 160px;
-        background-color: #3a3a3a;
-        padding: 8px 10px;
-        border-radius: 4px;
-        text-align: center;
-        transition: all 300ms ease-in-out;
-      }
-
-      .attr-input-group input {
-        display: inline-block;
-        width: 30px;
-        border: 0;
-        padding: 2px 4px;
-        border-radius: 4px;
-        background-color: var(--body-bg-color);
-        color: var(--font-color);
-        font-size: 0.95rem;
-        text-align: center;
-        appearance: textfield;
-      }
-
-      .attr-input-group input::-webkit-outer-spin-button,
-      .attr-input-group input::-webkit-inner-spin-button {
-        -webkit-appearance: none;
-        margin: 0;
-      }
-
-      .attr-input-group:focus-within {
-        box-shadow: 0 0 0 2px var(--outline-white);
-        color: var(--font-color);
-      }
-
-      .attr-input-group.error {
-        background-color: var(--danger);
-      }
-      
-      .attr-input-group.error:focus-within {
-        box-shadow: 0 0 0 2px var(--semitransparent-danger);
       }
 
       @media screen and (max-width: 375px) {
@@ -153,13 +98,11 @@ export class IgnemCreateCharacterPage extends IgnemElement {
         ${breadcrumbs(breadcrumbProps)}
         <h1 class="characters-title">Create Character</h1>
         <form is="ignem-form" class="character-form">
-          ${characterFirstForm(this)}
-
-          ${textBetweenDashes('Attributes')}
-
-          <div class="attributes">
-            ${attributeInputs}
-          </div>
+          ${[
+            characterFirstForm(this),
+            textBetweenDashes('Attributes'),
+            characterSecondForm(this)
+          ]}
         </form>
       </section>
     `
