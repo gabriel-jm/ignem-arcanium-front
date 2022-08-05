@@ -12,17 +12,17 @@
     "check": "ncu"
   },
   "devDependencies": {
-    "@types/node": "^18.6.1",
+    "@types/node": "^18.6.4",
     "c8": "^7.12.0",
     "happy-dom": "^6.0.4",
-    "npm-check-updates": "^16.0.0",
+    "npm-check-updates": "^16.0.5",
     "typescript": "^4.7.4",
-    "vite": "^3.0.3",
-    "vitest": "^0.19.0"
+    "vite": "^3.0.4",
+    "vitest": "^0.20.3"
   },
   "dependencies": {
     "lithen-router": "^2.0.0",
-    "lithen-super-element": "^4.0.1",
-    "lithen-tag-functions": "^4.0.1"
+    "lithen-super-element": "^4.1.0",
+    "lithen-tag-functions": "^4.1.0"
   }
 }
