@@ -1,12 +1,31 @@
-import { IgnemElement } from '@/ui/view/ignem-element'
+import { IgnemCreateCharacterPage } from '../ignem-create-character-page'
+import { tooltipStyles } from '@/ui/view/styles'
 import { css, html } from 'lithen-tag-functions'
 
 export const characterSecondFormStyles = css`
+  ${tooltipStyles}
+
   .attributes-warn {
     text-align: center;
     color: var(--sub-font-color);
     margin: 10px 0 30px 0;
     padding: 0 16px;
+  }
+
+  .stats-container {
+    margin-bottom: 40px;
+    text-align: center;
+  }
+
+  .stats-container span {
+    display: inline-block;
+    width: 200px;
+    margin: 0 8px;
+    background-color: #1b1b1b;
+    padding: 8px;
+    border-radius: 4px;
+    color: var(--sub-font-color);
+    cursor: default;
   }
 
   .attributes {
@@ -66,7 +85,7 @@ export const characterSecondFormStyles = css`
   }
 `
 
-export function characterSecondForm(parentElement: IgnemElement) {
+export function characterSecondForm(parent: IgnemCreateCharacterPage) {
   const attributes = [
     'strength',
     'dexterity',
@@ -76,7 +95,24 @@ export function characterSecondForm(parentElement: IgnemElement) {
     'charisma'
   ]
 
-  const onInputAttribute = (nextAttribute?: string) => {
+  function updateStats() {
+    const data = parent.form.getData<Record<string, number>>({
+      level: 'number',
+      strength: 'number',
+      constitution: 'number',
+      intelligence: 'number'
+    })
+
+    const { level, strength,  constitution, intelligence } = data
+    const hp = constitution * (level ?? 1) + strength + 10
+    const mp = intelligence * (level ?? 1) + 10
+
+    parent.select('[level]')!.textContent = `Level ${level}`
+    parent.select('[hp]')!.textContent = `Health Points ${hp}`
+    parent.select('[mp]')!.textContent = `Mana Points ${mp}`
+  }
+
+  function onInputAttribute(nextAttribute?: string) {
     return (e: InputEvent) => {
       e.preventDefault()
       const input = e.target as HTMLInputElement
@@ -92,10 +128,12 @@ export function characterSecondForm(parentElement: IgnemElement) {
 
       if (nextAttribute) {
         const query = `input[name=${nextAttribute}]`
-        parentElement.select<HTMLInputElement>(query)?.focus()
+        parent.select<HTMLInputElement>(query)?.focus()
       } else {
         input.blur()
       }
+
+      updateStats()
     }
   }
 
@@ -114,10 +152,23 @@ export function characterSecondForm(parentElement: IgnemElement) {
     `
   })
 
+  const hpCalcExplain = 'Health points are calculated by: Constitution x Level + Strength + 10'
+  const mpCalcExplain = 'Mana points are calculated by: Intelligence x Level + 10'
+
   return html`
     <p class="attributes-warn">
       The attributes must have a value between 1 and 6.
     </p>
+
+    <div class="stats-container">
+      <span level>Level 1</span>
+      <span hp data-tooltip="${hpCalcExplain}">
+        Health Points 10
+      </span>
+      <span mp data-tooltip="${mpCalcExplain}">
+        Mana Points 10
+      </span>
+    </div>
 
     <div class="attributes">
       ${attributeInputs}
