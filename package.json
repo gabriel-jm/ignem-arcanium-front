@@ -22,7 +22,7 @@
   },
   "dependencies": {
     "lithen-router": "^2.0.0",
-    "lithen-super-element": "^4.1.0",
+    "lithen-super-element": "^4.1.1",
     "lithen-tag-functions": "^4.1.1"
   }
 }

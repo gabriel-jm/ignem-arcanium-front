@@ -94,7 +94,7 @@ export class IgnemSideModal extends IgnemElement {
   }
   
   render() {
-    this.on('click', event => {
+    this.on('click', (event: Event) => {
       const containerElement = this.select('.container')
       const [clickedElement] = event.composedPath()
       
