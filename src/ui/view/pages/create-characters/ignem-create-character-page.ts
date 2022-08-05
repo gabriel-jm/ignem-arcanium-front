@@ -85,7 +85,7 @@ export class IgnemCreateCharacterPage extends IgnemElement {
           <input
             name="${attr}"
             type="number"
-            on-input=${onInputAttribute(arr[index + 1]) as EventListener}
+            on-input=${onInputAttribute(arr[index + 1])}
           />
         </label>
       `
