@@ -5,6 +5,7 @@ import { containerStyles, formControlStyles } from '@/ui/view/styles'
 import { breadcrumbs, IgnemFormElement, textBetweenDashes, textBetweenDashesStyles } from '@/ui/view/components'
 import { characterFirstForm, characterFirstFormStyles } from './forms/character-first-form'
 import { characterSecondForm, characterSecondFormStyles } from './forms/character-second-form'
+import { characterThirdForm, characterThirdFormStyles } from './forms/character-third-form'
 import { SuperElementRenderValues } from 'lithen-super-element'
 
 export class IgnemCreateCharacterPage extends IgnemElement {
@@ -18,7 +19,8 @@ export class IgnemCreateCharacterPage extends IgnemElement {
       formControlStyles,
       textBetweenDashesStyles,
       characterFirstFormStyles,
-      characterSecondFormStyles
+      characterSecondFormStyles,
+      characterThirdFormStyles
     ]
 
     return css`
@@ -59,7 +61,8 @@ export class IgnemCreateCharacterPage extends IgnemElement {
             characterFirstForm(this),
             textBetweenDashes('Attributes'),
             characterSecondForm(this),
-            textBetweenDashes('Inventory')
+            textBetweenDashes('Inventory'),
+            characterThirdForm(this)
           ]}
         </form>
       </section>

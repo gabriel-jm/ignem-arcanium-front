@@ -108,7 +108,7 @@ export function characterSecondForm(parent: IgnemCreateCharacterPage) {
     const hp = constitution * (level ?? 1) + strength + 10
     const mp = intelligence * (level ?? 1) + 10
 
-    parent.select('[level]')!.textContent = `Level ${level}`
+    parent.select('[level]')!.textContent = `Level ${level ?? 1}`
     parent.select('[hp]')!.textContent = `Health Points ${hp}`
     parent.select('[mp]')!.textContent = `Mana Points ${mp}`
   }
