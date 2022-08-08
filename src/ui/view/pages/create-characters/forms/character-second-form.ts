@@ -36,6 +36,7 @@ export const characterSecondFormStyles = css`
     font-weight: bold;
     justify-content: space-around;
     padding: 0 30px;
+    padding-bottom: 15px;
   }
 
   .attr-input-group {

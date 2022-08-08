@@ -58,7 +58,8 @@ export class IgnemCreateCharacterPage extends IgnemElement {
           ${[
             characterFirstForm(this),
             textBetweenDashes('Attributes'),
-            characterSecondForm(this)
+            characterSecondForm(this),
+            textBetweenDashes('Inventory')
           ]}
         </form>
       </section>
