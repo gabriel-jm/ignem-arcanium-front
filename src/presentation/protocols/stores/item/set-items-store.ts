@@ -1,4 +1,4 @@
-import { Item } from '@/domain/protocols/use-cases'
+import { Item } from '@/ui/protocols'
 
 export type SetItemsStoreParams = Item[]
 

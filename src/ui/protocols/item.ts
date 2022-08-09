@@ -4,4 +4,5 @@ export interface Item {
   type: string
   description: string
   rarity: string
+  weight: number
 }

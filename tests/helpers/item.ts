@@ -4,7 +4,8 @@ export function fakeItem() {
     name: 'any_name',
     type: 'any_type',
     description: 'any_description',
-    rarity: 'any_rarity'
+    rarity: 'any_rarity',
+    weight: 1
   }
 }
 
