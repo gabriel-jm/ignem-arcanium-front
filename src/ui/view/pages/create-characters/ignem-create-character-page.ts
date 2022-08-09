@@ -2,15 +2,34 @@ import '../../components/header/header'
 import { IgnemElement } from '@/ui/view/ignem-element'
 import { css, html } from 'lithen-tag-functions'
 import { containerStyles, formControlStyles } from '@/ui/view/styles'
-import { breadcrumbs, IgnemFormElement, textBetweenDashes, textBetweenDashesStyles } from '@/ui/view/components'
+import {
+  breadcrumbs,
+  IgnemFormElement,
+  textBetweenDashes, textBetweenDashesStyles } from '@/ui/view/components'
 import { characterFirstForm, characterFirstFormStyles } from './forms/character-first-form'
 import { characterSecondForm, characterSecondFormStyles } from './forms/character-second-form'
 import { characterThirdForm, characterThirdFormStyles } from './forms/character-third-form'
 import { SuperElementRenderValues } from 'lithen-super-element'
+import { Presenter } from '@/presentation/protocols'
 
 export class IgnemCreateCharacterPage extends IgnemElement {
+  #listItemsPresenter: Presenter
+  
+  constructor(
+    listAllDefaultItemsPresenter: Presenter
+  ) {
+    super()
+    this.#listItemsPresenter = listAllDefaultItemsPresenter
+
+    this.init()
+  }
+
   get form() {
     return this.select<IgnemFormElement>('form.character-form')!
+  }
+
+  async init() {
+    await this.#listItemsPresenter.handle()
   }
 
   styling() {
