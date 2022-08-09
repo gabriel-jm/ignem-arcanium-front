@@ -54,6 +54,13 @@ export const characterFirstFormStyles = css`
     max-height: 200px;
     min-height: 100px;
   }
+
+  @media screen and (max-width: 375px) {
+    .first-form {
+      display: flex;
+      flex-direction: column;
+    }
+  }
 `
 
 export function characterFirstForm(parentElement: IgnemElement) {

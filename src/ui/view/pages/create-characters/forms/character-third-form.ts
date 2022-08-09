@@ -1,6 +1,8 @@
-import { IgnemCreateCharacterPage } from '../ignem-create-character-page'
 import { css, html } from 'lithen-tag-functions'
+import { IgnemCreateCharacterPage } from '../ignem-create-character-page'
 import { itemTinyCard } from '@/ui/view/components/item'
+import { Item } from '@/ui/protocols'
+import { ItemsStore } from '@/ui/stores'
 
 export const characterThirdFormStyles = css`
   .inventory-message {
@@ -21,7 +23,7 @@ export const characterThirdFormStyles = css`
   .inventory-size-message {
     font-size: 1.5rem;
     font-weight: bold;
-    padding-right: 30px;
+    padding-right: 20px;
   }
 
   .size-in-use {
@@ -34,6 +36,7 @@ export const characterThirdFormStyles = css`
   }
 
   .inventory-empty-message {
+    min-width: 100%;
     text-align: center;
     color: var(--sub-font-color);
   }
@@ -47,17 +50,59 @@ export const characterThirdFormStyles = css`
 `
 
 export function characterThirdForm(parent: IgnemCreateCharacterPage) {
+  const iconByType: Record<string, string> = {
+    CONSUMABLE: '/bag.png',
+    WEAPON: '/sword.png',
+    SHIELD: '/shield.png',
+    ARMOR: '/armor.png',
+    POTION: '/potion.png'
+  }
+  const inventoryItems: Item[] = []
+  let availableItems: Item[] = []
+  let sizeInUse = 0
+
+  function addToInventory(itemId: string | null) {
+    const itemIndex = availableItems.findIndex(item => item.id === itemId)
+
+    if (itemIndex !== -1) {
+      const item = { ...availableItems[itemIndex] }
+      sizeInUse += item.weight
+      inventoryItems.push(item)
+      availableItems.slice(itemIndex, 1)
+
+      parent.select('.size-in-use')!.textContent = sizeInUse.toString()
+
+      parent.select('.inventory-empty-message')?.remove()
+
+      parent.select('[inventory]')?.append(html`
+        <li
+          tabindex="0"
+          key-id="${item.id}"
+          class="item-container ${item.rarity.toLowerCase()}"
+        >
+          <span class="name" title="${item.name}">
+            <img src="${iconByType[item.type] ?? '/potion.png'}" />
+            ${item.name}
+          </span>
+          <span>1</span>
+        </li>
+      `)
+    }
+  }
+
   function onClickItem(event: Event) {
     const target = event.target as HTMLElement
     const itemId = target.getAttribute('key-id')
 
-    parent.addToInventory(itemId)
+    addToInventory(itemId)
     target.remove()
   }
   
   parent.once('init', () => {
+    availableItems = new ItemsStore().items
+
     parent.select('[items-list]')?.append(
-      ...parent.availableItems.map(item => itemTinyCard({
+      ...availableItems.map(item => itemTinyCard({
         ...item,
         onClick: onClickItem
       }))

@@ -13,23 +13,10 @@ import { characterSecondForm, characterSecondFormStyles } from './forms/characte
 import { characterThirdForm, characterThirdFormStyles } from './forms/character-third-form'
 import { SuperElementRenderValues } from 'lithen-super-element'
 import { Presenter } from '@/presentation/protocols'
-import { Item } from '@/ui/protocols'
-import { ItemsStore } from '@/ui/stores'
 import { itemTinyCardStyles } from '@/ui/view/components/item'
 
 export class IgnemCreateCharacterPage extends IgnemElement {
-  iconByType: Record<string, string> = {
-    CONSUMABLE: '/bag.png',
-    WEAPON: '/sword.png',
-    SHIELD: '/shield.png',
-    ARMOR: '/armor.png',
-    POTION: '/potion.png'
-  }
-  
   #listItemsPresenter: Presenter
-  #sizeInUse = 0
-  #inventoryItems: Item[] = []
-  #items: Item[] = []
   
   constructor(
     listAllDefaultItemsPresenter: Presenter
@@ -44,45 +31,10 @@ export class IgnemCreateCharacterPage extends IgnemElement {
     return this.select<IgnemFormElement>('form.character-form')!
   }
 
-  get availableItems() {
-    return this.#items
-  }
-
   async init() {
     await this.#listItemsPresenter.handle()
 
-    this.#items = new ItemsStore().items
-
     this.dispatchEvent(new Event('init'))
-  }
-
-  addToInventory(itemId: string | null) {
-    const itemIndex = this.#items.findIndex(item => item.id === itemId)
-
-    if (itemIndex !== -1) {
-      const item = { ...this.#items[itemIndex] }
-      this.#sizeInUse += item.weight
-      this.#inventoryItems.push(item)
-      this.#items.slice(itemIndex, 1)
-
-      this.select('.size-in-use')!.textContent = this.#sizeInUse.toString()
-
-      this.select('.inventory-empty-message')?.remove()
-
-      this.select('[inventory]')?.append(html`
-        <li
-          tabindex="0"
-          key-id="${item.id}"
-          class="item-container ${item.rarity.toLowerCase()}"
-        >
-          <span class="name" title="${item.name}">
-            <img src="${this.iconByType[item.type] ?? '/potion.png'}" />
-            ${item.name}
-          </span>
-          <span>1</span>
-        </li>
-      `)
-    }
   }
 
   styling() {
@@ -105,13 +57,6 @@ export class IgnemCreateCharacterPage extends IgnemElement {
         padding-top: 16px;
         padding-bottom: 16px;
         margin-bottom: 30px;
-      }
-
-      @media screen and (max-width: 375px) {
-        .first-form {
-          display: flex;
-          flex-direction: column;
-        }
       }
     `
   }
