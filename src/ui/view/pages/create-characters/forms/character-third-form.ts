@@ -1,6 +1,6 @@
 import { IgnemCreateCharacterPage } from '../ignem-create-character-page'
 import { css, html } from 'lithen-tag-functions'
-import { ItemsStore } from '@/ui/stores'
+import { itemTinyCard } from '@/ui/view/components/item'
 
 export const characterThirdFormStyles = css`
   .inventory-message {
@@ -33,106 +33,34 @@ export const characterThirdFormStyles = css`
     color: var(--sub-font-color);
   }
 
-  [inventory] {
-    padding: 20px 0;
-  }
-
   .inventory-empty-message {
     text-align: center;
     color: var(--sub-font-color);
   }
 
-  [items-list] {
+  [inventory], [items-list] {
     display: flex;
     flex-wrap: wrap;
-    gap: 10px;
+    gap: 12px;
     padding: 20px 0;
-  }
-
-  .item-container {
-    max-width: 210px;
-    min-width: 210px;
-    min-height: 56px;
-    background-color: var(--black);
-    padding: 8px 10px;
-    border-radius: 4px;
-    display: flex;
-    gap: 8px;
-    justify-content: space-between;
-    align-items: center;
-    cursor: pointer;
-  }
-
-  .item-container:focus {
-    outline: 2px solid var(--outline-white);
-  }
-
-  .item-container img {
-    width: 30px;
-    filter: invert(0.8);
-  }
-
-  .item-container.common {
-    background-image: linear-gradient(
-      145deg,
-      #3a3a3a,
-      var(--black) 35%
-    );
-  }
-
-  .item-container.uncommon {
-    background-image: linear-gradient(
-      145deg,
-      #2a3a2a,
-      var(--black) 35%
-    );
-  }
-
-  .item-container .name {
-    font-size: 0.9rem;
-    display: flex;
-    align-items: center;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    gap: 8px;
-  }
-
-  .item-container .weight {
-    color: var(--sub-font-color);
-    font-size: 0.7rem;
-    text-align: center;
-    line-height: 1.6;
   }
 `
 
 export function characterThirdForm(parent: IgnemCreateCharacterPage) {
-  const iconByType: Record<string, string> = {
-    CONSUMABLE: '/bag.png',
-    WEAPON: '/sword.png',
-    SHIELD: '/shield.png',
-    ARMOR: '/armor.png',
-    POTION: '/potion.png'
+  function onClickItem(event: Event) {
+    const target = event.target as HTMLElement
+    const itemId = target.getAttribute('key-id')
+
+    parent.addToInventory(itemId)
+    target.remove()
   }
   
   parent.once('init', () => {
-    const itemStore = new ItemsStore()
-
     parent.select('[items-list]')?.append(
-      ...itemStore.items.map(item => html`
-        <li
-          tabindex="0"
-          key-id="${item.id}"
-          class="item-container ${item.rarity.toLowerCase()}"
-        >
-          <span class="name" title="${item.name}">
-            <img src="${iconByType[item.type] ?? '/potion.png'}" />
-            ${item.name}
-          </span>
-          <span class="weight">
-            Weight <br /> ${item.weight}
-          </span>
-        </li>
-      `)
+      ...parent.availableItems.map(item => itemTinyCard({
+        ...item,
+        onClick: onClickItem
+      }))
     )
   })
 
