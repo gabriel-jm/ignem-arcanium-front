@@ -5,7 +5,9 @@ import { containerStyles, formControlStyles } from '@/ui/view/styles'
 import {
   breadcrumbs,
   IgnemFormElement,
-  textBetweenDashes, textBetweenDashesStyles } from '@/ui/view/components'
+  textBetweenDashes,
+  textBetweenDashesStyles
+} from '@/ui/view/components'
 import { characterFirstForm, characterFirstFormStyles } from './forms/character-first-form'
 import { characterSecondForm, characterSecondFormStyles } from './forms/character-second-form'
 import { characterThirdForm, characterThirdFormStyles } from './forms/character-third-form'
@@ -30,6 +32,7 @@ export class IgnemCreateCharacterPage extends IgnemElement {
 
   async init() {
     await this.#listItemsPresenter.handle()
+    this.dispatchEvent(new Event('init'))
   }
 
   styling() {
