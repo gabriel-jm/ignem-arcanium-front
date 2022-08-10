@@ -1,6 +1,6 @@
 import { css, html } from 'lithen-tag-functions'
 import { IgnemCreateCharacterPage } from '../ignem-create-character-page'
-import { itemTinyCard } from '@/ui/view/components/item'
+import { itemIconByType, itemTinyCard } from '@/ui/view/components/item'
 import { Item } from '@/ui/protocols'
 import { ItemsStore } from '@/ui/stores'
 
@@ -35,6 +35,18 @@ export const characterThirdFormStyles = css`
     color: var(--sub-font-color);
   }
 
+  .inventory-container {
+    display: flex;
+  }
+
+  .inventory-items {
+    flex: 3;
+  }
+
+  .item-info {
+    flex: 1;
+  }
+
   .inventory-empty-message {
     min-width: 100%;
     text-align: center;
@@ -44,50 +56,145 @@ export const characterThirdFormStyles = css`
   [inventory], [items-list] {
     display: flex;
     flex-wrap: wrap;
-    gap: 12px;
+    gap: 10px;
     padding: 20px 0;
+  }
+
+  .item-details {
+    padding: 12px;
+    border-radius: 4px;
+    background-color: var(--black);
+  }
+
+  .item-details.common {
+    background-image: linear-gradient(
+      145deg,
+      var(--dark-common),
+      var(--black) 30%
+    );
+  }
+
+  .item-details.uncommon {
+    background-image: linear-gradient(
+      145deg,
+      var(--dark-uncommon),
+      var(--black) 30%
+    );
+  }
+
+  .item-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .item-title img {
+    width: 50px;
+    filter: invert(0.8);
+  }
+
+  .item-title h3 {
+    font-size: 1.5em;
+  }
+
+  .item-details .rarity {
+    --color: var(--font-color);
+
+    font-weight: bold;
+    text-transform: capitalize;
+    padding-top: 5px;
+    padding-bottom: 10px;
+    color: var(--color);
+  }
+
+  .item-details.common .rarity {
+    --color: var(--bright-common);
+  }
+
+  .item-details.uncommon .rarity {
+    --color: var(--bright-uncommon);
+  }
+
+  .item-details .property {
+    padding-bottom: 8px;
+  }
+
+  .item-details .property span:first-of-type {
+    display: block;
+    font-size: 0.85rem;
+    color: var(--sub-font-color);
   }
 `
 
 export function characterThirdForm(parent: IgnemCreateCharacterPage) {
-  const iconByType: Record<string, string> = {
-    CONSUMABLE: '/bag.png',
-    WEAPON: '/sword.png',
-    SHIELD: '/shield.png',
-    ARMOR: '/armor.png',
-    POTION: '/potion.png'
-  }
   const inventoryItems: Item[] = []
   let availableItems: Item[] = []
   let sizeInUse = 0
 
+  function onClickInventoryItem(event: Event) {
+    const target = event.target as HTMLElement
+    const itemId = target.getAttribute('key-id')
+
+    const item = inventoryItems.find(item => item.id === itemId)
+
+    if (!item) return
+
+    console.log(item)
+
+    parent.select('.item-info')?.replaceChildren(html`
+      <div class="item-details ${item.rarity.toLowerCase()}">
+        <header class="item-title">
+          <h3>${item.name}</h3>
+          <img src="${itemIconByType(item.type)}" />
+        </header>
+        <p class="rarity">
+          ${item.rarity.toLowerCase()}
+        </p>
+        <p class="property">
+          <span>Weight</span>
+          <span>${item.weight}</span>
+        </p>
+        <p class="property">
+          <span>Price</span>
+          <span>${item.price}</span>
+        </p>
+        <p class="property">
+          <span>Description</span>
+          <span>${item.description}</span>
+        </p>
+      </div>
+    `)
+  }
+
   function addToInventory(itemId: string | null) {
     const itemIndex = availableItems.findIndex(item => item.id === itemId)
 
-    if (itemIndex !== -1) {
-      const item = { ...availableItems[itemIndex] }
-      sizeInUse += item.weight
-      inventoryItems.push(item)
-      availableItems.slice(itemIndex, 1)
+    if (itemIndex === -1) return
 
-      parent.select('.size-in-use')!.textContent = sizeInUse.toString()
+    const item = { ...availableItems[itemIndex] }
+    sizeInUse += item.weight
+    inventoryItems.push(item)
+    availableItems.slice(itemIndex, 1)
 
-      parent.select('.inventory-empty-message')?.remove()
+    parent.select('.size-in-use')!.textContent = sizeInUse.toString()
 
-      parent.select('[inventory]')?.append(html`
-        <li
-          tabindex="0"
-          key-id="${item.id}"
-          class="item-container ${item.rarity.toLowerCase()}"
-        >
-          <span class="name" title="${item.name}">
-            <img src="${iconByType[item.type] ?? '/potion.png'}" />
-            ${item.name}
-          </span>
-          <span>1</span>
-        </li>
-      `)
-    }
+    parent.select('.inventory-empty-message')?.remove()
+
+    parent.select('[inventory]')?.append(html`
+      <li
+        tabindex="0"
+        key-id="${item.id}"
+        on-click=${onClickInventoryItem}
+        class="item-container ${item.rarity.toLowerCase()}"
+      >
+        <span class="name" title="${item.name}">
+          <img src="${itemIconByType(item.type)}" />
+          ${item.name}
+        </span>
+        <span>1</span>
+      </li>
+    `)
   }
 
   function onClickItem(event: Event) {
@@ -120,12 +227,19 @@ export function characterThirdForm(parent: IgnemCreateCharacterPage) {
       <span class="max-size">/ 200</span>
     </p>
 
-    <h3>Your Inventory</h3>
-    <ul inventory>
-      <p class="inventory-empty-message">Your inventory is empty</p>
-    </ul>
+    <div class="inventory-container">
+      <div class="inventory-items">
+        <h3>Your Inventory</h3>
+        <ul inventory>
+          <p class="inventory-empty-message">Your inventory is empty</p>
+        </ul>
 
-    <h3>Items List</h3>
-    <ul items-list></ul>
+        <h3>Items List</h3>
+        <ul items-list></ul>
+      </div>
+      <div class="item-info">
+        <p>Select an item</p>
+      </div>
+    </div>
   `
 }
