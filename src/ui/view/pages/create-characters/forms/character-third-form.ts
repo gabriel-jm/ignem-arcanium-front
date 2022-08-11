@@ -50,21 +50,15 @@ export const characterThirdFormStyles = css`
     padding-bottom: 8px;
   }
 
-  .item-info {
+  .item-info-container {
     flex: 1;
   }
 
-  .item-info > p {
+  .item-info-container .select-item-message {
     color: var(--sub-font-color);
     text-align: center;
     border-radius: 4px;
     padding: 50px 0;
-  }
-
-  .inventory-empty-message {
-    min-width: 100%;
-    text-align: center;
-    color: var(--sub-font-color);
   }
 
   [inventory] {
@@ -73,19 +67,28 @@ export const characterThirdFormStyles = css`
 
   [inventory], [items-list] {
     display: grid;
-    grid-template-columns: repeat(
-      auto-fill,
-      minmax(210px, calc(25% - 10px))
-    );
+    background-color: var(--bright-black);
+    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
     gap: 10px;
-    padding: 20px 2px;
-    height: 200px;
-    overflow: auto;
+    padding: 10px;
+    border-radius: 4px;
+    align-content: flex-start;
+    height: 220px;
+    overflow-y: scroll;
+    overflow-x: hidden;
   }
 
   [inventory] .item-container,
   [items-list] .item-container {
     flex: 1;
+  }
+
+  .inventory-empty-message {
+    grid-column: span 5;
+    text-align: center;
+    padding-top: 30px;
+    color: var(--sub-font-color);
+    font-size: 1.1rem;
   }
 
   .item-details {
@@ -160,7 +163,8 @@ export const characterThirdFormStyles = css`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 16px;
+    margin-top: 8px;
+    margin-bottom: 12px;
     background-color: var(--black);
   }
 
@@ -187,7 +191,7 @@ export function characterThirdForm(parent: IgnemCreateCharacterPage) {
   let availableItems: Item[] = []
   let sizeInUse = 0
 
-  function onClickInventoryItem(event: Event) {
+  function onFocusInventoryItem(event: Event) {
     const target = event.target as HTMLElement
     const itemId = target.getAttribute('key-id')
 
@@ -195,7 +199,7 @@ export function characterThirdForm(parent: IgnemCreateCharacterPage) {
 
     if (!item) return
 
-    parent.select('.item-info')?.replaceChildren(html`
+    parent.select('[item-info]')?.replaceChildren(html`
       <div class="quantity-control-container">
         <span>Quantity</span>
         <div class="quantity-controls">
@@ -246,7 +250,7 @@ export function characterThirdForm(parent: IgnemCreateCharacterPage) {
       <li
         tabindex="0"
         key-id="${item.id}"
-        on-click=${onClickInventoryItem}
+        on-focus=${onFocusInventoryItem}
         class="item-container ${item.rarity.toLowerCase()}"
       >
         <span class="name" title="${item.name}">
@@ -282,24 +286,29 @@ export function characterThirdForm(parent: IgnemCreateCharacterPage) {
       Select the items that your character is current holding
     </p>
 
-    <p class="inventory-size">
-      <span class="inventory-size-message">Inventory size</span>
-      <span class="size-in-use">0</span>
-      <span class="max-size">/ 200</span>
-    </p>
-
     <div class="inventory-container">
       <div class="inventory-items">
         <h3>Your Inventory</h3>
         <ul inventory>
-          <p class="inventory-empty-message">Your inventory is empty</p>
+          <p class="inventory-empty-message">
+            Your inventory is empty
+          </p>
         </ul>
 
         <h3>Items List</h3>
         <ul items-list></ul>
       </div>
-      <div class="item-info">
-        <p>Select an item to show its details</p>
+      <div class="item-info-container">
+        <p class="inventory-size">
+          <span class="inventory-size-message">Inventory size</span>
+          <span class="size-in-use">0</span>
+          <span class="max-size">/ 200</span>
+        </p>
+        <div item-info>
+          <p class="select-item-message">
+            Select an item to show its details
+          </p>
+        </div>
       </div>
     </div>
   `

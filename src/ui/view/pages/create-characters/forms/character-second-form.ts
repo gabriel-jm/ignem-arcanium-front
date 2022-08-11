@@ -21,10 +21,9 @@ export const characterSecondFormStyles = css`
     display: inline-block;
     width: 200px;
     margin: 0 8px;
-    background-color: #1b1b1b;
+    background-color: var(--black);
     padding: 8px;
     border-radius: 4px;
-    color: var(--sub-font-color);
     cursor: default;
   }
 
