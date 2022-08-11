@@ -5,7 +5,8 @@ export function fakeItem() {
     type: 'any_type',
     description: 'any_description',
     rarity: 'any_rarity',
-    weight: 1
+    weight: 1,
+    price: 1
   }
 }
 

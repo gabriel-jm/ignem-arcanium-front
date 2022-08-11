@@ -21,7 +21,6 @@ export function itemIconByType(type: string) {
 
 export const itemTinyCardStyles = css`
   .item-container {
-    max-width: 210px;
     min-width: 210px;
     min-height: 56px;
     max-height: 56px;

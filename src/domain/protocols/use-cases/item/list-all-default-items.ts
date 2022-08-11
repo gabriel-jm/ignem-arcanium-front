@@ -5,6 +5,7 @@ export interface Item {
   description: string
   rarity: string
   weight: number
+  price: number
 }
 
 export type ListAllDefaultItemsResult = Item[]

@@ -23,7 +23,7 @@ export const characterThirdFormStyles = css`
   .inventory-size-message {
     font-size: 1.5rem;
     font-weight: bold;
-    padding-right: 20px;
+    padding-right: 18px;
   }
 
   .size-in-use {
@@ -37,14 +37,28 @@ export const characterThirdFormStyles = css`
 
   .inventory-container {
     display: flex;
+    margin-top: 24px;
+    gap: 20px;
   }
 
   .inventory-items {
     flex: 3;
   }
 
+  .inventory-items h3 {
+    font-size: 1.5rem;
+    padding-bottom: 8px;
+  }
+
   .item-info {
     flex: 1;
+  }
+
+  .item-info > p {
+    color: var(--sub-font-color);
+    text-align: center;
+    border-radius: 4px;
+    padding: 50px 0;
   }
 
   .inventory-empty-message {
@@ -53,11 +67,25 @@ export const characterThirdFormStyles = css`
     color: var(--sub-font-color);
   }
 
+  [inventory] {
+    margin-bottom: 24px;
+  }
+
   [inventory], [items-list] {
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(
+      auto-fill,
+      minmax(210px, calc(25% - 10px))
+    );
     gap: 10px;
-    padding: 20px 0;
+    padding: 20px 2px;
+    height: 200px;
+    overflow: auto;
+  }
+
+  [inventory] .item-container,
+  [items-list] .item-container {
+    flex: 1;
   }
 
   .item-details {
@@ -125,6 +153,33 @@ export const characterThirdFormStyles = css`
     font-size: 0.85rem;
     color: var(--sub-font-color);
   }
+
+  .quantity-control-container {
+    padding: 6px 10px;
+    border-radius: 4px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+    background-color: var(--black);
+  }
+
+  .quantity-control-container button {
+    font-size: 1.1rem;
+    font-weight: bold;
+    background-color: transparent;
+    padding: 6px;
+    border: 0;
+    color: var(--font-color);
+    cursor: pointer;
+  }
+
+  .quantity-controls {
+    display: flex;
+    min-width: 100px;
+    justify-content: space-between;
+    align-items: center;
+  }
 `
 
 export function characterThirdForm(parent: IgnemCreateCharacterPage) {
@@ -140,9 +195,15 @@ export function characterThirdForm(parent: IgnemCreateCharacterPage) {
 
     if (!item) return
 
-    console.log(item)
-
     parent.select('.item-info')?.replaceChildren(html`
+      <div class="quantity-control-container">
+        <span>Quantity</span>
+        <div class="quantity-controls">
+          <button type="button">&minus;</button>
+          <span>1</span>
+          <button type="button">&plus;</button>
+        </div>
+      </div>
       <div class="item-details ${item.rarity.toLowerCase()}">
         <header class="item-title">
           <h3>${item.name}</h3>
@@ -159,7 +220,7 @@ export function characterThirdForm(parent: IgnemCreateCharacterPage) {
           <span>Price</span>
           <span>${item.price}</span>
         </p>
-        <p class="property">
+        <p class="property description">
           <span>Description</span>
           <span>${item.description}</span>
         </p>
@@ -238,7 +299,7 @@ export function characterThirdForm(parent: IgnemCreateCharacterPage) {
         <ul items-list></ul>
       </div>
       <div class="item-info">
-        <p>Select an item</p>
+        <p>Select an item to show its details</p>
       </div>
     </div>
   `
