@@ -3,6 +3,7 @@ import { IgnemCreateCharacterPage } from '../ignem-create-character-page'
 import { itemDetails, itemIconByType, itemTinyCard } from '@/ui/view/components/item'
 import { Item } from '@/ui/protocols'
 import { ItemsStore } from '@/ui/stores'
+import { InventoryItem } from '@/ui/protocols/inventory-item'
 
 export const characterThirdFormStyles = css`
   .inventory-message {
@@ -38,7 +39,8 @@ export const characterThirdFormStyles = css`
   .inventory-container {
     display: flex;
     margin-top: 24px;
-    gap: 20px;
+    gap: 18px;
+    overflow-x: hidden;
   }
 
   .inventory-items {
@@ -98,7 +100,7 @@ export const characterThirdFormStyles = css`
     justify-content: space-between;
     align-items: center;
     margin-top: 8px;
-    margin-bottom: 12px;
+    margin-bottom: 18px;
     background-color: var(--black);
   }
 
@@ -121,7 +123,7 @@ export const characterThirdFormStyles = css`
 `
 
 export function characterThirdForm(parent: IgnemCreateCharacterPage) {
-  const inventoryItems: Item[] = []
+  const inventoryItems: InventoryItem[] = []
   let availableItems: Item[] = []
   let sizeInUse = 0
 
@@ -133,17 +135,8 @@ export function characterThirdForm(parent: IgnemCreateCharacterPage) {
 
     if (!item) return
 
-    parent.select('[item-info]')?.replaceChildren(html`
-      <div class="quantity-control-container">
-        <span>Quantity</span>
-        <div class="quantity-controls">
-          <button type="button">&minus;</button>
-          <span>1</span>
-          <button type="button">&plus;</button>
-        </div>
-      </div>
-      ${itemDetails(item)}
-    `)
+    parent.select('[quantity]')!.textContent = item.quantity.toString()
+    parent.select('[item-info]')?.replaceChildren(itemDetails(item))
   }
 
   function addToInventory(itemId: string | null) {
@@ -151,15 +144,17 @@ export function characterThirdForm(parent: IgnemCreateCharacterPage) {
 
     if (itemIndex === -1) return
 
-    const item = { ...availableItems[itemIndex] }
+    const item = {
+      ...availableItems[itemIndex],
+      quantity: 1
+    }
     sizeInUse += item.weight
+    
     inventoryItems.push(item)
     availableItems.slice(itemIndex, 1)
 
     parent.select('.size-in-use')!.textContent = sizeInUse.toString()
-
     parent.select('.inventory-empty-message')?.remove()
-
     parent.select('[inventory]')?.append(html`
       <li
         tabindex="0"
@@ -171,7 +166,7 @@ export function characterThirdForm(parent: IgnemCreateCharacterPage) {
           <img src="${itemIconByType(item.type)}" />
           ${item.name}
         </span>
-        <span>1</span>
+        <span>${item.quantity}</span>
       </li>
     `)
   }
@@ -212,16 +207,29 @@ export function characterThirdForm(parent: IgnemCreateCharacterPage) {
         <h3>Items List</h3>
         <ul items-list></ul>
       </div>
+      
       <div class="item-info-container">
         <p class="inventory-size">
           <span class="inventory-size-message">Inventory size</span>
           <span class="size-in-use">0</span>
           <span class="max-size">/ 200</span>
         </p>
-        <div item-info>
-          <p class="select-item-message">
-            Select an item to show its details
-          </p>
+        
+        <div>
+          <div class="quantity-control-container">
+            <span>Quantity</span>
+            <div class="quantity-controls">
+              <button type="button">&minus;</button>
+              <span quantity>0</span>
+              <button type="button">&plus;</button>
+            </div>
+          </div>
+
+          <div item-info>
+            <p class="select-item-message">
+              Select an item to show its details
+            </p>
+          </div>
         </div>
       </div>
     </div>

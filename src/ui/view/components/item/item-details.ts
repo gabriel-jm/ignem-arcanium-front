@@ -9,6 +9,7 @@ export const itemDetailsStyles = css`
     padding: 12px;
     border-radius: 4px;
     background-color: var(--black);
+    animation: show 120ms backwards ease-in-out;
   }
 
   .item-details.common {
@@ -69,6 +70,18 @@ export const itemDetailsStyles = css`
     display: block;
     font-size: 0.85rem;
     color: var(--sub-font-color);
+  }
+
+  @keyframes show {
+    from {
+      opacity: 0;
+      transform: translateX(15px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
   }
 `
 
