@@ -126,6 +126,7 @@ export function characterThirdForm(parent: IgnemCreateCharacterPage) {
   const inventoryItems: InventoryItem[] = []
   let availableItems: Item[] = []
   let sizeInUse = 0
+  let lastSelectedItemId = ''
 
   function onFocusInventoryItem(event: Event) {
     const target = event.target as HTMLElement
@@ -135,8 +136,17 @@ export function characterThirdForm(parent: IgnemCreateCharacterPage) {
 
     if (!item) return
 
+    lastSelectedItemId = item.id
     parent.select('[quantity]')!.textContent = item.quantity.toString()
     parent.select('[item-info]')?.replaceChildren(itemDetails(item))
+  }
+
+  function updateInventoryAndItemQuantity(item: InventoryItem) {
+    parent.select('.size-in-use')!.textContent = sizeInUse.toString()
+
+    const elementQuery = `[inventory] [key-id="${lastSelectedItemId}"] [item-quantity]`
+    parent.select(elementQuery)!.textContent = item.quantity.toString()
+    parent.select('[quantity]')!.textContent = item.quantity.toString()
   }
 
   function addToInventory(itemId: string | null) {
@@ -166,7 +176,7 @@ export function characterThirdForm(parent: IgnemCreateCharacterPage) {
           <img src="${itemIconByType(item.type)}" />
           ${item.name}
         </span>
-        <span>${item.quantity}</span>
+        <span item-quantity>${item.quantity}</span>
       </li>
     `)
   }
@@ -177,6 +187,30 @@ export function characterThirdForm(parent: IgnemCreateCharacterPage) {
 
     addToInventory(itemId)
     target.remove()
+  }
+
+  function incrementQuantity() {
+    const item = inventoryItems.find(
+      item => item.id === lastSelectedItemId
+    )
+
+    if (!item) return
+
+    sizeInUse += item.weight
+    item.quantity += 1
+    updateInventoryAndItemQuantity(item)
+  }
+
+  function decrementQuantity() {
+    const item = inventoryItems.find(
+      item => item.id === lastSelectedItemId
+    )
+
+    if (!item) return
+
+    sizeInUse -= item.weight
+    item.quantity -= 1
+    updateInventoryAndItemQuantity(item)
   }
   
   parent.once('init', () => {
@@ -219,9 +253,13 @@ export function characterThirdForm(parent: IgnemCreateCharacterPage) {
           <div class="quantity-control-container">
             <span>Quantity</span>
             <div class="quantity-controls">
-              <button type="button">&minus;</button>
+              <button type="button" on-click=${decrementQuantity}>
+                &minus;
+              </button>
               <span quantity>0</span>
-              <button type="button">&plus;</button>
+              <button type="button" on-click=${incrementQuantity}>
+                &plus;
+              </button>
             </div>
           </div>
 
