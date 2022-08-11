@@ -13,7 +13,7 @@ import { characterSecondForm, characterSecondFormStyles } from './forms/characte
 import { characterThirdForm, characterThirdFormStyles } from './forms/character-third-form'
 import { SuperElementRenderValues } from 'lithen-super-element'
 import { Presenter } from '@/presentation/protocols'
-import { itemTinyCardStyles } from '@/ui/view/components/item'
+import { itemDetailsStyles, itemTinyCardStyles } from '@/ui/view/components/item'
 
 export class IgnemCreateCharacterPage extends IgnemElement {
   #listItemsPresenter: Presenter
@@ -43,6 +43,7 @@ export class IgnemCreateCharacterPage extends IgnemElement {
       formControlStyles,
       textBetweenDashesStyles,
       itemTinyCardStyles,
+      itemDetailsStyles,
       characterFirstFormStyles,
       characterSecondFormStyles,
       characterThirdFormStyles

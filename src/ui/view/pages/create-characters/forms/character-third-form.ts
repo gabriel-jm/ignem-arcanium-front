@@ -1,6 +1,6 @@
 import { css, html } from 'lithen-tag-functions'
 import { IgnemCreateCharacterPage } from '../ignem-create-character-page'
-import { itemIconByType, itemTinyCard } from '@/ui/view/components/item'
+import { itemDetails, itemIconByType, itemTinyCard } from '@/ui/view/components/item'
 import { Item } from '@/ui/protocols'
 import { ItemsStore } from '@/ui/stores'
 
@@ -91,72 +91,6 @@ export const characterThirdFormStyles = css`
     font-size: 1.1rem;
   }
 
-  .item-details {
-    padding: 12px;
-    border-radius: 4px;
-    background-color: var(--black);
-  }
-
-  .item-details.common {
-    background-image: linear-gradient(
-      145deg,
-      var(--dark-common),
-      var(--black) 30%
-    );
-  }
-
-  .item-details.uncommon {
-    background-image: linear-gradient(
-      145deg,
-      var(--dark-uncommon),
-      var(--black) 30%
-    );
-  }
-
-  .item-title {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    gap: 8px;
-  }
-
-  .item-title img {
-    width: 50px;
-    filter: invert(0.8);
-  }
-
-  .item-title h3 {
-    font-size: 1.5em;
-  }
-
-  .item-details .rarity {
-    --color: var(--font-color);
-
-    font-weight: bold;
-    text-transform: capitalize;
-    padding-top: 5px;
-    padding-bottom: 10px;
-    color: var(--color);
-  }
-
-  .item-details.common .rarity {
-    --color: var(--bright-common);
-  }
-
-  .item-details.uncommon .rarity {
-    --color: var(--bright-uncommon);
-  }
-
-  .item-details .property {
-    padding-bottom: 8px;
-  }
-
-  .item-details .property span:first-of-type {
-    display: block;
-    font-size: 0.85rem;
-    color: var(--sub-font-color);
-  }
-
   .quantity-control-container {
     padding: 6px 10px;
     border-radius: 4px;
@@ -208,27 +142,7 @@ export function characterThirdForm(parent: IgnemCreateCharacterPage) {
           <button type="button">&plus;</button>
         </div>
       </div>
-      <div class="item-details ${item.rarity.toLowerCase()}">
-        <header class="item-title">
-          <h3>${item.name}</h3>
-          <img src="${itemIconByType(item.type)}" />
-        </header>
-        <p class="rarity">
-          ${item.rarity.toLowerCase()}
-        </p>
-        <p class="property">
-          <span>Weight</span>
-          <span>${item.weight}</span>
-        </p>
-        <p class="property">
-          <span>Price</span>
-          <span>${item.price}</span>
-        </p>
-        <p class="property description">
-          <span>Description</span>
-          <span>${item.description}</span>
-        </p>
-      </div>
+      ${itemDetails(item)}
     `)
   }
 
