@@ -8,7 +8,32 @@ export interface Item {
   price: number
 }
 
-export type ListAllDefaultItemsResult = Item[]
+export interface Weapon extends Item {
+  damage: Record<string, string>
+  properties: string[]
+  initiativeModifier: number
+  distance: number
+}
+
+export interface ShieldOrArmor extends Item {
+  damageReduction: Record<string, string>
+  properties: string[]
+  initiativeModifier: number
+}
+
+export interface AlchemicalItem extends Item {
+  brewPrice: number
+  brewTime: number
+  effects: string
+}
+
+export interface Gem extends Item {
+  magicTier: number
+}
+
+export type AnyKindOfItem = Item | Weapon | ShieldOrArmor | AlchemicalItem | Gem
+
+export type ListAllDefaultItemsResult = AnyKindOfItem[]
 
 export interface ListAllDefaultItems {
   listAll(): Promise<ListAllDefaultItemsResult>

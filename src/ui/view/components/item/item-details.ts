@@ -1,8 +1,8 @@
-import { Item } from '@/ui/protocols'
+import { AnyKindOfInventoryItem, InventoryAlchemicalItem } from '@/ui/protocols'
 import { itemIconByType } from '@/ui/view/components/item/item-tiny-card'
-import { css, html } from 'lithen-tag-functions'
+import { css, html, raw } from 'lithen-tag-functions'
 
-export interface ItemDetailsProps extends Item {}
+export type ItemDetailsProps = AnyKindOfInventoryItem
 
 export const itemDetailsStyles = css`
   .item-details {
@@ -54,6 +54,11 @@ export const itemDetailsStyles = css`
     color: var(--color);
   }
 
+  .item-details .properties {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
   .item-details.common .rarity {
     --color: var(--bright-common);
   }
@@ -63,7 +68,8 @@ export const itemDetailsStyles = css`
   }
 
   .item-details .property {
-    padding-bottom: 8px;
+    min-width: 50%;
+    padding-bottom: 16px;
   }
 
   .item-details .property span:first-of-type {
@@ -85,9 +91,39 @@ export const itemDetailsStyles = css`
   }
 `
 
+const fieldsByItemType: Record<
+  string,
+  Record<'properties'|'descriptions', Function>
+> = {
+  'potion,oil,ointment': {
+    properties: (item: InventoryAlchemicalItem) => raw`
+      <p class="property">
+        <span>Brew Time</span>
+        <span>${item.brewTime}</span>
+      </p>
+      <p class="property">
+        <span>Brew Price</span>
+        <span>${item.brewPrice}</span>
+      </p>
+    `,
+    descriptions: (item: InventoryAlchemicalItem) => raw`
+      <p class="property">
+        <span>Effects</span>
+        <span>${item.effects}</span>
+      </p>
+    `
+  },
+}
+
 export function itemDetails(props: ItemDetailsProps) {
   const { name, type, weight, price, description } = props
   const rarity = props.rarity.toLowerCase()
+
+  const fieldAndFn = Object
+    .entries(fieldsByItemType)
+    .find(([field]) => field.split(',').includes(type.toLowerCase()))
+
+  const additionalFields = fieldAndFn?.[1]
 
   return html`
     <div class="item-details ${rarity}">
@@ -95,17 +131,25 @@ export function itemDetails(props: ItemDetailsProps) {
         <h3>${name}</h3>
         <img alt="Item Icon" src="${itemIconByType(type)}" />
       </header>
+      
       <p class="rarity">
         ${rarity}
       </p>
-      <p class="property">
-        <span>Weight</span>
-        <span>${weight}</span>
-      </p>
-      <p class="property">
-        <span>Price</span>
-        <span>${price}</span>
-      </p>
+      
+      <div class="properties">
+        <p class="property">
+          <span>Weight</span>
+          <span>${weight}</span>
+        </p>
+        <p class="property">
+          <span>Price</span>
+          <span>${price}</span>
+        </p>
+        ${additionalFields?.properties(props)}
+      </div>
+
+      ${additionalFields?.descriptions(props)}
+
       <p class="property description">
         <span>Description</span>
         <span>${description}</span>
