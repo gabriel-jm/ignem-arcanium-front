@@ -1,5 +1,5 @@
-import { AnyKindOfInventoryItem, InventoryAlchemicalItem } from '@/ui/protocols'
-import { itemIconByType } from '@/ui/view/components/item/item-tiny-card'
+import { AnyKindOfInventoryItem, InventoryAlchemicalItem, InventoryShieldOrArmor, InventoryWeapon } from '@/ui/protocols'
+import { itemIconByType } from '@/ui/view/components'
 import { css, html, raw } from 'lithen-tag-functions'
 
 export type ItemDetailsProps = AnyKindOfInventoryItem
@@ -54,11 +54,6 @@ export const itemDetailsStyles = css`
     color: var(--color);
   }
 
-  .item-details .properties {
-    display: flex;
-    flex-wrap: wrap;
-  }
-
   .item-details.common .rarity {
     --color: var(--bright-common);
   }
@@ -67,12 +62,20 @@ export const itemDetailsStyles = css`
     --color: var(--bright-uncommon);
   }
 
-  .item-details .property {
-    min-width: 50%;
+  .item-details p:not(.description) {
     padding-bottom: 16px;
   }
 
-  .item-details .property span:first-of-type {
+  .item-details .properties {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .item-details .properties > p {
+    min-width: 50%;
+  }
+
+  .item-details .property-name {
     display: block;
     font-size: 0.85rem;
     color: var(--sub-font-color);
@@ -91,67 +94,136 @@ export const itemDetailsStyles = css`
   }
 `
 
-const fieldsByItemType: Record<
-  string,
-  Record<'properties'|'descriptions', Function>
-> = {
-  'potion,oil,ointment': {
-    properties: (item: InventoryAlchemicalItem) => raw`
-      <p class="property">
-        <span>Brew Time</span>
-        <span>${item.brewTime}</span>
-      </p>
-      <p class="property">
-        <span>Brew Price</span>
-        <span>${item.brewPrice}</span>
-      </p>
-    `,
-    descriptions: (item: InventoryAlchemicalItem) => raw`
-      <p class="property">
-        <span>Effects</span>
-        <span>${item.effects}</span>
-      </p>
-    `
-  },
+const itemProperty = (name: string, value: any) => raw`
+  <p>
+    <span class="property-name">${name}</span>
+    <span>${value}</span>
+  </p>
+`
+
+function weaponDetails(props: InventoryWeapon) {
+  const {
+    damage,
+    initiativeModifier,
+    distance,
+    weight,
+    price,
+    properties
+  } = props
+
+  const damageList = Object
+    .entries(damage)
+    .map(([field, value]) => raw`<span>${value} (${field})</span>`)
+
+  return html`
+    ${itemProperty('Damage', damageList)}
+    ${itemProperty(
+      'Properties',
+      properties.length
+        ? properties.join(', ').toLowerCase()
+        : '-'
+    )}
+    
+    <div class="properties">
+      ${itemProperty('Initiative Modifier', initiativeModifier || '0')}
+      ${Boolean(distance) && itemProperty('Distance', `${distance} meters`)}
+      ${[
+        itemProperty('Weight', weight),
+        itemProperty('Price', price)
+      ]}
+    </div>
+  `
+}
+
+function shieldOrArmorDetails(props: InventoryShieldOrArmor) {
+  const {
+    damageReduction,
+    initiativeModifier,
+    weight,
+    price,
+    properties
+  } = props
+
+  const damageList = Object
+    .entries(damageReduction)
+    .map(([field, value]) => raw`<span>${value} (${field})</span>`)
+
+  return html`
+    ${itemProperty('Damage Reduction', damageList)}
+    ${itemProperty(
+      'Properties',
+      properties.length
+        ? properties.join(', ').toLowerCase()
+        : '-'
+    )}
+    
+    <div class="properties">
+      ${[
+        itemProperty('Initiative Modifier', initiativeModifier || '0'),
+        itemProperty('Weight', weight),
+        itemProperty('Price', price)
+      ]}
+    </div>
+  `
+}
+
+function alchemicalItemDetails(props: InventoryAlchemicalItem) {
+  const { brewTime, brewPrice, weight, price, effects } = props
+  
+  return html`
+    <div class="properties">
+      ${[
+        itemProperty('Brew Time', brewTime),
+        itemProperty('Brew Price', brewPrice),
+        itemProperty('Weight', weight),
+        itemProperty('Price', price)
+      ]}
+    </div>
+
+    ${itemProperty('Effects', effects)}
+  `
+}
+
+function detailsByItemTypes(item: ItemDetailsProps) {
+  if (item.type === 'WEAPON') {
+    return weaponDetails(item as InventoryWeapon)
+  }
+
+  if (['POTION', 'OIL', 'OINTMENT'].includes(item.type)) {
+    return alchemicalItemDetails(item as InventoryAlchemicalItem)
+  }
+
+  if (['SHIELD', 'ARMOR'].includes(item.type)) {
+    return shieldOrArmorDetails(item as InventoryShieldOrArmor)
+  }
+
+  return html`
+    <div class="properties">
+      ${[
+        itemProperty('Weight', item.weight),
+        itemProperty('Price', item.price)
+      ]}
+    </div>
+  `
 }
 
 export function itemDetails(props: ItemDetailsProps) {
-  const { name, type, weight, price, description } = props
+  const { name, description } = props
   const rarity = props.rarity.toLowerCase()
-
-  const fieldAndFn = Object
-    .entries(fieldsByItemType)
-    .find(([field]) => field.split(',').includes(type.toLowerCase()))
-
-  const additionalFields = fieldAndFn?.[1]
 
   return html`
     <div class="item-details ${rarity}">
       <header class="item-title">
         <h3>${name}</h3>
-        <img alt="Item Icon" src="${itemIconByType(type)}" />
+        <img alt="Item Icon" src="${itemIconByType(props)}" />
       </header>
       
-      <p class="rarity">
-        ${rarity}
-      </p>
+      <p class="rarity">${rarity}</p>
       
-      <div class="properties">
-        <p class="property">
-          <span>Weight</span>
-          <span>${weight}</span>
-        </p>
-        <p class="property">
-          <span>Price</span>
-          <span>${price}</span>
-        </p>
-        ${additionalFields?.properties(props)}
-      </div>
+      ${detailsByItemTypes(props)}
 
-      ${additionalFields?.descriptions(props)}
-
-      <p class="property description">
-        <span>Description</span>
+      <p class="description">
+        <span class="property-name">Description</span>
         <span>${description}</span>
       </p>
     </div>

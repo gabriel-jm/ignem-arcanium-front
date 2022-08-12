@@ -173,7 +173,7 @@ export function characterThirdForm(parent: IgnemCreateCharacterPage) {
         class="item-container ${item.rarity.toLowerCase()}"
       >
         <span class="name" title="${item.name}">
-          <img src="${itemIconByType(item.type)}" />
+          <img src="${itemIconByType(item)}" />
           ${item.name}
         </span>
         <span item-quantity>${item.quantity}</span>

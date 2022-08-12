@@ -1,22 +1,9 @@
 import { Item } from '@/domain/protocols/use-cases'
+import { itemIconByType } from './item-icon-by-type'
 import { css, html } from 'lithen-tag-functions'
 
 export interface ItemTinyCardProps extends Item {
   onClick: Function
-}
-
-export function itemIconByType(type: string) {
-  const iconByType: Record<string, string> = {
-    CONSUMABLE: '/bag.png',
-    WEAPON: '/sword.png',
-    SHIELD: '/shield.png',
-    ARMOR: '/armor.png',
-    POTION: '/potion.png',
-    OIL: '/oil.png',
-    OINTMENT: '/ointment.png'
-  }
-
-  return iconByType[type] ?? '/bag.png'
 }
 
 export const itemTinyCardStyles = css`
@@ -93,7 +80,7 @@ export function itemTinyCard(props: ItemTinyCardProps) {
       on-click=${onClick}
     >
       <span class="name">
-        <img src="${itemIconByType(type)}" />
+        <img src="${itemIconByType(props)}" />
         ${name}
       </span>
       <span class="weight">
