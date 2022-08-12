@@ -1,4 +1,4 @@
-import { Item } from '@/ui/protocols'
+import { Item } from '@/domain/protocols/use-cases'
 import { css, html } from 'lithen-tag-functions'
 
 export interface ItemTinyCardProps extends Item {

@@ -1,9 +1,9 @@
+import { AnyKindOfItem } from '@/domain/protocols/use-cases'
 import { SetItemsStore, SetItemsStoreParams } from '@/presentation/protocols/stores'
-import { Item } from '@/ui/protocols'
 
 export class ItemsStore implements SetItemsStore {
   static #instance: ItemsStore
-  #items: Item[] = []
+  #items: AnyKindOfItem[] = []
   
   constructor() {
     if (!ItemsStore.#instance) {

@@ -1,9 +1,9 @@
 import { css, html } from 'lithen-tag-functions'
 import { IgnemCreateCharacterPage } from '../ignem-create-character-page'
 import { itemDetails, itemIconByType, itemTinyCard } from '@/ui/view/components/item'
-import { Item } from '@/ui/protocols'
 import { ItemsStore } from '@/ui/stores'
-import { InventoryItem } from '@/ui/protocols/inventory-item'
+import { InventoryItem } from '@/ui/protocols'
+import { Item } from '@/domain/protocols/use-cases'
 
 export const characterThirdFormStyles = css`
   .inventory-message {
