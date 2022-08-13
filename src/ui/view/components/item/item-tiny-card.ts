@@ -6,6 +6,18 @@ export interface ItemTinyCardProps extends Item {
   onClick: Function
 }
 
+const rarities = ['common', 'uncommon']
+
+const backgroundByRarity = rarities.map(rarity => css`
+  .item-container.${rarity} {
+    background-image: linear-gradient(
+      145deg,
+      var(--dark-${rarity}),
+      var(--black) 35%
+    );
+  }
+`)
+
 export const itemTinyCardStyles = css`
   .item-container {
     min-width: 210px;
@@ -34,21 +46,7 @@ export const itemTinyCardStyles = css`
     filter: invert(0.8);
   }
 
-  .item-container.common {
-    background-image: linear-gradient(
-      145deg,
-      var(--dark-common),
-      var(--black) 35%
-    );
-  }
-
-  .item-container.uncommon {
-    background-image: linear-gradient(
-      145deg,
-      var(--dark-uncommon),
-      var(--black) 35%
-    );
-  }
+  ${backgroundByRarity}
 
   .item-container .name {
     max-height: 52px;
@@ -69,7 +67,7 @@ export const itemTinyCardStyles = css`
 `
 
 export function itemTinyCard(props: ItemTinyCardProps) {
-  const { id, rarity, name, type, weight, onClick } = props
+  const { id, rarity, name, weight, onClick } = props
 
   return html`
     <li

@@ -1,5 +1,23 @@
 import { css } from 'lithen-tag-functions'
 
+const rarities = ['common', 'uncommon']
+
+const backgroundByRarity = rarities.map(rarity => css`
+  .item-details.${rarity} {
+    background-image: linear-gradient(
+      145deg,
+      var(--dark-${rarity}),
+      var(--black) 30%
+    );
+  }
+`)
+
+const rarityNameColorByRarity = rarities.map(rarity => css`
+  .item-details.${rarity} .rarity {
+    --color: var(--bright-${rarity});
+  }
+`)
+
 export const itemCardStyles = css`
   .item-details {
     padding: 12px;
@@ -8,21 +26,7 @@ export const itemCardStyles = css`
     animation: show 120ms backwards ease-in-out;
   }
 
-  .item-details.common {
-    background-image: linear-gradient(
-      145deg,
-      var(--dark-common),
-      var(--black) 30%
-    );
-  }
-
-  .item-details.uncommon {
-    background-image: linear-gradient(
-      145deg,
-      var(--dark-uncommon),
-      var(--black) 30%
-    );
-  }
+  ${backgroundByRarity}
 
   .item-title {
     display: flex;
@@ -50,13 +54,7 @@ export const itemCardStyles = css`
     color: var(--color);
   }
 
-  .item-details.common .rarity {
-    --color: var(--bright-common);
-  }
-
-  .item-details.uncommon .rarity {
-    --color: var(--bright-uncommon);
-  }
+  ${rarityNameColorByRarity}
 
   p:not(.description) {
     padding-bottom: 16px;
