@@ -1,6 +1,6 @@
 import { css, html } from 'lithen-tag-functions'
 import { IgnemCreateCharacterPage } from '../ignem-create-character-page'
-import { itemCard, itemIconByType, itemTinyCard } from '@/ui/view/components/item'
+import { itemCard, itemTinyCard } from '@/ui/view/components/item'
 import { ItemsStore } from '@/ui/stores'
 import { InventoryItem } from '@/ui/protocols'
 import { Item } from '@/domain/protocols/use-cases'
@@ -165,20 +165,10 @@ export function characterThirdForm(parent: IgnemCreateCharacterPage) {
 
     parent.select('.size-in-use')!.textContent = sizeInUse.toString()
     parent.select('.inventory-empty-message')?.remove()
-    parent.select('[inventory]')?.append(html`
-      <li
-        tabindex="0"
-        key-id="${item.id}"
-        on-focus=${onFocusInventoryItem}
-        class="item-container ${item.rarity.toLowerCase()}"
-      >
-        <span class="name" title="${item.name}">
-          <img src="${itemIconByType(item)}" />
-          ${item.name}
-        </span>
-        <span item-quantity>${item.quantity}</span>
-      </li>
-    `)
+    parent.select('[inventory]')?.append(itemTinyCard({
+      ...item,
+      onFocus: onFocusInventoryItem
+    }))
   }
 
   function onClickItem(event: Event) {

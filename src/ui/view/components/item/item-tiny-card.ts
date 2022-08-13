@@ -1,9 +1,11 @@
 import { Item } from '@/domain/protocols/use-cases'
 import { itemIconByType } from './item-icon-by-type'
-import { css, html } from 'lithen-tag-functions'
+import { css, html, raw } from 'lithen-tag-functions'
 
 export interface ItemTinyCardProps extends Item {
-  onClick: Function
+  onClick?: Function
+  onFocus?: Function
+  quantity?: number
 }
 
 const rarities = ['common', 'uncommon']
@@ -67,7 +69,15 @@ export const itemTinyCardStyles = css`
 `
 
 export function itemTinyCard(props: ItemTinyCardProps) {
-  const { id, rarity, name, weight, onClick } = props
+  const {
+    id,
+    rarity,
+    name,
+    weight,
+    quantity,
+    onClick,
+    onFocus
+  } = props
 
   return html`
     <li
@@ -76,14 +86,24 @@ export function itemTinyCard(props: ItemTinyCardProps) {
       key-id="${id}"
       class="item-container ${rarity.toLowerCase()}"
       on-click=${onClick}
+      on-focus=${onFocus}
     >
       <span class="name">
         <img src="${itemIconByType(props)}" />
         ${name}
       </span>
-      <span class="weight">
-        Weight <br /> ${weight}
-      </span>
+      ${quantity
+        ? raw`
+          <span item-quantity>
+            ${quantity}
+          </span>
+        `
+        : raw`
+          <span class="weight">
+            Weight <br /> ${weight}
+          </span>
+        `
+      }
     </li>
   `
 }
