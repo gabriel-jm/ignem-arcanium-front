@@ -1,3 +1,3 @@
 export * from './item-tiny-card'
-export * from './item-details'
+export * from './card/item-card'
 export * from './item-icon-by-type'

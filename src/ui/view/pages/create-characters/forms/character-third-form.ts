@@ -1,6 +1,6 @@
 import { css, html } from 'lithen-tag-functions'
 import { IgnemCreateCharacterPage } from '../ignem-create-character-page'
-import { itemDetails, itemIconByType, itemTinyCard } from '@/ui/view/components/item'
+import { itemCard, itemIconByType, itemTinyCard } from '@/ui/view/components/item'
 import { ItemsStore } from '@/ui/stores'
 import { InventoryItem } from '@/ui/protocols'
 import { Item } from '@/domain/protocols/use-cases'
@@ -138,7 +138,7 @@ export function characterThirdForm(parent: IgnemCreateCharacterPage) {
 
     lastSelectedItemId = item.id
     parent.select('[quantity]')!.textContent = item.quantity.toString()
-    parent.select('[item-info]')?.replaceChildren(itemDetails(item))
+    parent.select('[item-info]')?.replaceChildren(itemCard(item))
   }
 
   function updateInventoryAndItemQuantity(item: InventoryItem) {
