@@ -120,6 +120,10 @@ export const characterThirdFormStyles = css`
     justify-content: space-between;
     align-items: center;
   }
+
+  .hide {
+    display: none;
+  }
 `
 
 export function characterThirdForm(parent: IgnemCreateCharacterPage) {
@@ -164,7 +168,7 @@ export function characterThirdForm(parent: IgnemCreateCharacterPage) {
     availableItems.slice(itemIndex, 1)
 
     parent.select('.size-in-use')!.textContent = sizeInUse.toString()
-    parent.select('.inventory-empty-message')?.remove()
+    parent.select('.inventory-empty-message')?.classList.add('hide')
     parent.select('[inventory]')?.append(itemTinyCard({
       ...item,
       onFocus: onFocusInventoryItem
@@ -201,6 +205,18 @@ export function characterThirdForm(parent: IgnemCreateCharacterPage) {
     sizeInUse -= item.weight
     item.quantity -= 1
     updateInventoryAndItemQuantity(item)
+
+    if (item.quantity < 1) {
+      parent.select(`[inventory] [key-id="${item.id}"]`)?.remove()
+      parent.select('[item-info]')?.replaceChildren(html`
+        <p class="select-item-message">
+          Select an item to show its details
+        </p>
+      `)
+
+      inventoryItems.slice(inventoryItems.indexOf(item), 1)
+      lastSelectedItemId = ''
+    }
   }
   
   parent.once('init', () => {
