@@ -10,4 +10,17 @@ export const sharedStyles = () => defineSharedStyles(css`
     list-style: none;
     -webkit-tap-highlight-color: transparent;
   }
+
+  *::-webkit-scrollbar {
+    position: fixed;
+    top: 0;
+    right: 0;
+    box-sizing: border-box;
+    width: 6px;
+  }
+
+  *::-webkit-scrollbar-thumb {
+    background-color: #999;
+    border-radius: 4px;
+  }
 `)

@@ -124,6 +124,12 @@ export const characterThirdFormStyles = css`
   .hide {
     display: none;
   }
+
+  @media screen and (max-width: 750px) {
+    .inventory-items {
+      flex: 1;
+    }
+  }
 `
 
 export function characterThirdForm(parent: IgnemCreateCharacterPage) {
