@@ -20,7 +20,7 @@ export const characterSecondFormStyles = css`
   .stats-container span {
     display: inline-block;
     width: 200px;
-    margin: 0 8px;
+    margin: 8px;
     background-color: var(--black);
     padding: 8px;
     border-radius: 4px;
