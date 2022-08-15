@@ -4,6 +4,7 @@ import { itemCard, itemTinyCard } from '@/ui/view/components/item'
 import { ItemsStore } from '@/ui/stores'
 import { InventoryItem } from '@/ui/protocols'
 import { Item } from '@/domain/protocols/use-cases'
+import { trashIcon } from '@/ui/view/components'
 
 export const characterThirdFormStyles = css`
   .inventory-message {
@@ -105,13 +106,19 @@ export const characterThirdFormStyles = css`
   }
 
   .quantity-control-container button {
+    width: 30px;
     font-size: 1.1rem;
     font-weight: bold;
     background-color: transparent;
     padding: 6px;
     border: 0;
+    border-radius: 2px;
     color: var(--font-color);
     cursor: pointer;
+  }
+
+  .quantity-control-container button:hover {
+    background-color: var(--bright-black);
   }
 
   .quantity-controls {
@@ -199,6 +206,11 @@ export function characterThirdForm(parent: IgnemCreateCharacterPage) {
     sizeInUse += item.weight
     item.quantity += 1
     updateInventoryAndItemQuantity(item)
+
+    if (parent.select('.trash-icon')) {
+      parent.select('.trash-icon')?.remove()
+      parent.select('.quantity-controls button')!.innerHTML = '&minus;'
+    }
   }
 
   function decrementQuantity() {
@@ -222,6 +234,11 @@ export function characterThirdForm(parent: IgnemCreateCharacterPage) {
 
       inventoryItems.slice(inventoryItems.indexOf(item), 1)
       lastSelectedItemId = ''
+      return
+    }
+
+    if (item.quantity === 1) {
+      parent.select('.quantity-controls button')!.innerHTML = trashIcon().toString()
     }
   }
   
@@ -266,7 +283,7 @@ export function characterThirdForm(parent: IgnemCreateCharacterPage) {
             <span>Quantity</span>
             <div class="quantity-controls">
               <button type="button" on-click=${decrementQuantity}>
-                &minus;
+                ${trashIcon()}
               </button>
               <span quantity>0</span>
               <button type="button" on-click=${incrementQuantity}>
