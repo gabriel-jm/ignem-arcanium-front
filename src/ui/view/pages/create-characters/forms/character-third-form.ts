@@ -103,6 +103,36 @@ export const characterThirdFormStyles = css`
       flex: 1;
     }
   }
+
+  @media screen and (max-width: 425px) {
+    .inventory-container {
+      display: block;
+    }
+    
+    .inventory-items {
+      padding-bottom: 50px;
+    }
+
+    .item-info-container {
+      width: 100%;
+      position: fixed;
+      left: 0;
+      top: 90%;
+      background-color: var(--black);
+      padding: 6px;
+      border-radius: 8px;
+      box-shadow: 0 0 3px 2px #1117;
+    }
+
+    .inventory-size {
+      text-align: center;
+    }
+
+    .item-info {
+      background-color: var(--body-bg-color);
+      padding: 4px 8px;
+    }
+  }
 `
 
 type QuantityControl = IgnemQuantityControlElement
@@ -239,7 +269,7 @@ export function characterThirdForm(parent: IgnemCreateCharacterPage) {
           <span class="max-size">/ 200</span>
         </p>
         
-        <div>
+        <div class="item-info">
           <ignem-quantity-control
             class="hide"
             on-increment=${incrementQuantity}
