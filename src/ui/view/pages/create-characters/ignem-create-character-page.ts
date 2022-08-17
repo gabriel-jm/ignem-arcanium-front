@@ -28,7 +28,7 @@ export class IgnemCreateCharacterPage extends IgnemElement {
   }
 
   get form() {
-    return this.select<IgnemFormElement>('form.character-form')!
+    return this.select<IgnemFormElement>('[form]')!
   }
 
   async init() {
@@ -74,7 +74,7 @@ export class IgnemCreateCharacterPage extends IgnemElement {
       <section class="container">
         ${breadcrumbs(breadcrumbProps)}
         <h1 class="characters-title">Create Character</h1>
-        <form is="ignem-form" class="character-form">
+        <form form is="ignem-form" class="character-form">
           ${[
             characterFirstForm(this),
             textBetweenDashes('Attributes'),

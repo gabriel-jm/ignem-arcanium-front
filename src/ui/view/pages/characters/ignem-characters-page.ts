@@ -46,12 +46,6 @@ export class IgnemCharactersPage extends IgnemElement {
   }
 
   async init() {
-    const openCharacterModal = () => {
-      const characterModal = this.select<IgnemCharacterModalElement>('ignem-character-modal')
-
-      characterModal?.dialog.showModal()
-    }
-
     const result = await this.#findAllCharactersPresenter.handle<Character[]>()
 
     this.select('.loading-icon')?.remove()

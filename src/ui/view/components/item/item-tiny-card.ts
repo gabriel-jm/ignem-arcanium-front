@@ -1,10 +1,14 @@
+import '../singles/quantity-control'
 import { Item } from '@/domain/protocols/use-cases'
 import { itemIconByType } from './item-icon-by-type'
 import { css, html, raw } from 'lithen-tag-functions'
+import { IgnemQuantityControlElement, IgnemWrapper } from '@/ui/view/components/singles'
 
 export interface ItemTinyCardProps extends Item {
   onClick?: Function
   onFocus?: Function
+  onIncrement?: Function
+  onDecrement?: Function
   quantity?: number
 }
 
@@ -23,44 +27,61 @@ const backgroundByRarity = rarities.map(rarity => css`
 export const itemTinyCardStyles = css`
   .item-container {
     min-width: 210px;
-    min-height: 56px;
-    max-height: 56px;
+    min-height: 60px;
+    max-height: 60px;
     background-color: var(--black);
     padding: 6px 8px;
     border-radius: 4px;
     display: flex;
-    gap: 6px;
-    justify-content: space-between;
+    gap: 0 18px;
     align-items: center;
     cursor: pointer;
   }
 
-  .item-container:focus {
+  :host(:focus) .item-container {
     outline: 2px solid var(--outline-white);
-  }
-
-  .item-container * {
-    pointer-events: none;
-  }
-
-  .item-container img {
-    width: 34px;
-    filter: invert(0.8);
   }
 
   ${backgroundByRarity}
 
-  .item-container .name {
-    max-height: 52px;
-    font-size: 0.85rem;
-    display: flex;
-    align-items: center;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    gap: 8px;
+  .item-icon {
+    height: 36px;
   }
 
-  .item-container .weight {
+  .item-icon img {
+    width: 36px;
+    filter: invert(0.8);
+  }
+
+  .item-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    overflow: hidden;
+  }
+
+  .item-content.quantity {
+    align-items: flex-end;
+  }
+
+  .item-content * {
+    flex: 1;
+  }
+
+  .item-content .name {
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .item-quantity {
+    display: flex;
+    justify-content: center;
+  }
+
+  .item-content .weight {
     color: var(--sub-font-color);
     font-size: 0.7rem;
     text-align: center;
@@ -76,34 +97,51 @@ export function itemTinyCard(props: ItemTinyCardProps) {
     weight,
     quantity,
     onClick,
-    onFocus
+    onFocus,
+    onIncrement,
+    onDecrement
   } = props
 
-  return html`
-    <li
+  const wrapper = <IgnemWrapper & { incrementQuantity: any }> html.first`
+    <ignem-wrapper
+      css="${itemTinyCardStyles}"
       title="${name}"
       tabindex="0"
       key-id="${id}"
-      class="item-container ${rarity.toLowerCase()}"
       on-click=${onClick}
       on-focus=${onFocus}
     >
-      <span class="name">
-        <img src="${itemIconByType(props)}" />
-        ${name}
-      </span>
-      ${quantity
-        ? raw`
-          <span item-quantity>
-            ${quantity}
-          </span>
-        `
-        : raw`
-          <span class="weight">
-            Weight <br /> ${weight}
-          </span>
-        `
-      }
-    </li>
+      <li class="item-container ${rarity.toLowerCase()}">
+        <figure class="item-icon">
+          <img alt="Item Icon" src="${itemIconByType(props)}" />
+        </figure>
+
+        <div class="item-content ${quantity && 'quantity'}">
+          <span class="name">${name}</span>
+          ${quantity
+            ? html`
+              <ignem-quantity-control
+                class="item-quantity"
+                on-increment=${onIncrement}
+                on-decrement=${onDecrement}
+              />
+            `
+            : raw`
+              <span class="weight">
+                Weight ${weight}
+              </span>
+            `
+          }
+        </div>
+      </li>
+    </ignem-wrapper>
   `
+
+  wrapper.incrementQuantity = () => {
+    wrapper
+      .select<IgnemQuantityControlElement>('ignem-quantity-control')
+      ?.incrementQuantity()
+  }
+
+  return wrapper
 }

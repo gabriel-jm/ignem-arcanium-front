@@ -71,7 +71,7 @@ export const characterThirdFormStyles = css`
   [inventory], [items-list] {
     display: grid;
     background-color: var(--bright-black);
-    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
     gap: 10px;
     padding: 10px;
     border-radius: 4px;
@@ -135,10 +135,8 @@ export const characterThirdFormStyles = css`
   }
 `
 
-type QuantityControl = IgnemQuantityControlElement
-
 export function characterThirdForm(parent: IgnemCreateCharacterPage) {
-  const inventoryItems: InventoryItem[] = []
+  let inventoryItems: InventoryItem[] = []
   let availableItems: Item[] = []
   let sizeInUse = 0
   let lastSelectedItemId = ''
@@ -152,47 +150,7 @@ export function characterThirdForm(parent: IgnemCreateCharacterPage) {
     if (!item) return
 
     lastSelectedItemId = item.id
-    const quantityControl = parent.select<QuantityControl>('ignem-quantity-control')!
-    quantityControl.classList.remove('hide')
-    quantityControl.quantity = item.quantity
     parent.select('[item-info]')?.replaceChildren(itemCard(item))
-  }
-
-  function updateInventoryAndItemQuantity(item: InventoryItem) {
-    parent.select('.size-in-use')!.textContent = sizeInUse.toString()
-
-    const elementQuery = `[inventory] [key-id="${lastSelectedItemId}"] [item-quantity]`
-    parent.select(elementQuery)!.textContent = item.quantity.toString()
-  }
-
-  function addToInventory(itemId: string | null) {
-    const itemIndex = availableItems.findIndex(item => item.id === itemId)
-
-    if (itemIndex === -1) return
-
-    const item = {
-      ...availableItems[itemIndex],
-      quantity: 1
-    }
-    sizeInUse += item.weight
-    
-    inventoryItems.push(item)
-    availableItems.slice(itemIndex, 1)
-
-    parent.select('.size-in-use')!.textContent = sizeInUse.toString()
-    parent.select('.inventory-empty-message')?.classList.add('hide')
-    parent.select('[inventory]')?.append(itemTinyCard({
-      ...item,
-      onFocus: onFocusInventoryItem
-    }))
-  }
-
-  function onClickItem(event: Event) {
-    const target = event.target as HTMLElement
-    const itemId = target.getAttribute('key-id')
-
-    addToInventory(itemId)
-    target.remove()
   }
 
   function incrementQuantity() {
@@ -204,7 +162,7 @@ export function characterThirdForm(parent: IgnemCreateCharacterPage) {
 
     sizeInUse += item.weight
     item.quantity += 1
-    updateInventoryAndItemQuantity(item)
+    parent.select('.size-in-use')!.textContent = sizeInUse.toString()
   }
 
   function decrementQuantity() {
@@ -216,7 +174,7 @@ export function characterThirdForm(parent: IgnemCreateCharacterPage) {
 
     sizeInUse -= item.weight
     item.quantity -= 1
-    updateInventoryAndItemQuantity(item)
+    parent.select('.size-in-use')!.textContent = sizeInUse.toString()
 
     if (item.quantity < 1) {
       parent.select(`[inventory] [key-id="${item.id}"]`)?.remove()
@@ -225,12 +183,59 @@ export function characterThirdForm(parent: IgnemCreateCharacterPage) {
           Select an item to show its details
         </p>
       `)
-      parent.select('ignem-quantity-control')?.classList.add('hide')
 
-      inventoryItems.slice(inventoryItems.indexOf(item), 1)
+      inventoryItems = inventoryItems.filter(invItem => invItem.id !== item.id)
       lastSelectedItemId = ''
       return
     }
+  }
+
+  function findItem(itemId: string | null) {
+    const itemInInventory = inventoryItems.find(item => item.id === itemId)
+
+    if (itemInInventory) {
+      parent
+        .select<any>(`[inventory] [key-id="${itemId}"]`)!
+        .incrementQuantity()      
+    } else {
+      const itemIndex = availableItems.findIndex(item => item.id === itemId)
+
+      const item = {
+        ...availableItems[itemIndex],
+        quantity: 1
+      }
+      sizeInUse += item.weight
+
+      const itemCard = itemTinyCard({
+        ...item,
+        onFocus: onFocusInventoryItem,
+        onIncrement: incrementQuantity,
+        onDecrement: decrementQuantity
+      })
+  
+      parent.select('[inventory]')?.append(itemCard)
+
+      inventoryItems.push(item)
+    }
+  }
+
+  function addToInventory(itemId: string | null) {
+    const itemExists = availableItems.some(item => item.id === itemId)
+
+    if (!itemExists) return
+
+    lastSelectedItemId = String(itemId)
+    findItem(itemId)
+    
+    parent.select('.size-in-use')!.textContent = sizeInUse.toString()
+    parent.select('.inventory-empty-message')?.classList.add('hide')
+  }
+
+  function onClickItem(event: Event) {
+    const target = event.target as HTMLElement
+    const itemId = target.getAttribute('key-id')
+
+    addToInventory(itemId)
   }
   
   parent.once('init', () => {
@@ -270,12 +275,6 @@ export function characterThirdForm(parent: IgnemCreateCharacterPage) {
         </p>
         
         <div class="item-info">
-          <ignem-quantity-control
-            class="hide"
-            on-increment=${incrementQuantity}
-            on-decrement=${decrementQuantity}
-          />
-
           <div item-info>
             <p class="select-item-message">
               Select an item to show its details

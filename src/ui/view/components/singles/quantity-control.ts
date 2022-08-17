@@ -1,9 +1,11 @@
-import { trashIcon } from '@/ui/view/components/icons'
+import { minusIcon, plusIcon } from '@/ui/view/components/icons'
 import { IgnemElement } from '@/ui/view/ignem-element'
+import { SelectedElement } from 'lithen-super-element'
 import { css, html } from 'lithen-tag-functions'
 
 export interface IgnemQuantityControlElement extends IgnemElement {
-  quantity: number
+  setQuantity(value: number): void
+  incrementQuantity(): void
 }
 
 /**
@@ -12,51 +14,59 @@ export interface IgnemQuantityControlElement extends IgnemElement {
  * 
  * @prop {Number} quantity
  */
-export class IgnemQuantityControl extends IgnemElement {
+class IgnemQuantityControl extends IgnemElement {
   #quantity = 1
 
-  get quantity() {
+  constructor() {
+    super({ preventRenderApplying: true })
+    this.applyRender()
+    console.log('quantity-control', this.select('[quantity]'))
+  }
+
+  init() {
+    this.select('[minus]')?.on('click', this.decrementQuantity)
+    this.select('[plus]')?.on('click', this.incrementQuantity)
+  }
+
+  getQuantity() {
     return this.#quantity
   }
 
-  set quantity(value: number) {
+  setQuantity(value: number) {
     this.#quantity = Math.max(1, value)
-    
-    if (this.#quantity === 1) {
-      this.select('[minus]')!.innerHTML = trashIcon().toString()
-    } else {
-      this.select('[minus]')!.innerHTML = '&minus;'
-    }
 
     this.select('[quantity]')!.textContent = this.#quantity.toString()
   }
 
+  incrementQuantity = () => {
+    this.setQuantity(this.getQuantity() + 1)
+
+    this.dispatchEvent(new CustomEvent('increment', {
+      detail: { quantity: this.#quantity }
+    }))
+  }
+
+  decrementQuantity = () => {
+    this.setQuantity(this.getQuantity() - 1)
+
+    this.dispatchEvent(new CustomEvent('decrement', {
+      detail: { quantity: this.#quantity }
+    }))
+  }
+
   styling() {
     return css`
-      .quantity-control-container {
-        padding: 6px 10px;
-        border-radius: 4px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-top: 8px;
-        margin-bottom: 18px;
-        background-color: var(--black);
-      }
-
-      .quantity-control-container button {
-        width: 30px;
-        font-size: 1.1rem;
-        font-weight: bold;
+      .quantity-controls button {
+        width: 22px;
         background-color: transparent;
-        padding: 6px;
+        padding: 4px;
         border: 0;
         border-radius: 2px;
         color: var(--font-color);
         cursor: pointer;
       }
 
-      .quantity-control-container button:hover {
+      .quantity-controls button:hover {
         background-color: var(--bright-black);
       }
 
@@ -70,42 +80,25 @@ export class IgnemQuantityControl extends IgnemElement {
   }
 
   render() {
-    const incrementQuantity = () => {
-      this.quantity += 1
-
-      this.dispatchEvent(new CustomEvent('increment', {
-        detail: { quantity: this.#quantity }
-      }))
-    }
-
-    const decrementQuantity = () => {
-      this.quantity -= 1
-
-      this.dispatchEvent(new CustomEvent('decrement', {
-        detail: { quantity: this.#quantity }
-      }))
-    }
+    const initialQuantity = this.getAttribute('quantity') ?? '1'
 
     return html`
-      <div class="quantity-control-container">
-        <span>Quantity</span>
-        <div class="quantity-controls">
-          <button
-            minus
-            type="button"
-            on-click=${decrementQuantity}
-          >
-            ${trashIcon()}
-          </button>
-          <span quantity>1</span>
-          <button
-            plus
-            type="button"
-            on-click=${incrementQuantity}
-          >
-            &plus;
-          </button>
-        </div>
+      <div class="quantity-controls">
+        <button
+          minus
+          type="button"
+          on-click=${this.decrementQuantity}
+        >
+          ${minusIcon()}
+        </button>
+        <span quantity>${initialQuantity}</span>
+        <button
+          plus
+          type="button"
+          on-click=${this.incrementQuantity}
+        >
+          ${plusIcon()}
+        </button>
       </div>
     `
   }
