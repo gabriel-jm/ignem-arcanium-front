@@ -12,13 +12,13 @@
     "check": "ncu"
   },
   "devDependencies": {
-    "@types/node": "^18.7.3",
+    "@types/node": "^18.7.6",
     "c8": "^7.12.0",
     "happy-dom": "^6.0.4",
     "npm-check-updates": "^16.0.5",
     "typescript": "^4.7.4",
-    "vite": "^3.0.7",
-    "vitest": "^0.21.1"
+    "vite": "^3.0.8",
+    "vitest": "^0.22.0"
   },
   "dependencies": {
     "lithen-router": "^2.0.0",
