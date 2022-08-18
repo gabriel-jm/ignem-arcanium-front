@@ -1,6 +1,7 @@
 import '../../components/header/header'
-import { IgnemElement } from '@/ui/view/ignem-element'
 import { css, html } from 'lithen-tag-functions'
+import { IgnemElement } from '@/ui/view/ignem-element'
+import { SuperElementRenderValues } from 'lithen-super-element'
 import { containerStyles, formControlStyles } from '@/ui/view/styles'
 import {
   breadcrumbs,
@@ -8,12 +9,14 @@ import {
   textBetweenDashes,
   textBetweenDashesStyles
 } from '@/ui/view/components'
-import { characterFirstForm, characterFirstFormStyles } from './forms/character-first-form'
-import { characterSecondForm, characterSecondFormStyles } from './forms/character-second-form'
-import { characterThirdForm, characterThirdFormStyles } from './forms/character-third-form'
-import { SuperElementRenderValues } from 'lithen-super-element'
+import { characterFirstForm } from './forms/first/character-first-form'
+import { characterSecondForm } from './forms/second/character-second-form'
+import { characterThirdForm } from './forms/third/character-third-form'
 import { Presenter } from '@/presentation/protocols'
 import { itemTinyCardStyles } from '@/ui/view/components/item'
+import { characterFirstFormStyles } from './forms/first/character-first-form-styles'
+import { characterSecondFormStyles } from './forms/second/character-second-form-styles'
+import { characterThirdFormStyles } from './forms/third/character-third-form-styles'
 
 export class IgnemCreateCharacterPage extends IgnemElement {
   #listItemsPresenter: Presenter
