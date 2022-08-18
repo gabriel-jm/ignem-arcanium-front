@@ -1,10 +1,9 @@
 import { css, html } from 'lithen-tag-functions'
 import { IgnemCreateCharacterPage } from '../ignem-create-character-page'
-import { itemCard, itemTinyCard } from '@/ui/view/components/item'
+import { IgnemItemTinyCard, itemCard } from '@/ui/view/components/item'
 import { ItemsStore } from '@/ui/stores'
 import { InventoryItem } from '@/ui/protocols'
 import { Item } from '@/domain/protocols/use-cases'
-import { IgnemQuantityControlElement } from '@/ui/view/components'
 
 export const characterThirdFormStyles = css`
   .inventory-message {
@@ -149,6 +148,8 @@ export function characterThirdForm(parent: IgnemCreateCharacterPage) {
 
     if (!item) return
 
+    console.log(parent.select.toString())
+
     lastSelectedItemId = item.id
     parent.select('[item-info]')?.replaceChildren(itemCard(item))
   }
@@ -206,7 +207,7 @@ export function characterThirdForm(parent: IgnemCreateCharacterPage) {
       }
       sizeInUse += item.weight
 
-      const itemCard = itemTinyCard({
+      const itemCard = new IgnemItemTinyCard({
         ...item,
         onFocus: onFocusInventoryItem,
         onIncrement: incrementQuantity,
@@ -242,7 +243,7 @@ export function characterThirdForm(parent: IgnemCreateCharacterPage) {
     availableItems = new ItemsStore().items
 
     parent.select('[items-list]')?.append(
-      ...availableItems.map(item => itemTinyCard({
+      ...availableItems.map(item => new IgnemItemTinyCard({
         ...item,
         onClick: onClickItem
       }))

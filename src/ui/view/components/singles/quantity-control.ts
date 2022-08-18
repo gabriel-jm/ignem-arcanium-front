@@ -1,31 +1,21 @@
 import { minusIcon, plusIcon } from '@/ui/view/components/icons'
 import { IgnemElement } from '@/ui/view/ignem-element'
-import { SelectedElement } from 'lithen-super-element'
 import { css, html } from 'lithen-tag-functions'
-
-export interface IgnemQuantityControlElement extends IgnemElement {
-  setQuantity(value: number): void
-  incrementQuantity(): void
-}
 
 /**
  * @event -increment
  * @event -decrement
- * 
- * @prop {Number} quantity
  */
-class IgnemQuantityControl extends IgnemElement {
+export class IgnemQuantityControl extends IgnemElement {
   #quantity = 1
 
   constructor() {
     super({ preventRenderApplying: true })
     this.applyRender()
-    console.log('quantity-control', this.select('[quantity]'))
   }
 
-  init() {
-    this.select('[minus]')?.on('click', this.decrementQuantity)
-    this.select('[plus]')?.on('click', this.incrementQuantity)
+  $(query: string) {
+    return this.root.querySelector(query)
   }
 
   getQuantity() {
@@ -33,9 +23,9 @@ class IgnemQuantityControl extends IgnemElement {
   }
 
   setQuantity(value: number) {
-    this.#quantity = Math.max(1, value)
+    this.#quantity = value < 1 ? 1 : value
 
-    this.select('[quantity]')!.textContent = this.#quantity.toString()
+    this.$('[quantity]')!.textContent = this.#quantity.toString()
   }
 
   incrementQuantity = () => {

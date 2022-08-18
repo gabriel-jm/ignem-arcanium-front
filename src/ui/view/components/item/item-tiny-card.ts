@@ -2,7 +2,8 @@ import '../singles/quantity-control'
 import { Item } from '@/domain/protocols/use-cases'
 import { itemIconByType } from './item-icon-by-type'
 import { css, html, raw } from 'lithen-tag-functions'
-import { IgnemQuantityControlElement, IgnemWrapper } from '@/ui/view/components/singles'
+import { IgnemQuantityControl } from '@/ui/view/components/singles'
+import { IgnemElement } from '@/ui/view/ignem-element'
 
 export interface ItemTinyCardProps extends Item {
   onClick?: Function
@@ -89,31 +90,45 @@ export const itemTinyCardStyles = css`
   }
 `
 
-export function itemTinyCard(props: ItemTinyCardProps) {
-  const {
-    id,
-    rarity,
-    name,
-    weight,
-    quantity,
-    onClick,
-    onFocus,
-    onIncrement,
-    onDecrement
-  } = props
+export class IgnemItemTinyCard extends IgnemElement {
+  #props: ItemTinyCardProps
 
-  const wrapper = <IgnemWrapper & { incrementQuantity: any }> html.first`
-    <ignem-wrapper
-      css="${itemTinyCardStyles}"
-      title="${name}"
-      tabindex="0"
-      key-id="${id}"
-      on-click=${onClick}
-      on-focus=${onFocus}
-    >
+  constructor(props: ItemTinyCardProps) {
+    super()
+    this.title = props.name
+    this.tabIndex = 0
+    this.setAttribute('key-id', props.id)
+    props.onClick && this.on('click', props.onClick)
+    props.onFocus && this.on('focus', props.onFocus)
+
+    this.#props = props
+    this.applyRender()
+  }
+
+  incrementQuantity = () => {
+    this
+      .select<IgnemQuantityControl>('ignem-quantity-control')
+      ?.incrementQuantity()
+  }
+
+  styling() {
+    return itemTinyCardStyles
+  }
+
+  render() {
+    const {
+      rarity,
+      name,
+      weight,
+      quantity,
+      onIncrement,
+      onDecrement
+    } = this.#props
+
+    return html`
       <li class="item-container ${rarity.toLowerCase()}">
         <figure class="item-icon">
-          <img alt="Item Icon" src="${itemIconByType(props)}" />
+          <img alt="Item Icon" src="${itemIconByType(this.#props)}" />
         </figure>
 
         <div class="item-content ${quantity && 'quantity'}">
@@ -134,14 +149,8 @@ export function itemTinyCard(props: ItemTinyCardProps) {
           }
         </div>
       </li>
-    </ignem-wrapper>
-  `
-
-  wrapper.incrementQuantity = () => {
-    wrapper
-      .select<IgnemQuantityControlElement>('ignem-quantity-control')
-      ?.incrementQuantity()
+    `
   }
-
-  return wrapper
 }
+
+customElements.define('ignem-item-tiny-card', IgnemItemTinyCard)
