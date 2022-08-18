@@ -187,7 +187,10 @@ export function characterThirdForm(parent: IgnemCreateCharacterPage) {
 
       inventoryItems = inventoryItems.filter(invItem => invItem.id !== item.id)
       lastSelectedItemId = ''
-      return
+      
+      if (inventoryItems.length === 0) {
+        parent.select('.inventory-empty-message')?.classList.remove('hide')
+      }
     }
   }
 

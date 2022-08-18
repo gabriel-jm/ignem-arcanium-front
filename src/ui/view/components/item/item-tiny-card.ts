@@ -77,6 +77,10 @@ export const itemTinyCardStyles = css`
     text-overflow: ellipsis;
   }
 
+  .item-content .name::selection {
+    background-color: transparent;
+  }
+
   .item-quantity {
     display: flex;
     justify-content: center;
