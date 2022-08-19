@@ -1,7 +1,6 @@
 import '../../singles/wrapper'
 import { html, raw } from 'lithen-tag-functions'
 import {
-  AnyKindOfInventoryItem,
   InventoryAlchemicalItem,
   InventoryShieldOrArmor,
   InventoryWeapon
@@ -11,8 +10,9 @@ import { itemCardStyles } from './item-card-styles'
 import { weaponDetails } from './weapon-details'
 import { shieldOrArmorDetails } from './shield-or-armor-details'
 import { alchemicalItemDetails } from './alchemical-item-details'
+import { AnyKindOfItem } from '@/domain/protocols/use-cases'
 
-export type ItemDetailsProps = AnyKindOfInventoryItem
+export type ItemDetailsProps = AnyKindOfItem
 
 export const itemProperty = (name: string, value: any) => raw`
   <p>

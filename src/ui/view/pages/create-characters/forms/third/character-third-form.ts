@@ -16,7 +16,7 @@ export function characterThirdForm(parent: IgnemCreateCharacterPage) {
     const target = event.target as HTMLElement
     const itemId = target.getAttribute('key-id')
 
-    const item = inventoryItems.find(item => item.id === itemId)
+    const item = availableItems.find(item => item.id === itemId)
 
     if (!item) return
 
@@ -108,12 +108,11 @@ export function characterThirdForm(parent: IgnemCreateCharacterPage) {
     parent.select('.inventory-empty-message')?.classList.add('hide')
   }
 
-  function onClickItem(event: Event) {
+  function onDoubleClickItem(event: Event) {
     const target = event.target as HTMLElement
     const itemId = target.getAttribute('key-id')
 
     addToInventory(itemId)
-    onFocusInventoryItem(event)
   }
   
   parent.once('init', () => {
@@ -122,7 +121,8 @@ export function characterThirdForm(parent: IgnemCreateCharacterPage) {
     parent.select('[items-list]')?.append(
       ...availableItems.map(item => new IgnemItemTinyCard({
         ...item,
-        onClick: onClickItem
+        onClick: onFocusInventoryItem,
+        onDoubleClick: onDoubleClickItem
       }))
     )
   })

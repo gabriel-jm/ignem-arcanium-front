@@ -7,6 +7,7 @@ import { IgnemElement } from '@/ui/view/ignem-element'
 
 export interface ItemTinyCardProps extends Item {
   onClick?: Function
+  onDoubleClick?: Function
   onFocus?: Function
   onIncrement?: Function
   onDecrement?: Function
@@ -104,6 +105,7 @@ export class IgnemItemTinyCard extends IgnemElement {
     this.setAttribute('key-id', props.id)
     props.onClick && this.on('click', props.onClick)
     props.onFocus && this.on('focus', props.onFocus)
+    props.onDoubleClick && this.on('dblclick', props.onDoubleClick)
 
     this.#props = props
     this.applyRender()
