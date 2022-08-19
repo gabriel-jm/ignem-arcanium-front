@@ -14,7 +14,7 @@ export class IgnemNotification extends IgnemElement {
   #availableTypes = ['success', 'warning']
 
   constructor(props: IgnemNotificationProps = {}) {
-    super({ preventRenderApplying: true })
+    super({ preventRender: true })
     props.label && this.setAttribute('label', props.label)
     props.message && this.setAttribute('message', props.message)
     props.type && this.setAttribute('type', props.type)

@@ -21,7 +21,7 @@ export class IgnemTorchRegistry extends IgnemElement {
   }
 
   constructor(props: IgnemTorchRegistryProps) {
-    super({ preventRenderApplying: true })
+    super({ preventRender: true })
     this.setAttributes({
       ...props,
       'character-name': props.characterName,

@@ -10,7 +10,7 @@ export class IgnemQuantityControl extends IgnemElement {
   #quantity = 1
 
   constructor() {
-    super({ preventRenderApplying: true })
+    super({ preventRender: true })
     this.applyRender()
   }
 

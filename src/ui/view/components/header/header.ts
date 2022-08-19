@@ -8,7 +8,7 @@ export class IgnemHeader extends IgnemElement {
   #accountStore = new AccountStore()
 
   constructor() {
-    super({ preventRenderApplying: true })
+    super({ preventRender: true })
     this.applyRender()
   }
 
