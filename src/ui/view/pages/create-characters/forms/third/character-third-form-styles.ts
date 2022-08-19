@@ -9,17 +9,26 @@ export const characterThirdFormStyles = css`
   }
   
   .inventory-size {
+    height: fit-content;
     text-align: right;
   }
 
-  .inventory-size span {
-    display: inline-block;
+  .inventory-size span:first-of-type {
+    pointer-events: none;
+  }
+
+  .inventory-size .chevron-up-icon {
+    display: none;
+    pointer-events: none;
+    transition: all 200ms;
+    transform-origin: center;
+    color: var(--sub-font-color);
   }
 
   .inventory-size-message {
     font-size: 1.5rem;
     font-weight: bold;
-    padding-right: 18px;
+    padding-right: 14px;
   }
 
   .size-in-use {
@@ -58,6 +67,10 @@ export const characterThirdFormStyles = css`
     padding: 50px 0;
   }
 
+  .item-info {
+    padding-top: 8px;
+  }
+
   [inventory] {
     margin-bottom: 24px;
   }
@@ -92,6 +105,12 @@ export const characterThirdFormStyles = css`
     display: none;
   }
 
+  @media screen and (max-width: 1100px) {
+    .inventory-items {
+      flex: 2;
+    }
+  }
+
   @media screen and (max-width: 750px) {
     .inventory-items {
       flex: 1;
@@ -109,6 +128,7 @@ export const characterThirdFormStyles = css`
 
     .item-info-container {
       width: 100%;
+      height: 300px;
       position: fixed;
       left: 0;
       top: 90%;
@@ -116,15 +136,40 @@ export const characterThirdFormStyles = css`
       padding: 6px;
       border-radius: 8px;
       box-shadow: 0 0 3px 2px #1117;
+      transition: all 250ms;
+    }
+
+    .item-info-container:focus {
+      outline: 1px solid var(--container-border-color);
+    }
+
+    .item-info-container.open {
+      transform: translateY(-80%);
     }
 
     .inventory-size {
-      text-align: center;
+      display: flex;
+      padding: 0 8px;
+      padding-bottom: 4px;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .inventory-size .chevron-up-icon {
+      display: block;
+    }
+
+    .item-info-container.open .chevron-up-icon {
+      transform: rotate(180deg);
     }
 
     .item-info {
+      height: 85%;
       background-color: var(--body-bg-color);
-      padding: 4px 8px;
+      padding: 6px 8px;
+      border-radius: 4px;
+      overflow-y: auto;
+      overflow-x: hidden;
     }
   }
 `

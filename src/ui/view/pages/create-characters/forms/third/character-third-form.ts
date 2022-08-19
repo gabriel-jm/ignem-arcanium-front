@@ -4,6 +4,7 @@ import { IgnemItemTinyCard, itemCard } from '@/ui/view/components/item'
 import { ItemsStore } from '@/ui/stores'
 import { InventoryItem } from '@/ui/protocols'
 import { Item } from '@/domain/protocols/use-cases'
+import { chevronUpIcon } from '@/ui/view/components'
 
 export function characterThirdForm(parent: IgnemCreateCharacterPage) {
   let inventoryItems: InventoryItem[] = []
@@ -20,7 +21,10 @@ export function characterThirdForm(parent: IgnemCreateCharacterPage) {
     if (!item) return
 
     lastSelectedItemId = item.id
-    parent.select('[item-info]')?.replaceChildren(itemCard(item))
+
+    if (!parent.select(`[item-info] [key-id="${item.id}"]`)) {
+      parent.select('[item-info]')?.replaceChildren(itemCard(item))
+    }
   }
 
   function incrementQuantity() {
@@ -109,6 +113,7 @@ export function characterThirdForm(parent: IgnemCreateCharacterPage) {
     const itemId = target.getAttribute('key-id')
 
     addToInventory(itemId)
+    onFocusInventoryItem(event)
   }
   
   parent.once('init', () => {
@@ -121,6 +126,18 @@ export function characterThirdForm(parent: IgnemCreateCharacterPage) {
       }))
     )
   })
+
+  function toggleItemInfo(action: 'add'| 'remove') {
+    return () => {
+      if (!matchMedia('(max-width: 425px)').matches) return
+      
+      const itemInfoContainer = parent.select('.item-info-container')
+
+      itemInfoContainer.classList[action]('open')
+
+      if (action === 'remove') itemInfoContainer.blur()
+    }
+  }
 
   return html`
     <p class="inventory-message">
@@ -140,11 +157,21 @@ export function characterThirdForm(parent: IgnemCreateCharacterPage) {
         <ul items-list></ul>
       </div>
       
-      <div class="item-info-container">
+      <div
+        tabindex="-1"
+        class="item-info-container"
+        on-focusin=${toggleItemInfo('add')}
+        on-blur=${toggleItemInfo('remove')}
+      >
         <p class="inventory-size">
-          <span class="inventory-size-message">Inventory size</span>
-          <span class="size-in-use">0</span>
-          <span class="max-size">/ 200</span>
+          <span>
+            <span class="inventory-size-message">Inventory size</span>
+            <span class="size-in-use">0</span>
+            <span class="max-size">/ 200</span>
+          </span>
+          <span>
+            ${chevronUpIcon()}
+          </span>
         </p>
         
         <div class="item-info">

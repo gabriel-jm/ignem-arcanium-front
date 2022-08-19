@@ -26,7 +26,11 @@ export function itemCard(props: ItemDetailsProps) {
   const rarity = props.rarity.toLowerCase()
 
   return html`
-    <ignem-wrapper class="item-card" css="${itemCardStyles}">
+    <ignem-wrapper
+      class="item-card"
+      key-id="${props.id}"
+      css="${itemCardStyles}"
+    >
       <div class="item-details ${rarity}">
         <header class="item-title">
           <h3>${name}</h3>
