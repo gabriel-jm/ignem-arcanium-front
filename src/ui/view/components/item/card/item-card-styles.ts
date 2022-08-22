@@ -1,4 +1,4 @@
-import { damageFormaterStyles } from '@/ui/view/components/singles'
+import { damageFormaterStyles, propertiesFormaterStyles } from '@/ui/view/components/formaters'
 import { css } from 'lithen-tag-functions'
 
 const rarities = ['common', 'uncommon']
@@ -20,7 +20,7 @@ const rarityNameColorByRarity = rarities.map(rarity => css`
 `)
 
 export const itemCardStyles = css`
-  ${damageFormaterStyles}
+  ${[damageFormaterStyles, propertiesFormaterStyles]}
 
   .item-details {
     padding: 12px;

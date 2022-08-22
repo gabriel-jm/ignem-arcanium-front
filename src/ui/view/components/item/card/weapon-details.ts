@@ -1,7 +1,7 @@
 import { InventoryWeapon } from '@/ui/protocols'
 import { itemProperty } from './item-card'
-import { html } from 'lithen-tag-functions'
-import { damageFormater } from '@/ui/view/components/singles'
+import { html, raw } from 'lithen-tag-functions'
+import { damageFormater, propertiesFormater } from '@/ui/view/components/formaters'
 
 export function weaponDetails(props: InventoryWeapon) {
   const {
@@ -22,12 +22,13 @@ export function weaponDetails(props: InventoryWeapon) {
       <span class="property-name">Damage</span>
       ${damageList}
     </p>
-    ${itemProperty(
-      'Properties',
-      properties.length
-        ? properties.join(', ').toLowerCase()
-        : '-'
-    )}
+    <p>
+      <span class="property-name">Properties</span>
+      ${properties.length
+        ? propertiesFormater(properties)
+        : raw`<span>-</span>`
+      }
+    </p>
     
     <div class="properties">
       ${itemProperty('Initiative Modifier', initiativeModifier || '0')}

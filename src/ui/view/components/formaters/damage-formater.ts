@@ -1,4 +1,4 @@
-import { captalize } from '@/ui/helpers'
+import { capitalize } from '@/ui/helpers'
 import { css, html } from 'lithen-tag-functions'
 
 export interface DamageFormaterProps {
@@ -47,7 +47,7 @@ export function damageFormater({ damage, type }: DamageFormaterProps) {
   return html`
     <span class="damage-container ${type}">
       <span class="damage">${damage}</span>
-      <span class="type">${captalize(type)}</span>
+      <span class="type">${capitalize(type)}</span>
     </span>
   `
 }
