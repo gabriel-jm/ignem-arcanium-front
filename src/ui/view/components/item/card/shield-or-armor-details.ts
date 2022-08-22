@@ -1,6 +1,7 @@
 import { InventoryShieldOrArmor } from '@/ui/protocols'
 import { itemProperty } from './item-card'
-import { html, raw } from 'lithen-tag-functions'
+import { html } from 'lithen-tag-functions'
+import { damageFormater } from '@/ui/view/components/singles'
 
 export function shieldOrArmorDetails(props: InventoryShieldOrArmor) {
   const {
@@ -13,10 +14,13 @@ export function shieldOrArmorDetails(props: InventoryShieldOrArmor) {
 
   const damageList = Object
     .entries(damageReduction)
-    .map(([field, value]) => raw`<span>${value} (${field})</span>`)
+    .map(([type, damage]) => damageFormater({ type, damage }))
 
   return html`
-    ${itemProperty('Damage Reduction', damageList)}
+    <p>
+      <span class="property-name">Damage Reduction</span>
+      ${damageList}
+    </p>
     ${itemProperty(
       'Properties',
       properties.length
