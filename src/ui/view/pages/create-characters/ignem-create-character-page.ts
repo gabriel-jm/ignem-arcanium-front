@@ -17,6 +17,7 @@ import { itemTinyCardStyles } from '@/ui/view/components/item'
 import { characterFirstFormStyles } from './forms/first/character-first-form-styles'
 import { characterSecondFormStyles } from './forms/second/character-second-form-styles'
 import { characterFourthFormStyles } from './forms/fourth/character-fourth-form-styles'
+import { characterThirdForm } from '@/ui/view/pages/create-characters/forms/third/character-third-form'
 
 export class IgnemCreateCharacterPage extends IgnemElement {
   #listItemsPresenter: Presenter
@@ -82,6 +83,8 @@ export class IgnemCreateCharacterPage extends IgnemElement {
             characterFirstForm(this),
             textBetweenDashes('Attributes'),
             characterSecondForm(this),
+            textBetweenDashes('Equipment'),
+            characterThirdForm(),
             textBetweenDashes('Inventory'),
             characterFourthForm(this)
           ]}
