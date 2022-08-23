@@ -1,6 +1,6 @@
 import { css } from 'lithen-tag-functions'
 
-export const characterThirdFormStyles = css`
+export const characterFourthFormStyles = css`
   .inventory-message {
     text-align: center;
     color: var(--sub-font-color);

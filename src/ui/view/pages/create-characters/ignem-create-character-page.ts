@@ -11,12 +11,12 @@ import {
 } from '@/ui/view/components'
 import { characterFirstForm } from './forms/first/character-first-form'
 import { characterSecondForm } from './forms/second/character-second-form'
-import { characterThirdForm } from './forms/third/character-third-form'
+import { characterFourthForm } from './forms/fourth/character-fourth-form'
 import { Presenter } from '@/presentation/protocols'
 import { itemTinyCardStyles } from '@/ui/view/components/item'
 import { characterFirstFormStyles } from './forms/first/character-first-form-styles'
 import { characterSecondFormStyles } from './forms/second/character-second-form-styles'
-import { characterThirdFormStyles } from './forms/third/character-third-form-styles'
+import { characterFourthFormStyles } from './forms/fourth/character-fourth-form-styles'
 
 export class IgnemCreateCharacterPage extends IgnemElement {
   #listItemsPresenter: Presenter
@@ -48,7 +48,7 @@ export class IgnemCreateCharacterPage extends IgnemElement {
       itemTinyCardStyles,
       characterFirstFormStyles,
       characterSecondFormStyles,
-      characterThirdFormStyles
+      characterFourthFormStyles
     ]
 
     return css`
@@ -83,7 +83,7 @@ export class IgnemCreateCharacterPage extends IgnemElement {
             textBetweenDashes('Attributes'),
             characterSecondForm(this),
             textBetweenDashes('Inventory'),
-            characterThirdForm(this)
+            characterFourthForm(this)
           ]}
         </form>
       </section>

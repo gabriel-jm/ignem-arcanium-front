@@ -6,7 +6,7 @@ import { InventoryItem } from '@/ui/protocols'
 import { Item } from '@/domain/protocols/use-cases'
 import { chevronUpIcon } from '@/ui/view/components'
 
-export function characterThirdForm(parent: IgnemCreateCharacterPage) {
+export function characterFourthForm(parent: IgnemCreateCharacterPage) {
   let inventoryItems: InventoryItem[] = []
   let availableItems: Item[] = []
   let sizeInUse = 0
