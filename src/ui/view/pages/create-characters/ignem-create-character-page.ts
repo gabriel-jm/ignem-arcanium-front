@@ -55,6 +55,13 @@ export class IgnemCreateCharacterPage extends IgnemElement {
     return css`
       ${aditionalStyles}
 
+      .explanatory-message {
+        text-align: center;
+        color: var(--sub-font-color);
+        margin: 10px 0 20px 0;
+        padding: 0 16px;
+      }
+
       .characters-title {
         font-size: 2rem;
         border-bottom: 1px solid var(--container-border-color);

@@ -1,13 +1,6 @@
 import { css } from 'lithen-tag-functions'
 
 export const characterFourthFormStyles = css`
-  .inventory-message {
-    text-align: center;
-    color: var(--sub-font-color);
-    margin: 10px 0 20px 0;
-    padding: 0 16px;
-  }
-  
   .inventory-size {
     height: fit-content;
     text-align: right;

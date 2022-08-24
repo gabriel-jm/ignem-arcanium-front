@@ -140,11 +140,11 @@ export function characterFourthForm(parent: IgnemCreateCharacterPage) {
   }
 
   return html`
-    <p class="inventory-message">
+    <p class="explanatory-message">
       Select the items that your character is current holding
     </p>
 
-    <div class="inventory-container">
+    <section class="inventory-container">
       <div class="inventory-items">
         <h3>Your Inventory</h3>
         <ul inventory>
@@ -182,6 +182,6 @@ export function characterFourthForm(parent: IgnemCreateCharacterPage) {
           </div>
         </div>
       </div>
-    </div>
+    </section>
   `
 }

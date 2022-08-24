@@ -2,15 +2,18 @@ import { html } from 'lithen-tag-functions'
 
 export function characterThirdForm() {
   return html`
-    <p>
+    <p class="explanatory-message">
       Select your character's current equipment
     </p>
 
-    <div>
-      <p>
-        <span>Left Hand</span>
-      </p>
-
+    <section>
+      <div>
+        <p>Left Hand</p>
+        <div>
+          Empty Hand
+        </div>  
+      </div>
+      
       <p>
         <span>Right Hand</span>
       </p>
@@ -26,6 +29,6 @@ export function characterThirdForm() {
       <p>
         <span>Accessory 2</span>
       </p>
-    </div>
+    </section>
   `
 }
