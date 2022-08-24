@@ -6,29 +6,26 @@ export function characterThirdForm() {
       Select your character's current equipment
     </p>
 
-    <section>
-      <div>
-        <p>Left Hand</p>
+    <section class="equipment">
+      <div class="equipment-display">
         <div>
-          Empty Hand
-        </div>  
+          <p>Left Hand</p>
+          <div>
+            Empty Hand
+          </div>  
+        </div>
+
+        <div>
+          <p>Right Hand</p>
+          <div>
+            Empty Hand
+          </div>  
+        </div>
       </div>
-      
-      <p>
-        <span>Right Hand</span>
-      </p>
 
-      <p>
-        <span>Armor</span>
-      </p>
+      <div class="items-display">
 
-      <p>
-        <span>Accessory 1</span>
-      </p>
-
-      <p>
-        <span>Accessory 2</span>
-      </p>
+      </div>
     </section>
   `
 }
