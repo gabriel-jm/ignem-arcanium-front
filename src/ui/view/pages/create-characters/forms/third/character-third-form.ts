@@ -8,17 +8,38 @@ export function characterThirdForm() {
 
     <section class="equipment">
       <div class="equipment-display">
-        <div>
-          <p>Left Hand</p>
-          <div>
+        <div class="item-slot-container">
+          <p class="item-slot-title">Left Hand</p>
+          <div class="item-slot">
             Empty Hand
           </div>  
         </div>
 
-        <div>
-          <p>Right Hand</p>
-          <div>
+        <div class="item-slot-container">
+          <p class="item-slot-title">Right Hand</p>
+          <div class="item-slot">
             Empty Hand
+          </div>  
+        </div>
+
+        <div class="item-slot-container">
+          <p class="item-slot-title">Armor</p>
+          <div class="item-slot">
+            None
+          </div>  
+        </div>
+
+        <div class="item-slot-container">
+          <p class="item-slot-title">Accessory 1</p>
+          <div class="item-slot">
+            None
+          </div>  
+        </div>
+
+        <div class="item-slot-container">
+          <p class="item-slot-title">Accessory 2</p>
+          <div class="item-slot">
+            None
           </div>  
         </div>
       </div>
