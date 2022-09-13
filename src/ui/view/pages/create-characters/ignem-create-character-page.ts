@@ -93,7 +93,7 @@ export class IgnemCreateCharacterPage extends IgnemElement {
             textBetweenDashes('Attributes'),
             characterSecondForm(this),
             textBetweenDashes('Equipment'),
-            characterThirdForm(),
+            characterThirdForm(this),
             textBetweenDashes('Inventory'),
             characterFourthForm(this)
           ]}

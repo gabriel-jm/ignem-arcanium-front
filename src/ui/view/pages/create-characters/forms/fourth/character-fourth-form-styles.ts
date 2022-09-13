@@ -68,7 +68,7 @@ export const characterFourthFormStyles = css`
     margin-bottom: 24px;
   }
 
-  [inventory], [items-list] {
+  [inventory], .items-list {
     display: grid;
     background-color: var(--bright-black);
     grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
@@ -82,7 +82,7 @@ export const characterFourthFormStyles = css`
   }
 
   [inventory] .item-container,
-  [items-list] .item-container {
+  .items-list .item-container {
     flex: 1;
   }
 

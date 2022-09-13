@@ -118,7 +118,7 @@ export function characterFourthForm(parent: IgnemCreateCharacterPage) {
   parent.once('init', () => {
     availableItems = new ItemsStore().items
 
-    parent.select('[items-list]')?.append(
+    parent.select('[inv-items-list]')?.append(
       ...availableItems.map(item => new IgnemItemTinyCard({
         ...item,
         onClick: onFocusInventoryItem,
@@ -154,7 +154,7 @@ export function characterFourthForm(parent: IgnemCreateCharacterPage) {
         </ul>
 
         <h3>Items List</h3>
-        <ul items-list></ul>
+        <ul class="items-list" inv-items-list></ul>
       </div>
       
       <div

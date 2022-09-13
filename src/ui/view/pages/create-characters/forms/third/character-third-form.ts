@@ -1,3 +1,7 @@
+import { Item } from '@/domain/protocols/use-cases'
+import { ItemsStore } from '@/ui/stores'
+import { IgnemItemTinyCard } from '@/ui/view/components'
+import { IgnemCreateCharacterPage } from '@/ui/view/pages/create-characters/ignem-create-character-page'
 import { html } from 'lithen-tag-functions'
 
 function itemSlot(title: string, emptyMessage: string) {
@@ -9,7 +13,21 @@ function itemSlot(title: string, emptyMessage: string) {
   `
 }
 
-export function characterThirdForm() {
+export function characterThirdForm(parent: IgnemCreateCharacterPage) {
+  let availableItems: Item[] = []
+  
+  parent.once('init', () => {
+    availableItems = new ItemsStore().items
+
+    parent.select('[equip-items-list]')?.append(
+      ...availableItems.map(item => new IgnemItemTinyCard({
+        ...item,
+        // onClick: onFocusInventoryItem,
+        // onDoubleClick: onDoubleClickItem
+      }))
+    )
+  })
+
   return html`
     <p class="explanatory-message">
       Select your character's current equipment
@@ -28,7 +46,7 @@ export function characterThirdForm() {
 
       <div class="items-display">
         <h3>Items List</h3>
-        <ul items-list></ul>
+        <ul class="items-list" equip-items-list></ul>
       </div>
     </section>
   `
