@@ -9,6 +9,13 @@ export const characterThirdFormStyles = css`
     gap: 10px;
   }
 
+  .items-display {
+    display: flex;
+    margin-top: 24px;
+    gap: 18px;
+    overflow-x: hidden;
+  }
+
   .item-slot-container {
     padding: 10px;
     border-radius: 4px;
@@ -32,5 +39,17 @@ export const characterThirdFormStyles = css`
     background-color: var(--black);
     padding: 6px 8px;
     border-radius: 4px;
+  }
+
+  .items-list-container {
+    flex: 3;
+  }
+
+  .items-list.third {
+    height: 450px;
+  }
+
+  .item-info {
+    flex: 1;
   }
 `

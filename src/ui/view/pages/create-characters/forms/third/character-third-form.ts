@@ -61,9 +61,9 @@ export function characterThirdForm(parent: IgnemCreateCharacterPage) {
       </div>
 
       <div class="items-display">
-        <div>
+        <div class="items-list-container">
           <h3>Items List</h3>
-          <ul class="items-list" equip-items-list></ul>
+          <ul class="third items-list" equip-items-list></ul>
         </div>
 
         <div class="item-info">
