@@ -1,6 +1,6 @@
 import { Item } from '@/domain/protocols/use-cases'
 import { ItemsStore } from '@/ui/stores'
-import { IgnemItemTinyCard } from '@/ui/view/components'
+import { IgnemItemTinyCard, itemCard } from '@/ui/view/components'
 import { IgnemCreateCharacterPage } from '@/ui/view/pages/create-characters/ignem-create-character-page'
 import { html } from 'lithen-tag-functions'
 
@@ -15,6 +15,22 @@ function itemSlot(title: string, emptyMessage: string) {
 
 export function characterThirdForm(parent: IgnemCreateCharacterPage) {
   let availableItems: Item[] = []
+  let lastSelectedItemId = ''
+
+  function onFocusInventoryItem(event: Event) {
+    const target = event.target as HTMLElement
+    const itemId = target.getAttribute('key-id')
+
+    const item = availableItems.find(item => item.id === itemId)
+
+    if (!item) return
+
+    lastSelectedItemId = item.id
+
+    if (!parent.select(`[item-info] [key-id="${item.id}"]`)) {
+      parent.select('[item-info]')?.replaceChildren(itemCard(item))
+    }
+  }
   
   parent.once('init', () => {
     availableItems = new ItemsStore().items
@@ -22,7 +38,7 @@ export function characterThirdForm(parent: IgnemCreateCharacterPage) {
     parent.select('[equip-items-list]')?.append(
       ...availableItems.map(item => new IgnemItemTinyCard({
         ...item,
-        // onClick: onFocusInventoryItem,
+        onClick: onFocusInventoryItem,
         // onDoubleClick: onDoubleClickItem
       }))
     )
@@ -45,8 +61,18 @@ export function characterThirdForm(parent: IgnemCreateCharacterPage) {
       </div>
 
       <div class="items-display">
-        <h3>Items List</h3>
-        <ul class="items-list" equip-items-list></ul>
+        <div>
+          <h3>Items List</h3>
+          <ul class="items-list" equip-items-list></ul>
+        </div>
+
+        <div class="item-info">
+          <div item-info>
+            <p class="select-item-message">
+              Select an item to show its details
+            </p>
+          </div>
+        </div>
       </div>
     </section>
   `
