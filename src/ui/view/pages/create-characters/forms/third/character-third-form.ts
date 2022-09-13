@@ -1,5 +1,14 @@
 import { html } from 'lithen-tag-functions'
 
+function itemSlot(title: string, emptyMessage: string) {
+  return html`
+    <div class="item-slot-container">
+      <p class="item-slot-title">${title}</p>
+      <div class="item-slot">${emptyMessage}</div>
+    </div>
+  `
+}
+
 export function characterThirdForm() {
   return html`
     <p class="explanatory-message">
@@ -8,44 +17,18 @@ export function characterThirdForm() {
 
     <section class="equipment">
       <div class="equipment-display">
-        <div class="item-slot-container">
-          <p class="item-slot-title">Left Hand</p>
-          <div class="item-slot">
-            Empty Hand
-          </div>  
-        </div>
-
-        <div class="item-slot-container">
-          <p class="item-slot-title">Right Hand</p>
-          <div class="item-slot">
-            Empty Hand
-          </div>  
-        </div>
-
-        <div class="item-slot-container">
-          <p class="item-slot-title">Armor</p>
-          <div class="item-slot">
-            None
-          </div>  
-        </div>
-
-        <div class="item-slot-container">
-          <p class="item-slot-title">Accessory 1</p>
-          <div class="item-slot">
-            None
-          </div>  
-        </div>
-
-        <div class="item-slot-container">
-          <p class="item-slot-title">Accessory 2</p>
-          <div class="item-slot">
-            None
-          </div>  
-        </div>
+        ${[
+          itemSlot('Left Hand', 'Empty Hand'),
+          itemSlot('Right Hand', 'Empty Hand'),
+          itemSlot('Armor', 'None'),
+          itemSlot('Accessory 1', 'None'),
+          itemSlot('Accessory 2', 'None')
+        ]}
       </div>
 
       <div class="items-display">
-
+        <h3>Items List</h3>
+        <ul items-list></ul>
       </div>
     </section>
   `
