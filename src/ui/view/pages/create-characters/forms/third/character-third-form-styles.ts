@@ -16,25 +16,31 @@ export const characterThirdFormStyles = css`
     overflow-x: hidden;
   }
 
-  .item-slot-container {
+  .equip-slot-container {
+    box-sizing: border-box;
     padding: 10px;
     border-radius: 4px;
     cursor: pointer;
-    transition: all 150ms ease-in-out;
+    transition: background-color 150ms ease-in-out;
   }
 
-  .item-slot-container:hover {
+  .equip-slot-container:hover {
     background-color: var(--bright-black);
   }
 
-  .item-slot-title {
+  .equip-slot-container.selected {
+    background-color: var(--bright-black);
+    border: 2px solid var(--container-border-color);
+  }
+
+  .equip-slot-title {
     font-weight: bold;
     font-size: 1.1rem;
     padding-bottom: 5px;
     text-indent: 3px;
   }
 
-  .item-slot {
+  .equip-slot {
     width: 230px;
     background-color: var(--black);
     padding: 6px 8px;
