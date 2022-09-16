@@ -4,21 +4,6 @@ import { ItemsStore } from '@/ui/stores'
 import { IgnemItemTinyCard, itemCard } from '@/ui/view/components'
 import { IgnemCreateCharacterPage } from '../../ignem-create-character-page'
 
-interface EquipSlotProps {
-  title: string
-  emptyMessage: string
-  onClick: Function
-}
-
-function equipSlot({ title, emptyMessage, onClick }: EquipSlotProps) {
-  return html`
-    <div on-click=${onClick} class="equip-slot-container">
-      <p class="equip-slot-title">${title}</p>
-      <div class="equip-slot">${emptyMessage}</div>
-    </div>
-  `
-}
-
 export function characterThirdForm(parent: IgnemCreateCharacterPage) {
   let availableItems: Item[] = []
   let lastSelectedItemId = ''
@@ -48,7 +33,7 @@ export function characterThirdForm(parent: IgnemCreateCharacterPage) {
   }
   
   parent.once('init', () => {
-    availableItems = new ItemsStore().items.sort((a, b) => {
+    availableItems = new ItemsStore().items.sort(a => {
       if (a.type === 'WEAPON') {
         return -2
       }
@@ -76,33 +61,28 @@ export function characterThirdForm(parent: IgnemCreateCharacterPage) {
 
     <section class="equipment">
       <div class="equipment-display">
-        ${[
-          equipSlot({
-            title: 'Left Hand',
-            emptyMessage: 'Empty Hand',
-            onClick: onClickEquipmentSlot
-          }),
-          equipSlot({
-            title: 'Right Hand',
-            emptyMessage: 'Empty Hand',
-            onClick: onClickEquipmentSlot
-          }),
-          equipSlot({
-            title: 'Armor',
-            emptyMessage: 'None',
-            onClick: onClickEquipmentSlot
-          }),
-          equipSlot({
-            title: 'Accessory 1',
-            emptyMessage: 'None',
-            onClick: onClickEquipmentSlot
-          }),
-          equipSlot({
-            title: 'Accessory 2',
-            emptyMessage: 'None',
-            onClick: onClickEquipmentSlot
-          })
-        ]}
+        <ignem-equip-slot
+          title="Left Hand"
+          empty-message="Empty Hand"
+          on-click=${onClickEquipmentSlot}
+        />
+        <ignem-equip-slot
+          title="Right Hand"
+          empty-message="Empty Hand"
+          on-click=${onClickEquipmentSlot}
+        />
+        <ignem-equip-slot
+          title="Armor"
+          on-click=${onClickEquipmentSlot}
+        />
+        <ignem-equip-slot
+          title="Accessory 1"
+          on-click=${onClickEquipmentSlot}
+        />
+        <ignem-equip-slot
+          title="Accessory 2"
+          on-click=${onClickEquipmentSlot}
+        />
       </div>
 
       <div class="items-display">

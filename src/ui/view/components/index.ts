@@ -13,3 +13,5 @@ export * from './form/ignem-select'
 export * from './form/ignem-input'
 export * from './form/ignem-textarea'
 export * from './form/utils/lock-button-until'
+
+export * from './equipment'
