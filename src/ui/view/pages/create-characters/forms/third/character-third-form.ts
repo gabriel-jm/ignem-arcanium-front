@@ -1,13 +1,13 @@
 import { html } from 'lithen-tag-functions'
 import { Item } from '@/domain/protocols/use-cases'
 import { ItemsStore } from '@/ui/stores'
-import { IgnemItemTinyCard, itemCard } from '@/ui/view/components'
+import { IgnemEquipmentSlot, IgnemItemTinyCard, itemCard } from '@/ui/view/components'
 import { IgnemCreateCharacterPage } from '../../ignem-create-character-page'
 
 export function characterThirdForm(parent: IgnemCreateCharacterPage) {
   let availableItems: Item[] = []
   let lastSelectedItemId = ''
-  let selectedEquipmentSlot: Element | null = null
+  let selectedEquipmentSlot: IgnemEquipmentSlot | null = null
 
   function onFocusInventoryItem(event: Event) {
     const target = event.target as HTMLElement
@@ -24,8 +24,16 @@ export function characterThirdForm(parent: IgnemCreateCharacterPage) {
     }
   }
 
+  function onDoubleClickItem(event: Event) {
+    const target = event.target as HTMLElement
+    const itemId = target.getAttribute('key-id')
+    const item = availableItems.find(item => item.id === itemId)
+
+    selectedEquipmentSlot?.setItem(item ?? null)
+  }
+
   function onClickEquipmentSlot(event: Event) {
-    const target = event.currentTarget as Element
+    const target = event.currentTarget as IgnemEquipmentSlot
 
     selectedEquipmentSlot?.classList.remove('selected')
     selectedEquipmentSlot = target
@@ -49,7 +57,7 @@ export function characterThirdForm(parent: IgnemCreateCharacterPage) {
       ...availableItems.map(item => new IgnemItemTinyCard({
         ...item,
         onClick: onFocusInventoryItem,
-        // onDoubleClick: onDoubleClickItem
+        onDoubleClick: onDoubleClickItem
       }))
     )
   })
