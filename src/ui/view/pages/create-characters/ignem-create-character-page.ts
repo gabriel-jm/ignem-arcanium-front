@@ -17,8 +17,8 @@ import { itemTinyCardStyles } from '@/ui/view/components/item'
 import { characterFirstFormStyles } from './forms/first/character-first-form-styles'
 import { characterSecondFormStyles } from './forms/second/character-second-form-styles'
 import { characterFourthFormStyles } from './forms/fourth/character-fourth-form-styles'
-import { characterThirdForm } from '@/ui/view/pages/create-characters/forms/third/character-third-form'
-import { characterThirdFormStyles } from '@/ui/view/pages/create-characters/forms/third/character-third-form-styles'
+import { characterThirdForm } from './forms/third/character-third-form'
+import { characterThirdFormStyles } from './forms/third/character-third-form-styles'
 
 export class IgnemCreateCharacterPage extends IgnemElement {
   #listItemsPresenter: Presenter
@@ -38,8 +38,9 @@ export class IgnemCreateCharacterPage extends IgnemElement {
 
   async init() {
     await this.#listItemsPresenter.handle()
-
     this.dispatchEvent(new Event('init'))
+
+
   }
 
   styling() {
@@ -71,6 +72,10 @@ export class IgnemCreateCharacterPage extends IgnemElement {
         padding-bottom: 16px;
         margin-bottom: 30px;
       }
+
+      [step]:not(.active) {
+        display: none;
+      }
     `
   }
   
@@ -90,11 +95,8 @@ export class IgnemCreateCharacterPage extends IgnemElement {
         <form form is="ignem-form" class="character-form">
           ${[
             characterFirstForm(this),
-            textBetweenDashes('Attributes'),
             characterSecondForm(this),
-            textBetweenDashes('Equipment'),
             characterThirdForm(this),
-            textBetweenDashes('Inventory'),
             characterFourthForm(this)
           ]}
         </form>

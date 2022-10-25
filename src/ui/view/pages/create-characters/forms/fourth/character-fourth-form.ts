@@ -4,7 +4,7 @@ import { IgnemItemTinyCard, itemCard } from '@/ui/view/components/item'
 import { ItemsStore } from '@/ui/stores'
 import { InventoryItem } from '@/ui/protocols'
 import { Item } from '@/domain/protocols/use-cases'
-import { chevronUpIcon } from '@/ui/view/components'
+import { chevronUpIcon, textBetweenDashes } from '@/ui/view/components'
 
 export function characterFourthForm(parent: IgnemCreateCharacterPage) {
   let inventoryItems: InventoryItem[] = []
@@ -140,48 +140,52 @@ export function characterFourthForm(parent: IgnemCreateCharacterPage) {
   }
 
   return html`
-    <p class="explanatory-message">
-      Select the items that your character is current holding
-    </p>
+    <div step="4">
+      ${textBetweenDashes('Inventory')}
 
-    <section class="inventory-container">
-      <div class="inventory-items">
-        <h3>Your Inventory</h3>
-        <ul inventory>
-          <p class="inventory-empty-message">
-            Your inventory is empty
-          </p>
-        </ul>
+      <p class="explanatory-message">
+        Select the items that your character is current holding
+      </p>
 
-        <h3>Items List</h3>
-        <ul class="items-list" inv-items-list></ul>
-      </div>
-      
-      <div
-        tabindex="-1"
-        class="item-info-container"
-        on-focusin=${toggleItemInfo('add')}
-        on-blur=${toggleItemInfo('remove')}
-      >
-        <p class="inventory-size">
-          <span>
-            <span class="inventory-size-message">Inventory size</span>
-            <span class="size-in-use">0</span>
-            <span class="max-size">/ 200</span>
-          </span>
-          <span>
-            ${chevronUpIcon()}
-          </span>
-        </p>
-        
-        <div class="item-info">
-          <div inv-item-info>
-            <p class="select-item-message">
-              Select an item to show its details
+      <section class="inventory-container">
+        <div class="inventory-items">
+          <h3>Your Inventory</h3>
+          <ul inventory>
+            <p class="inventory-empty-message">
+              Your inventory is empty
             </p>
+          </ul>
+
+          <h3>Items List</h3>
+          <ul class="items-list" inv-items-list></ul>
+        </div>
+        
+        <div
+          tabindex="-1"
+          class="item-info-container"
+          on-focusin=${toggleItemInfo('add')}
+          on-blur=${toggleItemInfo('remove')}
+        >
+          <p class="inventory-size">
+            <span>
+              <span class="inventory-size-message">Inventory size</span>
+              <span class="size-in-use">0</span>
+              <span class="max-size">/ 200</span>
+            </span>
+            <span>
+              ${chevronUpIcon()}
+            </span>
+          </p>
+          
+          <div class="item-info">
+            <div inv-item-info>
+              <p class="select-item-message">
+                Select an item to show its details
+              </p>
+            </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </div>
   `
 }

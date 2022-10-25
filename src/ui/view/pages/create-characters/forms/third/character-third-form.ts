@@ -1,7 +1,7 @@
 import { html } from 'lithen-tag-functions'
 import { Item } from '@/domain/protocols/use-cases'
 import { ItemsStore } from '@/ui/stores'
-import { IgnemEquipmentSlot, IgnemItemTinyCard, itemCard } from '@/ui/view/components'
+import { IgnemEquipmentSlot, IgnemItemTinyCard, itemCard, textBetweenDashes } from '@/ui/view/components'
 import { IgnemCreateCharacterPage } from '../../ignem-create-character-page'
 
 export function characterThirdForm(parent: IgnemCreateCharacterPage) {
@@ -68,50 +68,54 @@ export function characterThirdForm(parent: IgnemCreateCharacterPage) {
   })
 
   return html`
-    <p class="explanatory-message">
-      Select your character's current equipment
-    </p>
+    <div step="3">
+      ${textBetweenDashes('Equipment')}
 
-    <section class="equipment">
-      <div class="equipment-display">
-        <ignem-equip-slot
-          title="Right Hand"
-          empty-message="Empty Hand"
-          on-click=${onClickEquipmentSlot}
-        />
-        <ignem-equip-slot
-          title="Left Hand"
-          empty-message="Empty Hand"
-          on-click=${onClickEquipmentSlot}
-        />
-        <ignem-equip-slot
-          title="Armor"
-          on-click=${onClickEquipmentSlot}
-        />
-        <ignem-equip-slot
-          title="Accessory 1"
-          on-click=${onClickEquipmentSlot}
-        />
-        <ignem-equip-slot
-          title="Accessory 2"
-          on-click=${onClickEquipmentSlot}
-        />
-      </div>
+      <p class="explanatory-message">
+        Select your character's current equipment
+      </p>
 
-      <div class="items-display">
-        <div class="items-list-container">
-          <h3>Items List</h3>
-          <ul class="third items-list" equip-items-list></ul>
+      <section class="equipment">
+        <div class="equipment-display">
+          <ignem-equip-slot
+            title="Right Hand"
+            empty-message="Empty Hand"
+            on-click=${onClickEquipmentSlot}
+          />
+          <ignem-equip-slot
+            title="Left Hand"
+            empty-message="Empty Hand"
+            on-click=${onClickEquipmentSlot}
+          />
+          <ignem-equip-slot
+            title="Armor"
+            on-click=${onClickEquipmentSlot}
+          />
+          <ignem-equip-slot
+            title="Accessory 1"
+            on-click=${onClickEquipmentSlot}
+          />
+          <ignem-equip-slot
+            title="Accessory 2"
+            on-click=${onClickEquipmentSlot}
+          />
         </div>
 
-        <div class="item-info">
-          <div equip-item-info>
-            <p class="select-item-message">
-              Select an item to show its details
-            </p>
+        <div class="items-display">
+          <div class="items-list-container">
+            <h3>Items List</h3>
+            <ul class="third items-list" equip-items-list></ul>
+          </div>
+
+          <div class="item-info">
+            <div equip-item-info>
+              <p class="select-item-message">
+                Select an item to show its details
+              </p>
+            </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </div>
   `
 }

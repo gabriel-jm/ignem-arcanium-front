@@ -1,5 +1,6 @@
 import { IgnemCreateCharacterPage } from '../../ignem-create-character-page'
 import { html } from 'lithen-tag-functions'
+import { textBetweenDashes } from '@/ui/view/components'
 
 export function characterSecondForm(parent: IgnemCreateCharacterPage) {
   const attributes = [
@@ -73,22 +74,26 @@ export function characterSecondForm(parent: IgnemCreateCharacterPage) {
   const mpCalcExplain = 'Mana points are calculated by: Intelligence x Level + 10'
 
   return html`
-    <p class="attributes-warn">
-      The attributes must have a value between 1 and 6.
-    </p>
+    <div step="2">
+      ${textBetweenDashes('Attributes')}
 
-    <div class="stats-container">
-      <span level>Level 1</span>
-      <span hp data-tooltip="${hpCalcExplain}">
-        Health Points 10
-      </span>
-      <span mp data-tooltip="${mpCalcExplain}">
-        Mana Points 10
-      </span>
-    </div>
+      <p class="attributes-warn">
+        The attributes must have a value between 1 and 6.
+      </p>
 
-    <div class="attributes">
-      ${attributeInputs}
+      <div class="stats-container">
+        <span level>Level 1</span>
+        <span hp data-tooltip="${hpCalcExplain}">
+          Health Points 10
+        </span>
+        <span mp data-tooltip="${mpCalcExplain}">
+          Mana Points 10
+        </span>
+      </div>
+
+      <div class="attributes">
+        ${attributeInputs}
+      </div>
     </div>
   `
 }
