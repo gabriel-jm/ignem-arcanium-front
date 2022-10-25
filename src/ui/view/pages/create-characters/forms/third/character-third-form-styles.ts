@@ -20,6 +20,11 @@ export const characterThirdFormStyles = css`
     flex: 3;
   }
 
+  .items-list-container h3 {
+    font-size: 1.5rem;
+    padding-bottom: 8px;
+  }
+
   .items-list.third {
     height: 450px;
   }

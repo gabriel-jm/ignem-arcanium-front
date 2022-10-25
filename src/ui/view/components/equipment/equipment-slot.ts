@@ -3,6 +3,18 @@ import { itemIconByType } from '@/ui/view/components/item'
 import { IgnemElement } from '@/ui/view/ignem-element'
 import { css, html } from 'lithen-tag-functions'
 
+const rarities = ['common', 'uncommon']
+
+const borderImageByRarity = rarities.map(rarity => css`
+  .equip-slot.${rarity} {
+    border-image-source: linear-gradient(
+      to bottom right,
+      var(--bright-${rarity}),
+      var(--black) 35%
+    );
+  }
+`)
+
 /**
  * @attr empty-message
  */
@@ -22,7 +34,10 @@ export class IgnemEquipmentSlot extends IgnemElement {
     }
 
     this.#itemId = item.id
-    this.select('.equip-slot').replaceChildren(
+    
+    const equipSlot = this.select('.equip-slot')
+    equipSlot.className = `equip-slot ${item.rarity.toLowerCase()}`
+    equipSlot.replaceChildren(
       html`
         <div class="equip-item-display">
           <img alt="Item icon" src="${itemIconByType(item)}" />
@@ -57,9 +72,22 @@ export class IgnemEquipmentSlot extends IgnemElement {
       .equip-slot {
         width: 230px;
         background-color: var(--black);
-        padding: 6px 8px;
+        font-size: 0.9rem;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        padding: 8px 8px;
+        border: 2px solid;
+        border-image-slice: 1;
+        border-image-source: linear-gradient(
+          to top left,
+          var(--black),
+          var(--black)
+        );
         border-radius: 4px;
       }
+
+      ${borderImageByRarity}
 
       .equip-item-display {
         display: flex;

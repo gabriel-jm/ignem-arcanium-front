@@ -19,8 +19,8 @@ export function characterThirdForm(parent: IgnemCreateCharacterPage) {
 
     lastSelectedItemId = item.id
 
-    if (!parent.select(`[item-info] [key-id="${item.id}"]`)) {
-      parent.select('[item-info]')?.replaceChildren(itemCard(item))
+    if (!parent.select(`[equip-item-info] [key-id="${item.id}"]`)) {
+      parent.select('[equip-item-info]')?.replaceChildren(itemCard(item))
     }
   }
 
@@ -60,6 +60,11 @@ export function characterThirdForm(parent: IgnemCreateCharacterPage) {
         onDoubleClick: onDoubleClickItem
       }))
     )
+
+    selectedEquipmentSlot = parent.select<IgnemEquipmentSlot>(
+      'ignem-equip-slot[title="Right Hand"]'
+    )
+    selectedEquipmentSlot.classList.add('selected')
   })
 
   return html`
@@ -70,12 +75,12 @@ export function characterThirdForm(parent: IgnemCreateCharacterPage) {
     <section class="equipment">
       <div class="equipment-display">
         <ignem-equip-slot
-          title="Left Hand"
+          title="Right Hand"
           empty-message="Empty Hand"
           on-click=${onClickEquipmentSlot}
         />
         <ignem-equip-slot
-          title="Right Hand"
+          title="Left Hand"
           empty-message="Empty Hand"
           on-click=${onClickEquipmentSlot}
         />
@@ -100,7 +105,7 @@ export function characterThirdForm(parent: IgnemCreateCharacterPage) {
         </div>
 
         <div class="item-info">
-          <div item-info>
+          <div equip-item-info>
             <p class="select-item-message">
               Select an item to show its details
             </p>

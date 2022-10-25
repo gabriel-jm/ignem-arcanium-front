@@ -22,8 +22,8 @@ export function characterFourthForm(parent: IgnemCreateCharacterPage) {
 
     lastSelectedItemId = item.id
 
-    if (!parent.select(`[item-info] [key-id="${item.id}"]`)) {
-      parent.select('[item-info]')?.replaceChildren(itemCard(item))
+    if (!parent.select(`[inv-item-info] [key-id="${item.id}"]`)) {
+      parent.select('[inv-item-info]')?.replaceChildren(itemCard(item))
     }
   }
 
@@ -175,7 +175,7 @@ export function characterFourthForm(parent: IgnemCreateCharacterPage) {
         </p>
         
         <div class="item-info">
-          <div item-info>
+          <div inv-item-info>
             <p class="select-item-message">
               Select an item to show its details
             </p>
