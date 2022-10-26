@@ -6,7 +6,6 @@ import { containerStyles, formControlStyles } from '@/ui/view/styles'
 import {
   breadcrumbs,
   IgnemFormElement,
-  textBetweenDashes,
   textBetweenDashesStyles
 } from '@/ui/view/components'
 import { characterFirstForm } from './forms/first/character-first-form'
@@ -92,6 +91,9 @@ export class IgnemCreateCharacterPage extends IgnemElement {
       <section class="container">
         ${breadcrumbs(breadcrumbProps)}
         <h1 class="characters-title">Create Character</h1>
+
+        <ignem-steps />
+
         <form form is="ignem-form" class="character-form">
           ${[
             characterFirstForm(this),
