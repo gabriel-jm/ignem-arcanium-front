@@ -6,6 +6,7 @@ import { containerStyles, formControlStyles } from '@/ui/view/styles'
 import {
   breadcrumbs,
   IgnemFormElement,
+  IgnemSteps,
   textBetweenDashesStyles
 } from '@/ui/view/components'
 import { characterFirstForm } from './forms/first/character-first-form'
@@ -104,7 +105,6 @@ export class IgnemCreateCharacterPage extends IgnemElement {
 
         <ignem-steps
           steps="${steps.join(',')}"
-          current-step="3"
         />
 
         <form form is="ignem-form" class="character-form">

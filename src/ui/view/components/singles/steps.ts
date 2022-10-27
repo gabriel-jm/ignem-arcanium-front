@@ -1,7 +1,47 @@
 import { IgnemElement } from '@/ui/view/ignem-element'
 import { css, html, raw } from 'lithen-tag-functions'
 
+/**
+ * @attr {string} steps
+ * @attr {number} current-step
+ */
 export class IgnemSteps extends IgnemElement {
+  #currentStep = 1
+
+  constructor() {
+    super()
+    const step = Number(this.getAttribute('current-step') ?? 1)
+    this.currentStep = step
+  }
+
+  get currentStep() {
+    return this.#currentStep
+  }
+
+  set currentStep(value: number) {
+    this.#currentStep = value
+    
+    this.selectAll('.step').forEach((element, index) => {
+      const step = index + 1
+
+      if (step <= this.#currentStep) {
+        element.classList.add('passed')
+      } else {
+        element.classList.remove('passed')
+      }
+    })
+
+    this.selectAll('.line').forEach((element, index) => {
+      const step = index + 1
+
+      if (step < this.#currentStep) {
+        element.classList.add('passed')
+      } else {
+        element.classList.remove('passed')
+      }
+    })
+  }
+
   styling() {
     return css`
       .steps-container {
@@ -22,6 +62,7 @@ export class IgnemSteps extends IgnemElement {
         padding: 18px;
         border-radius: 50%;
         cursor: pointer;
+        transition: background-color 200ms ease-in;
       }
 
       .step::after {
@@ -40,6 +81,7 @@ export class IgnemSteps extends IgnemElement {
         width: 110%;
         height: 6px;
         background-color: var(--bright-black);
+        transition: background-color 200ms ease-in;
       }
 
       .step.passed, .line.passed {
@@ -56,27 +98,22 @@ export class IgnemSteps extends IgnemElement {
       console.log(step)
     }
 
-    const currentStep = Number(this.getAttribute('current-step'))
     const stepMessages = this.getAttribute('steps')
       ?.split(',')
       .map((message, index, arr) => {
         const step = index + 1
-        const stepElement = html`
+        return html`
           <div
+            class="step"
             on-click=${onClickStep}
-            class="step ${step <= currentStep && 'passed'}"
             message="${message.trim()}"
           >
             ${step}
           </div>
           ${step !== arr.length && raw`
-            <div
-              class="line ${step < currentStep && 'passed'}"
-            ></div>
+            <div class="line"></div>
           `}
         `
-
-        return stepElement
       })
 
     return html`
