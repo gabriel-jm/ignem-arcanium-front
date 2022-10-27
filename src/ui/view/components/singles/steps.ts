@@ -1,60 +1,87 @@
 import { IgnemElement } from '@/ui/view/ignem-element'
-import { css, html } from 'lithen-tag-functions'
+import { css, html, raw } from 'lithen-tag-functions'
 
 export class IgnemSteps extends IgnemElement {
   styling() {
     return css`
       .steps-container {
         display: flex;
-        justify-content: space-between;
-        padding: 0 16px;
-        padding-bottom: 20px;
+        justify-content: center;
+        align-items: center;
+        padding: 20px 24px;
+        flex-wrap: wrap;
       }
 
       .step {
         width: 60px;
+        height: 60px;
         text-align: center;
         position: relative;
         font-weight: bolder;
-        background-color: var(--danger);
-        padding: 18px 22px;
+        background-color: var(--bright-black);
+        padding: 18px;
         border-radius: 50%;
+        cursor: pointer;
       }
 
       .step::after {
         content: attr(message);
+        width: 80px;
+        color: var(--font-color);
+        font-size: 0.95rem;
+        text-align: center;
         position: absolute;
         top: 110%;
-        left: -1%;
+        left: -16%;
       }
 
-      .step:not(:last-of-type)::before {
-        content: '';
-        position: absolute;
-        display: block;
-        width: 100px;
-        height: 8px;
-        background-color: green;
-        top: 50%;
-        left: 90%;
-        z-index: -1;
-        transform: translateY(-50%);
+      .line {
+        flex: 1;
+        width: 110%;
+        height: 6px;
+        background-color: var(--bright-black);
+      }
+
+      .step.passed, .line.passed {
+        color: var(--black);
+        background-color: var(--white);
       }
     `
   }
   
   render() {
+    function onClickStep(event: Event) {
+      const step = Number((event.target as HTMLElement).textContent)
+
+      console.log(step)
+    }
+
+    const currentStep = Number(this.getAttribute('current-step'))
+    const stepMessages = this.getAttribute('steps')
+      ?.split(',')
+      .map((message, index, arr) => {
+        const step = index + 1
+        const stepElement = html`
+          <div
+            on-click=${onClickStep}
+            class="step ${step <= currentStep && 'passed'}"
+            message="${message.trim()}"
+          >
+            ${step}
+          </div>
+          ${step !== arr.length && raw`
+            <div
+              class="line ${step < currentStep && 'passed'}"
+            ></div>
+          `}
+        `
+
+        return stepElement
+      })
+
     return html`
       <div class="steps-container">
-        <div class="step" message="General Info">
-          1
-        </div>
-        <div class="step" message="Attributes">
-          2
-        </div>
-        <div class="step" message="Equipment slot">
-          3
-        </div>
+        ${stepMessages}
       </div>
     `
   }

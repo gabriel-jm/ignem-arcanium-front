@@ -72,6 +72,10 @@ export class IgnemCreateCharacterPage extends IgnemElement {
         margin-bottom: 30px;
       }
 
+      .character-form {
+        padding-top: 32px;
+      }
+
       [step]:not(.active) {
         display: none;
       }
@@ -84,6 +88,12 @@ export class IgnemCreateCharacterPage extends IgnemElement {
       Characters: '/characters',
       'Create Character': 'current'
     }
+    const steps = [
+      'General',
+      'Attributes',
+      'Equipment',
+      'Inventory'
+    ]
 
     return html`
       <ignem-header />
@@ -92,7 +102,10 @@ export class IgnemCreateCharacterPage extends IgnemElement {
         ${breadcrumbs(breadcrumbProps)}
         <h1 class="characters-title">Create Character</h1>
 
-        <ignem-steps />
+        <ignem-steps
+          steps="${steps.join(',')}"
+          current-step="3"
+        />
 
         <form form is="ignem-form" class="character-form">
           ${[
