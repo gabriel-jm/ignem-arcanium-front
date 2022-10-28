@@ -60,7 +60,7 @@ export class IgnemForm extends HTMLFormElement {
     ) as T
   }
 
-  setErrors(errorsRecord?: Record<string, string>) {
+  setErrors(errorsRecord?: Record<string, string> | null) {
     this.removeErrors()
 
     if (!errorsRecord) return

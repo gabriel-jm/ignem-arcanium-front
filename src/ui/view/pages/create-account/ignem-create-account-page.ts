@@ -1,6 +1,6 @@
 import { Presenter } from '@/presentation/protocols'
 import { SuccessNotifier } from '@/ui/protocols'
-import { IgnemFormElement, ignemInput, lockButtonUntil } from '@/ui/view/components'
+import { IgnemForm, ignemInput, lockButtonUntil } from '@/ui/view/components'
 import { IgnemElement } from '@/ui/view/ignem-element'
 import { createAccountStyles } from './create-account-styles'
 import { router } from 'lithen-router'
@@ -26,7 +26,7 @@ export class IgnemCreateAccountPage extends IgnemElement {
   render() {
     const getButton = this.select.bind(this, '.btn')
     const handleSubmit = lockButtonUntil(getButton, async () => {
-      const form = this.select<IgnemFormElement>('form')!
+      const form = this.select<IgnemForm>('form')!
       const formData = form.getData({
         name: 'string',
         email: 'string',

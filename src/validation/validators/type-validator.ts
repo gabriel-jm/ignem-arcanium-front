@@ -15,9 +15,12 @@ export const typeValidator: Validator = (
   field: string,
   types: string | string[]
 ) => {
+  const inputValue = Reflect.get(input, field)
+
+  if (!inputValue) return null
+
   const isArray = Array.isArray(types)
   const typeList = isArray ? types : [types]
-  const inputValue = Reflect.get(input, field)
 
   const typeOfValue = getType(inputValue)
 

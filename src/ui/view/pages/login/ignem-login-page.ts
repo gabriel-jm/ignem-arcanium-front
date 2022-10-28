@@ -2,7 +2,7 @@ import { router } from 'lithen-router'
 import { html } from 'lithen-tag-functions'
 import { IgnemElement } from '@/ui/view/ignem-element'
 import {
-  IgnemFormElement,
+  IgnemForm,
   ignemInput,
   loadingIcon,
   lockButtonUntil,
@@ -52,7 +52,7 @@ export class IgnemLoginPage extends IgnemElement {
   render() {
     const getButton = this.select.bind(this, '.link')
     const handleSubmit = lockButtonUntil(getButton, async () => {
-      const form = this.select<IgnemFormElement>('form')
+      const form = this.select<IgnemForm>('form')
 
       const formData = form?.getData({
         email: 'string',

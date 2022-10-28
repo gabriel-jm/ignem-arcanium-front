@@ -3,7 +3,7 @@ import {
   closeIcon,
   textBetweenDashes,
   InputMasks,
-  IgnemFormElement
+  IgnemForm
 } from '@/ui/view'
 import { characterModalStyles } from './character-modal-styles'
 import { IgnemElement } from '@/ui/view/ignem-element'
@@ -11,7 +11,7 @@ import { html } from 'lithen-tag-functions'
 
 export interface IgnemCharacterModalElement extends IgnemElement {
   get dialog(): DialogElement
-  get form(): IgnemFormElement
+  get form(): IgnemForm
   setErrors(errorsRecord?: Record<string, string> | null): void
 }
 
@@ -33,7 +33,7 @@ export class IgnemCharacterModal extends IgnemElement {
   }
 
   get form() {
-    return this.select<IgnemFormElement>('form')!
+    return this.select<IgnemForm>('form')!
   }
 
   setErrors(errorsRecord?: Record<string, string>) {

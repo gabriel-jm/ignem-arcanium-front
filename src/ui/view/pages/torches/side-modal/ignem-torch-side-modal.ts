@@ -1,9 +1,9 @@
 import { buttonStyles, IgnemElement, IgnemSideModalElement, formControlStyles } from '@/ui/view'
-import { IgnemFormElement } from '@/ui/view/components'
+import { IgnemForm } from '@/ui/view/components'
 import { css, html } from 'lithen-tag-functions'
 
 export interface IgnemTorchSideModalElement extends IgnemSideModalElement {
-  get form(): IgnemFormElement
+  get form(): IgnemForm
 }
 
 /**
@@ -11,12 +11,12 @@ export interface IgnemTorchSideModalElement extends IgnemSideModalElement {
  */
 export class IgnemTorchSideModal extends IgnemElement {
   #sideModal?: IgnemSideModalElement
-  #form: IgnemFormElement
+  #form: IgnemForm
 
   constructor() {
     super()
     this.#sideModal = this.select('ignem-side-modal')
-    this.#form = this.select<IgnemFormElement>('form[is=ignem-form]')!
+    this.#form = this.select<IgnemForm>('form[is=ignem-form]')!
   }
 
   get form() {
@@ -95,7 +95,7 @@ export class IgnemTorchSideModal extends IgnemElement {
 
     const onSubmit: EventListener = event => {
       event.preventDefault()
-      const form = event.target as IgnemFormElement
+      const form = event.target as IgnemForm
       const formData = form.getData({
         characterName: 'string',
         torchCount: 'number',

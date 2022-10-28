@@ -32,14 +32,16 @@ interface IgnemCreateCharacterProps {
 
 export class IgnemCreateCharacterPage extends IgnemElement {
   #props: IgnemCreateCharacterProps
-  #formsSubmition = [
-    this.#firstFormSubmition,
-  ]
+  #formsSubmition
   
   constructor(props: IgnemCreateCharacterProps) {
-    super()
+    super({ preventRender: true })
     this.#props = props
 
+    this.#formsSubmition = [
+      this.#firstFormSubmition
+    ]
+    this.applyRender()
     this.init()
   }
 
@@ -52,7 +54,7 @@ export class IgnemCreateCharacterPage extends IgnemElement {
     this.dispatchEvent(new Event('init'))
   }
 
-  #firstFormSubmition(form: IgnemForm) {
+  #firstFormSubmition = async (form: IgnemForm) => {
     const data = form.getData({
       name: 'string',
       alignment: 'string',
@@ -61,7 +63,12 @@ export class IgnemCreateCharacterPage extends IgnemElement {
       description: 'string'
     })
 
+    const result = await this.#props
+      .generalInfoPresenter.handle(data)
 
+    form.setErrors(result.validationErrors)
+
+    console.log(result)
   }
 
   styling() {
