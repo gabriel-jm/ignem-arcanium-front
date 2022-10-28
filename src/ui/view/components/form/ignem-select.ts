@@ -22,7 +22,9 @@ export function ignemSelect({
         name="${name}"
         class="form-control ${className}"
       >
-        ${placeholder && html`<option hidden>${placeholder}</option>`}
+        ${placeholder && html`
+          <option hidden value="">${placeholder}</option>
+        `}
         ${options.map(option => html`
           <option value="${option}">${option}</option>
         `)}

@@ -10,15 +10,6 @@ type FormDataParser = {
   [K in FormDataTypes]: (value: string) => FormDataTypeMap[K] | null
 }
 
-export interface IgnemFormElement extends HTMLFormElement {
-  get<T extends unknown>(name: string, type: FormDataTypes): T | null
-  getData<T extends Record<string, unknown | null>>(
-    schema: Record<string, FormDataTypes>
-  ): T
-  setErrors(errorsRecord?: Record<string, string> | null): void
-  removeErrors(): void
-}
-
 const formDataParser: FormDataParser = {
   string(value) {
     return value || null

@@ -1,7 +1,12 @@
 import { html } from 'lithen-tag-functions'
 import { Item } from '@/domain/protocols/use-cases'
 import { ItemsStore } from '@/ui/stores'
-import { IgnemEquipmentSlot, IgnemItemTinyCard, itemCard, textBetweenDashes } from '@/ui/view/components'
+import {
+  IgnemEquipmentSlot,
+  IgnemItemTinyCard,
+  itemCard,
+  textBetweenDashes
+} from '@/ui/view/components'
 import { IgnemCreateCharacterPage } from '../../ignem-create-character-page'
 
 export function characterThirdForm(parent: IgnemCreateCharacterPage) {

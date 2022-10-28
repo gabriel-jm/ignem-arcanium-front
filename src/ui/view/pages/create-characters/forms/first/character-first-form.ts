@@ -1,4 +1,10 @@
-import { ignemInput, ignemSelect, ignemTextarea, InputMasks, textBetweenDashes } from '@/ui/view/components'
+import {
+  ignemInput,
+  ignemSelect,
+  ignemTextarea,
+  InputMasks,
+  textBetweenDashes
+} from '@/ui/view/components'
 import { IgnemElement } from '@/ui/view/ignem-element'
 import { html } from 'lithen-tag-functions'
 
@@ -22,7 +28,12 @@ export function characterFirstForm(parentElement: IgnemElement) {
   `)
 
   return html`
-    <div class="active" step="1">
+    <form
+      form
+      is="ignem-form"
+      class="character-form active"
+      step="1"
+    >
       ${textBetweenDashes('General')}
 
       <p class="icons-title">
@@ -81,6 +92,6 @@ export function characterFirstForm(parentElement: IgnemElement) {
           })
         ]}
       </div>
-    </div>
+    </form>
   `
 }

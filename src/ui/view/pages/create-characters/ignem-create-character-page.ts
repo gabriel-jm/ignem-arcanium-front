@@ -2,10 +2,15 @@ import '../../components/header/header'
 import { css, html } from 'lithen-tag-functions'
 import { IgnemElement } from '@/ui/view/ignem-element'
 import { SuperElementRenderValues } from 'lithen-super-element'
-import { containerStyles, formControlStyles } from '@/ui/view/styles'
+import {
+  borderedButtonStyles,
+  buttonStyles,
+  containerStyles,
+  formControlStyles
+} from '@/ui/view/styles'
 import {
   breadcrumbs,
-  IgnemFormElement,
+  IgnemForm,
   IgnemSteps,
   textBetweenDashesStyles
 } from '@/ui/view/components'
@@ -20,25 +25,41 @@ import { characterFourthFormStyles } from './forms/fourth/character-fourth-form-
 import { characterThirdForm } from './forms/third/character-third-form'
 import { characterThirdFormStyles } from './forms/third/character-third-form-styles'
 
+interface IgnemCreateCharacterProps {
+  listItemsPresenter: Presenter,
+  generalInfoPresenter: Presenter
+}
+
 export class IgnemCreateCharacterPage extends IgnemElement {
-  #listItemsPresenter: Presenter
+  #props: IgnemCreateCharacterProps
+  #formsSubmition = [
+    this.#firstFormSubmition,
+  ]
   
-  constructor(
-    listAllDefaultItemsPresenter: Presenter
-  ) {
+  constructor(props: IgnemCreateCharacterProps) {
     super()
-    this.#listItemsPresenter = listAllDefaultItemsPresenter
+    this.#props = props
 
     this.init()
   }
 
   get form() {
-    return this.select<IgnemFormElement>('[form]')!
+    return this.select<IgnemForm>('[form]')!
   }
 
   async init() {
-    await this.#listItemsPresenter.handle()
+    await this.#props.listItemsPresenter.handle()
     this.dispatchEvent(new Event('init'))
+  }
+
+  #firstFormSubmition(form: IgnemForm) {
+    const data = form.getData({
+      name: 'string',
+      alignment: 'string',
+      level: 'number',
+      gold: 'number',
+      description: 'string'
+    })
 
 
   }
@@ -49,6 +70,8 @@ export class IgnemCreateCharacterPage extends IgnemElement {
       formControlStyles,
       textBetweenDashesStyles,
       itemTinyCardStyles,
+      buttonStyles,
+      borderedButtonStyles,
       characterFirstFormStyles,
       characterSecondFormStyles,
       characterThirdFormStyles,
@@ -80,6 +103,17 @@ export class IgnemCreateCharacterPage extends IgnemElement {
       [step]:not(.active) {
         display: none;
       }
+
+      .form-buttons {
+        display: flex;
+        justify-content: flex-end;
+        padding: 24px 0;
+      }
+
+      .form-buttons button {
+        width: 150px;
+        margin: 0 12px;
+      }
     `
   }
   
@@ -96,6 +130,14 @@ export class IgnemCreateCharacterPage extends IgnemElement {
       'Inventory'
     ]
 
+    const onSubmitForm = (event: Event) => {
+      event.preventDefault()
+      const currentStep = this.select<IgnemSteps>('ignem-steps').currentStep
+      const form = this.select<IgnemForm>(`form[step="${currentStep}"]`)
+
+      this.#formsSubmition[currentStep - 1](form)
+    }
+
     return html`
       <ignem-header />
 
@@ -107,14 +149,16 @@ export class IgnemCreateCharacterPage extends IgnemElement {
           steps="${steps.join(',')}"
         />
 
-        <form form is="ignem-form" class="character-form">
-          ${[
-            characterFirstForm(this),
-            characterSecondForm(this),
-            characterThirdForm(this),
-            characterFourthForm(this)
-          ]}
-        </form>
+        ${[
+          characterFirstForm(this),
+          characterSecondForm(this),
+          characterThirdForm(this),
+          characterFourthForm(this)
+        ]}
+        <div class="form-buttons">
+          <button class="btn-bordered">Previous</button>
+          <button class="btn" on-click=${onSubmitForm}>Next</button>
+        </div>
       </section>
     `
   }
