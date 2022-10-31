@@ -7,9 +7,11 @@ import { css, html, raw } from 'lithen-tag-functions'
  */
 export class IgnemSteps extends IgnemElement {
   #currentStep = 1
+  #totalSteps!: number
 
   constructor() {
     super()
+    this.applyRender()
     const step = Number(this.getAttribute('current-step') ?? 1)
     this.currentStep = step
   }
@@ -40,6 +42,18 @@ export class IgnemSteps extends IgnemElement {
         element.classList.remove('passed')
       }
     })
+  }
+
+  previous() {
+    if (this.currentStep - 1 >= 0) {
+      this.currentStep--
+    }
+  }
+
+  next() {
+    if (this.currentStep + 1 <= this.#totalSteps) {
+      this.currentStep++
+    }
   }
 
   styling() {
@@ -98,27 +112,28 @@ export class IgnemSteps extends IgnemElement {
       console.log(step)
     }
 
-    const stepMessages = this.getAttribute('steps')
-      ?.split(',')
-      .map((message, index, arr) => {
-        const step = index + 1
-        return html`
-          <div
-            class="step"
-            on-click=${onClickStep}
-            message="${message.trim()}"
-          >
-            ${step}
-          </div>
-          ${step !== arr.length && raw`
-            <div class="line"></div>
-          `}
-        `
-      })
+    const stepMessages = this.getAttribute('steps')?.split(',') ?? []
+    this.#totalSteps = stepMessages.length
+
+    const stepElements = stepMessages.map((message, index, arr) => {
+      const step = index + 1
+      return html`
+        <div
+          class="step"
+          on-click=${onClickStep}
+          message="${message.trim()}"
+        >
+          ${step}
+        </div>
+        ${step !== arr.length && raw`
+          <div class="line"></div>
+        `}
+      `
+    })
 
     return html`
       <div class="steps-container">
-        ${stepMessages}
+        ${stepElements}
       </div>
     `
   }

@@ -34,7 +34,7 @@ export function characterSecondForm(parent: IgnemCreateCharacterPage) {
     return (e: InputEvent) => {
       e.preventDefault()
       const input = e.target as HTMLInputElement
-      const inputData = e.data?.replace(/[^1-6]/g, '') ?? ''
+      const inputData = e.data?.replace(/[^0-6]/g, '') ?? ''
 
       input.value = inputData
       
@@ -74,11 +74,15 @@ export function characterSecondForm(parent: IgnemCreateCharacterPage) {
   const mpCalcExplain = 'Mana points are calculated by: Intelligence x Level + 10'
 
   return html`
-    <div step="2">
+    <form
+      is="ignem-form"
+      class="character-form"
+      step="2"
+    >
       ${textBetweenDashes('Attributes')}
 
       <p class="attributes-warn">
-        The attributes must have a value between 1 and 6.
+        The attributes must have a value between 0 and 6.
       </p>
 
       <div class="stats-container">
@@ -94,6 +98,15 @@ export function characterSecondForm(parent: IgnemCreateCharacterPage) {
       <div class="attributes">
         ${attributeInputs}
       </div>
-    </div>
+
+      <div class="form-buttons">
+        <button
+          class="btn-bordered"
+          type="button"
+          on-click=${() => parent.previous()}
+        >Previous</button>
+        <button class="btn">Next</button>
+      </div>
+    </form>
   `
 }

@@ -53,7 +53,28 @@ export class IgnemCreateCharacterPage extends IgnemElement {
   }
 
   next() {
-    
+    this.#changeStepForm(1)
+  }
+
+  previous() {
+    this.#changeStepForm(-1)
+  }
+
+  #changeStepForm(direction: number) {
+    scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    })
+
+    const ignemSteps = this.select<IgnemSteps>('ignem-steps')
+
+    this.select(`form[step="${ignemSteps.currentStep}"]`)
+      .classList.remove('active')
+
+    direction > 0 ? ignemSteps.next() : ignemSteps.previous()
+
+    this.select(`form[step="${ignemSteps.currentStep}"]`)
+      .classList.add('active')
   }
 
   styling() {
