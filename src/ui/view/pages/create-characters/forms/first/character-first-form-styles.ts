@@ -39,7 +39,7 @@ export const characterFirstFormStyles = css`
     padding-top: 20px;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 8px 16px;
+    gap: 16px 24px;
   }
 
   .description {

@@ -24,23 +24,21 @@ import { characterSecondFormStyles } from './forms/second/character-second-form-
 import { characterFourthFormStyles } from './forms/fourth/character-fourth-form-styles'
 import { characterThirdForm } from './forms/third/character-third-form'
 import { characterThirdFormStyles } from './forms/third/character-third-form-styles'
+import { CreateCharacterParams } from '@/domain/protocols/use-cases'
 
-interface IgnemCreateCharacterProps {
+export interface IgnemCreateCharacterProps {
   listItemsPresenter: Presenter,
   generalInfoPresenter: Presenter
 }
 
 export class IgnemCreateCharacterPage extends IgnemElement {
   #props: IgnemCreateCharacterProps
-  #formsSubmition
+  characterData!: CreateCharacterParams
   
   constructor(props: IgnemCreateCharacterProps) {
     super({ preventRender: true })
     this.#props = props
 
-    this.#formsSubmition = [
-      this.#firstFormSubmition
-    ]
     this.applyRender()
     this.init()
   }
@@ -54,21 +52,8 @@ export class IgnemCreateCharacterPage extends IgnemElement {
     this.dispatchEvent(new Event('init'))
   }
 
-  #firstFormSubmition = async (form: IgnemForm) => {
-    const data = form.getData({
-      name: 'string',
-      alignment: 'string',
-      level: 'number',
-      gold: 'number',
-      description: 'string'
-    })
-
-    const result = await this.#props
-      .generalInfoPresenter.handle(data)
-
-    form.setErrors(result.validationErrors)
-
-    console.log(result)
+  next() {
+    
   }
 
   styling() {
@@ -137,14 +122,6 @@ export class IgnemCreateCharacterPage extends IgnemElement {
       'Inventory'
     ]
 
-    const onSubmitForm = (event: Event) => {
-      event.preventDefault()
-      const currentStep = this.select<IgnemSteps>('ignem-steps').currentStep
-      const form = this.select<IgnemForm>(`form[step="${currentStep}"]`)
-
-      this.#formsSubmition[currentStep - 1](form)
-    }
-
     return html`
       <ignem-header />
 
@@ -157,15 +134,11 @@ export class IgnemCreateCharacterPage extends IgnemElement {
         />
 
         ${[
-          characterFirstForm(this),
+          characterFirstForm(this, this.#props),
           characterSecondForm(this),
           characterThirdForm(this),
           characterFourthForm(this)
         ]}
-        <div class="form-buttons">
-          <button class="btn-bordered">Previous</button>
-          <button class="btn" on-click=${onSubmitForm}>Next</button>
-        </div>
       </section>
     `
   }
