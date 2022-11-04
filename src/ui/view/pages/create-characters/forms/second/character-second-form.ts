@@ -1,8 +1,11 @@
-import { IgnemCreateCharacterPage } from '../../ignem-create-character-page'
+import { IgnemCreateCharacterPage, IgnemCreateCharacterProps } from '../../ignem-create-character-page'
 import { html } from 'lithen-tag-functions'
-import { textBetweenDashes } from '@/ui/view/components'
+import { IgnemForm, textBetweenDashes } from '@/ui/view/components'
 
-export function characterSecondForm(parent: IgnemCreateCharacterPage) {
+export function characterSecondForm(
+  parent: IgnemCreateCharacterPage,
+  props: IgnemCreateCharacterProps
+) {
   const attributes = [
     'strength',
     'dexterity',
@@ -55,6 +58,29 @@ export function characterSecondForm(parent: IgnemCreateCharacterPage) {
     }
   }
 
+  async function onSubmitForm(event: Event) {
+    event.preventDefault()
+    const form = event.target as IgnemForm
+
+    const data = form.getData(
+      Object.fromEntries(
+        attributes.map(attr => [attr, 'number'])
+      )
+    )
+
+    const result = await props.attributesPresenter.handle(data)
+
+    form.setErrors(result.validationErrors)
+
+    if (result.ok) {
+      parent.characterData = {
+        ...parent.characterData,
+        ...data
+      }
+      parent.next()
+    }
+  }
+
   const attributeInputs = attributes.map((attr, index, arr) => {
     const captalizedAttribute = attr[0].toUpperCase() + attr.substring(1)
 
@@ -78,6 +104,7 @@ export function characterSecondForm(parent: IgnemCreateCharacterPage) {
       is="ignem-form"
       class="character-form"
       step="2"
+      on-submit=${onSubmitForm}
     >
       ${textBetweenDashes('Attributes')}
 
@@ -104,7 +131,9 @@ export function characterSecondForm(parent: IgnemCreateCharacterPage) {
           class="btn-bordered"
           type="button"
           on-click=${() => parent.previous()}
-        >Previous</button>
+        >
+          Previous
+        </button>
         <button class="btn">Next</button>
       </div>
     </form>

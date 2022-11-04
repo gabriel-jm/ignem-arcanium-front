@@ -46,7 +46,7 @@ export function characterFirstForm(
         ...result.data
       }
       parent.next()
-    } 
+    }
   }
 
   const iconPaths = ['/mage.svg', '/mage.svg']

@@ -4,6 +4,7 @@ import { ErrorHandlingPresenterDecorator, ValidationPresenterDecorator } from '@
 import { makeFetchHTTPClient } from '@/main/factories/clients'
 import { successResponse } from '@/presentation/helpers'
 import { ListAllDefaultItemsPresenter } from '@/presentation/presenters'
+import { Presenter } from '@/presentation/protocols'
 import { UiNotifier } from '@/ui/notifiers'
 import { ItemsStore } from '@/ui/stores'
 import { IgnemCreateCharacterPage } from '@/ui/view'
@@ -19,9 +20,12 @@ export function makeCreateCharactersPage() {
     remoteListAllDefaultItems,
     itemsStore
   )
+  const dummyPresenter: Presenter = {
+    handle: (data) => Promise.resolve(successResponse(data))
+  }
 
   const generalInfoPresenter = new ValidationPresenterDecorator(
-    { handle: (data) => Promise.resolve(successResponse(data)) },
+    dummyPresenter,
     {
       name: {
         type: 'string',
@@ -29,7 +33,8 @@ export function makeCreateCharactersPage() {
       },
       alignment: {
         type: 'string',
-        required: true
+        required: true,
+        // TODO: add oneOf validation
       },
       level: {
         type: 'number',
@@ -45,11 +50,24 @@ export function makeCreateCharactersPage() {
     }
   )
 
+  const attributesPresenter = new ValidationPresenterDecorator(
+    dummyPresenter,
+    Object.fromEntries(
+      (['strength', 'dexterity', 'constitution', 'intelligence', 'wisdom', 'charisma'])
+        .map(attribute => [attribute, {
+          type: 'number',
+          required: true,
+          valueInBetween: [0, 6]
+        }])
+    )
+  )
+
   return new IgnemCreateCharacterPage({
     listItemsPresenter: new ErrorHandlingPresenterDecorator(
       new UiNotifier(),
       listAllDefaultItemsPresenter
     ),
-    generalInfoPresenter
+    generalInfoPresenter,
+    attributesPresenter
   })
 }

@@ -27,8 +27,9 @@ import { characterThirdFormStyles } from './forms/third/character-third-form-sty
 import { CreateCharacterParams } from '@/domain/protocols/use-cases'
 
 export interface IgnemCreateCharacterProps {
-  listItemsPresenter: Presenter,
+  listItemsPresenter: Presenter
   generalInfoPresenter: Presenter
+  attributesPresenter: Presenter
 }
 
 export class IgnemCreateCharacterPage extends IgnemElement {
@@ -156,7 +157,7 @@ export class IgnemCreateCharacterPage extends IgnemElement {
 
         ${[
           characterFirstForm(this, this.#props),
-          characterSecondForm(this),
+          characterSecondForm(this, this.#props),
           characterThirdForm(this),
           characterFourthForm(this)
         ]}
