@@ -15,12 +15,22 @@ export function ignemSelect({
   className,
   placeholder
 }: IgnemSelectProps) {
+  function onChange(event: Event) {
+    const select = event.target as HTMLSelectElement
+
+    if (select.value && select.classList.contains('error')) {
+      select.classList.remove('error')
+      select.nextElementSibling!.textContent = ''
+    }
+  }
+
   return html`
     <label class="form-control-container">
       ${label && html`<span>${label}</span>`}
       <select
-        name="${name}"
         class="form-control ${className}"
+        name="${name}"
+        on-change=${onChange}
       >
         ${placeholder && html`
           <option hidden value="">${placeholder}</option>
