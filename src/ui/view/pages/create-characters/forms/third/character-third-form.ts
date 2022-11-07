@@ -8,6 +8,7 @@ import {
   textBetweenDashes
 } from '@/ui/view/components'
 import { IgnemCreateCharacterPage } from '../../ignem-create-character-page'
+import { e } from 'vitest/dist/index-220c1d70'
 
 export function characterThirdForm(parent: IgnemCreateCharacterPage) {
   let availableItems: Item[] = []
@@ -44,6 +45,16 @@ export function characterThirdForm(parent: IgnemCreateCharacterPage) {
     selectedEquipmentSlot = target
     selectedEquipmentSlot.classList.add('selected')
   }
+
+  function onSubmitForm(event: Event) {
+    event.preventDefault()
+
+    console.log(
+      parent
+        .selectAll<IgnemEquipmentSlot>('ignem-equip-slot')
+        .map(element => element.itemId)
+    )
+  }
   
   parent.once('init', () => {
     availableItems = new ItemsStore().items.sort(a => {
@@ -73,7 +84,12 @@ export function characterThirdForm(parent: IgnemCreateCharacterPage) {
   })
 
   return html`
-    <div step="3">
+    <form
+      is="ignem-form"
+      class="character-form"
+      step="3"
+      on-submit=${onSubmitForm}
+    >
       ${textBetweenDashes('Equipment')}
 
       <p class="explanatory-message">
@@ -121,6 +137,17 @@ export function characterThirdForm(parent: IgnemCreateCharacterPage) {
           </div>
         </div>
       </section>
-    </div>
+
+      <div class="form-buttons">
+        <button
+          class="btn-bordered"
+          type="button"
+          on-click=${() => parent.previous()}
+        >
+          Previous
+        </button>
+        <button class="btn">Next</button>
+      </div>
+    </form>
   `
 }
