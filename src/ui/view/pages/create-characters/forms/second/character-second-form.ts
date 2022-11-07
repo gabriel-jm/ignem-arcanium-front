@@ -16,7 +16,8 @@ export function characterSecondForm(
   ]
 
   function updateStats() {
-    const data = parent.form.getData<Record<string, number>>({
+    const form = parent.select('form[step="2"]') as IgnemForm
+    const data = form.getData<Record<string, number>>({
       level: 'number',
       strength: 'number',
       constitution: 'number',
@@ -24,7 +25,7 @@ export function characterSecondForm(
     })
 
     const { strength,  constitution, intelligence } = data
-    const level = data.level ?? 1
+    const level = parent.characterData.level ?? 1
     const hp = constitution * level + strength + 10
     const mp = intelligence * level + 10
 
@@ -70,7 +71,14 @@ export function characterSecondForm(
 
     const result = await props.attributesPresenter.handle(data)
 
-    form.setErrors(result.validationErrors)
+    for (const attr of attributes) {
+      if (result.validationErrors?.[attr]) {
+        form.select(`[attr="${attr}"]`).classList.add('error')
+        continue
+      }
+
+      form.select(`[attr="${attr}"]`).classList.remove('error')
+    }
 
     if (result.ok) {
       parent.characterData = {
