@@ -1,12 +1,16 @@
 import { html } from 'lithen-tag-functions'
-import { IgnemCreateCharacterPage } from '../../ignem-create-character-page'
+import { IgnemCreateCharacterPage, IgnemCreateCharacterProps } from '../../ignem-create-character-page'
 import { IgnemItemTinyCard, itemCard } from '@/ui/view/components/item'
 import { ItemsStore } from '@/ui/stores'
 import { InventoryItem } from '@/ui/protocols'
 import { Item } from '@/domain/protocols/use-cases'
 import { chevronUpIcon, textBetweenDashes } from '@/ui/view/components'
+import { router } from 'lithen-router'
 
-export function characterFourthForm(parent: IgnemCreateCharacterPage) {
+export function characterFourthForm(
+  parent: IgnemCreateCharacterPage,
+  props: IgnemCreateCharacterProps
+) {
   let inventoryItems: InventoryItem[] = []
   let availableItems: Item[] = []
   let sizeInUse = 0
@@ -114,6 +118,26 @@ export function characterFourthForm(parent: IgnemCreateCharacterPage) {
 
     addToInventory(itemId)
   }
+
+  async function onSubmitForm(event: Event) {
+    event.preventDefault()
+    const inventory = inventoryItems.map(item => ({
+      itemId: item.id,
+      quantity: item.quantity
+    }))
+
+    const result = await props.createCharacterPresenter
+      .handle({
+        ...parent.characterData,
+        inventoryItems: inventory
+      })
+
+    console.log(result)
+
+    if (result.ok) {
+      router.goTo('/chracters')
+    }
+  }
   
   parent.once('init', () => {
     availableItems = new ItemsStore().items
@@ -140,7 +164,12 @@ export function characterFourthForm(parent: IgnemCreateCharacterPage) {
   }
 
   return html`
-    <form is="ignem-form" class="character-form" step="4">
+    <form
+      is="ignem-form"
+      class="character-form"
+      step="4"
+      on-submit=${onSubmitForm}
+    >
       ${textBetweenDashes('Inventory')}
 
       <p class="explanatory-message">
@@ -186,6 +215,17 @@ export function characterFourthForm(parent: IgnemCreateCharacterPage) {
           </div>
         </div>
       </section>
+
+      <div class="form-buttons">
+        <button
+          class="btn-bordered"
+          type="button"
+          on-click=${() => parent.previous()}
+        >
+          Previous
+        </button>
+        <button class="btn">Next</button>
+      </div>
     </form>
   `
 }

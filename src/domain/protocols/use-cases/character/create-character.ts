@@ -3,20 +3,25 @@ export interface CreateCharacterParams {
   icon: string
   level: number
   gold: number
-  hp: number
-  mp: number
+  alignment: string
+  description?: string
+  characterPoints: number
   strength: number
   dexterity: number
   constitution: number
   intelligence: number
   wisdom: number
-  charism: number
+  charisma: number
   equipment: Partial<{
     rightHand: string
     leftHand: string
     armor: string
     accessory1: string
     accessory2: string
+  }>
+  inventoryItems?: Array<{
+    itemId: string
+    quantity: number
   }>
 }
 

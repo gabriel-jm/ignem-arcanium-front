@@ -31,6 +31,7 @@ export interface IgnemCreateCharacterProps {
   generalInfoPresenter: Presenter
   attributesPresenter: Presenter
   equipmentPresenter: Presenter
+  createCharacterPresenter: Presenter
 }
 
 export class IgnemCreateCharacterPage extends IgnemElement {
@@ -181,7 +182,7 @@ export class IgnemCreateCharacterPage extends IgnemElement {
           characterFirstForm(this, this.#props),
           characterSecondForm(this, this.#props),
           characterThirdForm(this, this.#props),
-          characterFourthForm(this)
+          characterFourthForm(this, this.#props)
         ]}
       </section>
     `

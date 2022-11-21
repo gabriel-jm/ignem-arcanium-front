@@ -29,14 +29,27 @@ export function makeCreateCharacterPresenter() {
         },
         level: requiredNumber,
         gold: requiredNumber,
-        hp: requiredNumber,
-        mp: requiredNumber,
+        alignment: {
+          type: 'string',
+          required: true
+          // TODO: add oneOf validation
+        },
+        description: {
+          type: 'string'
+        },
         strength: requiredAttributeNumber,
         dexterity: requiredAttributeNumber,
         constitution: requiredAttributeNumber,
         intelligence: requiredAttributeNumber,
         wisdom: requiredAttributeNumber,
-        charisma: requiredAttributeNumber
+        charisma: requiredAttributeNumber,
+        // TODO: add object and array validation
+        equipment: {
+          type: 'object'
+        },
+        inventoryItems: {
+          type: 'array'
+        }
       }
     )
   )

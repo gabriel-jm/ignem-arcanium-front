@@ -10,7 +10,8 @@ export class CreateCharacterPresenter implements Presenter {
   async handle<T = any>(data: CreateCharacterPresenterParams): Promise<PresenterResult<T>> {
     const character = await this.createCharacter.create({
       ...data,
-      icon: '/mage.svg'
+      icon: '/mage.svg',
+      characterPoints: 0,
     })
 
     return successResponse(character)
