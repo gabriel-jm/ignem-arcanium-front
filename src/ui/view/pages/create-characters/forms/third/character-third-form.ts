@@ -3,14 +3,17 @@ import { Item } from '@/domain/protocols/use-cases'
 import { ItemsStore } from '@/ui/stores'
 import {
   IgnemEquipmentSlot,
+  IgnemForm,
   IgnemItemTinyCard,
   itemCard,
   textBetweenDashes
 } from '@/ui/view/components'
-import { IgnemCreateCharacterPage } from '../../ignem-create-character-page'
-import { e } from 'vitest/dist/index-220c1d70'
+import { IgnemCreateCharacterPage, IgnemCreateCharacterProps } from '../../ignem-create-character-page'
 
-export function characterThirdForm(parent: IgnemCreateCharacterPage) {
+export function characterThirdForm(
+  parent: IgnemCreateCharacterPage,
+  props: IgnemCreateCharacterProps
+) {
   let availableItems: Item[] = []
   let lastSelectedItemId = ''
   let selectedEquipmentSlot: IgnemEquipmentSlot | null = null
@@ -46,14 +49,34 @@ export function characterThirdForm(parent: IgnemCreateCharacterPage) {
     selectedEquipmentSlot.classList.add('selected')
   }
 
-  function onSubmitForm(event: Event) {
+  async function onSubmitForm(event: Event) {
     event.preventDefault()
+    const form = event.target as IgnemForm
 
-    console.log(
+    const equipmentsId = Object.fromEntries(
       parent
         .selectAll<IgnemEquipmentSlot>('ignem-equip-slot')
-        .map(element => element.itemId)
+        .map(element => {
+          const [firstName, ...rest] = element.title.split(' ')
+          return [
+            `${firstName.toLowerCase()}${rest}`,
+            element.itemId
+          ]
+        })
     )
+
+    const result = await props.equipmentPresenter
+      .handle(equipmentsId)
+
+    form.setErrors(result.validationErrors)
+
+    if (result.ok) {
+      parent.characterData = {
+        ...parent.characterData,
+        equipment: { ...result.data }
+      }
+      parent.next()
+    }
   }
   
   parent.once('init', () => {

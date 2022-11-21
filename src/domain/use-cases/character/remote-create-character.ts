@@ -17,7 +17,8 @@ export class RemoteCreateCharacter implements CreateCharacter {
       constitution: params.constitution,
       intelligence: params.intelligence,
       wisdom: params.wisdom,
-      charism: params.charism
+      charism: params.charism,
+      equipment: params.equipment
     }
     
     const creationResult = await this.createCharacterService.create(characterData)

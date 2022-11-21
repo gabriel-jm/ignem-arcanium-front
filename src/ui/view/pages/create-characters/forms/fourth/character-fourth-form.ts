@@ -140,7 +140,7 @@ export function characterFourthForm(parent: IgnemCreateCharacterPage) {
   }
 
   return html`
-    <div step="4">
+    <form is="ignem-form" class="character-form" step="4">
       ${textBetweenDashes('Inventory')}
 
       <p class="explanatory-message">
@@ -186,6 +186,6 @@ export function characterFourthForm(parent: IgnemCreateCharacterPage) {
           </div>
         </div>
       </section>
-    </div>
+    </form>
   `
 }

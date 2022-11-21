@@ -11,6 +11,13 @@ export interface CreateCharacterParams {
   intelligence: number
   wisdom: number
   charism: number
+  equipment: Partial<{
+    rightHand: string
+    leftHand: string
+    armor: string
+    accessory1: string
+    accessory2: string
+  }>
 }
 
 export type CreateCharacterResult = CreateCharacterParams & { id: string }
