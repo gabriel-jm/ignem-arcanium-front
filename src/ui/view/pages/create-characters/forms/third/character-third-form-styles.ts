@@ -1,5 +1,6 @@
 import { css } from 'lithen-tag-functions'
 
+// TODO: fix item details display
 export const characterThirdFormStyles = css`
   .equipment-display {
     display: flex;

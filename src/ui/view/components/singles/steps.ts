@@ -106,10 +106,12 @@ export class IgnemSteps extends IgnemElement {
   }
   
   render() {
-    function onClickStep(event: Event) {
-      const step = Number((event.target as HTMLElement).textContent)
+    const onClickStep = (event: Event) => {
+      const clickedStep = Number((event.target as HTMLElement).textContent)
 
-      console.log(step)
+      this.dispatchEvent(new CustomEvent('click-step', {
+        detail: { clickedStep }
+      }))
     }
 
     const stepMessages = this.getAttribute('steps')?.split(',') ?? []

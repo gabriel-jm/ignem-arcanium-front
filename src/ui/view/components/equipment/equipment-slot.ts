@@ -1,4 +1,5 @@
 import { Item } from '@/domain/protocols/use-cases'
+import { closeIcon } from '@/ui/view/components/icons'
 import { itemIconByType } from '@/ui/view/components/item'
 import { IgnemElement } from '@/ui/view/ignem-element'
 import { css, html } from 'lithen-tag-functions'
@@ -40,11 +41,23 @@ export class IgnemEquipmentSlot extends IgnemElement {
     equipSlot.replaceChildren(
       html`
         <div class="equip-item-display">
-          <img alt="Item icon" src="${itemIconByType(item)}" />
-          <p>${item.name}</p>
+          <div class="equip-item-name">
+            <img alt="Item icon" src="${itemIconByType(item)}" />
+            <p>${item.name}</p>
+          </div>
+          <div on-click=${this.removeItem.bind(this)}>
+            ${closeIcon()}
+          </div>
         </div>
       `
     )
+  }
+
+  removeItem() {
+    const emptyMessage = this.getAttribute('empty-message') ?? 'None'
+    const equipSlot = this.select('.equip-slot')
+    equipSlot.className = 'equip-slot'
+    equipSlot.replaceChildren(new Text(emptyMessage))
   }
 
   styling() {
@@ -90,6 +103,12 @@ export class IgnemEquipmentSlot extends IgnemElement {
       ${borderImageByRarity}
 
       .equip-item-display {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .equip-item-name {
         display: flex;
         gap: 10px;
         align-items: center;

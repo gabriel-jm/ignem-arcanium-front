@@ -144,6 +144,26 @@ export class IgnemCreateCharacterPage extends IgnemElement {
       'Inventory'
     ]
 
+    // TODO: after develop remove me
+    const onClickStep = (event: CustomEvent) => {
+      const { clickedStep } = event.detail
+
+      scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      })
+  
+      const ignemSteps = this.select<IgnemSteps>('ignem-steps')
+  
+      this.select(`form[step="${ignemSteps.currentStep}"]`)
+        .classList.remove('active')
+  
+      ignemSteps.currentStep = clickedStep
+
+      this.select(`form[step="${ignemSteps.currentStep}"]`)
+        .classList.add('active')
+    }
+
     return html`
       <ignem-header />
 
@@ -153,6 +173,7 @@ export class IgnemCreateCharacterPage extends IgnemElement {
 
         <ignem-steps
           steps="${steps.join(',')}"
+          on-click-step=${onClickStep}
         />
 
         ${[
