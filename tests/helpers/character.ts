@@ -5,14 +5,16 @@ export function fakeCharacter() {
     icon: 'any_icon',
     level: 1,
     gold: 10,
-    hp: 10,
-    mp: 10,
+    hp: 12,
+    mp: 11,
+    alignment: 'any_alignment',
+    characterPoints: 0,
     strength: 1,
     dexterity: 2,
     constitution: 3,
     intelligence: 4,
     wisdom: 5,
-    charism: 6,
+    charisma: 6,
     equipment: {
       rightHand: 'any_item_id',
       leftHand: 'any_item_id'
@@ -34,7 +36,9 @@ export function mockFindAllCharactersService() {
 }
 
 export function mockFindAllCharacters() {
-  const result = [fakeCharacter()]
+  const result = [{
+    ...fakeCharacter()
+  }]
 
   return {
     result,

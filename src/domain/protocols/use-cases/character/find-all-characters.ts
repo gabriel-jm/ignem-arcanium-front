@@ -11,7 +11,7 @@ export interface FindAllCharactersResult {
   constitution: number
   intelligence: number
   wisdom: number
-  charism: number
+  charisma: number
 }
 
 export interface FindAllCharacters {
