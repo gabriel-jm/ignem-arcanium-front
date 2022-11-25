@@ -6,9 +6,9 @@ import { breadcrumbs, loadingIcon } from '@/ui/view/components'
 import { IgnemElement } from '@/ui/view/ignem-element'
 import { css, html } from 'lithen-tag-functions'
 import { SuccessNotifier } from '@/ui/protocols'
-import { IgnemCharacterModalElement } from './modal/ignem-character-modal'
 import { characterCard, characterCardStyles } from './card/character-card'
 import { router } from 'lithen-router'
+import { IgnemCharacterModal } from './modal/ignem-character-modal'
 
 interface Character {
   id: string
@@ -23,7 +23,7 @@ interface Character {
   constitution: number
   intelligence: number
   wisdom: number
-  charism: number
+  charisma: number
 }
 
 export class IgnemCharactersPage extends IgnemElement {
@@ -50,42 +50,25 @@ export class IgnemCharactersPage extends IgnemElement {
 
     this.select('.loading-icon')?.remove()
 
-    if (result.ok) {
-      const charactersList = result.data
-        .map(characterCard)
-        .concat(html`
-          <button
-            class="new-btn"
-            on-click=${() => router.goTo('/characters/create')}
-          >
-            &plus; New
-          </button>
-        `)       
-
-      this.select('.characters-list')?.append(...charactersList)
+    const onClickCharacterCard = () => {
+      const modal = this.select<IgnemCharacterModal>('ignem-character-modal')
+      modal.dialog.show()
     }
-  }
 
-  #onCharacterCreated = async (event: CustomEvent) => {
-    const modal = event.target as IgnemCharacterModalElement
-    const formData = event.detail
+    if (!result.ok) return 
 
-    const result = await this.#createCharacterPresenter.handle(formData)
+    const charactersList = result.data
+      .map(character => characterCard(character, onClickCharacterCard))
+      .concat(html`
+        <button
+          class="new-btn"
+          on-click=${() => router.goTo('/characters/create')}
+        >
+          &plus; New
+        </button>
+      `)       
 
-    modal.setErrors(result.validationErrors)
-
-    if (result.ok) {
-      modal.dialog.close()
-      modal.form.reset()
-      this.select('.characters-list')?.insertBefore(
-        characterCard(result.data),
-        this.select('button')!
-      )
-      this.#successNotifier.notifySuccess(
-        'Created',
-        'Character created with success'
-      )
-    }
+    this.select('.characters-list')?.append(...charactersList)
   }
 
   styling() {
@@ -152,7 +135,7 @@ export class IgnemCharactersPage extends IgnemElement {
           ${loadingIcon()}
         </div>
 
-        <ignem-character-modal on-character-created=${this.#onCharacterCreated} />
+        <ignem-character-modal />
       </section>
     `
   }

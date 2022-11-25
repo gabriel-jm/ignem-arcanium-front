@@ -11,7 +11,7 @@ interface CharacterCardProps {
   constitution: number
   intelligence: number
   wisdom: number
-  charism: number
+  charisma: number
 }
 
 export const characterCardStyles = css`
@@ -74,9 +74,12 @@ export const characterCardStyles = css`
   }
 `
 
-export function characterCard(character: CharacterCardProps) {
+export function characterCard(
+  character: CharacterCardProps,
+  onClick: Function
+) {
   return html`
-    <div class="character-card" tabindex="0">
+    <div class="character-card" tabindex="0" on-click=${onClick}>
       <figure>
         <img
           width="70px"
@@ -108,7 +111,7 @@ export function characterCard(character: CharacterCardProps) {
           <li>Con ${character.constitution}</li>
           <li>Int ${character.intelligence}</li>
           <li>Wis ${character.wisdom}</li>
-          <li>Cha ${character.charism}</li>
+          <li>Cha ${character.charisma}</li>
         </ul>
       </div>
     </div>

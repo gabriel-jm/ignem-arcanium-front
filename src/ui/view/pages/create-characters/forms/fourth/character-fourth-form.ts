@@ -135,7 +135,7 @@ export function characterFourthForm(
     console.log(result)
 
     if (result.ok) {
-      router.goTo('/chracters')
+      router.goTo('/characters')
     }
   }
   
