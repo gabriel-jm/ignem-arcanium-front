@@ -135,7 +135,7 @@ export class IgnemCharactersPage extends IgnemElement {
           ${loadingIcon()}
         </div>
 
-        <ignem-character-modal />
+        <ignem-character-modal  />
       </section>
     `
   }
