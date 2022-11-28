@@ -9,22 +9,9 @@ import { SuccessNotifier } from '@/ui/protocols'
 import { characterCard, characterCardStyles } from './card/character-card'
 import { router } from 'lithen-router'
 import { IgnemCharacterModal } from './modal/ignem-character-modal'
+import { FindAllCharactersResult } from '@/domain/protocols/use-cases'
 
-interface Character {
-  id: string
-  name: string
-  icon: string
-  level: number
-  gold: number
-  hp: number
-  mp: number
-  strength: number
-  dexterity: number
-  constitution: number
-  intelligence: number
-  wisdom: number
-  charisma: number
-}
+type Character = FindAllCharactersResult
 
 export class IgnemCharactersPage extends IgnemElement {
   #findAllCharactersPresenter: Presenter
@@ -50,15 +37,17 @@ export class IgnemCharactersPage extends IgnemElement {
 
     this.select('.loading-icon')?.remove()
 
-    const onClickCharacterCard = () => {
-      const modal = this.select<IgnemCharacterModal>('ignem-character-modal')
-      modal.dialog.show()
+    const onClickCharacterCard = (character: Character) => {
+      return () => {
+        this.select<IgnemCharacterModal>('ignem-character-modal')
+          .open(character)
+      }
     }
 
     if (!result.ok) return 
 
     const charactersList = result.data
-      .map(character => characterCard(character, onClickCharacterCard))
+      .map(character => characterCard(character, onClickCharacterCard(character)))
       .concat(html`
         <button
           class="new-btn"

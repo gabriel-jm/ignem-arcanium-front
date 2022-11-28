@@ -4,6 +4,8 @@ export interface FindAllCharactersResult {
   icon: string
   level: number
   gold: number
+  characterPoints: number
+  alignment: string
   hp: number
   mp: number
   strength: number
