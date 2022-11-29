@@ -1,18 +1,6 @@
-export interface FindAllCharactersServiceResult {
-  id: string
-  name: string
-  icon: string
-  level: number
-  gold: number
-  hp: number
-  mp: number
-  strength: number
-  dexterity: number
-  constitution: number
-  intelligence: number
-  wisdom: number
-  charisma: number
-}
+import { FindAllCharactersResult } from '@/domain/protocols/use-cases'
+
+export type FindAllCharactersServiceResult = FindAllCharactersResult
 
 export interface FindAllCharactersService {
   findAll(): Promise<FindAllCharactersServiceResult[]>
