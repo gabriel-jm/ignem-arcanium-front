@@ -1,4 +1,4 @@
-import { AlchemicalItem, Gem, Item, ShieldOrArmor, Weapon } from '@/domain/protocols/use-cases'
+import { AlchemicalItem, Gem, ShieldOrArmor, Item, Weapon } from '@/domain/protocols/use-cases'
 
 export interface InventoryItem extends Item {
   quantity: number

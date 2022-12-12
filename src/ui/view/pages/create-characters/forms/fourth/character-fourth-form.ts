@@ -121,8 +121,9 @@ export function characterFourthForm(
 
   async function onSubmitForm(event: Event) {
     event.preventDefault()
+
     const inventory = inventoryItems.map(item => ({
-      itemId: item.id,
+      itemId: item.itemId ?? item.id,
       quantity: item.quantity
     }))
 

@@ -51,15 +51,21 @@ export function itemCard(props: ItemDetailsProps) {
 }
 
 function detailsByItemTypes(item: ItemDetailsProps) {
-  if (item.type === 'WEAPON') {
+  console.log(item)
+
+  if (item.type === 'weapon') {
     return weaponDetails(item as InventoryWeapon)
   }
 
-  if (['SHIELD', 'ARMOR'].includes(item.type)) {
+  if (['shield', 'armor'].includes(item.type)) {
     return shieldOrArmorDetails(item as InventoryShieldOrArmor)
   }
 
-  if (['POTION', 'OIL', 'OINTMENT'].includes(item.type)) {
+  // if (['POTION', 'OIL', 'OINTMENT'].includes(item.type)) {
+  //   return alchemicalItemDetails(item as InventoryAlchemicalItem)
+  // }
+
+  if (item.type === 'alchemicalItem') {
     return alchemicalItemDetails(item as InventoryAlchemicalItem)
   }
 

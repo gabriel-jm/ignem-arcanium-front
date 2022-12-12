@@ -81,16 +81,18 @@ export function characterThirdForm(
   
   parent.once('init', () => {
     availableItems = new ItemsStore().items.sort(a => {
-      if (a.type === 'WEAPON') {
+      if (a.type === 'weapon') {
         return -2
       }
 
-      if (a.type === 'ARMOR' || a.type === 'SHIELD') {
+      if (a.type === 'armor' || a.type === 'shield') {
         return -1
       }
 
       return 1
     })
+
+    console.log(availableItems)
 
     parent.select('[equip-items-list]')?.append(
       ...availableItems.map(item => new IgnemItemTinyCard({

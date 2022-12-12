@@ -34,7 +34,7 @@ export class IgnemEquipmentSlot extends IgnemElement {
       return
     }
 
-    this.#itemId = item.id
+    this.#itemId = item.itemId ?? item.id
     
     const equipSlot = this.select('.equip-slot')
     equipSlot.className = `equip-slot ${item.rarity.toLowerCase()}`
