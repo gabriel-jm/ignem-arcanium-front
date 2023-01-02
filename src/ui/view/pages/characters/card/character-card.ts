@@ -1,3 +1,4 @@
+import { characterStatsStyles } from '@/ui/view/styles'
 import { css, html } from 'lithen-tag-functions'
 
 interface CharacterCardProps {
@@ -15,6 +16,8 @@ interface CharacterCardProps {
 }
 
 export const characterCardStyles = css`
+  ${characterStatsStyles}
+
   .character-card {
     min-height: 114px;
     min-width: 250px;
@@ -41,18 +44,6 @@ export const characterCardStyles = css`
 
   .character-info h1 {
     font-size: 1.5rem;
-  }
-
-  .level {
-    font-weight: bold;
-    font-size: 0.85rem;
-    color: #5b90a5;
-  }
-
-  .gold {
-    font-weight: bold;
-    font-size: 0.85rem;
-    color: #ebc855;
   }
 
   .stats-list {
