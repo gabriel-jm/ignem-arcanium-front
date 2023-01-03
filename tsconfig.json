@@ -7,6 +7,8 @@
     "types": ["vitest/globals"],
     "moduleResolution": "Node",
     "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
     "sourceMap": true,
     "resolveJsonModule": true,
     "esModuleInterop": true,
