@@ -1,6 +1,6 @@
-import { HTTPServiceError, UnauthorizedError } from '@/infra/errors'
+import { HTTPServiceError } from '@/infra/errors'
 import { CharacterService } from '@/infra/services'
-import { fakeCharacter, mockCacheStore, mockHTTPClient } from '@/tests/helpers'
+import { fakeCharacter, mockHTTPClient } from '@/tests/helpers'
 
 function makeSut() {
   const httpClientSpy = mockHTTPClient([])

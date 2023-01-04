@@ -15,7 +15,6 @@ export function characterThirdForm(
   props: IgnemCreateCharacterProps
 ) {
   let availableItems: Item[] = []
-  let lastSelectedItemId = ''
   let selectedEquipmentSlot: IgnemEquipmentSlot | null = null
 
   function onFocusInventoryItem(event: Event) {
@@ -25,8 +24,6 @@ export function characterThirdForm(
     const item = availableItems.find(item => item.id === itemId)
 
     if (!item) return
-
-    lastSelectedItemId = item.id
 
     if (!parent.select(`[equip-item-info] [key-id="${item.id}"]`)) {
       parent.select('[equip-item-info]')?.replaceChildren(itemCard(item))

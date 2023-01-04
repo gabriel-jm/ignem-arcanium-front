@@ -5,7 +5,6 @@ import { containerStyles } from '@/ui/view'
 import { breadcrumbs, loadingIcon } from '@/ui/view/components'
 import { IgnemElement } from '@/ui/view/ignem-element'
 import { css, html } from 'lithen-tag-functions'
-import { SuccessNotifier } from '@/ui/protocols'
 import { characterCard, characterCardStyles } from './card/character-card'
 import { router } from 'lithen-router'
 import { IgnemCharacterModal } from './modal/ignem-character-modal'
@@ -15,18 +14,10 @@ type Character = FindAllCharactersResult
 
 export class IgnemCharactersPage extends IgnemElement {
   #findAllCharactersPresenter: Presenter
-  #createCharacterPresenter: Presenter
-  #successNotifier: SuccessNotifier
   
-  constructor(
-    findAllCharactersPresenter: Presenter,
-    createCharacterPresenter: Presenter,
-    successNotifier: SuccessNotifier
-  ) {
+  constructor(findAllCharactersPresenter: Presenter) {
     super()
     this.#findAllCharactersPresenter = findAllCharactersPresenter
-    this.#createCharacterPresenter = createCharacterPresenter
-    this.#successNotifier = successNotifier
 
     this.applyRender()
     this.init()

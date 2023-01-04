@@ -1,4 +1,3 @@
-import { CacheStore } from '@/domain/protocols/cache'
 import {
   CreateCharacterService,
   CreateCharacterServiceParams,
@@ -6,7 +5,7 @@ import {
   FindAllCharactersService,
   FindAllCharactersServiceResult
 } from '@/domain/protocols/services'
-import { HTTPServiceError, UnauthorizedError } from '@/infra/errors'
+import { HTTPServiceError } from '@/infra/errors'
 import { HTTPClient } from '@/infra/protocols'
 
 type Service = FindAllCharactersService & CreateCharacterService
