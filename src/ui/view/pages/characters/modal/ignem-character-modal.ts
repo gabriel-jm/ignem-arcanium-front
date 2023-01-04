@@ -1,4 +1,5 @@
 import { FindAllCharactersResult } from '@/domain/protocols/use-cases'
+import { equipmentItemCard } from '@/ui/view/components'
 import { IgnemElement } from '@/ui/view/ignem-element'
 import { characterModalStyles } from '@/ui/view/pages/characters/modal/character-modal-styles'
 import { html } from 'lithen-tag-functions'
@@ -32,7 +33,11 @@ export class IgnemCharacterModal extends IgnemElement {
 
 customElements.define('ignem-character-modal', IgnemCharacterModal)
 
+const equipmentSlots = ['rightHand', 'leftHand', 'armor', 'accessory1', 'accessory2']
+
 function characterModalContent(modal: IgnemCharacterModal, data: CharacterModalData) {
+  console.log(data)
+
   return html`
     <div class="modal-container">
       <header class="modal-header">
@@ -55,7 +60,7 @@ function characterModalContent(modal: IgnemCharacterModal, data: CharacterModalD
         </div>
       </header>
 
-      <div class="attributes-group">
+      <section class="attributes-group">
         <div>
           <span>HP ${data.hp}</span>
           <span>MP ${data.mp}</span>
@@ -69,11 +74,24 @@ function characterModalContent(modal: IgnemCharacterModal, data: CharacterModalD
           <span>Wisdom ${data.wisdom}</span>
           <span>Charisma ${data.charisma}</span>
         </div>
-      </div>
+      </section>
 
       <section>
         <div>
-          
+          <span>Equipment</span>
+        </div>
+        <div>
+          ${equipmentSlots.map(slot => {
+            console.log(data.equipments[slot])
+            return html`
+              <div>
+                <p>${slot}</p>
+                ${data.equipments[slot] && equipmentItemCard({
+                  item: data.equipments[slot]
+                })}
+              </div>
+            `
+          })}
         </div>
       </section>
 

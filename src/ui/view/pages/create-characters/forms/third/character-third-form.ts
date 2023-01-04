@@ -89,8 +89,6 @@ export function characterThirdForm(
       return 1
     })
 
-    console.log(availableItems)
-
     parent.select('[equip-items-list]')?.append(
       ...availableItems.map(item => new IgnemItemTinyCard({
         ...item,

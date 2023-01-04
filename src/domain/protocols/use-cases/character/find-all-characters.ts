@@ -1,3 +1,5 @@
+import { Item, ShieldOrArmor, Weapon } from '@/domain/protocols/use-cases/item/list-all-default-items'
+
 export interface FindAllCharactersResult {
   id: string
   name: string
@@ -14,6 +16,10 @@ export interface FindAllCharactersResult {
   intelligence: number
   wisdom: number
   charisma: number
+  equipments: Record<string, Item> & {
+    rightHand?: Omit<Weapon, 'id'> & { weaponId: string }
+    armor?: Omit<ShieldOrArmor, 'id'> & { shieldId: string, armorId: string }
+  }
 }
 
 export interface FindAllCharacters {
