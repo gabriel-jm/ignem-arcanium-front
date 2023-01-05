@@ -4,7 +4,7 @@ import { itemIconByType } from '@/ui/view/components/item'
 import { css, html } from 'lithen-tag-functions'
 
 interface EquipmentItemCardProps {
-  item: Item
+  item?: Item | null
   onDelete?: Function
 }
 
@@ -12,35 +12,35 @@ const rarities = ['common', 'uncommon']
 
 const borderImageByRarity = rarities.map(rarity => css`
   .equip-slot.${rarity} {
-    border-image-source: linear-gradient(
-      to bottom right,
-      var(--bright-${rarity}),
-      var(--black) 35%
+    background-image: linear-gradient(
+      145deg,
+      var(--dark-${rarity}),
+      var(--black) 30%
     );
   }
 `)
 
 const equipmentItemCardStyles = css`
   .equip-slot {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     width: 230px;
+    height: 48px;
     background-color: var(--black);
-    font-size: 0.9rem;
+    font-size: 1rem;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    padding: 8px 8px;
-    border: 2px solid;
-    border-image-slice: 1;
-    border-image-source: linear-gradient(
-      to top left,
-      var(--black),
-      var(--black)
-    );
+    padding: 10px 12px;
+    border: 0;
+    border-radius: 4px;
   }
 
   ${borderImageByRarity}
 
   .equip-item-display {
+    flex: 1;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -50,7 +50,6 @@ const equipmentItemCardStyles = css`
     display: flex;
     gap: 10px;
     align-items: center;
-    font-size: 1rem;
   }
 
   .equip-item-display img {
@@ -59,21 +58,27 @@ const equipmentItemCardStyles = css`
   }
 `
 
-export function equipmentItemCard({ item, onDelete }: EquipmentItemCardProps) {
+export function equipmentItemCard({ item, onDelete }: EquipmentItemCardProps = {}) {
+  const cardContent = item
+    ? html`
+      <div class="equip-item-name">
+        <img alt="Item icon" src="${itemIconByType(item)}" />
+        <p>${item.name}</p>
+      </div>
+    `
+    : html`<p>None</p>`
+
   return html`
     <ignem-wrapper css="${equipmentItemCardStyles}">
-      <div class="equip-slot ${item.rarity}">  
+      <div class="equip-slot ${item?.rarity}">  
         <div class="equip-item-display">
-          <div class="equip-item-name">
-            <img alt="Item icon" src="${itemIconByType(item)}" />
-            <p>${item.name}</p>
-          </div>
-          ${onDelete && html`
-            <div on-click=${onDelete}>
-              ${closeIcon()}
-            </div>
-          `}
+          ${cardContent}    
         </div>
+        ${item && onDelete && html`
+          <div on-click=${onDelete}>
+            ${closeIcon()}
+          </div>
+        `}
       <div>
     </ignem-wrapper>
   `

@@ -55,4 +55,18 @@ export const characterModalStyles = css`
     gap: 0 16px;
     flex-wrap: wrap;
   }
+
+  .equipment-section {
+    padding: 16px 2px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .equipment-slot-name {
+    font-size: 1.15rem;
+    font-weight: bold;
+    text-transform: capitalize;
+    padding-bottom: 6px;
+  }
 `

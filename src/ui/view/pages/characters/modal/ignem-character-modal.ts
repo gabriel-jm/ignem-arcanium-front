@@ -14,6 +14,10 @@ export class IgnemCharacterModal extends IgnemElement {
   open(data: CharacterModalData) {
     this.dialog.show()
     this.#applyDialogContent(data)
+    this.select('dialog').scrollTo({
+      behavior: 'auto',
+      top: 0
+    })
   }
 
   #applyDialogContent(data: CharacterModalData) {
@@ -27,7 +31,11 @@ export class IgnemCharacterModal extends IgnemElement {
   }
 
   render() {
-    return '<dialog></dialog>'
+    return html`<dialog on-click=${(event: Event) => {
+      if (event.target === event.currentTarget) {
+        (event.target as HTMLDialogElement).close()
+      }
+    }}></dialog>`
   }  
 }
 
@@ -80,14 +88,14 @@ function characterModalContent(modal: IgnemCharacterModal, data: CharacterModalD
         <div>
           <span>Equipment</span>
         </div>
-        <div>
+        <div class="equipment-section">
           ${equipmentSlots.map(slot => {
-            console.log(data.equipments[slot])
+            console.log(data.equipment[slot])
             return html`
               <div>
-                <p>${slot}</p>
-                ${data.equipments[slot] && equipmentItemCard({
-                  item: data.equipments[slot]
+                <p class="equipment-slot-name">${slot}</p>
+                ${equipmentItemCard({
+                  item: data.equipment[slot]
                 })}
               </div>
             `

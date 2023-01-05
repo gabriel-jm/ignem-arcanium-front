@@ -15,10 +15,7 @@ export function fakeCharacter() {
     intelligence: 4,
     wisdom: 5,
     charisma: 6,
-    equipment: {
-      rightHand: 'any_item_id',
-      leftHand: 'any_item_id'
-    },
+    equipment: {},
     inventoryItems: [{
       itemId: 'any_item_id',
       quantity: 1

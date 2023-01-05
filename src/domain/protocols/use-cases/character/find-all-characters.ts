@@ -16,9 +16,9 @@ export interface FindAllCharactersResult {
   intelligence: number
   wisdom: number
   charisma: number
-  equipments: Record<string, Item> & {
-    rightHand?: Omit<Weapon, 'id'> & { weaponId: string }
-    armor?: Omit<ShieldOrArmor, 'id'> & { shieldId: string, armorId: string }
+  equipment: Record<string, Item> & {
+    rightHand?: Weapon & { weaponId: string }
+    armor?: ShieldOrArmor & { shieldId: string, armorId: string }
   }
 }
 
