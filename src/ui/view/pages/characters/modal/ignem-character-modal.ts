@@ -85,22 +85,24 @@ function characterModalContent(modal: IgnemCharacterModal, data: CharacterModalD
       </section>
 
       <section>
-        <div>
-          <span>Equipment</span>
-        </div>
-        <div class="equipment-section">
-          ${equipmentSlots.map(slot => {
-            console.log(data.equipment[slot])
-            return html`
-              <div>
-                <p class="equipment-slot-name">${slot}</p>
-                ${equipmentItemCard({
-                  item: data.equipment[slot]
-                })}
-              </div>
-            `
-          })}
-        </div>
+        <ignem-tabs>
+          <div tab="Equipment" class="equipment-section">
+            ${equipmentSlots.map(slot => {
+              console.log(data.equipment[slot])
+              return html`
+                <div>
+                  <p class="equipment-slot-name">${slot}</p>
+                  ${equipmentItemCard({
+                    item: data.equipment[slot]
+                  })}
+                </div>
+              `
+            })}
+          </div>
+          <div tab="Inventory">
+            <p>Inventory</p>
+          </div>
+        </ignem-tabs>
       </section>
 
       <button
