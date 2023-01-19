@@ -14,15 +14,15 @@
   "devDependencies": {
     "@types/node": "^18.11.18",
     "c8": "^7.12.0",
-    "happy-dom": "^8.1.1",
+    "happy-dom": "^8.1.4",
     "npm-check-updates": "^16.6.2",
     "typescript": "^4.9.4",
-    "vite": "^4.0.3",
-    "vitest": "^0.26.3"
+    "vite": "^4.0.4",
+    "vitest": "^0.27.2"
   },
   "dependencies": {
     "lithen-router": "^2.0.0",
     "lithen-super-element": "^5.0.0",
-    "lithen-tag-functions": "^4.1.1"
+    "lithen-tag-functions": "^4.2.2"
   }
 }
