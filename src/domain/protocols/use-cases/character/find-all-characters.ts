@@ -20,6 +20,12 @@ export interface FindAllCharactersResult {
     rightHand?: Weapon & { weaponId: string }
     armor?: ShieldOrArmor & { shieldId: string, armorId: string }
   }
+  inventory: {
+    id: string
+    size: number
+    spaceInUse: number
+    items: Item[]
+  }
 }
 
 export interface FindAllCharacters {

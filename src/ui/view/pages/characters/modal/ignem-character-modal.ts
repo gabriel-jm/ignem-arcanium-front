@@ -1,5 +1,5 @@
 import { FindAllCharactersResult } from '@/domain/protocols/use-cases'
-import { equipmentItemCard } from '@/ui/view/components'
+import { equipmentItemCard, IgnemItemTinyCard, itemCard } from '@/ui/view/components'
 import { IgnemElement } from '@/ui/view/ignem-element'
 import { characterModalStyles } from '@/ui/view/pages/characters/modal/character-modal-styles'
 import { html } from 'lithen-tag-functions'
@@ -44,8 +44,7 @@ customElements.define('ignem-character-modal', IgnemCharacterModal)
 const equipmentSlots = ['rightHand', 'leftHand', 'armor', 'accessory1', 'accessory2']
 
 function characterModalContent(modal: IgnemCharacterModal, data: CharacterModalData) {
-  console.log(data)
-
+  console.log({ data })
   return html`
     <div class="modal-container">
       <header class="modal-header">
@@ -86,21 +85,27 @@ function characterModalContent(modal: IgnemCharacterModal, data: CharacterModalD
 
       <section>
         <ignem-tabs>
-          <div tab="Equipment" class="equipment-section">
-            ${equipmentSlots.map(slot => {
-              console.log(data.equipment[slot])
-              return html`
-                <div>
-                  <p class="equipment-slot-name">${slot}</p>
-                  ${equipmentItemCard({
-                    item: data.equipment[slot]
-                  })}
-                </div>
-              `
-            })}
+          <div tab="Equipment">
+            <div class="equipment-section">
+              ${equipmentSlots.map(slot => {
+                console.log(data.equipment[slot])
+                return html`
+                  <div>
+                    <p class="equipment-slot-name">${slot}</p>
+                    ${equipmentItemCard({
+                      item: data.equipment[slot]
+                    })}
+                  </div>
+                `
+              })}
+            </div>
           </div>
           <div tab="Inventory">
-            <p>Inventory</p>
+            <div>
+              ${data.inventory.items.map(item => {
+                return new IgnemItemTinyCard(item)
+              })}
+            </div>
           </div>
         </ignem-tabs>
       </section>
