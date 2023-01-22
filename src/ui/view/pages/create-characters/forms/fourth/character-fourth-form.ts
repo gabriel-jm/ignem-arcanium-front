@@ -89,6 +89,7 @@ export function characterFourthForm(
 
       const itemCard = new IgnemItemTinyCard({
         ...item,
+        quantityControl: true,
         onFocus: onFocusInventoryItem,
         onIncrement: incrementQuantity,
         onDecrement: decrementQuantity

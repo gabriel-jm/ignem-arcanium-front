@@ -1,8 +1,8 @@
 import { FindAllCharactersResult } from '@/domain/protocols/use-cases'
-import { equipmentItemCard, IgnemItemTinyCard, itemCard } from '@/ui/view/components'
+import { equipmentItemCard, IgnemItemTinyCard } from '@/ui/view/components'
 import { IgnemElement } from '@/ui/view/ignem-element'
 import { characterModalStyles } from '@/ui/view/pages/characters/modal/character-modal-styles'
-import { html } from 'lithen-tag-functions'
+import { html, raw } from 'lithen-tag-functions'
 
 export type CharacterModalData = FindAllCharactersResult
 
@@ -101,7 +101,10 @@ function characterModalContent(modal: IgnemCharacterModal, data: CharacterModalD
             </div>
           </div>
           <div tab="Inventory">
-            <div>
+            <div class="inventory">
+              ${data.inventory.items.length === 0 && raw`
+                <span>Inventory Empty</span>
+              `}
               ${data.inventory.items.map(item => {
                 return new IgnemItemTinyCard(item)
               })}

@@ -69,4 +69,18 @@ export const characterModalStyles = css`
     text-transform: capitalize;
     padding-bottom: 6px;
   }
+
+  .inventory {
+    display: grid;
+    background-color: var(--bright-black);
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 10px;
+    padding: 10px;
+    border-radius: 4px;
+    align-content: flex-start;
+    max-height: 420px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    margin: 10px 0;
+  }
 `

@@ -16,10 +16,12 @@ export function fakeCharacter() {
     wisdom: 5,
     charisma: 6,
     equipment: {},
-    inventoryItems: [{
-      itemId: 'any_item_id',
-      quantity: 1
-    }]
+    inventory: {
+      id: 'any_inventory_id',
+      size: 200,
+      spaceInUse: 100,
+      items: []
+    }
   }
 }
 

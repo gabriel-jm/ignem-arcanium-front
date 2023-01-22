@@ -4,6 +4,7 @@ import { itemIconByType } from './item-icon-by-type'
 import { css, html, raw } from 'lithen-tag-functions'
 import { IgnemQuantityControl } from '@/ui/view/components/singles'
 import { IgnemElement } from '@/ui/view/ignem-element'
+import { capitalize } from '@/ui/helpers'
 
 export interface ItemTinyCardProps extends Item {
   onClick?: Function
@@ -12,6 +13,8 @@ export interface ItemTinyCardProps extends Item {
   onIncrement?: Function
   onDecrement?: Function
   quantity?: number
+  quantityControl?: boolean
+  showAttr?: string
 }
 
 const rarities = ['common', 'uncommon']
@@ -87,7 +90,7 @@ export const itemTinyCardStyles = css`
     justify-content: center;
   }
 
-  .item-content .weight {
+  .item-content .attr {
     color: var(--sub-font-color);
     font-size: 0.7rem;
     text-align: center;
@@ -125,11 +128,14 @@ export class IgnemItemTinyCard extends IgnemElement {
     const {
       rarity,
       name,
-      weight,
       quantity,
+      quantityControl,
+      showAttr,
       onIncrement,
       onDecrement
     } = this.#props
+
+    const isQuantityControlEnabled = quantityControl && quantity
 
     return html`
       <li class="item-container ${rarity.toLowerCase()}">
@@ -137,22 +143,20 @@ export class IgnemItemTinyCard extends IgnemElement {
           <img alt="Item Icon" src="${itemIconByType(this.#props)}" />
         </figure>
 
-        <div class="item-content ${quantity && 'quantity'}">
+        <div class="item-content ${isQuantityControlEnabled && 'quantity'}">
           <span class="name">${name}</span>
-          ${quantity
-            ? html`
-              <ignem-quantity-control
-                class="item-quantity"
-                on-increment=${onIncrement}
-                on-decrement=${onDecrement}
-              />
-            `
-            : raw`
-              <span class="weight">
-                Weight ${weight}
-              </span>
-            `
-          }
+          ${isQuantityControlEnabled && html`
+            <ignem-quantity-control
+              class="item-quantity"
+              on-increment=${onIncrement}
+              on-decrement=${onDecrement}
+            />
+          `}
+          ${!isQuantityControlEnabled && showAttr && raw`
+            <span class="attr">
+              ${capitalize(showAttr)} ${Reflect.get(this.#props, showAttr)}
+            </span>
+          `}
         </div>
       </li>
     `
