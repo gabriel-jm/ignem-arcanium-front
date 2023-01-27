@@ -5,6 +5,7 @@ import { css, html } from 'lithen-tag-functions'
 
 interface EquipmentItemCardProps {
   item?: Item | null
+  onClick?: Function
   onDelete?: Function
 }
 
@@ -37,6 +38,10 @@ const equipmentItemCardStyles = css`
     border-radius: 4px;
   }
 
+  :host(:focus) .equip-slot {
+    outline: 2px solid var(--outline-white);
+  }
+
   ${borderImageByRarity}
 
   .equip-item-display {
@@ -58,7 +63,9 @@ const equipmentItemCardStyles = css`
   }
 `
 
-export function equipmentItemCard({ item, onDelete }: EquipmentItemCardProps = {}) {
+export function equipmentItemCard(
+  { item, onClick, onDelete }: EquipmentItemCardProps = {}
+) {
   const cardContent = item
     ? html`
       <div class="equip-item-name">
@@ -69,7 +76,11 @@ export function equipmentItemCard({ item, onDelete }: EquipmentItemCardProps = {
     : html`<p>None</p>`
 
   return html`
-    <ignem-wrapper css="${equipmentItemCardStyles}">
+    <ignem-wrapper
+      tabindex="-1"
+      css="${equipmentItemCardStyles}"
+      on-click=${onClick}
+    >
       <div class="equip-slot ${item?.rarity}">  
         <div class="equip-item-display">
           ${cardContent}    

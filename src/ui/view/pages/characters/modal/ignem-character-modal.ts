@@ -1,8 +1,8 @@
-import { FindAllCharactersResult } from '@/domain/protocols/use-cases'
-import { equipmentItemCard, IgnemItemTinyCard } from '@/ui/view/components'
+import { FindAllCharactersResult, Item } from '@/domain/protocols/use-cases'
+import { closeIcon, equipmentItemCard, IgnemItemTinyCard, itemCard } from '@/ui/view/components'
 import { IgnemElement } from '@/ui/view/ignem-element'
 import { characterModalStyles } from '@/ui/view/pages/characters/modal/character-modal-styles'
-import { html, raw } from 'lithen-tag-functions'
+import { html, raw, ref } from 'lithen-tag-functions'
 
 export type CharacterModalData = FindAllCharactersResult
 
@@ -44,7 +44,18 @@ customElements.define('ignem-character-modal', IgnemCharacterModal)
 const equipmentSlots = ['rightHand', 'leftHand', 'armor', 'accessory1', 'accessory2']
 
 function characterModalContent(modal: IgnemCharacterModal, data: CharacterModalData) {
-  console.log({ data })
+  const itemDetailsRef = ref<HTMLElement>()
+
+  function onClickEquipItem(item?: Item) {
+    return () => {
+      item
+        ? itemDetailsRef.el?.replaceChildren(
+          itemCard({ ...item })
+        )
+        : itemDetailsRef.el?.replaceChildren()
+    }
+  }
+
   return html`
     <div class="modal-container">
       <header class="modal-header">
@@ -65,6 +76,12 @@ function characterModalContent(modal: IgnemCharacterModal, data: CharacterModalD
             </span>
           </div>
         </div>
+        <span
+          class="modal-close-btn"
+          on-click=${() => modal.dialog.close()}
+        >
+          ${closeIcon()}
+        </span>
       </header>
 
       <section class="attributes-group">
@@ -87,17 +104,21 @@ function characterModalContent(modal: IgnemCharacterModal, data: CharacterModalD
         <ignem-tabs>
           <div tab="Equipment">
             <div class="equipment-section">
-              ${equipmentSlots.map(slot => {
-                console.log(data.equipment[slot])
-                return html`
-                  <div>
+              <section>
+                ${equipmentSlots.map(slot => html`
+                  <div class="equipment-slot-container">
                     <p class="equipment-slot-name">${slot}</p>
                     ${equipmentItemCard({
-                      item: data.equipment[slot]
+                      item: data.equipment[slot],
+                      onClick: onClickEquipItem(data.equipment[slot])
                     })}
                   </div>
-                `
-              })}
+                `)}
+              </section>
+              <section
+                class="equipment-item-details"
+                ref=${itemDetailsRef}
+              ></section>
             </div>
           </div>
           <div tab="Inventory">
@@ -106,18 +127,15 @@ function characterModalContent(modal: IgnemCharacterModal, data: CharacterModalD
                 <span>Inventory Empty</span>
               `}
               ${data.inventory.items.map(item => {
-                return new IgnemItemTinyCard(item)
+                return new IgnemItemTinyCard({
+                  ...item,
+                  showAttr: 'quantity'
+                })
               })}
             </div>
           </div>
         </ignem-tabs>
       </section>
-
-      <button
-        on-click=${() => modal.dialog.close()}
-      >
-        close
-      </button>
     </div>
   `
 }

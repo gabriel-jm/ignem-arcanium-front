@@ -38,6 +38,12 @@ export const characterModalStyles = css`
     margin-bottom: 4px;
   }
 
+  .modal-close-btn {
+    align-self: flex-start;
+    margin-left: auto;
+    cursor: pointer;
+  }
+
   .primary-stats-container span {
     margin-right: 16px;
   }
@@ -48,6 +54,9 @@ export const characterModalStyles = css`
     align-items: center;
     flex-wrap: wrap;
     padding: 18px;
+    background-color: var(--bright-black);
+    border-radius: 4px;
+    margin-bottom: 16px;
   }
 
   .attributes-group div {
@@ -59,8 +68,12 @@ export const characterModalStyles = css`
   .equipment-section {
     padding: 16px 2px;
     display: flex;
-    flex-direction: column;
-    gap: 10px;
+    gap: 32px;
+  }
+
+  .equipment-slot-container {
+    margin: 16px 0;
+    cursor: pointer;
   }
 
   .equipment-slot-name {
@@ -68,6 +81,11 @@ export const characterModalStyles = css`
     font-weight: bold;
     text-transform: capitalize;
     padding-bottom: 6px;
+  }
+
+  .equipment-item-details {
+    flex: 1;
+    max-width: 300px;
   }
 
   .inventory {
