@@ -35,10 +35,20 @@ export class IgnemCharactersPage extends IgnemElement {
       }
     }
 
+    const onCharacterDelete = (character: Character) => {
+      return () => {
+        console.log(character)
+      }
+    }
+
     if (!result.ok) return 
 
     const charactersList = result.data
-      .map(character => characterCard(character, onClickCharacterCard(character)))
+      .map(character => characterCard(
+        character,
+        onClickCharacterCard(character),
+        onCharacterDelete(character)
+      ))
       .concat(html`
         <button
           class="new-btn"

@@ -1,3 +1,4 @@
+import { trashIcon } from '@/ui/view/components'
 import { characterStatsStyles } from '@/ui/view/styles'
 import { css, html } from 'lithen-tag-functions'
 
@@ -42,6 +43,11 @@ export const characterCardStyles = css`
     box-shadow: 0 0 1px 2px var(--container-border-color);
   }
 
+  .character-header {
+    display: flex;
+    justify-content: space-between;
+  }
+
   .character-info h1 {
     font-size: 1.5rem;
   }
@@ -67,7 +73,8 @@ export const characterCardStyles = css`
 
 export function characterCard(
   character: CharacterCardProps,
-  onClick: Function
+  onClick: Function,
+  onDelete: Function
 ) {
   return html`
     <div class="character-card" tabindex="0" on-click=${onClick}>
@@ -80,7 +87,15 @@ export function characterCard(
         />
       </figure>
       <div class="character-info">
-        <h1>${character.name}</h1>
+        <div class="character-header">  
+          <h1>${character.name}</h1>
+          <div on-click=${(event: Event) => {
+            event.stopPropagation()
+            onDelete()
+          }}>
+            ${trashIcon()}
+          </div>
+        </div>
         <div>
           <span class="level">Level ${character.level}</span>
           <svg style="margin: 0 10px;" width="12" height="12">
