@@ -24,6 +24,7 @@ export class IgnemEquipmentSlot extends IgnemElement {
   }
 
   removeItem() {
+    this.#itemId = null
     this.select('[item-card]').replaceChildren(
       equipmentItemCard()
     )
