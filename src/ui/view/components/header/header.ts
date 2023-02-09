@@ -1,8 +1,9 @@
-import { html } from 'lithen-tag-functions'
+import { html, ref } from 'lithen-tag-functions'
 import { AccountStore } from '@/ui/stores'
 import { IgnemElement, logOutIcon } from '@/ui/view'
 import { headerStyles } from './header-styles'
 import { router } from 'lithen-router'
+import { confirmDialog } from '@/ui/view/components'
 
 export class IgnemHeader extends IgnemElement {
   #accountStore = new AccountStore()
@@ -17,18 +18,11 @@ export class IgnemHeader extends IgnemElement {
   }
 
   render() {
+    const dialogRef = ref<DialogElement>()
     const accountName = this.#accountStore.account?.name
 
-    const openDialog = () => this.select<DialogElement>('dialog')?.showModal()
-    const setCloseClass = () => this.select('dialog')?.classList.add('close')
-    const closeDialog = (event: AnimationEventInit) => {
-      if (event.animationName === 'close-dialog') {
-        const dialog = this.select<DialogElement>('dialog')
-        dialog?.close()
-        dialog?.classList.remove('close')
-      }
-    }
-    const confirmDialog = () => this.#accountStore.logout()
+    const openDialog = () => dialogRef.el?.showModal()
+    const onConfirmDialog = () => this.#accountStore.logout()
 
     return html`
       <header class="header">
@@ -49,11 +43,11 @@ export class IgnemHeader extends IgnemElement {
           </div>
         </section>
       </header>
-      <dialog on-animationend=${closeDialog} class="log-out-dialog">
-        <p>Confirm log out?</p>
-        <button on-click=${confirmDialog}>Yes</button>
-        <button on-click=${setCloseClass}>No</button>
-      </dialog>
+      ${confirmDialog({
+        ref: dialogRef,
+        message: 'Confirm log out?',
+        onConfirm: onConfirmDialog
+      })}
     `
   }
 }

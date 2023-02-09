@@ -12,19 +12,24 @@ import { FindAllCharactersResult } from '@/domain/protocols/use-cases'
 
 type Character = FindAllCharactersResult
 
+interface CharactersPageProps {
+  findAllCharacters: Presenter
+  deleteCharacter: Presenter
+}
+
 export class IgnemCharactersPage extends IgnemElement {
-  #findAllCharactersPresenter: Presenter
+  #props: CharactersPageProps
   
-  constructor(findAllCharactersPresenter: Presenter) {
+  constructor(props: CharactersPageProps) {
     super()
-    this.#findAllCharactersPresenter = findAllCharactersPresenter
+    this.#props = props
 
     this.applyRender()
     this.init()
   }
 
   async init() {
-    const result = await this.#findAllCharactersPresenter.handle<Character[]>()
+    const result = await this.#props.findAllCharacters.handle<Character[]>()
 
     this.select('.loading-icon')?.remove()
 
