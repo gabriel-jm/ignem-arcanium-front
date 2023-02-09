@@ -26,9 +26,13 @@ export class FetchHTTPClient implements HTTPClient {
       throw new UnauthorizedError()
     }
 
-    const body = response.status !== 204
-      ? await response.json()
-      : null
+    const body = await (async () => {
+      try {
+        return await response.json()
+      } catch {
+        return null
+      }
+    })()
 
     return {
       statusCode: response.status,

@@ -134,8 +134,6 @@ export function characterFourthForm(
         inventoryItems: inventory
       })
 
-    console.log(result)
-
     if (result.ok) {
       router.goTo('/characters')
     }

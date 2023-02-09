@@ -2,13 +2,14 @@ import '@/ui/view'
 import './modal/ignem-character-modal'
 import { Presenter } from '@/presentation/protocols'
 import { containerStyles } from '@/ui/view'
-import { breadcrumbs, loadingIcon } from '@/ui/view/components'
+import { breadcrumbs, confirmDialog, confirmDialogStyles, loadingIcon } from '@/ui/view/components'
 import { IgnemElement } from '@/ui/view/ignem-element'
-import { css, html } from 'lithen-tag-functions'
+import { css, html, ref } from 'lithen-tag-functions'
 import { characterCard, characterCardStyles } from './card/character-card'
 import { router } from 'lithen-router'
 import { IgnemCharacterModal } from './modal/ignem-character-modal'
 import { FindAllCharactersResult } from '@/domain/protocols/use-cases'
+import { UiNotifier } from '@/ui/notifiers'
 
 type Character = FindAllCharactersResult
 
@@ -19,6 +20,8 @@ interface CharactersPageProps {
 
 export class IgnemCharactersPage extends IgnemElement {
   #props: CharactersPageProps
+  #dialogRef = ref<DialogElement>()
+  #currentChar?: Character
   
   constructor(props: CharactersPageProps) {
     super()
@@ -42,7 +45,8 @@ export class IgnemCharactersPage extends IgnemElement {
 
     const onCharacterDelete = (character: Character) => {
       return () => {
-        console.log(character)
+        this.#dialogRef.el?.showModal()
+        this.#currentChar = character
       }
     }
 
@@ -68,7 +72,7 @@ export class IgnemCharactersPage extends IgnemElement {
 
   styling() {
     return css`
-      ${[containerStyles, characterCardStyles]}
+      ${[containerStyles, characterCardStyles, confirmDialogStyles]}
 
       .characters-title {
         font-size: 2rem;
@@ -118,6 +122,21 @@ export class IgnemCharactersPage extends IgnemElement {
       Characters: 'current'
     }
 
+    const onConfirm = async () => {
+      if (!this.#currentChar) return
+
+      const characterId = this.#currentChar.id
+
+      const result = await this.#props.deleteCharacter.handle({
+        characterId
+      })
+
+      if (result.ok) {
+        this.select(`.character-card[key-id="${characterId}"]`)?.remove()
+        new UiNotifier().notifySuccess('Success', 'Character deleted with success')
+      }
+    }
+
     return html`
       <ignem-header />
 
@@ -132,6 +151,12 @@ export class IgnemCharactersPage extends IgnemElement {
 
         <ignem-character-modal  />
       </section>
+
+      ${confirmDialog({
+        ref: this.#dialogRef,
+        message: 'Are you sure you want to delete this character?',
+        onConfirm
+      })}
     `
   }
 }

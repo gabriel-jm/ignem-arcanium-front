@@ -1,6 +1,7 @@
 import { IgnemCreateCharacterPage, IgnemCreateCharacterProps } from '../../ignem-create-character-page'
 import { html } from 'lithen-tag-functions'
 import { IgnemForm, textBetweenDashes } from '@/ui/view/components'
+import { capitalize } from '@/ui/helpers'
 
 export function characterSecondForm(
   parent: IgnemCreateCharacterPage,
@@ -90,11 +91,9 @@ export function characterSecondForm(
   }
 
   const attributeInputs = attributes.map((attr, index, arr) => {
-    const captalizedAttribute = attr[0].toUpperCase() + attr.substring(1)
-
     return html`
       <label class="attr-input-group" attr=${attr}>
-        <span>${captalizedAttribute}</span>
+        <span>${capitalize(attr)}</span>
         <input
           name="${attr}"
           type="number"

@@ -77,7 +77,12 @@ export function characterCard(
   onDelete: Function
 ) {
   return html`
-    <div class="character-card" tabindex="0" on-click=${onClick}>
+    <div
+      class="character-card"
+      key-id="${character.id}"
+      tabindex="0"
+      on-click=${onClick}
+    >
       <figure>
         <img
           width="70px"

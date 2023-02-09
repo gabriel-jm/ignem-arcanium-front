@@ -23,8 +23,6 @@ export class RemoteCreateCharacter implements CreateCharacter {
       inventoryItems: params.inventoryItems
     }
 
-    console.log('send data', characterData)
-    
     const creationResult = await this.createCharacterService.create(characterData)
 
     return {
