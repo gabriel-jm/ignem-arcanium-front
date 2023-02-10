@@ -1,5 +1,5 @@
 import { LocalAccountLogout } from '@/domain/use-cases'
-import { LocalStorageCacheStore } from '@/infra/stores'
+import { LocalStorageCacheStore } from '@/common/infra/stores'
 import { ErrorHandlingPresenterDecorator } from '@/main/decorators'
 import { LogoutPresenter } from '@/presentation/presenters'
 import { UiNotifier } from '@/ui/notifiers'

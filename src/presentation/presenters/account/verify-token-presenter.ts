@@ -1,14 +1,13 @@
 import { VerifyToken } from '@/domain/protocols/use-cases'
 import { successResponse } from '@/presentation/helpers'
 import { Presenter } from '@/presentation/protocols'
-import { Router } from '@/presentation/protocols/router'
 import { SetAccountStore } from '@/presentation/protocols/stores'
+import { router } from 'lithen-router'
 
 export class VerifyTokenPresenter implements Presenter {
   constructor(
     private readonly verifyToken: VerifyToken,
-    private readonly setAccountStore: SetAccountStore,
-    private readonly router: Router
+    private readonly setAccountStore: SetAccountStore
   ) {}
   
   async handle() {
@@ -21,7 +20,7 @@ export class VerifyTokenPresenter implements Presenter {
 
       return successResponse(null)
     } catch(error) {
-      this.router.navigate('/login')
+      router.goTo('/login')
 
       throw error
     }

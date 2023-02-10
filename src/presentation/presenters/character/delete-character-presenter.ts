@@ -1,5 +1,5 @@
+import { HTTPClient } from '@/common/infra/protocols'
 import { HTTPServiceError } from '@/infra/errors'
-import { HTTPClient } from '@/infra/protocols'
 import { successResponse } from '@/presentation/helpers'
 import { Presenter, PresenterResult } from '@/presentation/protocols'
 

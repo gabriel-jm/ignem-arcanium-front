@@ -1,6 +1,5 @@
-import { CacheStore } from '@/domain/protocols/cache'
-import { UnauthorizedError } from '@/infra/errors'
-import { HTTPClient, HTTPRequest, HTTPResponse } from '@/infra/protocols'
+import { UnauthorizedError } from '../errors'
+import { CacheStore, HTTPClient, HTTPRequest, HTTPResponse } from '../protocols'
 
 export class FetchHTTPClient implements HTTPClient {
   constructor(

@@ -1,11 +1,10 @@
 import { RemoteVerifyToken } from '@/domain/use-cases'
 import { Base64TokenDecoder } from '@/infra/cryptography'
-import { LocalStorageCacheStore } from '@/infra/stores'
+import { LocalStorageCacheStore } from '@/common/infra/stores'
 import { ErrorHandlingPresenterDecorator } from '@/main/decorators'
 import { makeAccountService } from '@/main/factories/services'
 import { VerifyTokenPresenter } from '@/presentation/presenters'
 import { UiNotifier } from '@/ui/notifiers'
-import { LithenRouterAdapter } from '@/ui/routers'
 import { AccountStore } from '@/ui/stores'
 
 export function makeVerifyTokenPresenter() {
@@ -20,8 +19,7 @@ export function makeVerifyTokenPresenter() {
 
   const presenter = new VerifyTokenPresenter(
     verifyToken,
-    new AccountStore(),
-    new LithenRouterAdapter()
+    new AccountStore()
   )
 
   return new ErrorHandlingPresenterDecorator(new UiNotifier(), presenter)

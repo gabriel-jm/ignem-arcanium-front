@@ -1,4 +1,4 @@
-import { CacheStore } from '@/domain/protocols/cache'
+import { CacheStore } from '@/common/infra/protocols'
 import { CheckTokenExists } from '@/domain/protocols/use-cases'
 
 export class LocalCheckTokenExists implements CheckTokenExists {

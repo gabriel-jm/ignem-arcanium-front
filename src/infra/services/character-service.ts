@@ -1,3 +1,4 @@
+import { HTTPClient } from '@/common/infra/protocols'
 import {
   CreateCharacterService,
   CreateCharacterServiceParams,
@@ -6,7 +7,6 @@ import {
   FindAllCharactersServiceResult
 } from '@/domain/protocols/services'
 import { HTTPServiceError } from '@/infra/errors'
-import { HTTPClient } from '@/infra/protocols'
 
 type Service = FindAllCharactersService & CreateCharacterService
 

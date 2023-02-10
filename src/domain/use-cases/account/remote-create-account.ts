@@ -1,4 +1,4 @@
-import { CacheStore } from '@/domain/protocols/cache'
+import { CacheStore } from '@/common/infra/protocols'
 import { CreateAccountService } from '@/domain/protocols/services'
 import { CreateAccount, CreateAccountParams, CreateAccountResult } from '@/domain/protocols/use-cases'
 

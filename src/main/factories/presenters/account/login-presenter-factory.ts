@@ -1,5 +1,5 @@
 import { RemoteAccountLogin } from '@/domain/use-cases'
-import { LocalStorageCacheStore } from '@/infra/stores'
+import { LocalStorageCacheStore } from '@/common/infra/stores'
 import { ErrorHandlingPresenterDecorator, ValidationPresenterDecorator } from '@/main/decorators'
 import { makeAccountService } from '@/main/factories/services'
 import { LoginPresenter } from '@/presentation/presenters'

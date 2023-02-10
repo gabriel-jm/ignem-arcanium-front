@@ -1,4 +1,4 @@
-import { WebSocketClient } from '@/infra/clients'
+import { WebSocketClient } from '@/common/infra/clients'
 import { WsServiceError, WebSocketConnectionFailedError } from '@/infra/errors'
 import { mockNativeWebSocket } from '@/tests/helpers'
 

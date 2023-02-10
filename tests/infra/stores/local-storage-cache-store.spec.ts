@@ -1,4 +1,4 @@
-import { LocalStorageCacheStore } from '@/infra/stores'
+import { LocalStorageCacheStore } from '@/common/infra/stores'
 
 function makeSut() {
   const setItemSpy = vi.spyOn(localStorage, 'setItem')

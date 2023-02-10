@@ -1,4 +1,4 @@
-import { CacheStore } from '@/domain/protocols/cache'
+import { CacheStore } from '../protocols'
 
 export class LocalStorageCacheStore implements CacheStore {
   get(key: string) {

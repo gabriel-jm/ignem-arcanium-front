@@ -37,12 +37,12 @@ export class IgnemLoginPage extends IgnemElement {
       IgnemLoginPage.tokenChecked = true
       const result = await this.#checkTokenExists.handle()
 
-      if (!result.ok) {
-        this.select('.loading')?.classList.add('hide')
+      if (result.ok) {
+        return router.goTo('/home')
       }
-    } else {
-      this.select('.loading')?.classList.add('hide')
     }
+    
+    this.select('.loading')?.classList.add('hide')
   }
 
   styling() {

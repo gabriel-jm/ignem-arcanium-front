@@ -1,4 +1,5 @@
-import { ErrorResponse, HTTPResponse } from '@/infra/protocols'
+import { HTTPResponse } from '@/common/infra/protocols'
+import { ErrorResponse } from '@/infra/protocols'
 
 export class HTTPServiceError extends Error {
   constructor(

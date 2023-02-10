@@ -1,3 +1,4 @@
+import { HTTPClient } from '@/common/infra/protocols'
 import {
   AccountLoginService,
   AccountLoginServiceParams,
@@ -7,7 +8,6 @@ import {
   CreateAccountServiceResult
 } from '@/domain/protocols/services'
 import { HTTPServiceError } from '@/infra/errors'
-import { HTTPClient } from '@/infra/protocols'
 
 export class AccountService implements CreateAccountService, AccountLoginService {
   constructor(private readonly httpClient: HTTPClient) {}

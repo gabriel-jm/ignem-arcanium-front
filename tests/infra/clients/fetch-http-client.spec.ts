@@ -1,5 +1,5 @@
-import { FetchHTTPClient } from '@/infra/clients'
-import { UnauthorizedError } from '@/infra/errors'
+import { FetchHTTPClient } from '@/common/infra/clients'
+import { UnauthorizedError } from '@/common/infra/errors'
 import { mockCacheStore } from '@/tests/helpers'
 
 function makeSut() {

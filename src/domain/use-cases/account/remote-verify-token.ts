@@ -1,5 +1,5 @@
+import { CacheStore } from '@/common/infra/protocols'
 import { InvalidTokenError } from '@/domain/error'
-import { CacheStore } from '@/domain/protocols/cache'
 import { TokenDecoder } from '@/domain/protocols/cryptography'
 import { VerifyTokenService } from '@/domain/protocols/services'
 import { VerifyToken, VerifyTokenResult } from '@/domain/protocols/use-cases'
