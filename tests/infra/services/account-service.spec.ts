@@ -1,5 +1,5 @@
+import { AccountService } from '@/account/infra/services/account-service'
 import { HTTPServiceError } from '@/infra/errors'
-import { AccountService } from '@/infra/services/account-service'
 
 function makeSut() {
   const httpClientSpy = {

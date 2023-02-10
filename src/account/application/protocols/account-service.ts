@@ -1,6 +1,7 @@
-import { AccountLoginParams } from '@/domain/protocols/use-cases'
-
-export type AccountLoginServiceParams = AccountLoginParams
+export interface AccountLoginServiceParams {
+  email: string
+  password: string
+}
 
 export interface AccountLoginServiceResult {
   name: string

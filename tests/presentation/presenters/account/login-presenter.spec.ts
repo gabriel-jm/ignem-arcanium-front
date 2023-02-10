@@ -1,15 +1,16 @@
+import { LoginPresenter } from '@/account/application/login-presenter'
 import { successResponse } from '@/presentation/helpers'
-import { LoginPresenter } from '@/presentation/presenters'
-import { mockAccountLogin, mockSetAccountStore } from '@/tests/helpers'
+import { mockAccountLoginService, mockCacheStore, mockSetAccountStore } from '@/tests/helpers'
 
 function makeSut() {
-  const accountLoginSpy = mockAccountLogin()
+  const accountServiceSpy = mockAccountLoginService()
+  const cacheStoreSpy = mockCacheStore()
   const setAccountStoreSpy = mockSetAccountStore()
-  const sut = new LoginPresenter(accountLoginSpy, setAccountStoreSpy)
+  const sut = new LoginPresenter(accountServiceSpy, cacheStoreSpy,  setAccountStoreSpy)
 
   return {
     sut,
-    accountLoginSpy,
+    accountServiceSpy,
     setAccountStoreSpy
   }
 }
@@ -20,24 +21,24 @@ describe('LoginPresenter', () => {
     password: 'any_password'
   }
 
-  it('should call AccountLogin with correct values', async () => {
-    const { sut, accountLoginSpy } = makeSut()
+  it('should call AccountService with correct values', async () => {
+    const { sut, accountServiceSpy } = makeSut()
 
     await sut.handle(dummyLoginParams)
 
-    expect(accountLoginSpy.login).toHaveBeenCalledWith({
+    expect(accountServiceSpy.login).toHaveBeenCalledWith({
       email: dummyLoginParams.email,
       password: dummyLoginParams.password
     })
   })
 
   it('should call SetAccountStore with correct values', async () => {
-    const { sut, setAccountStoreSpy, accountLoginSpy } = makeSut()
+    const { sut, setAccountStoreSpy, accountServiceSpy } = makeSut()
 
     await sut.handle(dummyLoginParams)
 
     expect(setAccountStoreSpy.setAccountValue).toEqual({
-      name: accountLoginSpy.result.name
+      name: accountServiceSpy.result.name
     })
   })
 

@@ -1,8 +1,10 @@
-import { HTTPClient } from '@/common/infra/protocols'
 import {
   AccountLoginService,
   AccountLoginServiceParams,
-  AccountLoginServiceResult,
+  AccountLoginServiceResult
+} from '@/account/application/protocols'
+import { HTTPClient } from '@/common/infra/protocols'
+import {
   CreateAccountService,
   CreateAccountServiceParams,
   CreateAccountServiceResult

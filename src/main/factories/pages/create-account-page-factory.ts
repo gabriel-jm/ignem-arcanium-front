@@ -1,11 +1,11 @@
 import { RemoteCreateAccount } from '@/domain/use-cases'
 import { LocalStorageCacheStore } from '@/common/infra/stores'
 import { ErrorHandlingPresenterDecorator, ValidationPresenterDecorator } from '@/main/decorators'
-import { makeAccountService } from '@/main/factories/services'
 import { CreateAccountPresenter } from '@/presentation/presenters'
 import { UiNotifier } from '@/ui/notifiers'
 import { AccountStore } from '@/ui/stores'
 import { IgnemCreateAccountPage } from '@/ui/view'
+import { makeAccountService } from '@/account/main/factories'
 
 export function makeCreateAccountPage() {
   const accountService = makeAccountService()
