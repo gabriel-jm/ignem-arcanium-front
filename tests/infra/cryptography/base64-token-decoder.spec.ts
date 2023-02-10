@@ -1,4 +1,4 @@
-import { Base64TokenDecoder } from '@/infra/cryptography'
+import { Base64TokenDecoder } from '@/account/infra/cryptography'
 
 const makeSut = () => new Base64TokenDecoder()
 

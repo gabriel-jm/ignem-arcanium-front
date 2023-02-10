@@ -10,9 +10,9 @@ import {
 } from '@/ui/view/components'
 import { Presenter } from '@/presentation/protocols'
 import { SuccessNotifier } from '@/ui/protocols'
-import { loginStyles } from '@/ui/view/pages/login/login-styles'
+import { loginStyles } from './login-styles'
 
-export class IgnemLoginPage extends IgnemElement {
+export class LoginPage extends IgnemElement {
   static tokenChecked = false
 
   #accountLoginPresenter: Presenter
@@ -33,8 +33,8 @@ export class IgnemLoginPage extends IgnemElement {
   }
 
   async init() {
-    if (!IgnemLoginPage.tokenChecked) {
-      IgnemLoginPage.tokenChecked = true
+    if (!LoginPage.tokenChecked) {
+      LoginPage.tokenChecked = true
       const result = await this.#checkTokenExists.handle()
 
       if (result.ok) {
@@ -112,4 +112,4 @@ export class IgnemLoginPage extends IgnemElement {
   }
 }
 
-customElements.define('ignem-login', IgnemLoginPage)
+customElements.define('ignem-login', LoginPage)

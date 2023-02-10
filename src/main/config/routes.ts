@@ -1,3 +1,4 @@
+import { makeLoginPage } from '@/account/main/factories'
 import { auth } from '@/main/decorators'
 import {
   makeCharactersPage,
@@ -5,7 +6,6 @@ import {
   makeCreateCharactersPage,
   makeHomePage,
   makeIntroductionPage,
-  makeLoginPage,
   makeTorchesPage
 } from '@/main/factories/pages'
 import { IgnemNotFoundPage } from '@/ui/view'

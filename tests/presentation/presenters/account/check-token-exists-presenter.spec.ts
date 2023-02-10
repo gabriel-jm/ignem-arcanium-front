@@ -5,7 +5,7 @@ import { mockCheckTokenExists, mockRouter } from '@/tests/helpers'
 function makeSut() {
   const checkTokenExistsSpy = mockCheckTokenExists()
   const routerSpy = mockRouter()
-  const sut = new CheckTokenExistsPresenter(checkTokenExistsSpy, routerSpy)
+  const sut = new CheckTokenExistsPresenter(checkTokenExistsSpy)
 
   return {
     sut,

@@ -7,8 +7,7 @@ function makeSut() {
   const routerSpy = mockRouter()
   const sut = new VerifyTokenPresenter(
     verifyTokenSpy,
-    setAccountStoreSpy,
-    routerSpy
+    setAccountStoreSpy
   )
 
   return {

@@ -1,12 +1,14 @@
 import { setAccountStorePresenters } from '@/main/factories/stores'
+import { makeVerifyTokenPresenter } from '../factories/presenters'
 
-// const verifyTokenPresenter = makeVerifyTokenPresenter()
 
 export function auth(pageFactory: () => Element) {
+  const verifyTokenPresenter = makeVerifyTokenPresenter()
+  
   return async () => {
-    // const response = await verifyTokenPresenter.handle()
+    const response = await verifyTokenPresenter.handle()
 
-    // if (!response.ok) return null
+    if (!response.ok) return null
 
     setAccountStorePresenters()
 

@@ -10,7 +10,6 @@ function makeSut() {
 
   const sut = new RemoteVerifyToken(
     cacheStoreSpy,
-    verifyTokenServiceSpy,
     tokenDecoderSpy
   )
 

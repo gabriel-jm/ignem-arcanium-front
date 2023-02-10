@@ -1,13 +1,12 @@
 import { CacheStore } from '@/common/infra/protocols'
 import { InvalidTokenError } from '@/domain/error'
 import { TokenDecoder } from '@/domain/protocols/cryptography'
-import { VerifyTokenService } from '@/domain/protocols/services'
 import { VerifyToken, VerifyTokenResult } from '@/domain/protocols/use-cases'
 
 export class RemoteVerifyToken implements VerifyToken {
   constructor(
     private readonly cacheStore: CacheStore,
-    private readonly verifyTokenService: VerifyTokenService,
+    // private readonly verifyTokenService: VerifyTokenService,
     private readonly tokenDecoder: TokenDecoder
   ) {}
   
@@ -18,7 +17,7 @@ export class RemoteVerifyToken implements VerifyToken {
       throw new InvalidTokenError()
     }
 
-    await this.verifyTokenService.verify(tokenData.token)
+    // await this.verifyTokenService.verify(tokenData.token)
 
     const accountData = this.tokenDecoder.decode<Record<'id'|'name', string>>(
       tokenData.token
