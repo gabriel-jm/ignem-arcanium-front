@@ -3,7 +3,7 @@ import { TorchRegistryService } from '@/infra/services'
 import { ErrorHandlingPresenterDecorator, ValidationPresenterDecorator } from '@/main/decorators'
 import { makeWebSocketClient } from '@/main/factories/clients'
 import { CreateTorchRegistryPresenter } from '@/presentation/presenters'
-import { UiNotifier } from '@/ui/notifiers'
+import { UiNotifier } from '@/common/ui/notifiers'
 
 export function makeCreateTorchRegistryPresenter() {
   const wsClient = makeWebSocketClient()

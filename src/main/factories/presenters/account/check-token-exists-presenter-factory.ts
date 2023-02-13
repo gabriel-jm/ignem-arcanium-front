@@ -2,7 +2,7 @@ import { LocalCheckTokenExists } from '@/domain/use-cases'
 import { LocalStorageCacheStore } from '@/common/infra/stores'
 import { ErrorHandlingPresenterDecorator } from '@/main/decorators'
 import { CheckTokenExistsPresenter } from '@/presentation/presenters'
-import { UiNotifier } from '@/ui/notifiers'
+import { UiNotifier } from '@/common/ui/notifiers'
 
 export function makeCheckTokenExistsPresenter() {
   const localStorageCacheStore = new LocalStorageCacheStore()

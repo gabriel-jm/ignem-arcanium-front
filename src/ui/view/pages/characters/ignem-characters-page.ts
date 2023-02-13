@@ -9,7 +9,7 @@ import { characterCard, characterCardStyles } from './card/character-card'
 import { router } from 'lithen-router'
 import { IgnemCharacterModal } from './modal/ignem-character-modal'
 import { FindAllCharactersResult } from '@/domain/protocols/use-cases'
-import { UiNotifier } from '@/ui/notifiers'
+import { UiNotifier } from '@/common/ui/notifiers'
 
 type Character = FindAllCharactersResult
 

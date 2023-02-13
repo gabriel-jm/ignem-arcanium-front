@@ -2,7 +2,7 @@ import { RemoteCreateCharacter } from '@/domain/use-cases'
 import { ErrorHandlingPresenterDecorator, ValidationPresenterDecorator } from '@/main/decorators'
 import { makeCharacterService } from '@/main/factories/services'
 import { CreateCharacterPresenter } from '@/presentation/presenters'
-import { UiNotifier } from '@/ui/notifiers'
+import { UiNotifier } from '@/common/ui/notifiers'
 
 const requiredNumber = {
   type: 'number',

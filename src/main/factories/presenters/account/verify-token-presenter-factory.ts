@@ -3,7 +3,7 @@ import { RemoteVerifyToken } from '@/domain/use-cases'
 import { Base64TokenDecoder } from '@/account/infra/cryptography'
 import { LocalStorageCacheStore } from '@/common/infra/stores'
 import { ErrorHandlingPresenterDecorator } from '@/main/decorators'
-import { UiNotifier } from '@/ui/notifiers'
+import { UiNotifier } from '@/common/ui/notifiers'
 import { AccountStore } from '@/ui/stores'
 
 export function makeVerifyTokenPresenter() {

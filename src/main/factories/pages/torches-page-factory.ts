@@ -2,7 +2,7 @@ import {
   makeCreateTorchRegistryPresenter,
   makeFindAllTorchRegistriesPresenter
 } from '@/main/factories/presenters'
-import { UiNotifier } from '@/ui/notifiers'
+import { UiNotifier } from '@/common/ui/notifiers'
 import { IgnemTorchesPage } from '@/ui/view'
 
 export function makeTorchesPage() {

@@ -6,7 +6,7 @@ import { makeCreateCharacterPresenter } from '@/main/factories/presenters'
 import { successResponse } from '@/presentation/helpers'
 import { ListAllDefaultItemsPresenter } from '@/presentation/presenters'
 import { Presenter } from '@/presentation/protocols'
-import { UiNotifier } from '@/ui/notifiers'
+import { UiNotifier } from '@/common/ui/notifiers'
 import { ItemsStore } from '@/ui/stores'
 import { IgnemCreateCharacterPage } from '@/ui/view'
 

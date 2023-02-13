@@ -1,22 +1,19 @@
 import { Presenter } from '@/presentation/protocols'
-import { SuccessNotifier } from '@/ui/protocols'
 import { IgnemForm, ignemInput, lockButtonUntil } from '@/ui/view/components'
 import { IgnemElement } from '@/ui/view/ignem-element'
 import { createAccountStyles } from './create-account-styles'
 import { router } from 'lithen-router'
 import { html } from 'lithen-tag-functions'
+import { UiNotifier } from '@/common/ui/notifiers'
 
-export class IgnemCreateAccountPage extends IgnemElement {
+export class CreateAccountPage extends IgnemElement {
   #createAccountPresenter: Presenter
-  #successNotifier: SuccessNotifier
 
   constructor(
-    createAccountPresenter: Presenter,
-    successNotifier: SuccessNotifier
+    createAccountPresenter: Presenter
   ) {
     super()
     this.#createAccountPresenter = createAccountPresenter
-    this.#successNotifier = successNotifier
   }
 
   styling() {
@@ -44,7 +41,7 @@ export class IgnemCreateAccountPage extends IgnemElement {
 
       if (result.ok) {
         form.reset()
-        this.#successNotifier.notifySuccess(
+        new UiNotifier().notifySuccess(
           'Created',
           'Account created with success'
         )
@@ -97,4 +94,4 @@ export class IgnemCreateAccountPage extends IgnemElement {
   }
 }
 
-customElements.define('ignem-create-account', IgnemCreateAccountPage)
+customElements.define('ignem-create-account', CreateAccountPage)
