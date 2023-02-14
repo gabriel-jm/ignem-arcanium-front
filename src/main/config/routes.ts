@@ -1,6 +1,6 @@
+import { auth } from '@/account/main/decorators/page-factory-auth-decorator'
 import { makeLoginPage } from '@/account/main/factories'
 import { makeCreateAccountPage } from '@/account/main/factories/create-account-page-factory'
-import { auth } from '@/main/decorators'
 import {
   makeCharactersPage,
   makeCreateCharactersPage,

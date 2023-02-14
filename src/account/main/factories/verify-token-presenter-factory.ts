@@ -1,21 +1,14 @@
-import { VerifyTokenPresenter } from '@/presentation/presenters'
-import { RemoteVerifyToken } from '@/domain/use-cases'
 import { Base64TokenDecoder } from '@/account/infra/cryptography'
 import { LocalStorageCacheStore } from '@/common/infra/stores'
 import { ErrorHandlingPresenterDecorator } from '@/main/decorators'
 import { UiNotifier } from '@/common/ui/notifiers'
 import { AccountStore } from '@/ui/stores'
+import { VerifyTokenPresenter } from '@/account/application/verify-token-presenter'
 
 export function makeVerifyTokenPresenter() {
-  const localStorageCacheStore = new LocalStorageCacheStore()
-  const base64TokenDecoder = new Base64TokenDecoder()
-  const verifyToken = new RemoteVerifyToken(
-    localStorageCacheStore,
-    base64TokenDecoder
-  )
-
   const presenter = new VerifyTokenPresenter(
-    verifyToken,
+    new LocalStorageCacheStore(),
+    new Base64TokenDecoder(),
     new AccountStore()
   )
 

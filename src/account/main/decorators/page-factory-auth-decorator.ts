@@ -1,6 +1,5 @@
 import { setAccountStorePresenters } from '@/main/factories/stores'
-import { makeVerifyTokenPresenter } from '../factories/presenters'
-
+import { makeVerifyTokenPresenter } from '../factories/verify-token-presenter-factory'
 
 export function auth(pageFactory: () => Element) {
   const verifyTokenPresenter = makeVerifyTokenPresenter()
