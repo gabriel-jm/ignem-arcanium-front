@@ -1,5 +1,6 @@
 import { FindAllCharactersResult, Item } from '@/domain/protocols/use-cases'
-import { closeIcon, equipmentItemCard, IgnemItemTinyCard, itemCard } from '@/ui/view/components'
+import { IgnemItemTinyCard, itemCard } from '@/item/ui'
+import { closeIcon, equipmentItemCard } from '@/ui/view/components'
 import { IgnemElement } from '@/ui/view/ignem-element'
 import { characterModalStyles } from '@/ui/view/pages/characters/modal/character-modal-styles'
 import { html, raw, ref } from 'lithen-tag-functions'

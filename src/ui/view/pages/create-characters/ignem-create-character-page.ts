@@ -18,13 +18,13 @@ import { characterFirstForm } from './forms/first/character-first-form'
 import { characterSecondForm } from './forms/second/character-second-form'
 import { characterFourthForm } from './forms/fourth/character-fourth-form'
 import { Presenter } from '@/presentation/protocols'
-import { itemTinyCardStyles } from '@/ui/view/components/item'
 import { characterFirstFormStyles } from './forms/first/character-first-form-styles'
 import { characterSecondFormStyles } from './forms/second/character-second-form-styles'
 import { characterFourthFormStyles } from './forms/fourth/character-fourth-form-styles'
 import { characterThirdForm } from './forms/third/character-third-form'
 import { characterThirdFormStyles } from './forms/third/character-third-form-styles'
 import { CreateCharacterParams } from '@/domain/protocols/use-cases'
+import { itemTinyCardStyles } from '@/item/ui'
 
 export interface IgnemCreateCharacterProps {
   listItemsPresenter: Presenter

@@ -1,4 +1,3 @@
-import '../singles/quantity-control'
 import { Item } from '@/domain/protocols/use-cases'
 import { itemIconByType } from './item-icon-by-type'
 import { css, html, raw } from 'lithen-tag-functions'

@@ -2,7 +2,6 @@ export * from './singles'
 
 export * from './icons'
 export * from './notification'
-export * from './item'
 
 export * from './modal/side-modal'
 export * from './modal/confirm-dialog'

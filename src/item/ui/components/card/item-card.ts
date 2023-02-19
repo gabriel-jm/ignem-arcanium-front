@@ -1,4 +1,4 @@
-import '../../singles/wrapper'
+import '@/ui/view/components/singles/wrapper'
 import { html, raw } from 'lithen-tag-functions'
 import {
   InventoryAlchemicalItem,

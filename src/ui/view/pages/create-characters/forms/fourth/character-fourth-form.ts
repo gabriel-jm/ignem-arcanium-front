@@ -1,11 +1,11 @@
 import { html } from 'lithen-tag-functions'
 import { IgnemCreateCharacterPage, IgnemCreateCharacterProps } from '../../ignem-create-character-page'
-import { IgnemItemTinyCard, itemCard } from '@/ui/view/components/item'
 import { ItemsStore } from '@/ui/stores'
 import { InventoryItem } from '@/ui/protocols'
 import { Item } from '@/domain/protocols/use-cases'
 import { chevronUpIcon, textBetweenDashes } from '@/ui/view/components'
 import { router } from 'lithen-router'
+import { IgnemItemTinyCard, itemCard } from '@/item/ui'
 
 export function characterFourthForm(
   parent: IgnemCreateCharacterPage,

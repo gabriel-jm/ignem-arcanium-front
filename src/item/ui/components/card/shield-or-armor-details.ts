@@ -1,26 +1,25 @@
-import { InventoryWeapon } from '@/ui/protocols'
+import { InventoryShieldOrArmor } from '@/ui/protocols'
 import { itemProperty } from './item-card'
 import { html, raw } from 'lithen-tag-functions'
-import { damageFormater, propertiesFormater } from '@/ui/view/components/formaters'
+import { damageFormater, propertiesFormater } from '@/item/ui/components/formaters'
 
-export function weaponDetails(props: InventoryWeapon) {
+export function shieldOrArmorDetails(props: InventoryShieldOrArmor) {
   const {
-    damage,
+    damageReduction,
     initiativeModifier,
-    distance,
     weight,
     price,
     properties
   } = props
 
   const damageList = Object
-    .entries(damage)
+    .entries(damageReduction)
     .map(([type, damage]) => damageFormater({ type, damage }))
 
   return html`
     <p>
-      <span class="property-name">Damage</span>
-      ${damageList}
+      <span class="property-name">Damage Reduction</span>
+      ${damageList.length ? damageList : '0'}
     </p>
     <p>
       <span class="property-name">Properties</span>
@@ -31,9 +30,8 @@ export function weaponDetails(props: InventoryWeapon) {
     </p>
     
     <div class="properties">
-      ${itemProperty('Initiative Modifier', initiativeModifier || '0')}
-      ${Boolean(distance) && itemProperty('Distance', `${distance} meters`)}
       ${[
+        itemProperty('Initiative Modifier', initiativeModifier || '0'),
         itemProperty('Weight', weight),
         itemProperty('Price', price)
       ]}

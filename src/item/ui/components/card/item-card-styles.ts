@@ -1,4 +1,4 @@
-import { damageFormaterStyles, propertiesFormaterStyles } from '@/ui/view/components/formaters'
+import { damageFormaterStyles, propertiesFormaterStyles } from '@/item/ui/components/formaters'
 import { css } from 'lithen-tag-functions'
 
 const rarities = ['common', 'uncommon']

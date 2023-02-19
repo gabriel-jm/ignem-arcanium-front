@@ -4,11 +4,10 @@ import { ItemsStore } from '@/ui/stores'
 import {
   IgnemEquipmentSlot,
   IgnemForm,
-  IgnemItemTinyCard,
-  itemCard,
   textBetweenDashes
 } from '@/ui/view/components'
 import { IgnemCreateCharacterPage, IgnemCreateCharacterProps } from '../../ignem-create-character-page'
+import { IgnemItemTinyCard, itemCard } from '@/item/ui'
 
 export function characterThirdForm(
   parent: IgnemCreateCharacterPage,

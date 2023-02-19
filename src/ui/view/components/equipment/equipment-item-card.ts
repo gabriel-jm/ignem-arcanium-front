@@ -1,6 +1,6 @@
 import { Item } from '@/domain/protocols/use-cases'
+import { itemIconByType } from '@/item/ui'
 import { closeIcon } from '@/ui/view/components/icons'
-import { itemIconByType } from '@/ui/view/components/item'
 import { css, html } from 'lithen-tag-functions'
 
 interface EquipmentItemCardProps {
