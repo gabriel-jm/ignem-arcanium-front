@@ -9,7 +9,3 @@ export * from './character/find-all-characters-presenter'
 export * from './character/create-character-presenter'
 
 export * from './item/list-all-default-items-presenter'
-
-export * from './torch-registry/find-all-torch-registries-presenter'
-export * from './torch-registry/create-torch-registry-presenter'
-export * from './torch-registry/update-torch-registry-presenter'

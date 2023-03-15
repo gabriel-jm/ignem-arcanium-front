@@ -6,7 +6,6 @@ import {
   makeCreateCharactersPage,
   makeHomePage,
   makeIntroductionPage,
-  makeTorchesPage
 } from '@/main/factories/pages'
 import { IgnemNotFoundPage } from '@/ui/view'
 import { router } from 'lithen-router'
@@ -18,6 +17,5 @@ export const configRoutes = () => router.defineRoutes({
   '/home': auth(makeHomePage),
   '/characters': auth(makeCharactersPage),
   '/characters/create': auth(makeCreateCharactersPage),
-  '/torches': auth(makeTorchesPage),
   notFound: () => new IgnemNotFoundPage()
 })
