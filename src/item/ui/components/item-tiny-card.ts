@@ -1,9 +1,9 @@
-import { Item } from '@/domain/protocols/use-cases'
 import { itemIconByType } from './item-icon-by-type'
 import { css, html, raw } from 'lithen-tag-functions'
 import { IgnemQuantityControl } from '@/ui/view/components/singles'
 import { IgnemElement } from '@/ui/view/ignem-element'
 import { capitalize } from '@/ui/helpers'
+import { Item } from '@/item/types/items'
 
 export interface ItemTinyCardProps extends Item {
   onClick?: Function

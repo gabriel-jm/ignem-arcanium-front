@@ -1,34 +1,34 @@
 import { successResponse } from '@/presentation/helpers'
-import { ListAllDefaultItemsPresenter } from '@/presentation/presenters'
-import { mockListAllDefaultItems, mockSetItemsStore } from '@/tests/helpers'
+import { ListAllDefaultItemsPresenter } from '@/item/application'
+import { mockHTTPClient, mockSetItemsStore } from '@/tests/helpers'
 
 function makeSut() {
-  const listAllDefaultItemsSpy = mockListAllDefaultItems()
+  const httpClientSpy = mockHTTPClient()
   const setItemsStoreSpy = mockSetItemsStore()
-  const sut = new ListAllDefaultItemsPresenter(listAllDefaultItemsSpy, setItemsStoreSpy)
+  const sut = new ListAllDefaultItemsPresenter(httpClientSpy, setItemsStoreSpy)
 
   return {
     sut,
-    listAllDefaultItemsSpy,
+    httpClientSpy,
     setItemsStoreSpy
   }
 }
 
 describe('ListAllDefaultItemsPresenter', () => {
   it('should call ListAllDefaultItems usecase with correct values', async () => {
-    const { sut, listAllDefaultItemsSpy } = makeSut()
+    const { sut, httpClientSpy } = makeSut()
 
     await sut.handle()
 
-    expect(listAllDefaultItemsSpy.listAll).toHaveBeenCalledWith()
+    expect(httpClientSpy.request).toHaveBeenCalledWith()
   })
 
   it('should call SetItemsStore with correct values', async () => {
-    const { sut, setItemsStoreSpy, listAllDefaultItemsSpy } = makeSut()
+    const { sut, setItemsStoreSpy, httpClientSpy } = makeSut()
 
     await sut.handle()
 
-    expect(setItemsStoreSpy.setItemsValue).toEqual(listAllDefaultItemsSpy.result)
+    expect(setItemsStoreSpy.setItemsValue).toEqual(httpClientSpy.result)
   })
 
   it('should return an empty success response', async () => {

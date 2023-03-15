@@ -33,9 +33,3 @@ export interface Gem extends Item {
 }
 
 export type AnyKindOfItem = Item | Weapon | ShieldOrArmor | AlchemicalItem | Gem
-
-export type ListAllDefaultItemsResult = AnyKindOfItem[]
-
-export interface ListAllDefaultItems {
-  listAll(): Promise<ListAllDefaultItemsResult>
-}

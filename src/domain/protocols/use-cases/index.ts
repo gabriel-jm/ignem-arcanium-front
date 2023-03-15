@@ -6,5 +6,3 @@ export * from './connection/create-connection'
 
 export * from './character/find-all-characters'
 export * from './character/create-character'
-
-export * from './item/list-all-default-items'

@@ -1,4 +1,4 @@
-import { Item, ShieldOrArmor, Weapon } from '@/domain/protocols/use-cases/item/list-all-default-items'
+import { Item, Weapon, ShieldOrArmor } from '@/item/types/items'
 
 export interface FindAllCharactersResult {
   id: string

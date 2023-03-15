@@ -1,4 +1,4 @@
-import { AnyKindOfItem } from '@/domain/protocols/use-cases'
+import { AnyKindOfItem } from '@/item/types/items'
 
 export type SetItemsStoreParams = AnyKindOfItem[]
 

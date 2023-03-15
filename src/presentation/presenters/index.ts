@@ -7,5 +7,3 @@ export * from './generic/generic-presenter'
 
 export * from './character/find-all-characters-presenter'
 export * from './character/create-character-presenter'
-
-export * from './item/list-all-default-items-presenter'

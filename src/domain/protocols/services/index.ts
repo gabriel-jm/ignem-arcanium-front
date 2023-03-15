@@ -5,5 +5,3 @@ export * from './account/verify-token-service'
 
 export * from './character/find-all-characters-service'
 export * from './character/create-character-service'
-
-export * from './item/list-all-default-items-service'

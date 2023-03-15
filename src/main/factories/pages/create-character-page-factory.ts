@@ -1,25 +1,17 @@
-import { RemoteListAllDefaultItems } from '@/domain/use-cases'
-import { ItemService } from '@/infra/services'
 import { ErrorHandlingPresenterDecorator, ValidationPresenterDecorator } from '@/main/decorators'
 import { makeFetchHTTPClient } from '@/main/factories/clients'
 import { makeCreateCharacterPresenter } from '@/main/factories/presenters'
 import { successResponse } from '@/presentation/helpers'
-import { ListAllDefaultItemsPresenter } from '@/presentation/presenters'
+import { ListAllDefaultItemsPresenter } from '@/item/application'
 import { Presenter } from '@/presentation/protocols'
 import { UiNotifier } from '@/common/ui/notifiers'
-import { ItemsStore } from '@/ui/stores'
 import { IgnemCreateCharacterPage } from '@/ui/view'
+import { ItemsStore } from '@/item/ui/store/items-store'
 
 export function makeCreateCharactersPage() {
-  const itemsStore = new ItemsStore()
-
-  const httpClient = makeFetchHTTPClient()
-  const itemService = new ItemService(httpClient)
-  const remoteListAllDefaultItems = new RemoteListAllDefaultItems(itemService)
-
   const listAllDefaultItemsPresenter = new ListAllDefaultItemsPresenter(
-    remoteListAllDefaultItems,
-    itemsStore
+    makeFetchHTTPClient(),
+    new ItemsStore()
   )
   // TODO: create a validation only presenter
   const dummyPresenter: Presenter = {

@@ -1,4 +1,5 @@
-import { FindAllCharactersResult, Item } from '@/domain/protocols/use-cases'
+import { FindAllCharactersResult } from '@/domain/protocols/use-cases'
+import { Item } from '@/item/types/items'
 import { IgnemItemTinyCard, itemCard } from '@/item/ui'
 import { closeIcon, equipmentItemCard } from '@/ui/view/components'
 import { IgnemElement } from '@/ui/view/ignem-element'

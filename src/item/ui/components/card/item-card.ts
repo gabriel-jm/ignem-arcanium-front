@@ -10,7 +10,7 @@ import { itemCardStyles } from './item-card-styles'
 import { weaponDetails } from './weapon-details'
 import { shieldOrArmorDetails } from './shield-or-armor-details'
 import { alchemicalItemDetails } from './alchemical-item-details'
-import { AnyKindOfItem } from '@/domain/protocols/use-cases'
+import { AnyKindOfItem } from '@/item/types/items'
 
 export type ItemDetailsProps = AnyKindOfItem
 
