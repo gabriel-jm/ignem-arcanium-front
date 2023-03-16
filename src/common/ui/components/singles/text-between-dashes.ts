@@ -1,4 +1,4 @@
-import { css, raw } from 'lithen-tag-functions'
+import { css, raw } from 'lithen-fns'
 
 export const textBetweenDashesStyles = css`
   .text-between-dashes {

@@ -1,4 +1,4 @@
-import { css } from 'lithen-tag-functions'
+import { css } from 'lithen-fns'
 
 export const notificationStyles = css`
   :host {

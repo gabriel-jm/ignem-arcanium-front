@@ -1,5 +1,5 @@
 import { capitalize } from '@/ui/helpers'
-import { css, html } from 'lithen-tag-functions'
+import { css, html } from 'lithen-fns'
 
 export interface DamageFormaterProps {
   damage: string

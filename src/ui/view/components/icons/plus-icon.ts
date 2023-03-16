@@ -1,5 +1,4 @@
-import '../singles/wrapper'
-import { raw } from 'lithen-tag-functions'
+import { raw } from 'lithen-fns'
 import { iconsStyles } from '@/ui/view/styles'
 
 export const plusIcon = () => raw`

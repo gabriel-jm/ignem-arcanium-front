@@ -1,6 +1,6 @@
 import { trashIcon } from '@/ui/view/components'
 import { characterStatsStyles } from '@/ui/view/styles'
-import { css, html } from 'lithen-tag-functions'
+import { css, html } from 'lithen-fns'
 
 interface CharacterCardProps {
   id: string

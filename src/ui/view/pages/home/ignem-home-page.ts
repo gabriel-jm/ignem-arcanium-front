@@ -1,9 +1,9 @@
 import '@/ui/view/components'
-import { AccountStore } from '@/ui/stores'
 import { IgnemElement } from '@/ui/view/ignem-element'
-import { css, html } from 'lithen-tag-functions'
+import { css, html } from 'lithen-fns'
 import { buttonStyles, containerStyles } from '@/ui/view/styles'
 import { router } from 'lithen-router'
+import { AccountStore } from '@/account/ui/stores/account-store'
 
 export class IgnemHomePage extends IgnemElement {
   styling() {

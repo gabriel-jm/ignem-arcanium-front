@@ -1,16 +1,16 @@
 import { router } from 'lithen-router'
-import { html } from 'lithen-tag-functions'
+import { html } from 'lithen-fns'
 import { IgnemElement } from '@/ui/view/ignem-element'
 import {
   IgnemForm,
   ignemInput,
   loadingIcon,
   lockButtonUntil,
-  textBetweenDashes
 } from '@/ui/view/components'
 import { Presenter } from '@/presentation/protocols'
 import { SuccessNotifier } from '@/ui/protocols'
 import { loginStyles } from './login-styles'
+import { textBetweenDashes } from '@/common/ui'
 
 export class LoginPage extends IgnemElement {
   static tokenChecked = false

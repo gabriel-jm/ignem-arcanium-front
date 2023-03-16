@@ -1,6 +1,6 @@
 import { containerStyles } from '@/ui/view/styles'
 import { confirmDialogStyles } from '@/ui/view/components'
-import { css } from 'lithen-tag-functions'
+import { css } from 'lithen-fns'
 
 export const headerStyles = css`
   ${[containerStyles, confirmDialogStyles]}

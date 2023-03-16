@@ -1,6 +1,6 @@
 import '@/ui/view'
 import { router } from 'lithen-router'
-import { css, html, raw } from 'lithen-tag-functions'
+import { css, html, raw } from 'lithen-fns'
 
 type BreadcrumbsProps = Record<string, string>
 

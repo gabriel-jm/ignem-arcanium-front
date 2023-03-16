@@ -1,5 +1,5 @@
 import { capitalize } from '@/ui/helpers'
-import { css, html, raw } from 'lithen-tag-functions'
+import { css, html, raw } from 'lithen-fns'
 
 export const propertiesFormaterStyles = css`
   .property-container span {

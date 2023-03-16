@@ -1,6 +1,5 @@
-import '@/ui/view/components/singles/wrapper'
 import { iconsStyles } from '@/ui/view/styles'
-import { css, raw } from 'lithen-tag-functions'
+import { css, raw } from 'lithen-fns'
 
 export function loadingIcon() {
   const styles = css`

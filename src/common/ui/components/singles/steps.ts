@@ -1,5 +1,5 @@
 import { IgnemElement } from '@/ui/view/ignem-element'
-import { css, html, raw } from 'lithen-tag-functions'
+import { css, html, raw } from 'lithen-fns'
 
 /**
  * @attr {string} steps

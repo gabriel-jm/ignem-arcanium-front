@@ -3,7 +3,7 @@ import { IgnemForm, ignemInput, lockButtonUntil } from '@/ui/view/components'
 import { IgnemElement } from '@/ui/view/ignem-element'
 import { createAccountStyles } from './create-account-styles'
 import { router } from 'lithen-router'
-import { html } from 'lithen-tag-functions'
+import { html } from 'lithen-fns'
 import { UiNotifier } from '@/common/ui/notifiers'
 
 export class CreateAccountPage extends IgnemElement {

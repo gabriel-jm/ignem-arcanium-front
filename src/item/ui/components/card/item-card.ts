@@ -1,5 +1,4 @@
-import '@/ui/view/components/singles/wrapper'
-import { html, raw } from 'lithen-tag-functions'
+import { html, raw } from 'lithen-fns'
 import {
   InventoryAlchemicalItem,
   InventoryShieldOrArmor,

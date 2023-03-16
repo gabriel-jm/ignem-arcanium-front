@@ -1,5 +1,5 @@
 import { containerStyles, IgnemElement } from '@/ui/view'
-import { css, raw } from 'lithen-tag-functions'
+import { css, raw } from 'lithen-fns'
 
 export interface IgnemSideModalElement extends IgnemElement {
   open(): void

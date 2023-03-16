@@ -1,5 +1,5 @@
-import '../../../../common/ui/components/header/header'
-import { css, html } from 'lithen-tag-functions'
+import '@/common/ui/components/header/header'
+import { css, html } from 'lithen-fns'
 import { IgnemElement } from '@/ui/view/ignem-element'
 import { SuperElementRenderValues } from 'lithen-super-element'
 import {
@@ -9,10 +9,7 @@ import {
   formControlStyles
 } from '@/ui/view/styles'
 import {
-  breadcrumbs,
   IgnemForm,
-  IgnemSteps,
-  textBetweenDashesStyles
 } from '@/ui/view/components'
 import { characterFirstForm } from './forms/first/character-first-form'
 import { characterSecondForm } from './forms/second/character-second-form'
@@ -25,6 +22,7 @@ import { characterThirdForm } from './forms/third/character-third-form'
 import { characterThirdFormStyles } from './forms/third/character-third-form-styles'
 import { CreateCharacterParams } from '@/domain/protocols/use-cases'
 import { itemTinyCardStyles } from '@/item/ui'
+import { breadcrumbs, IgnemSteps, textBetweenDashesStyles } from '@/common/ui'
 
 export interface IgnemCreateCharacterProps {
   listItemsPresenter: Presenter

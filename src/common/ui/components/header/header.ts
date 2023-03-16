@@ -1,4 +1,4 @@
-import { html, ref } from 'lithen-tag-functions'
+import { html, ref } from 'lithen-fns'
 import { IgnemElement, logOutIcon } from '@/ui/view'
 import { headerStyles } from './header-styles'
 import { router } from 'lithen-router'

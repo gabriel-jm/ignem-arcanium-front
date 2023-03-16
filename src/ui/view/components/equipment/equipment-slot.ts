@@ -1,7 +1,7 @@
 import { Item } from '@/item/types/items'
 import { equipmentItemCard } from '@/ui/view/components/equipment/equipment-item-card'
 import { IgnemElement } from '@/ui/view/ignem-element'
-import { css, html } from 'lithen-tag-functions'
+import { css, html } from 'lithen-fns'
 
 /**
  * @attr empty-message

@@ -1,6 +1,6 @@
 import { InventoryShieldOrArmor } from '@/ui/protocols'
 import { itemProperty } from './item-card'
-import { html, raw } from 'lithen-tag-functions'
+import { html, raw } from 'lithen-fns'
 import { damageFormater, propertiesFormater } from '@/item/ui/components/formaters'
 
 export function shieldOrArmorDetails(props: InventoryShieldOrArmor) {

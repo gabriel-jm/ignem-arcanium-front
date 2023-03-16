@@ -2,10 +2,10 @@ import { UiNotifier } from '@/common/ui/notifiers'
 import { makeCheckTokenExistsPresenter } from '@/main/factories/presenters'
 import { LoginPage } from '@/account/ui/pages'
 import { LocalStorageCacheStore } from '@/common/infra/stores'
-import { AccountStore } from '@/ui/stores'
 import { ErrorHandlingPresenterDecorator, ValidationPresenterDecorator } from '@/main/decorators'
 import { LoginPresenter } from '@/account/application/login-presenter'
 import { makeFetchHTTPClient } from '@/main/factories/clients'
+import { AccountStore } from '@/account/ui/stores/account-store'
 
 export function makeLoginPage() {
   return new LoginPage(

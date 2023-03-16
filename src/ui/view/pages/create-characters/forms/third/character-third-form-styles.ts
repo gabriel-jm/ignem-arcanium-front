@@ -1,4 +1,4 @@
-import { css } from 'lithen-tag-functions'
+import { css } from 'lithen-fns'
 
 // TODO: fix item details display
 export const characterThirdFormStyles = css`

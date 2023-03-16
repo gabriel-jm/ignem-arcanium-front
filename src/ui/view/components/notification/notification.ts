@@ -1,5 +1,5 @@
 import { alertIcon, checkCircleIcon, IgnemElement, infoIcon } from '@/ui/view'
-import { html } from 'lithen-tag-functions'
+import { html } from 'lithen-fns'
 import { notificationStyles } from './notification-styles'
 
 interface IgnemNotificationProps {

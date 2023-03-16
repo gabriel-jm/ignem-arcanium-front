@@ -4,10 +4,10 @@ import {
   ignemSelect,
   ignemTextarea,
   InputMasks,
-  textBetweenDashes
 } from '@/ui/view/components'
 import { IgnemCreateCharacterPage, IgnemCreateCharacterProps } from '../../ignem-create-character-page'
-import { html } from 'lithen-tag-functions'
+import { html } from 'lithen-fns'
+import { textBetweenDashes } from '@/common/ui'
 
 export function characterFirstForm(
   parent: IgnemCreateCharacterPage,

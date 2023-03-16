@@ -1,4 +1,4 @@
-import { css } from 'lithen-tag-functions'
+import { css } from 'lithen-fns'
 import { tooltipStyles } from '@/ui/view/styles'
 
 export const characterSecondFormStyles = css`

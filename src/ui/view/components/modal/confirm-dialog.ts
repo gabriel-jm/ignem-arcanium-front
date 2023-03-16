@@ -1,4 +1,4 @@
-import { css, ElementRef, html } from 'lithen-tag-functions'
+import { css, ElementRef, html } from 'lithen-fns'
 
 export interface ConfirmDialogProps {
   ref: ElementRef<DialogElement>

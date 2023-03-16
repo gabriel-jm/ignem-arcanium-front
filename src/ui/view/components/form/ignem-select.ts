@@ -1,4 +1,4 @@
-import { html } from 'lithen-tag-functions'
+import { html } from 'lithen-fns'
 
 export interface IgnemSelectProps {
   label?: string

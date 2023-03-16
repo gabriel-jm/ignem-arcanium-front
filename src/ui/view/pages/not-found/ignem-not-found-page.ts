@@ -1,6 +1,6 @@
 import { buttonStyles, IgnemElement } from '@/ui/view'
 import { router } from 'lithen-router'
-import { css, html } from 'lithen-tag-functions'
+import { css, html } from 'lithen-fns'
 
 export class IgnemNotFoundPage extends IgnemElement {
   styling() {

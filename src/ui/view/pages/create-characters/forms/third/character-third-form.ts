@@ -1,13 +1,13 @@
-import { html } from 'lithen-tag-functions'
+import { html } from 'lithen-fns'
 import {
   IgnemEquipmentSlot,
   IgnemForm,
-  textBetweenDashes
 } from '@/ui/view/components'
 import { IgnemCreateCharacterPage, IgnemCreateCharacterProps } from '../../ignem-create-character-page'
 import { IgnemItemTinyCard, itemCard } from '@/item/ui'
 import { Item } from '@/item/types/items'
 import { ItemsStore } from '@/item/ui/store/items-store'
+import { textBetweenDashes } from '@/common/ui'
 
 export function characterThirdForm(
   parent: IgnemCreateCharacterPage,

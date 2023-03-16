@@ -1,6 +1,5 @@
 export * from './connection/create-connection-presenter'
 
-export * from './account/logout-presenter'
 export * from './account/check-token-exists-presenter'
 
 export * from './generic/generic-presenter'

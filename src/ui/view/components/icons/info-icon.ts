@@ -1,5 +1,4 @@
-import '../singles/wrapper'
-import { css, raw } from 'lithen-tag-functions'
+import { css, raw } from 'lithen-fns'
 import { iconsStyles } from '@/ui/view'
 
 export function infoIcon(animate = false) {

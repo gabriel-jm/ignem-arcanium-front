@@ -1,5 +1,5 @@
 import { containerStyles, buttonStyles, formControlStyles } from '@/ui/view/styles'
-import { css } from 'lithen-tag-functions'
+import { css } from 'lithen-fns'
 
 export const createAccountStyles = css`
   ${[containerStyles, buttonStyles, formControlStyles]}

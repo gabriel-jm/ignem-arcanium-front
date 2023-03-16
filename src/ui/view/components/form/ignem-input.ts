@@ -1,5 +1,5 @@
 import { toHtmlAttributes } from '@/ui/helpers'
-import { html, raw } from 'lithen-tag-functions'
+import { html, raw } from 'lithen-fns'
 
 export const InputMasks = {
   ONLY_NUMBERS: /\D+/g

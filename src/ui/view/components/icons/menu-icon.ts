@@ -1,5 +1,4 @@
-import '../singles/wrapper'
-import { css, raw } from 'lithen-tag-functions'
+import { css, raw } from 'lithen-fns'
 
 export function menuIcon() {
   const styles = css`

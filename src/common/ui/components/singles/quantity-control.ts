@@ -1,6 +1,6 @@
 import { minusIcon, plusIcon } from '@/ui/view/components/icons'
 import { IgnemElement } from '@/ui/view/ignem-element'
-import { css, html } from 'lithen-tag-functions'
+import { css, html } from 'lithen-fns'
 
 /**
  * @event -increment

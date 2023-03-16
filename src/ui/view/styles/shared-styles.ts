@@ -1,5 +1,5 @@
 import { defineSharedStyles } from 'lithen-super-element'
-import { css } from 'lithen-tag-functions'
+import { css } from 'lithen-fns'
 
 export const sharedStyles = () => defineSharedStyles(css`
   * {

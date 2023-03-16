@@ -1,4 +1,4 @@
-import { css } from 'lithen-tag-functions'
+import { css } from 'lithen-fns'
 
 export const formControlStyles = css`
   .form-control-container span {

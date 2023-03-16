@@ -1,6 +1,5 @@
-import '@/ui/view/components/singles/wrapper'
 import { iconsStyles } from '@/ui/view/styles'
-import { raw } from 'lithen-tag-functions'
+import { raw } from 'lithen-fns'
 
 export const closeIcon = () => raw`
   <ignem-wrapper class="close-icon" css="${iconsStyles}">

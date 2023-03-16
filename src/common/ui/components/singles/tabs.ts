@@ -1,5 +1,5 @@
 import { IgnemElement } from '@/ui/view'
-import { css, html } from 'lithen-tag-functions'
+import { css, html } from 'lithen-fns'
 
 export class IgnemTabs extends IgnemElement {
   constructor() {

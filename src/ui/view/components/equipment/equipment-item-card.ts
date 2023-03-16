@@ -1,7 +1,7 @@
 import { Item } from '@/item/types/items'
 import { itemIconByType } from '@/item/ui'
 import { closeIcon } from '@/ui/view/components/icons'
-import { css, html } from 'lithen-tag-functions'
+import { css, html } from 'lithen-fns'
 
 interface EquipmentItemCardProps {
   item?: Item | null
