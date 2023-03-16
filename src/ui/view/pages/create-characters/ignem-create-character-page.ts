@@ -1,4 +1,4 @@
-import '../../components/header/header'
+import '../../../../common/ui/components/header/header'
 import { css, html } from 'lithen-tag-functions'
 import { IgnemElement } from '@/ui/view/ignem-element'
 import { SuperElementRenderValues } from 'lithen-super-element'

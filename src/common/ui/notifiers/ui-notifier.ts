@@ -6,7 +6,7 @@ export class UiNotifier implements WarningNotifier, SuccessNotifier {
     'ignem-notification-container'
   )!
 
-  notifySuccess(label: string, message: string): void {
+  notifySuccess(label: string, message: string) {
     this.#container.addNotification(new IgnemNotification({
       label,
       message,

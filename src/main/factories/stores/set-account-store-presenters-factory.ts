@@ -1,10 +1,8 @@
-import { LocalAccountLogout } from '@/domain/use-cases'
 import { LocalStorageCacheStore } from '@/common/infra/stores'
 import { ErrorHandlingPresenterDecorator } from '@/main/decorators'
-import { LogoutPresenter } from '@/presentation/presenters'
 import { UiNotifier } from '@/common/ui/notifiers'
-import { LithenRouterAdapter } from '@/ui/routers'
-import { AccountStore } from '@/ui/stores'
+import { AccountStore } from '@/account/ui/stores/account-store'
+import { LogoutPresenter } from '@/account/application/logout-presenter'
 
 export function setAccountStorePresenters() {
   const accountStore = new AccountStore()
@@ -12,11 +10,9 @@ export function setAccountStorePresenters() {
   if (accountStore.logoutPresenter) return
 
   const localStorageCacheStore = new LocalStorageCacheStore()
-  const localAccountLogout = new LocalAccountLogout(localStorageCacheStore)
   const logoutPresenter = new LogoutPresenter(
-    localAccountLogout,
-    accountStore,
-    new LithenRouterAdapter()
+    localStorageCacheStore,
+    accountStore
   )
 
   accountStore.logoutPresenter = new ErrorHandlingPresenterDecorator(

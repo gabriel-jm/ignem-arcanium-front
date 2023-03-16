@@ -1,9 +1,9 @@
 import { html, ref } from 'lithen-tag-functions'
-import { AccountStore } from '@/ui/stores'
 import { IgnemElement, logOutIcon } from '@/ui/view'
 import { headerStyles } from './header-styles'
 import { router } from 'lithen-router'
 import { confirmDialog } from '@/ui/view/components'
+import { AccountStore } from '@/account/ui/stores/account-store'
 
 export class IgnemHeader extends IgnemElement {
   #accountStore = new AccountStore()

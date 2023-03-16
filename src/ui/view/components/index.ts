@@ -1,5 +1,3 @@
-export * from './singles'
-
 export * from './icons'
 export * from './notification'
 
@@ -13,5 +11,3 @@ export * from './form/ignem-textarea'
 export * from './form/utils/lock-button-until'
 
 export * from './equipment'
-
-export * from './header/header'
