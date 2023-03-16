@@ -1,7 +1,7 @@
 import { itemIconByType } from './item-icon-by-type'
 import { css, html, raw } from 'lithen-fns'
 import { IgnemElement } from '@/ui/view/ignem-element'
-import { capitalize } from '@/ui/helpers'
+import { capitalize } from '@/common/ui/helpers'
 import { Item } from '@/item/types/items'
 import { IgnemQuantityControl } from '@/common/ui'
 

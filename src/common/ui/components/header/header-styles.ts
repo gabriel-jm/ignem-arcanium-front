@@ -6,7 +6,12 @@ export const headerStyles = css`
   ${[containerStyles, confirmDialogStyles]}
 
   .header {
-    background-color: #151515;
+    background: linear-gradient(
+      150deg,
+      var(--body-bg-color),
+      var(--bright-black) 20%,
+      var(--black) 70%
+    );
     display: block;
     padding: 6px 10px;
   }

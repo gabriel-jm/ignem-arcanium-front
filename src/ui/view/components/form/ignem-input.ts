@@ -1,4 +1,4 @@
-import { toHtmlAttributes } from '@/ui/helpers'
+import { toHtmlAttributes } from '@/common/ui/helpers'
 import { html, raw } from 'lithen-fns'
 
 export const InputMasks = {

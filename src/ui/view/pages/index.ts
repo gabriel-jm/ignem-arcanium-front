@@ -1,7 +1,5 @@
 export * from './root/ignem-root'
 export * from '@/common/ui'
-export * from './not-found/ignem-not-found-page'
-export * from './intro/ignem-introduction-page'
 export * from './characters/ignem-characters-page'
 export * from './create-characters/ignem-create-character-page'
 export * from './home/ignem-home-page'

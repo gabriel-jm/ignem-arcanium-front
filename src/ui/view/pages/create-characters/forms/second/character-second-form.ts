@@ -1,7 +1,7 @@
 import { IgnemCreateCharacterPage, IgnemCreateCharacterProps } from '../../ignem-create-character-page'
 import { html } from 'lithen-fns'
 import { IgnemForm } from '@/ui/view/components'
-import { capitalize } from '@/ui/helpers'
+import { capitalize } from '@/common/ui/helpers'
 import { textBetweenDashes } from '@/common/ui'
 
 export function characterSecondForm(

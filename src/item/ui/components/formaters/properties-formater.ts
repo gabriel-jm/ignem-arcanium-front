@@ -1,4 +1,4 @@
-import { capitalize } from '@/ui/helpers'
+import { capitalize } from '@/common/ui/helpers'
 import { css, html, raw } from 'lithen-fns'
 
 export const propertiesFormaterStyles = css`
