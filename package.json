@@ -22,7 +22,7 @@
     "vitest": "^0.28.4"
   },
   "dependencies": {
-    "lithen-fns": "^1.0.0",
+    "lithen-fns": "^1.0.1",
     "lithen-router": "^2.0.0",
     "lithen-super-element": "^5.0.0"
   }
