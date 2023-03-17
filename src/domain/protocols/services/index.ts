@@ -1,7 +1,7 @@
-export * from './connection/create-connection-service'
+export * from './connection/create-connection-service.js'
 
-export * from './account/create-account-service'
-export * from './account/verify-token-service'
+export * from './account/create-account-service.js'
+export * from './account/verify-token-service.js'
 
-export * from './character/find-all-characters-service'
-export * from './character/create-character-service'
+export * from './character/find-all-characters-service.js'
+export * from './character/create-character-service.js'

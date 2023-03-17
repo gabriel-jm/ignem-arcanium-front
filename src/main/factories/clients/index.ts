@@ -1,2 +1,2 @@
-export * from './web-socket-client-factory'
-export * from './fetch-http-client-factory'
+export * from './web-socket-client-factory.js'
+export * from './fetch-http-client-factory.js'

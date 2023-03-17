@@ -1,1 +1,1 @@
-export * from './local-storage-cache-store'
+export * from './local-storage-cache-store.js'

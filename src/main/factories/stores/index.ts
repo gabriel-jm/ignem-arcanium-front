@@ -1,1 +1,1 @@
-export * from './set-account-store-presenters-factory'
+export * from './set-account-store-presenters-factory.js'

@@ -1,12 +1,12 @@
-import { ErrorHandlingPresenterDecorator, ValidationPresenterDecorator } from '@/main/decorators'
-import { makeFetchHTTPClient } from '@/main/factories/clients'
-import { makeCreateCharacterPresenter } from '@/main/factories/presenters'
-import { successResponse } from '@/presentation/helpers'
-import { ListAllDefaultItemsPresenter } from '@/item/application'
-import { Presenter } from '@/presentation/protocols'
-import { UiNotifier } from '@/common/ui/notifiers'
-import { IgnemCreateCharacterPage } from '@/ui/view'
-import { ItemsStore } from '@/item/ui/store/items-store'
+import { ErrorHandlingPresenterDecorator, ValidationPresenterDecorator } from '@/main/decorators/index.js'
+import { makeFetchHTTPClient } from '@/main/factories/clients/index.js'
+import { makeCreateCharacterPresenter } from '@/main/factories/presenters/index.js'
+import { successResponse } from '@/presentation/helpers/index.js'
+import { ListAllDefaultItemsPresenter } from '@/item/application/index.js'
+import { Presenter } from '@/presentation/protocols/index.js'
+import { UiNotifier } from '@/common/ui/notifiers/index.js'
+import { IgnemCreateCharacterPage } from '@/ui/view/index.js'
+import { ItemsStore } from '@/item/ui/store/items-store.js'
 
 export function makeCreateCharactersPage() {
   const listAllDefaultItemsPresenter = new ListAllDefaultItemsPresenter(

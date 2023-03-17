@@ -1,5 +1,5 @@
-import { UnauthorizedError } from '../errors'
-import { CacheStore, HTTPClient, HTTPRequest, HTTPResponse } from '../protocols'
+import { UnauthorizedError } from '../errors/index.js'
+import { CacheStore, HTTPClient, HTTPRequest, HTTPResponse } from '../protocols/index.js'
 
 export class FetchHTTPClient implements HTTPClient {
   constructor(

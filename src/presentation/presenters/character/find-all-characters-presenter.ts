@@ -1,6 +1,6 @@
-import { FindAllCharacters } from '@/domain/protocols/use-cases'
-import { successResponse } from '@/presentation/helpers'
-import { Presenter } from '@/presentation/protocols'
+import { FindAllCharacters } from '@/domain/protocols/use-cases/index.js'
+import { successResponse } from '@/presentation/helpers/index.js'
+import { Presenter } from '@/presentation/protocols/index.js'
 
 export class FindAllCharactersPresenter implements Presenter {
   constructor(

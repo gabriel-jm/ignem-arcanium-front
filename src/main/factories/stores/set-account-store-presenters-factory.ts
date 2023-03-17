@@ -1,8 +1,8 @@
-import { LocalStorageCacheStore } from '@/common/infra/stores'
-import { ErrorHandlingPresenterDecorator } from '@/main/decorators'
-import { UiNotifier } from '@/common/ui/notifiers'
-import { AccountStore } from '@/account/ui/stores/account-store'
-import { LogoutPresenter } from '@/account/application/logout-presenter'
+import { LocalStorageCacheStore } from '@/common/infra/stores/index.js'
+import { ErrorHandlingPresenterDecorator } from '@/main/decorators/index.js'
+import { UiNotifier } from '@/common/ui/notifiers/index.js'
+import { AccountStore } from '@/account/ui/stores/account-store.js'
+import { LogoutPresenter } from '@/account/application/logout-presenter.js'
 
 export function setAccountStorePresenters() {
   const accountStore = new AccountStore()

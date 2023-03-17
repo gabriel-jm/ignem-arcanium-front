@@ -1,1 +1,1 @@
-export * from './base64-token-decoder'
+export * from './base64-token-decoder.js'

@@ -1,5 +1,5 @@
+import { iconsStyles } from '@/ui/view/index.js'
 import { el } from 'lithen-fns'
-import { iconsStyles } from '@/ui/view/styles'
 
 export const chevronUpIcon = () => el/*html*/`
   <ignem-wrapper class="chevron-up-icon" css="${iconsStyles}">

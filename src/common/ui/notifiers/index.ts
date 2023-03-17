@@ -1,1 +1,1 @@
-export * from './ui-notifier'
+export * from './ui-notifier.js'

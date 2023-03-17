@@ -1,2 +1,2 @@
-export * from './html-attributes'
-export * from './capitalize'
+export * from './html-attributes.js'
+export * from './capitalize.js'

@@ -1,5 +1,5 @@
-import { LocalStorageCacheStore } from '@/common/infra/stores'
-import { FetchHTTPClient } from '@/common/infra/clients'
+import { LocalStorageCacheStore } from '@/common/infra/stores/index.js'
+import { FetchHTTPClient } from '@/common/infra/clients/index.js'
 
 export function makeFetchHTTPClient() {
   const localStorageCacheStore = new LocalStorageCacheStore()

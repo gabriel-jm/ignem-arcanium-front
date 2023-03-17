@@ -1,11 +1,11 @@
 {
   "compilerOptions": {
-    "target": "ESNext",
+    "target": "ES2022",
     "useDefineForClassFields": true,
     "module": "ESNext",
     "lib": ["ESNext", "DOM"],
     "types": ["vitest/globals"],
-    "moduleResolution": "Node",
+    "moduleResolution": "nodenext",
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
@@ -20,5 +20,5 @@
       "@/tests/*": ["./tests/*"]
     }
   },
-  "include": ["src", "tests"]
+  "include": ["src"]
 }

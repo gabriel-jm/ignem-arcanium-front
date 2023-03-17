@@ -1,4 +1,4 @@
-import { Validator } from '@/validation/protocols'
+import { Validator } from '@/validation/protocols/index.js'
 
 export const valueInBetweenValidator: Validator = (
   input: any,

@@ -1,2 +1,2 @@
-export * from './notification'
-export * from './notification-container'
+export * from './notification.js'
+export * from './notification-container.js'

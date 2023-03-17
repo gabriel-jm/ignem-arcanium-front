@@ -1,5 +1,5 @@
-import { AnyKindOfItem } from '@/item/types/items'
-import { InventoryWeapon } from '@/ui/protocols'
+import { AnyKindOfItem } from '@/item/types/items.js'
+import { InventoryWeapon } from '@/ui/protocols/index.js'
 
 export function itemIconByType(item: AnyKindOfItem) {
   const distance = (item as InventoryWeapon).distance

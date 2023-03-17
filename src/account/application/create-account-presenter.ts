@@ -1,8 +1,8 @@
-import { CacheStore, HTTPClient } from '@/common/infra/protocols'
-import { HTTPServiceError } from '@/infra/errors'
-import { successResponse } from '@/presentation/helpers'
-import { Presenter, PresenterResult } from '@/presentation/protocols'
-import { SetAccountStore } from '@/presentation/protocols/stores'
+import { CacheStore, HTTPClient } from '@/common/infra/protocols/index.js'
+import { HTTPServiceError } from '@/infra/errors/index.js'
+import { successResponse } from '@/presentation/helpers/index.js'
+import { Presenter, PresenterResult } from '@/presentation/protocols/index.js'
+import { SetAccountStore } from '@/presentation/protocols/stores/index.js'
 
 export interface CreateAccountPresenterParams {
   name: string

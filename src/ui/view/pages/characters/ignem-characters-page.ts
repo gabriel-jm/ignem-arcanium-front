@@ -1,14 +1,14 @@
-import { Presenter } from '@/presentation/protocols'
-import { containerStyles } from '@/ui/view'
-import { confirmDialog, confirmDialogStyles, loadingIcon } from '@/ui/view/components'
-import { IgnemElement } from '@/ui/view/ignem-element'
+import { Presenter } from '@/presentation/protocols/index.js'
+import { containerStyles } from '@/ui/view/styles/index.js'
+import { IgnemElement } from '@/ui/view/ignem-element.js'
 import { css, html, ref } from 'lithen-fns'
-import { characterCard, characterCardStyles } from './card/character-card'
+import { characterCard, characterCardStyles } from './card/character-card.js'
 import { router } from 'lithen-router'
-import { IgnemCharacterModal } from './modal/ignem-character-modal'
-import { FindAllCharactersResult } from '@/domain/protocols/use-cases'
-import { UiNotifier } from '@/common/ui/notifiers'
-import { breadcrumbs } from '@/common/ui/components'
+import { IgnemCharacterModal } from './modal/ignem-character-modal.js'
+import { FindAllCharactersResult } from '@/domain/protocols/use-cases/index.js'
+import { UiNotifier } from '@/common/ui/notifiers/index.js'
+import { breadcrumbs, loadingIcon } from '@/common/ui/components/index.js'
+import { confirmDialogStyles, confirmDialog } from '../../components/index.js'
 
 type Character = FindAllCharactersResult
 

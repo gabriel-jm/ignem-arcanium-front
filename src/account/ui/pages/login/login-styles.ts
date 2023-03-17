@@ -1,5 +1,5 @@
-import { textBetweenDashesStyles } from '@/common/ui'
-import { containerStyles, buttonStyles, formControlStyles } from '@/ui/view/styles'
+import { textBetweenDashesStyles } from '@/common/ui/components/index.js'
+import { containerStyles, buttonStyles, formControlStyles } from '@/ui/view/styles/index.js'
 import { css } from 'lithen-fns'
 
 const additionalStyles = [

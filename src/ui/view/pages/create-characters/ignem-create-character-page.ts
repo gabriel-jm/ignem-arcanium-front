@@ -1,26 +1,25 @@
-import '@/common/ui/components/header/header'
 import { css, html } from 'lithen-fns'
-import { IgnemElement } from '@/ui/view/ignem-element'
+import { IgnemElement } from '@/ui/view/ignem-element.js'
 import { SuperElementRenderValues } from 'lithen-super-element'
 import {
   borderedButtonStyles,
   buttonStyles,
   containerStyles,
   formControlStyles
-} from '@/ui/view/styles'
+} from '@/ui/view/styles/index.js'
 
-import { characterFirstForm } from './forms/first/character-first-form'
-import { characterSecondForm } from './forms/second/character-second-form'
-import { characterFourthForm } from './forms/fourth/character-fourth-form'
-import { Presenter } from '@/presentation/protocols'
-import { characterFirstFormStyles } from './forms/first/character-first-form-styles'
-import { characterSecondFormStyles } from './forms/second/character-second-form-styles'
-import { characterFourthFormStyles } from './forms/fourth/character-fourth-form-styles'
-import { characterThirdForm } from './forms/third/character-third-form'
-import { characterThirdFormStyles } from './forms/third/character-third-form-styles'
-import { CreateCharacterParams } from '@/domain/protocols/use-cases'
-import { itemTinyCardStyles } from '@/item/ui'
-import { breadcrumbs, CustomForm, IgnemSteps, textBetweenDashesStyles } from '@/common/ui'
+import { characterFirstForm } from './forms/first/character-first-form.js'
+import { characterSecondForm } from './forms/second/character-second-form.js'
+import { characterFourthForm } from './forms/fourth/character-fourth-form.js'
+import { Presenter } from '@/presentation/protocols/index.js'
+import { characterFirstFormStyles } from './forms/first/character-first-form-styles.js'
+import { characterSecondFormStyles } from './forms/second/character-second-form-styles.js'
+import { characterFourthFormStyles } from './forms/fourth/character-fourth-form-styles.js'
+import { characterThirdForm } from './forms/third/character-third-form.js'
+import { characterThirdFormStyles } from './forms/third/character-third-form-styles.js'
+import { CreateCharacterParams } from '@/domain/protocols/use-cases/index.js'
+import { itemTinyCardStyles } from '@/item/ui/index.js'
+import { breadcrumbs, CustomForm, IgnemSteps, textBetweenDashesStyles } from '@/common/ui/index.js'
 
 export interface IgnemCreateCharacterProps {
   listItemsPresenter: Presenter

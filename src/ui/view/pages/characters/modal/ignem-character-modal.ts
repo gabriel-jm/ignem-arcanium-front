@@ -1,9 +1,10 @@
-import { FindAllCharactersResult } from '@/domain/protocols/use-cases'
-import { Item } from '@/item/types/items'
-import { IgnemItemTinyCard, itemCard } from '@/item/ui'
-import { closeIcon, equipmentItemCard } from '@/ui/view/components'
-import { IgnemElement } from '@/ui/view/ignem-element'
-import { characterModalStyles } from '@/ui/view/pages/characters/modal/character-modal-styles'
+import { closeIcon } from '@/common/ui/index.js'
+import { FindAllCharactersResult } from '@/domain/protocols/use-cases/index.js'
+import { Item } from '@/item/types/items.js'
+import { IgnemItemTinyCard, itemCard } from '@/item/ui/index.js'
+import { equipmentItemCard } from '@/ui/view/components/index.js'
+import { IgnemElement } from '@/ui/view/ignem-element.js'
+import { characterModalStyles } from '@/ui/view/pages/characters/modal/character-modal-styles.js'
 import { html, el, ref } from 'lithen-fns'
 
 export type CharacterModalData = FindAllCharactersResult

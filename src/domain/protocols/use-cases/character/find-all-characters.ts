@@ -1,4 +1,4 @@
-import { Item, Weapon, ShieldOrArmor } from '@/item/types/items'
+import { Item, Weapon, ShieldOrArmor } from '@/item/types/items.js'
 
 export interface FindAllCharactersResult {
   id: string

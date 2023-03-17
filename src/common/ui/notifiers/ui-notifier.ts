@@ -1,5 +1,5 @@
-import { SuccessNotifier, WarningNotifier } from '@/ui/protocols'
-import { IgnemNotification, IgnemNotificationContainerElement } from '@/ui/view'
+import { SuccessNotifier, WarningNotifier } from '@/ui/protocols/index.js'
+import { IgnemNotification, IgnemNotificationContainerElement } from '@/ui/view/index.js'
 
 export class UiNotifier implements WarningNotifier, SuccessNotifier {
   #container: IgnemNotificationContainerElement = document.querySelector(

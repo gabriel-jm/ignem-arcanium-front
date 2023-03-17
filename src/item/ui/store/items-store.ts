@@ -1,5 +1,5 @@
-import { AnyKindOfItem } from '@/item/types/items'
-import { SetItemsStore, SetItemsStoreParams } from '@/presentation/protocols/stores'
+import { AnyKindOfItem } from '@/item/types/items.js'
+import { SetItemsStore, SetItemsStoreParams } from '@/presentation/protocols/stores/index.js'
 
 export class ItemsStore implements SetItemsStore {
   static #instance: ItemsStore

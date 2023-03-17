@@ -1,2 +1,2 @@
-export * from './damage-formater'
-export * from './properties-formater'
+export * from './damage-formater.js'
+export * from './properties-formater.js'

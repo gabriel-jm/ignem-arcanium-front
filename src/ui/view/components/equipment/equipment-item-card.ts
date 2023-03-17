@@ -1,6 +1,6 @@
-import { Item } from '@/item/types/items'
-import { itemIconByType } from '@/item/ui'
-import { closeIcon } from '@/common/ui/components/icons'
+import { Item } from '@/item/types/items.js'
+import { itemIconByType } from '@/item/ui/index.js'
+import { closeIcon } from '@/common/ui/components/icons/index.js'
 import { css, html } from 'lithen-fns'
 
 interface EquipmentItemCardProps {

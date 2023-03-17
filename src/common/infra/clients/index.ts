@@ -1,2 +1,2 @@
-export * from './web-socket-client'
-export * from './fetch-http-client'
+export * from './web-socket-client.js'
+export * from './fetch-http-client.js'

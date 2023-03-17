@@ -1,4 +1,4 @@
-import { IgnemElement } from '@/ui/view/ignem-element'
+import { IgnemElement } from '@/ui/view/ignem-element.js'
 import { css, html, el } from 'lithen-fns'
 
 /**

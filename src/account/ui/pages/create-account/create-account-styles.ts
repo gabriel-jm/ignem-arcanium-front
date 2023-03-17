@@ -1,4 +1,4 @@
-import { containerStyles, buttonStyles, formControlStyles } from '@/ui/view/styles'
+import { containerStyles, buttonStyles, formControlStyles } from '@/ui/view/styles/index.js'
 import { css } from 'lithen-fns'
 
 export const createAccountStyles = css`

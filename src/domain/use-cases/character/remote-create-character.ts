@@ -1,5 +1,5 @@
-import { CreateCharacterService } from '@/domain/protocols/services'
-import { CreateCharacter, CreateCharacterParams, CreateCharacterResult } from '@/domain/protocols/use-cases'
+import { CreateCharacterService } from '@/domain/protocols/services/index.js'
+import { CreateCharacter, CreateCharacterParams, CreateCharacterResult } from '@/domain/protocols/use-cases/index.js'
 
 export class RemoteCreateCharacter implements CreateCharacter {
   constructor(private readonly createCharacterService: CreateCharacterService) {}

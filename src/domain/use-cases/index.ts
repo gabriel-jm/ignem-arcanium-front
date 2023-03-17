@@ -1,6 +1,6 @@
-export * from './account/local-check-token-exists'
+export * from './account/local-check-token-exists.js'
 
-export * from './connection/remote-create-connection'
+export * from './connection/remote-create-connection.js'
 
-export * from './character/remote-find-all-characters'
-export * from './character/remote-create-character'
+export * from './character/remote-find-all-characters.js'
+export * from './character/remote-create-character.js'

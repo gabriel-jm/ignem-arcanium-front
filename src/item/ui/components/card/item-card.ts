@@ -3,13 +3,13 @@ import {
   InventoryAlchemicalItem,
   InventoryShieldOrArmor,
   InventoryWeapon
-} from '@/ui/protocols'
-import { itemIconByType } from '../item-icon-by-type'
-import { itemCardStyles } from './item-card-styles'
-import { weaponDetails } from './weapon-details'
-import { shieldOrArmorDetails } from './shield-or-armor-details'
-import { alchemicalItemDetails } from './alchemical-item-details'
-import { AnyKindOfItem } from '@/item/types/items'
+} from '@/ui/protocols/index.js'
+import { itemIconByType } from '../item-icon-by-type.js'
+import { itemCardStyles } from './item-card-styles.js'
+import { weaponDetails } from './weapon-details.js'
+import { shieldOrArmorDetails } from './shield-or-armor-details.js'
+import { alchemicalItemDetails } from './alchemical-item-details.js'
+import { AnyKindOfItem } from '@/item/types/items.js'
 
 export type ItemDetailsProps = AnyKindOfItem
 

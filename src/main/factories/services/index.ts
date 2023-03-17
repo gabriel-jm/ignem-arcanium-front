@@ -1,1 +1,1 @@
-export * from './character-service-factory'
+export * from './character-service-factory.js'

@@ -1,1 +1,1 @@
-export * from './invalid-token-error'
+export * from './invalid-token-error.js'

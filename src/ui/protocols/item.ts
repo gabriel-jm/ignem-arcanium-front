@@ -1,4 +1,4 @@
-import { AlchemicalItem, Gem, ShieldOrArmor, Item, Weapon } from '@/item/types/items'
+import { AlchemicalItem, Gem, ShieldOrArmor, Item, Weapon } from '@/item/types/items.js'
 
 export interface InventoryItem extends Item {
   quantity: number

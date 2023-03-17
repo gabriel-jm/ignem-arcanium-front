@@ -1,2 +1,2 @@
-export * from './equipment-slot'
-export * from './equipment-item-card'
+export * from './equipment-slot.js'
+export * from './equipment-item-card.js'

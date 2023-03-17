@@ -1,8 +1,8 @@
-import { RemoteCreateCharacter } from '@/domain/use-cases'
-import { ErrorHandlingPresenterDecorator, ValidationPresenterDecorator } from '@/main/decorators'
-import { makeCharacterService } from '@/main/factories/services'
-import { CreateCharacterPresenter } from '@/presentation/presenters'
-import { UiNotifier } from '@/common/ui/notifiers'
+import { RemoteCreateCharacter } from '@/domain/use-cases/index.js'
+import { ErrorHandlingPresenterDecorator, ValidationPresenterDecorator } from '@/main/decorators/index.js'
+import { makeCharacterService } from '@/main/factories/services/index.js'
+import { CreateCharacterPresenter } from '@/presentation/presenters/index.js'
+import { UiNotifier } from '@/common/ui/notifiers/index.js'
 
 const requiredNumber = {
   type: 'number',

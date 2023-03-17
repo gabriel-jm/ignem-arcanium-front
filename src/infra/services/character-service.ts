@@ -1,12 +1,12 @@
-import { HTTPClient } from '@/common/infra/protocols'
+import { HTTPClient } from '@/common/infra/protocols/index.js'
 import {
   CreateCharacterService,
   CreateCharacterServiceParams,
   CreateCharacterServiceResult,
   FindAllCharactersService,
   FindAllCharactersServiceResult
-} from '@/domain/protocols/services'
-import { HTTPServiceError } from '@/infra/errors'
+} from '@/domain/protocols/services/index.js'
+import { HTTPServiceError } from '@/infra/errors/index.js'
 
 type Service = FindAllCharactersService & CreateCharacterService
 

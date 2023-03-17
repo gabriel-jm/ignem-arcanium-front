@@ -1,2 +1,2 @@
-export * from './error-handling-presenter-decorator'
-export * from './validation-presenter-decorator'
+export * from './error-handling-presenter-decorator.js'
+export * from './validation-presenter-decorator.js'

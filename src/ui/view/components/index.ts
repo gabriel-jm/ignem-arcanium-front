@@ -1,7 +1,6 @@
-export * from '../../../common/ui/components/icons'
-export * from './notification'
+export * from './modal/confirm-dialog.js'
+export * from './notification/index.js'
 
-export * from './modal/side-modal'
-export * from './modal/confirm-dialog'
+export * from './modal/side-modal.js'
 
-export * from './equipment'
+export * from './equipment/index.js'

@@ -1,4 +1,4 @@
-import { iconsStyles } from '@/ui/view/styles'
+import { iconsStyles } from '@/ui/view/styles/index.js'
 import { css, el } from 'lithen-fns'
 
 export function loadingIcon() {

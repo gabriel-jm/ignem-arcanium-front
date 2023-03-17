@@ -1,7 +1,7 @@
-import { IgnemCreateCharacterPage, IgnemCreateCharacterProps } from '../../ignem-create-character-page'
+import { IgnemCreateCharacterPage, IgnemCreateCharacterProps } from '../../ignem-create-character-page.js'
 import { html } from 'lithen-fns'
-import { capitalize } from '@/common/ui/helpers'
-import { CustomForm, textBetweenDashes } from '@/common/ui'
+import { capitalize } from '@/common/ui/helpers/index.js'
+import { CustomForm, textBetweenDashes } from '@/common/ui/index.js'
 
 export function characterSecondForm(
   parent: IgnemCreateCharacterPage,

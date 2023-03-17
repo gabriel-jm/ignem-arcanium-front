@@ -1,9 +1,9 @@
-import { ValidationResult } from '@/validation/protocols'
+import { ValidationResult } from '@/validation/protocols/index.js'
 import {
   requiredFieldValidator,
   typeValidator,
   valueInBetweenValidator
-} from '@/validation/validators'
+} from '@/validation/validators/index.js'
 
 const validatorsPriority: Record<string, number> = {
   type: 0,

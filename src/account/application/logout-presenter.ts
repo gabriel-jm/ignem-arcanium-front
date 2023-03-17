@@ -1,7 +1,7 @@
-import { CacheStore } from '@/common/infra/protocols'
-import { successResponse } from '@/presentation/helpers'
-import { Presenter } from '@/presentation/protocols'
-import { SetAccountStore } from '@/presentation/protocols/stores'
+import { CacheStore } from '@/common/infra/protocols/index.js'
+import { successResponse } from '@/presentation/helpers/index.js'
+import { Presenter } from '@/presentation/protocols/index.js'
+import { SetAccountStore } from '@/presentation/protocols/stores/index.js'
 import { router } from 'lithen-router'
 
 export class LogoutPresenter implements Presenter {

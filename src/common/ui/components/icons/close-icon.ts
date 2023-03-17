@@ -1,4 +1,4 @@
-import { iconsStyles } from '@/ui/view/styles'
+import { iconsStyles } from '@/ui/view/styles/index.js'
 import { el } from 'lithen-fns'
 
 export const closeIcon = () => el/*html*/`

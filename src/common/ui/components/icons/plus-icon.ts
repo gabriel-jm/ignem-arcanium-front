@@ -1,5 +1,5 @@
 import { el } from 'lithen-fns'
-import { iconsStyles } from '@/ui/view/styles'
+import { iconsStyles } from '@/ui/view/styles/index.js'
 
 export const plusIcon = () => el/*html*/`
   <ignem-wrapper class="plus-icon" css="${iconsStyles}">

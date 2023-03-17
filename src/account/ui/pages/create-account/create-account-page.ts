@@ -1,10 +1,10 @@
-import { Presenter } from '@/presentation/protocols'
-import { IgnemElement } from '@/ui/view/ignem-element'
-import { createAccountStyles } from './create-account-styles'
+import { Presenter } from '@/presentation/protocols/index.js'
+import { IgnemElement } from '@/ui/view/ignem-element.js'
+import { createAccountStyles } from './create-account-styles.js'
 import { router } from 'lithen-router'
 import { html } from 'lithen-fns'
-import { UiNotifier } from '@/common/ui/notifiers'
-import { lockButtonUntil, CustomForm, inputField } from '@/common/ui'
+import { UiNotifier } from '@/common/ui/notifiers/index.js'
+import { lockButtonUntil, CustomForm, inputField } from '@/common/ui/index.js'
 
 export class CreateAccountPage extends IgnemElement {
   #createAccountPresenter: Presenter

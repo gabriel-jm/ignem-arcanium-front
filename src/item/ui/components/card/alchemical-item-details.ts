@@ -1,5 +1,5 @@
-import { InventoryAlchemicalItem } from '@/ui/protocols'
-import { itemProperty } from './item-card'
+import { InventoryAlchemicalItem } from '@/ui/protocols/index.js'
+import { itemProperty } from './item-card.js'
 import { html } from 'lithen-fns'
 
 export function alchemicalItemDetails(props: InventoryAlchemicalItem) {

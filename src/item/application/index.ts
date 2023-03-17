@@ -1,1 +1,1 @@
-export * from './list-all-default-items-presenter'
+export * from './list-all-default-items-presenter.js'

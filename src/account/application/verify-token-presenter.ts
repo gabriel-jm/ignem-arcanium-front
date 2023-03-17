@@ -1,10 +1,10 @@
 import { router } from 'lithen-router'
-import { CacheStore } from '@/common/infra/protocols'
-import { InvalidTokenError } from '@/domain/error'
-import { successResponse } from '@/presentation/helpers'
-import { Presenter } from '@/presentation/protocols'
-import { SetAccountStore } from '@/presentation/protocols/stores'
-import { TokenDecoder } from './token-decoder'
+import { CacheStore } from '@/common/infra/protocols/index.js'
+import { InvalidTokenError } from '@/domain/error/index.js'
+import { successResponse } from '@/presentation/helpers/index.js'
+import { Presenter } from '@/presentation/protocols/index.js'
+import { SetAccountStore } from '@/presentation/protocols/stores/index.js'
+import { TokenDecoder } from './token-decoder.js'
 
 export class VerifyTokenPresenter implements Presenter {
   constructor(

@@ -1,1 +1,1 @@
-export * from './intro-page'
+export * from './intro-page.js'

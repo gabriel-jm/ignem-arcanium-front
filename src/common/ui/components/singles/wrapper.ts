@@ -1,4 +1,4 @@
-import { IgnemElement } from '@/ui/view'
+import { IgnemElement } from '@/ui/view/index.js'
 
 /**
  * @attr css

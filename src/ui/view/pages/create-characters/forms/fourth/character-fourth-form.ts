@@ -1,12 +1,11 @@
 import { html } from 'lithen-fns'
-import { IgnemCreateCharacterPage, IgnemCreateCharacterProps } from '../../ignem-create-character-page'
-import { InventoryItem } from '@/ui/protocols'
-import { chevronUpIcon } from '@/ui/view/components'
+import { IgnemCreateCharacterPage, IgnemCreateCharacterProps } from '../../ignem-create-character-page.js'
+import { InventoryItem } from '@/ui/protocols/index.js'
 import { router } from 'lithen-router'
-import { IgnemItemTinyCard, itemCard } from '@/item/ui'
-import { Item } from '@/item/types/items'
-import { ItemsStore } from '@/item/ui/store/items-store'
-import { textBetweenDashes } from '@/common/ui'
+import { IgnemItemTinyCard, itemCard } from '@/item/ui/index.js'
+import { Item } from '@/item/types/items.js'
+import { ItemsStore } from '@/item/ui/store/items-store.js'
+import { chevronUpIcon, textBetweenDashes } from '@/common/ui/index.js'
 
 export function characterFourthForm(
   parent: IgnemCreateCharacterPage,

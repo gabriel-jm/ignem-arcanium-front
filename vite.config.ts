@@ -3,10 +3,7 @@ import path from 'path'
 
 export default defineConfig({
   build: {
-    target: 'es2022',
-    dynamicImportVarsOptions: {
-      include: []
-    }
+    target: 'es2022'
   },
   resolve: {
     alias: {

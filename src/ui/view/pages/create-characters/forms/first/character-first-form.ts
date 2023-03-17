@@ -1,4 +1,4 @@
-import { IgnemCreateCharacterPage, IgnemCreateCharacterProps } from '../../ignem-create-character-page'
+import { IgnemCreateCharacterPage, IgnemCreateCharacterProps } from '../../ignem-create-character-page.js'
 import { html } from 'lithen-fns'
 import {
   CustomForm,
@@ -7,7 +7,7 @@ import {
   selectField,
   textAreaField,
   textBetweenDashes
-} from '@/common/ui'
+} from '@/common/ui/index.js'
 
 export function characterFirstForm(
   parent: IgnemCreateCharacterPage,

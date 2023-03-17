@@ -1,6 +1,6 @@
-import { failureResponse } from '@/presentation/helpers'
-import { Presenter } from '@/presentation/protocols'
-import { WarningNotifier } from '@/ui/protocols'
+import { failureResponse } from '@/presentation/helpers/index.js'
+import { Presenter } from '@/presentation/protocols/index.js'
+import { WarningNotifier } from '@/ui/protocols/index.js'
 
 export class ErrorHandlingPresenterDecorator implements Presenter {
   constructor(

@@ -1,13 +1,13 @@
-import { auth } from '@/account/main/decorators/page-factory-auth-decorator'
-import { makeLoginPage } from '@/account/main/factories'
-import { makeCreateAccountPage } from '@/account/main/factories/create-account-page-factory'
-import { introPage } from '@/introduction'
+import { auth } from '@/account/main/decorators/page-factory-auth-decorator.js'
+import { makeLoginPage } from '@/account/main/factories/index.js'
+import { makeCreateAccountPage } from '@/account/main/factories/create-account-page-factory.js'
+import { introPage } from '@/introduction/index.js'
 import {
   makeCharactersPage,
   makeCreateCharactersPage,
   makeHomePage,
-} from '@/main/factories/pages'
-import { notFoundPage } from '@/not-found/not-found-page'
+} from '@/main/factories/pages/index.js'
+import { notFoundPage } from '@/not-found/not-found-page.js'
 import { router } from 'lithen-router'
 
 export const configRoutes = () => router.defineRoutes({

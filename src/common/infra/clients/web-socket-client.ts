@@ -1,11 +1,11 @@
-import { WsServiceError, WebSocketConnectionFailedError } from '@/infra/errors'
+import { WsServiceError, WebSocketConnectionFailedError } from '@/infra/errors/index.js'
 import {
   CreateConnectionClient,
   MessageOnceListener,
   SendMessageClient,
   SendMessageClientParams,
   SendMessageClientResult,
-} from '@/infra/protocols'
+} from '@/infra/protocols/index.js'
 
 interface WebSocketClientEventHandlerParams {
   event: string

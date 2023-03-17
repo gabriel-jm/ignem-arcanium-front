@@ -1,2 +1,2 @@
-export * from './web-socket-connection-service'
-export * from './character-service'
+export * from './web-socket-connection-service.js'
+export * from './character-service.js'

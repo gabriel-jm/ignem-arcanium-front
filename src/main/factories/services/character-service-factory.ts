@@ -1,5 +1,5 @@
-import { CharacterService } from '@/infra/services'
-import { makeFetchHTTPClient } from '@/main/factories/clients'
+import { CharacterService } from '@/infra/services/index.js'
+import { makeFetchHTTPClient } from '@/main/factories/clients/index.js'
 
 export function makeCharacterService() {
   const httpClient = makeFetchHTTPClient()

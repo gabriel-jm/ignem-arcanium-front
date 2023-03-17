@@ -1,1 +1,1 @@
-export * from './lithen-router-adapter'
+export * from './lithen-router-adapter.js'

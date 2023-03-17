@@ -1,6 +1,6 @@
-import { CheckTokenExists } from '@/domain/protocols/use-cases'
-import { failureResponse, successResponse } from '@/presentation/helpers'
-import { Presenter } from '@/presentation/protocols'
+import { CheckTokenExists } from '@/domain/protocols/use-cases/index.js'
+import { failureResponse, successResponse } from '@/presentation/helpers/index.js'
+import { Presenter } from '@/presentation/protocols/index.js'
 
 export class CheckTokenExistsPresenter implements Presenter {
   constructor(

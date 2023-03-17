@@ -1,7 +1,7 @@
-import { InventoryWeapon } from '@/ui/protocols'
-import { itemProperty } from './item-card'
+import { InventoryWeapon } from '@/ui/protocols/index.js'
+import { itemProperty } from './item-card.js'
 import { html, el } from 'lithen-fns'
-import { damageFormater, propertiesFormater } from '@/item/ui/components/formaters'
+import { damageFormater, propertiesFormater } from '@/item/ui/components/formaters/index.js'
 
 export function weaponDetails(props: InventoryWeapon) {
   const {

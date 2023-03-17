@@ -1,5 +1,5 @@
-import { trashIcon } from '@/ui/view/components'
-import { characterStatsStyles } from '@/ui/view/styles'
+import { trashIcon } from '@/common/ui/index.js'
+import { characterStatsStyles } from '@/ui/view/styles/index.js'
 import { css, html } from 'lithen-fns'
 
 interface CharacterCardProps {

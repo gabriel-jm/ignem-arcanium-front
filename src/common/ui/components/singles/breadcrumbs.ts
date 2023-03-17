@@ -1,4 +1,4 @@
-import '@/ui/view'
+import '@/ui/view/index.js'
 import { router } from 'lithen-router'
 import { css, html, el } from 'lithen-fns'
 

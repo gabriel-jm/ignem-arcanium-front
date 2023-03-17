@@ -1,5 +1,5 @@
-import { CacheStore } from '@/common/infra/protocols'
-import { CheckTokenExists } from '@/domain/protocols/use-cases'
+import { CacheStore } from '@/common/infra/protocols/index.js'
+import { CheckTokenExists } from '@/domain/protocols/use-cases/index.js'
 
 export class LocalCheckTokenExists implements CheckTokenExists {
   constructor(private readonly cacheStore: CacheStore) {}

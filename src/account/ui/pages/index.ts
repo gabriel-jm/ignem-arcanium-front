@@ -1,1 +1,1 @@
-export * from './login/login-page'
+export * from './login/login-page.js'
