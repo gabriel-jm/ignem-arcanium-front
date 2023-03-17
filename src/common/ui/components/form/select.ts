@@ -1,6 +1,6 @@
 import { html } from 'lithen-fns'
 
-export interface IgnemSelectProps {
+export interface selectFieldProps {
   label?: string
   name: string
   options: string[]
@@ -8,13 +8,13 @@ export interface IgnemSelectProps {
   placeholder?: string
 }
 
-export function ignemSelect({
+export function selectField({
   label,
   options,
   name,
   className,
   placeholder
-}: IgnemSelectProps) {
+}: selectFieldProps) {
   function onChange(event: Event) {
     const select = event.target as HTMLSelectElement
 

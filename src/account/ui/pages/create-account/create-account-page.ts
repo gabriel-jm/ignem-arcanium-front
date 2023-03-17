@@ -1,10 +1,10 @@
 import { Presenter } from '@/presentation/protocols'
-import { IgnemForm, ignemInput, lockButtonUntil } from '@/ui/view/components'
 import { IgnemElement } from '@/ui/view/ignem-element'
 import { createAccountStyles } from './create-account-styles'
 import { router } from 'lithen-router'
 import { html } from 'lithen-fns'
 import { UiNotifier } from '@/common/ui/notifiers'
+import { lockButtonUntil, CustomForm, inputField } from '@/common/ui'
 
 export class CreateAccountPage extends IgnemElement {
   #createAccountPresenter: Presenter
@@ -23,7 +23,7 @@ export class CreateAccountPage extends IgnemElement {
   render() {
     const getButton = this.select.bind(this, '.btn')
     const handleSubmit = lockButtonUntil(getButton, async () => {
-      const form = this.select<IgnemForm>('form')!
+      const form = this.select<CustomForm>('form')!
       const formData = form.getData({
         name: 'string',
         email: 'string',
@@ -55,21 +55,21 @@ export class CreateAccountPage extends IgnemElement {
           <h1 class="form-title">Create Account</h1>
           
           ${[
-            ignemInput({
+            inputField({
               label: 'Name',
               name: 'name',
               className: 'input',
               placeholder: 'Name'
             }),
 
-            ignemInput({
+            inputField({
               label: 'E-Mail',
               name: 'email',
               className: 'input',
               placeholder: 'E-Mail'
             }),
 
-            ignemInput({
+            inputField({
               label: 'Password',
               className: 'input',
               name: 'password',

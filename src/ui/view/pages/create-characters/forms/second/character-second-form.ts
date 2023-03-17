@@ -1,8 +1,7 @@
 import { IgnemCreateCharacterPage, IgnemCreateCharacterProps } from '../../ignem-create-character-page'
 import { html } from 'lithen-fns'
-import { IgnemForm } from '@/ui/view/components'
 import { capitalize } from '@/common/ui/helpers'
-import { textBetweenDashes } from '@/common/ui'
+import { CustomForm, textBetweenDashes } from '@/common/ui'
 
 export function characterSecondForm(
   parent: IgnemCreateCharacterPage,
@@ -18,7 +17,7 @@ export function characterSecondForm(
   ]
 
   function updateStats() {
-    const form = parent.select('form[step="2"]') as IgnemForm
+    const form = parent.select('form[step="2"]') as CustomForm
     const data = form.getData<Record<string, number>>({
       level: 'number',
       strength: 'number',
@@ -63,7 +62,7 @@ export function characterSecondForm(
 
   async function onSubmitForm(event: Event) {
     event.preventDefault()
-    const form = event.target as IgnemForm
+    const form = event.target as CustomForm
 
     const data = form.getData(
       Object.fromEntries(

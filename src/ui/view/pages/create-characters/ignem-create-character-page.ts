@@ -8,9 +8,7 @@ import {
   containerStyles,
   formControlStyles
 } from '@/ui/view/styles'
-import {
-  IgnemForm,
-} from '@/ui/view/components'
+
 import { characterFirstForm } from './forms/first/character-first-form'
 import { characterSecondForm } from './forms/second/character-second-form'
 import { characterFourthForm } from './forms/fourth/character-fourth-form'
@@ -22,7 +20,7 @@ import { characterThirdForm } from './forms/third/character-third-form'
 import { characterThirdFormStyles } from './forms/third/character-third-form-styles'
 import { CreateCharacterParams } from '@/domain/protocols/use-cases'
 import { itemTinyCardStyles } from '@/item/ui'
-import { breadcrumbs, IgnemSteps, textBetweenDashesStyles } from '@/common/ui'
+import { breadcrumbs, CustomForm, IgnemSteps, textBetweenDashesStyles } from '@/common/ui'
 
 export interface IgnemCreateCharacterProps {
   listItemsPresenter: Presenter
@@ -45,7 +43,7 @@ export class IgnemCreateCharacterPage extends IgnemElement {
   }
 
   get form() {
-    return this.select<IgnemForm>('[form]')!
+    return this.select<CustomForm>('[form]')!
   }
 
   async init() {

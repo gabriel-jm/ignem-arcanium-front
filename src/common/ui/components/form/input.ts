@@ -5,7 +5,7 @@ export const InputMasks = {
   ONLY_NUMBERS: /\D+/g
 } as const
 
-type IgnemInputProps = {
+type inputFieldProps = {
   label?: string
   className?: string
   name: string
@@ -14,7 +14,7 @@ type IgnemInputProps = {
   mask?: keyof typeof InputMasks | RegExp
 }
 
-export function ignemInput(props: IgnemInputProps) {
+export function inputField(props: inputFieldProps) {
   const { label, className, mask, ...attributes } = props
 
   function onInput(event: Event) {

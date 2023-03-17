@@ -1,16 +1,11 @@
 import { router } from 'lithen-router'
 import { html } from 'lithen-fns'
 import { IgnemElement } from '@/ui/view/ignem-element'
-import {
-  IgnemForm,
-  ignemInput,
-  loadingIcon,
-  lockButtonUntil,
-} from '@/ui/view/components'
 import { Presenter } from '@/presentation/protocols'
 import { SuccessNotifier } from '@/ui/protocols'
 import { loginStyles } from './login-styles'
-import { textBetweenDashes } from '@/common/ui'
+import { CustomForm, inputField, lockButtonUntil, textBetweenDashes } from '@/common/ui'
+import { loadingIcon } from '@/ui/view/components'
 
 export class LoginPage extends IgnemElement {
   static tokenChecked = false
@@ -52,7 +47,7 @@ export class LoginPage extends IgnemElement {
   render() {
     const getButton = this.select.bind(this, '.link')
     const handleSubmit = lockButtonUntil(getButton, async () => {
-      const form = this.select<IgnemForm>('form')
+      const form = this.select<CustomForm>('form')
 
       const formData = form?.getData({
         email: 'string',
@@ -80,14 +75,14 @@ export class LoginPage extends IgnemElement {
           <h1 class="form-title">Login</h1>
 
           ${[
-            ignemInput({
+            inputField({
               label: 'E-Mail',
               name: 'email',
               className: 'input',
               placeholder: 'E-Mail'
             }),
             
-            ignemInput({
+            inputField({
               label: 'Password',
               className: 'input',
               name: 'password',

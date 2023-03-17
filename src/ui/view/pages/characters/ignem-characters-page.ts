@@ -1,7 +1,5 @@
-import '@/ui/view'
-import './modal/ignem-character-modal'
 import { Presenter } from '@/presentation/protocols'
-import { breadcrumbs, containerStyles } from '@/ui/view'
+import { containerStyles } from '@/ui/view'
 import { confirmDialog, confirmDialogStyles, loadingIcon } from '@/ui/view/components'
 import { IgnemElement } from '@/ui/view/ignem-element'
 import { css, html, ref } from 'lithen-fns'
@@ -10,6 +8,7 @@ import { router } from 'lithen-router'
 import { IgnemCharacterModal } from './modal/ignem-character-modal'
 import { FindAllCharactersResult } from '@/domain/protocols/use-cases'
 import { UiNotifier } from '@/common/ui/notifiers'
+import { breadcrumbs } from '@/common/ui/components'
 
 type Character = FindAllCharactersResult
 

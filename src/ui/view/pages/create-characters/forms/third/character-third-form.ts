@@ -1,13 +1,12 @@
 import { html } from 'lithen-fns'
 import {
   IgnemEquipmentSlot,
-  IgnemForm,
 } from '@/ui/view/components'
 import { IgnemCreateCharacterPage, IgnemCreateCharacterProps } from '../../ignem-create-character-page'
 import { IgnemItemTinyCard, itemCard } from '@/item/ui'
 import { Item } from '@/item/types/items'
 import { ItemsStore } from '@/item/ui/store/items-store'
-import { textBetweenDashes } from '@/common/ui'
+import { CustomForm, textBetweenDashes } from '@/common/ui'
 
 export function characterThirdForm(
   parent: IgnemCreateCharacterPage,
@@ -47,7 +46,7 @@ export function characterThirdForm(
 
   async function onSubmitForm(event: Event) {
     event.preventDefault()
-    const form = event.target as IgnemForm
+    const form = event.target as CustomForm
 
     const equipmentsId = Object.fromEntries(
       parent

@@ -31,7 +31,7 @@ const formDataParser: FormDataParser = {
   }
 }
 
-export class IgnemForm extends HTMLFormElement {
+export class CustomForm extends HTMLFormElement {
   get root() {
     return this
   }
@@ -103,4 +103,4 @@ export class IgnemForm extends HTMLFormElement {
   }
 }
 
-customElements.define('ignem-form', IgnemForm, { extends: 'form' })
+customElements.define('ignem-form', CustomForm, { extends: 'form' })

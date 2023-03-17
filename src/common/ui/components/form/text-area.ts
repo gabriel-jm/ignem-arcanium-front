@@ -1,6 +1,6 @@
 import { html } from 'lithen-fns'
 
-export interface IgnemTextareaProps {
+export interface textAreaFieldProps {
   label?: string
   name: string
   placeholder?: string
@@ -8,13 +8,13 @@ export interface IgnemTextareaProps {
   containerClassName?: string
 }
 
-export function ignemTextarea({
+export function textAreaField({
   label,
   name,
   placeholder,
   containerClassName,
   className
-}: IgnemTextareaProps) {
+}: textAreaFieldProps) {
   return html`
     <label class="form-control-container ${containerClassName}">
       ${label && html`<span>${label}</span>`}

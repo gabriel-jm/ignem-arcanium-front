@@ -1,13 +1,13 @@
-import {
-  IgnemForm,
-  ignemInput,
-  ignemSelect,
-  ignemTextarea,
-  InputMasks,
-} from '@/ui/view/components'
 import { IgnemCreateCharacterPage, IgnemCreateCharacterProps } from '../../ignem-create-character-page'
 import { html } from 'lithen-fns'
-import { textBetweenDashes } from '@/common/ui'
+import {
+  CustomForm,
+  inputField,
+  InputMasks,
+  selectField,
+  textAreaField,
+  textBetweenDashes
+} from '@/common/ui'
 
 export function characterFirstForm(
   parent: IgnemCreateCharacterPage,
@@ -25,7 +25,7 @@ export function characterFirstForm(
 
   const onSubmitForm = async (event: Event) => {
     event.preventDefault()
-    const form = event.target as IgnemForm
+    const form = event.target as CustomForm
 
     const data = form.getData({
       name: 'string',
@@ -76,13 +76,13 @@ export function characterFirstForm(
 
       <div class="first-form">
         ${[
-          ignemInput({
+          inputField({
             label: 'Name',
             name: 'name',
             placeholder: 'Enter your character name'
           }),
           
-          ignemSelect({
+          selectField({
             label: 'Alignment',
             name: 'alignment',
             placeholder: 'Select alignment',
@@ -99,21 +99,21 @@ export function characterFirstForm(
             ]
           }),
 
-          ignemInput({
+          inputField({
             label: 'Level',
             name: 'level',
             placeholder: 'Current character level',
             mask: InputMasks.ONLY_NUMBERS
           }),
 
-          ignemInput({
+          inputField({
             label: 'Gold',
             name: 'gold',
             placeholder: 'Gold amount',
             mask: InputMasks.ONLY_NUMBERS
           }),
 
-          ignemTextarea({
+          textAreaField({
             label: 'Description',
             name: 'description',
             placeholder: 'Describe your character and story',
