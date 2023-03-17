@@ -1,4 +1,4 @@
-import { css, raw } from 'lithen-fns'
+import { css, el } from 'lithen-fns'
 import { iconsStyles } from '@/ui/view'
 
 export function alertIcon() {
@@ -18,7 +18,7 @@ export function alertIcon() {
     }
   `
 
-  return raw`
+  return el/*html*/`
     <ignem-wrapper css="${styles}">
       <svg
         xmlns="http://www.w3.org/2000/svg"

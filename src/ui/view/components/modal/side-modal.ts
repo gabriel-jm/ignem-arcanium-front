@@ -1,5 +1,5 @@
 import { containerStyles, IgnemElement } from '@/ui/view'
-import { css, raw } from 'lithen-fns'
+import { css, el } from 'lithen-fns'
 
 export interface IgnemSideModalElement extends IgnemElement {
   open(): void
@@ -109,13 +109,13 @@ export class IgnemSideModal extends IgnemElement {
       }
     })
 
-    return raw`
+    return el/*html*/`
       <section class="container">
         <div class="side-modal-container">
           <slot></slot>
         </div>
       </section>
-    `
+    ` as Element
   }
 }
 

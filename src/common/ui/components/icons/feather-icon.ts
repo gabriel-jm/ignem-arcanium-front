@@ -1,7 +1,7 @@
 import { iconsStyles } from '@/ui/view/styles'
-import { raw } from 'lithen-fns'
+import { el } from 'lithen-fns'
 
-export const featherIcon = () => raw`
+export const featherIcon = () => el/*html*/`
   <ignem-wrapper class="feather-icon" css="${iconsStyles}">
     <svg
       xmlns="http://www.w3.org/2000/svg"

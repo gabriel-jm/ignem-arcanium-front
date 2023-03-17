@@ -1,5 +1,5 @@
 import { capitalize } from '@/common/ui/helpers'
-import { css, html, raw } from 'lithen-fns'
+import { css, html, el } from 'lithen-fns'
 
 export const propertiesFormaterStyles = css`
   .property-container span {
@@ -18,7 +18,7 @@ export const propertiesFormaterStyles = css`
 export function propertiesFormater(propertyNames: string[]) {
   return html`
     <span class="property-container">
-      ${propertyNames.map(property => raw`
+      ${propertyNames.map(property => el/*html*/`
         <span>${capitalize(property)}</span>
       `)}
     </span>

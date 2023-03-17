@@ -1,4 +1,4 @@
-import { css, raw } from 'lithen-fns'
+import { css, el } from 'lithen-fns'
 
 export function menuIcon() {
   const styles = css`
@@ -11,7 +11,7 @@ export function menuIcon() {
     }
   `
 
-  return raw`
+  return el/*html*/`
     <ignem-wrapper class="menu-icon" css="${styles}">
       <svg
         xmlns="http://www.w3.org/2000/svg"

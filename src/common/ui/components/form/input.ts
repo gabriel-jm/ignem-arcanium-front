@@ -1,5 +1,5 @@
 import { toHtmlAttributes } from '@/common/ui/helpers'
-import { html, raw } from 'lithen-fns'
+import { el, html } from 'lithen-fns'
 
 export const InputMasks = {
   ONLY_NUMBERS: /\D+/g
@@ -32,7 +32,7 @@ export function inputField(props: inputFieldProps) {
 
   return html`
     <label class="form-control-container">
-      ${label && raw`<span>${label}</span>`}
+      ${label && el/*html*/`<span>${label}</span>`}
       <input
         class="form-control ${className}"
         on-input=${onInput}

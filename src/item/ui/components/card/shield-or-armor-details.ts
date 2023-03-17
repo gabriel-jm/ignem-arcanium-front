@@ -1,6 +1,6 @@
 import { InventoryShieldOrArmor } from '@/ui/protocols'
 import { itemProperty } from './item-card'
-import { html, raw } from 'lithen-fns'
+import { html, el } from 'lithen-fns'
 import { damageFormater, propertiesFormater } from '@/item/ui/components/formaters'
 
 export function shieldOrArmorDetails(props: InventoryShieldOrArmor) {
@@ -25,7 +25,7 @@ export function shieldOrArmorDetails(props: InventoryShieldOrArmor) {
       <span class="property-name">Properties</span>
       ${properties.length
         ? propertiesFormater(properties)
-        : raw`<span>-</span>`
+        : el/*html*/`<span>-</span>`
       }
     </p>
     

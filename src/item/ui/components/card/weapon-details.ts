@@ -1,6 +1,6 @@
 import { InventoryWeapon } from '@/ui/protocols'
 import { itemProperty } from './item-card'
-import { html, raw } from 'lithen-fns'
+import { html, el } from 'lithen-fns'
 import { damageFormater, propertiesFormater } from '@/item/ui/components/formaters'
 
 export function weaponDetails(props: InventoryWeapon) {
@@ -26,7 +26,7 @@ export function weaponDetails(props: InventoryWeapon) {
       <span class="property-name">Properties</span>
       ${properties.length
         ? propertiesFormater(properties)
-        : raw`<span>-</span>`
+        : el/*html*/`<span>-</span>`
       }
     </p>
     

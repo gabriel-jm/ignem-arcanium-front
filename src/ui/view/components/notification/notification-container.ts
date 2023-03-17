@@ -1,5 +1,5 @@
 import { IgnemElement, IgnemNotification } from '@/ui/view'
-import { css, raw } from 'lithen-fns'
+import { css, el } from 'lithen-fns'
 
 export interface IgnemNotificationContainerElement extends IgnemElement {
   addNotification(notificationElement: IgnemNotification): void
@@ -30,7 +30,7 @@ export class IgnemNotificationContainer extends IgnemElement {
   }
 
   render() {
-    return raw`<div></div>`
+    return el/*html*/`<div></div>` as Element
   }
 }
 

@@ -1,7 +1,7 @@
-import { raw } from 'lithen-fns'
+import { el } from 'lithen-fns'
 import { iconsStyles } from '@/ui/view/styles'
 
-export const trashIcon = () => raw`
+export const trashIcon = () => el/*html*/`
   <ignem-wrapper class="trash-icon" css="${iconsStyles}">
     <svg
       xmlns="http://www.w3.org/2000/svg"

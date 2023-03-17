@@ -1,7 +1,7 @@
-import { raw } from 'lithen-fns'
+import { el } from 'lithen-fns'
 import { iconsStyles } from '@/ui/view/styles'
 
-export const minusIcon = () => raw`
+export const minusIcon = () => el/*html*/`
   <ignem-wrapper class="minus-icon" css="${iconsStyles}">
     <svg
       width="24"

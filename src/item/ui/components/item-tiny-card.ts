@@ -1,5 +1,5 @@
 import { itemIconByType } from './item-icon-by-type'
-import { css, html, raw } from 'lithen-fns'
+import { css, html, el } from 'lithen-fns'
 import { IgnemElement } from '@/ui/view/ignem-element'
 import { capitalize } from '@/common/ui/helpers'
 import { Item } from '@/item/types/items'
@@ -151,7 +151,7 @@ export class IgnemItemTinyCard extends IgnemElement {
               on-decrement=${onDecrement}
             />
           `}
-          ${!isQuantityControlEnabled && showAttr && raw`
+          ${!isQuantityControlEnabled && showAttr && el/*html*/`
             <span class="attr">
               ${capitalize(showAttr)} ${Reflect.get(this.#props, showAttr)}
             </span>

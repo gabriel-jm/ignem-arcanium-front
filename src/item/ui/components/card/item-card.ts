@@ -1,4 +1,4 @@
-import { html, raw } from 'lithen-fns'
+import { html, el } from 'lithen-fns'
 import {
   InventoryAlchemicalItem,
   InventoryShieldOrArmor,
@@ -13,7 +13,7 @@ import { AnyKindOfItem } from '@/item/types/items'
 
 export type ItemDetailsProps = AnyKindOfItem
 
-export const itemProperty = (name: string, value: any) => raw`
+export const itemProperty = (name: string, value: any) => el/*html*/`
   <p>
     <span class="property-name">${name}</span>
     <span>${value}</span>

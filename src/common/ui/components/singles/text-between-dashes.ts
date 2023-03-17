@@ -1,4 +1,4 @@
-import { css, raw } from 'lithen-fns'
+import { css, el } from 'lithen-fns'
 
 export const textBetweenDashesStyles = css`
   .text-between-dashes {
@@ -22,7 +22,7 @@ export const textBetweenDashesStyles = css`
   }
 `
 
-export const textBetweenDashes = (text: string) => raw`
+export const textBetweenDashes = (text: string) => el/*html*/`
   <div class="text-between-dashes">
     <span class="line"></span>
     <span>${text}</span>

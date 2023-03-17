@@ -1,6 +1,6 @@
 import '@/ui/view'
 import { router } from 'lithen-router'
-import { css, html, raw } from 'lithen-fns'
+import { css, html, el } from 'lithen-fns'
 
 type BreadcrumbsProps = Record<string, string>
 
@@ -32,7 +32,7 @@ export function breadcrumbs(props: BreadcrumbsProps) {
     <ignem-wrapper css="${breadcrumbsStyles}">
       ${Object.entries(props).map(([name, path]) => {
         if (path === 'current') {
-          return raw`<span class="current">${name}</span>`
+          return el/*html*/`<span class="current">${name}</span>`
         }
 
         return html`

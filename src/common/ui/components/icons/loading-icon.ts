@@ -1,5 +1,5 @@
 import { iconsStyles } from '@/ui/view/styles'
-import { css, raw } from 'lithen-fns'
+import { css, el } from 'lithen-fns'
 
 export function loadingIcon() {
   const styles = css`
@@ -18,7 +18,7 @@ export function loadingIcon() {
     }
   `
   
-  return raw`
+  return el/*html*/`
     <ignem-wrapper class="loading-icon" css="${styles}">
       <svg
         xmlns="http://www.w3.org/2000/svg"

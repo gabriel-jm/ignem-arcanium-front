@@ -1,5 +1,5 @@
 import { IgnemElement } from '@/ui/view/ignem-element'
-import { css, html, raw } from 'lithen-fns'
+import { css, html, el } from 'lithen-fns'
 
 /**
  * @attr {string} steps
@@ -127,7 +127,7 @@ export class IgnemSteps extends IgnemElement {
         >
           ${step}
         </div>
-        ${step !== arr.length && raw`
+        ${step !== arr.length && el/*html*/`
           <div class="line"></div>
         `}
       `
