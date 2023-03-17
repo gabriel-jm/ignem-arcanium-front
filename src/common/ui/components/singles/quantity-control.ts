@@ -1,4 +1,4 @@
-import { minusIcon, plusIcon } from '@/ui/view/components/icons'
+import { minusIcon, plusIcon } from '@/common/ui/components/icons'
 import { IgnemElement } from '@/ui/view/ignem-element'
 import { css, html } from 'lithen-fns'
 

@@ -1,4 +1,4 @@
-export * from './icons'
+export * from '../../../common/ui/components/icons'
 export * from './notification'
 
 export * from './modal/side-modal'
