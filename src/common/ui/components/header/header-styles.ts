@@ -8,9 +8,9 @@ export const headerStyles = css`
   .header {
     background: linear-gradient(
       150deg,
-      var(--body-bg-color),
-      var(--bright-black) 20%,
-      var(--black) 70%
+      var(--black) 50%,
+      var(--bright-black) 80%,
+      var(--body-bg-color) 95%
     );
     display: block;
     padding: 6px 10px;

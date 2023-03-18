@@ -1,3 +1,4 @@
+import './modal/ignem-character-modal.js'
 import { Presenter } from '@/presentation/protocols/index.js'
 import { containerStyles } from '@/ui/view/styles/index.js'
 import { IgnemElement } from '@/ui/view/ignem-element.js'
@@ -20,6 +21,7 @@ interface CharactersPageProps {
 export class IgnemCharactersPage extends IgnemElement {
   #props: CharactersPageProps
   #dialogRef = ref<DialogElement>()
+  #characterModalRef = ref<IgnemCharacterModal>()
   #currentChar?: Character
   
   constructor(props: CharactersPageProps) {
@@ -37,8 +39,8 @@ export class IgnemCharactersPage extends IgnemElement {
 
     const onClickCharacterCard = (character: Character) => {
       return () => {
-        this.select<IgnemCharacterModal>('ignem-character-modal')
-          .open(character)
+        console.log(this.#characterModalRef.el)
+        this.#characterModalRef.el?.open(character)
       }
     }
 
@@ -148,7 +150,7 @@ export class IgnemCharactersPage extends IgnemElement {
           ${loadingIcon()}
         </div>
 
-        <ignem-character-modal  />
+        <ignem-character-modal ref=${this.#characterModalRef} />
       </section>
 
       ${confirmDialog({
