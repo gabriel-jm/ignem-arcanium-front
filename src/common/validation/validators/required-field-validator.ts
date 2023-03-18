@@ -1,4 +1,4 @@
-import { Validator } from '@/validation/protocols/index.js'
+import { Validator } from '@/common/validation/protocols/index.js'
 
 export const requiredFieldValidator: Validator = (
   input: any, field: string

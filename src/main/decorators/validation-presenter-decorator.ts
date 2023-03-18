@@ -1,6 +1,6 @@
 import { validationErrorResponse } from '@/presentation/helpers/index.js'
 import { Presenter } from '@/presentation/protocols/index.js'
-import { createValidator } from '@/validation/facades/index.js'
+import { createValidator } from '@/common/validation/facades/index.js'
 
 export class ValidationPresenterDecorator implements Presenter {
   private readonly validator: (input: unknown) => any
