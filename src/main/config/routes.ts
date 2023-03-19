@@ -8,9 +8,11 @@ import {
   makeHomePage,
 } from '@/main/factories/pages/index.js'
 import { notFoundPage } from '@/not-found/not-found-page.js'
-import { router } from 'lithen-router'
+import { LithenRouter } from 'lithen-router'
 
-export const configRoutes = () => router.defineRoutes({
+type ElementFactory = () => Node | null | Promise<Node | null>
+
+export const router = new LithenRouter<ElementFactory>({
   '/': introPage,
   '/login': makeLoginPage,
   '/create-account': makeCreateAccountPage,

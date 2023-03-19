@@ -1,6 +1,6 @@
 import { buttonStyles } from '@/ui/view/styles/index.js'
 import { css, html } from 'lithen-fns'
-import { router } from 'lithen-router'
+import { router } from '@/main/config/routes.js'
 
 const introPageStyles = css`
   ${buttonStyles}
@@ -27,7 +27,7 @@ const introPageStyles = css`
 
 export function introPage() {
   function onClick() {
-    router.goTo('/login')
+    router.navigate('/login')
   }
 
   return html`

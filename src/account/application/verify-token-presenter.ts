@@ -1,4 +1,4 @@
-import { router } from 'lithen-router'
+import { router } from '@/main/config/routes.js'
 import { CacheStore } from '@/common/infra/protocols/index.js'
 import { InvalidTokenError } from '@/domain/error/index.js'
 import { successResponse } from '@/presentation/helpers/index.js'
@@ -35,7 +35,7 @@ export class VerifyTokenPresenter implements Presenter {
 
       return successResponse(null)
     } catch(error) {
-      router.goTo('/login')
+      router.navigate('/login')
 
       throw error
     }

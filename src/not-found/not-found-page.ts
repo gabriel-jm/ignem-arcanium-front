@@ -1,6 +1,6 @@
 import { buttonStyles } from '@/ui/view/styles/index.js'
 import { css, html } from 'lithen-fns'
-import { router } from 'lithen-router'
+import { router } from '@/main/config/routes.js'
 
 const notFoundStyle = css`
   ${buttonStyles}
@@ -19,7 +19,7 @@ export function notFoundPage() {
       <h1>Page Not Found</h1>
       <button
         class="btn"
-        on-click=${() => router.goTo('/home')}
+        on-click=${() => router.navigate('/home')}
       >
         Home
       </button>

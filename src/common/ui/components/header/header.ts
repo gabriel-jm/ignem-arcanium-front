@@ -1,7 +1,7 @@
 import { html, ref } from 'lithen-fns'
 import { IgnemElement } from '@/ui/view/index.js'
 import { headerStyles } from './header-styles.js'
-import { router } from 'lithen-router'
+import { router } from '@/main/config/routes.js'
 import { confirmDialog } from '@/ui/view/components/index.js'
 import { AccountStore } from '@/account/ui/stores/account-store.js'
 import { logOutIcon } from '../index.js'
@@ -31,7 +31,7 @@ export class IgnemHeader extends IgnemElement {
           <div>
             <h1
               class="title"
-              on-click=${() => router.goTo('/home')}
+              on-click=${() => router.navigate('/home')}
             >
               Ignem Arcanium
             </h1>

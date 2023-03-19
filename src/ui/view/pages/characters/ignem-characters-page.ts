@@ -4,7 +4,7 @@ import { containerStyles } from '@/ui/view/styles/index.js'
 import { IgnemElement } from '@/ui/view/ignem-element.js'
 import { css, html, ref } from 'lithen-fns'
 import { characterCard, characterCardStyles } from './card/character-card.js'
-import { router } from 'lithen-router'
+import { router } from '@/main/config/routes.js'
 import { IgnemCharacterModal } from './modal/ignem-character-modal.js'
 import { FindAllCharactersResult } from '@/domain/protocols/use-cases/index.js'
 import { UiNotifier } from '@/common/ui/notifiers/index.js'
@@ -62,7 +62,7 @@ export class IgnemCharactersPage extends IgnemElement {
       .concat(html`
         <button
           class="new-btn"
-          on-click=${() => router.goTo('/characters/create')}
+          on-click=${() => router.navigate('/characters/create')}
         >
           &plus; New
         </button>

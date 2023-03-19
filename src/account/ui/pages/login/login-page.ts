@@ -1,4 +1,4 @@
-import { router } from 'lithen-router'
+import { router } from '@/main/config/routes.js'
 import { html } from 'lithen-fns'
 import { IgnemElement } from '@/ui/view/ignem-element.js'
 import { Presenter } from '@/presentation/protocols/index.js'
@@ -33,7 +33,7 @@ export class LoginPage extends IgnemElement {
       const result = await this.#checkTokenExists.handle()
 
       if (result.ok) {
-        return router.goTo('/home')
+        return router.navigate('/home')
       }
     }
     
@@ -64,7 +64,7 @@ export class LoginPage extends IgnemElement {
           'Success',
           'Logged in with success'
         )
-        router.goTo('/home')
+        router.navigate('/home')
       }
     })
   
@@ -97,7 +97,7 @@ export class LoginPage extends IgnemElement {
 
           <button
             class="link"
-            on-click=${() => router.goTo('/create-account')}
+            on-click=${() => router.navigate('/create-account')}
           >
             Create account
           </button>

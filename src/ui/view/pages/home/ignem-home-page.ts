@@ -2,7 +2,7 @@ import '@/ui/view/components/index.js'
 import { IgnemElement } from '@/ui/view/ignem-element.js'
 import { css, html } from 'lithen-fns'
 import { buttonStyles, containerStyles } from '@/ui/view/styles/index.js'
-import { router } from 'lithen-router'
+import { router } from '@/main/config/routes.js'
 import { AccountStore } from '@/account/ui/stores/account-store.js'
 
 export class IgnemHomePage extends IgnemElement {
@@ -30,7 +30,7 @@ export class IgnemHomePage extends IgnemElement {
           <li>
             <button
               class="btn"
-              on-click=${() => router.goTo('/characters')}
+              on-click=${() => router.navigate('/characters')}
             >
               Characters
             </button>

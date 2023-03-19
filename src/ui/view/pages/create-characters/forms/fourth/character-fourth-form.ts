@@ -1,7 +1,7 @@
 import { html } from 'lithen-fns'
 import { IgnemCreateCharacterPage, IgnemCreateCharacterProps } from '../../ignem-create-character-page.js'
 import { InventoryItem } from '@/ui/protocols/index.js'
-import { router } from 'lithen-router'
+import { router } from '@/main/config/routes.js'
 import { IgnemItemTinyCard, itemCard } from '@/item/ui/index.js'
 import { Item } from '@/item/types/items.js'
 import { ItemsStore } from '@/item/ui/store/items-store.js'
@@ -135,7 +135,7 @@ export function characterFourthForm(
       })
 
     if (result.ok) {
-      router.goTo('/characters')
+      router.navigate('/characters')
     }
   }
   

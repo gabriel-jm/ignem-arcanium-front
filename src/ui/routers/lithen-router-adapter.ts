@@ -1,8 +1,8 @@
 import { Router } from '@/presentation/protocols/index.js'
-import { router } from 'lithen-router'
+import { router } from '@/main/config/routes.js'
 
 export class LithenRouterAdapter implements Router {
   navigate(path: string): void {
-    router.goTo(path)
+    router.navigate(path)
   }
 }

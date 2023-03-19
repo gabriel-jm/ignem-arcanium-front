@@ -1,5 +1,5 @@
 import '@/ui/view/index.js'
-import { router } from 'lithen-router'
+import { router } from '@/main/config/routes.js'
 import { css, html, el } from 'lithen-fns'
 
 type BreadcrumbsProps = Record<string, string>
@@ -25,7 +25,7 @@ export function breadcrumbs(props: BreadcrumbsProps) {
   `
 
   function onClick(path: string) {
-    return () => router.goTo(path)
+    return () => router.navigate(path)
   }
   
   return html`
