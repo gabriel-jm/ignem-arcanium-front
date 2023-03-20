@@ -1,5 +1,5 @@
 import { css, el } from 'lithen-fns'
-import { iconsStyles } from '@/ui/view/index.js'
+import { iconsStyles } from '@/common/ui/styles/index.js'
 
 export function alertIcon() {
   const styles = css`

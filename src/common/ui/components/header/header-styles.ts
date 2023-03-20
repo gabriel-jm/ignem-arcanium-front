@@ -1,5 +1,5 @@
 import { confirmDialogStyles } from '@/ui/view/components/index.js'
-import { containerStyles } from '@/ui/view/styles/index.js'
+import { containerStyles } from '@/common/ui/styles/index.js'
 import { css } from 'lithen-fns'
 
 export const headerStyles = css`

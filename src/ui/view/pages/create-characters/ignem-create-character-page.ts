@@ -6,7 +6,7 @@ import {
   buttonStyles,
   containerStyles,
   formControlStyles
-} from '@/ui/view/styles/index.js'
+} from '@/common/ui/styles/index.js'
 
 import { characterFirstForm } from './forms/first/character-first-form.js'
 import { characterSecondForm } from './forms/second/character-second-form.js'

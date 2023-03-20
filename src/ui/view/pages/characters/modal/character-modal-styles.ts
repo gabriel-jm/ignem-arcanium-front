@@ -1,4 +1,4 @@
-import { characterStatsStyles } from '@/ui/view/styles/index.js'
+import { characterStatsStyles } from '@/common/ui/styles/index.js'
 import { css } from 'lithen-fns'
 
 export const characterModalStyles = css`

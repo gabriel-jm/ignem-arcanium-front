@@ -1,5 +1,6 @@
-import { IgnemElement, IgnemNotification } from '@/ui/view/index.js'
 import { css, el } from 'lithen-fns'
+import { IgnemElement } from '../../ignem-element.js'
+import { IgnemNotification } from './notification.js'
 
 export interface IgnemNotificationContainerElement extends IgnemElement {
   addNotification(notificationElement: IgnemNotification): void

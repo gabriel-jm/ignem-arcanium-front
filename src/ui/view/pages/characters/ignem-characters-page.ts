@@ -1,6 +1,6 @@
 import './modal/ignem-character-modal.js'
 import { Presenter } from '@/presentation/protocols/index.js'
-import { containerStyles } from '@/ui/view/styles/index.js'
+import { containerStyles } from '@/common/ui/styles/index.js'
 import { IgnemElement } from '@/ui/view/ignem-element.js'
 import { css, html, ref } from 'lithen-fns'
 import { characterCard, characterCardStyles } from './card/character-card.js'

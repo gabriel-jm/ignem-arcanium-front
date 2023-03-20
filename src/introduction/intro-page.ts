@@ -1,4 +1,4 @@
-import { buttonStyles } from '@/ui/view/styles/index.js'
+import { buttonStyles } from '@/common/ui/styles/index.js'
 import { css, html } from 'lithen-fns'
 import { router } from '@/main/config/routes.js'
 

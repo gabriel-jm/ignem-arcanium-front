@@ -1,5 +1,5 @@
 import { css } from 'lithen-fns'
-import { tooltipStyles } from '@/ui/view/styles/index.js'
+import { tooltipStyles } from '@/common/ui/styles/index.js'
 
 export const characterSecondFormStyles = css`
   ${tooltipStyles}

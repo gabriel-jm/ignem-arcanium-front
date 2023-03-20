@@ -1,9 +1,9 @@
 import '@/main/config/routes.js'
-import { sharedStyles } from '@/ui/view/styles/index.js'
+import { sharedStyles } from '@/common/ui/styles/index.js'
 
 function init() {
   import('@/common/ui/index.js')
-  import('@/ui/view/index.js')
+  import('@/common/ui/styles/index.js')
   
   sharedStyles()
 }

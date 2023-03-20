@@ -1,5 +1,5 @@
 import { router } from '@/main/config/routes.js'
-import { IgnemElement } from '@/ui/view/index.js'
+import { IgnemElement } from '@/ui/view/ignem-element.js'
 
 export class AppRoot extends IgnemElement {
   constructor() {

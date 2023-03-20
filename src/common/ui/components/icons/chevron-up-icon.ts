@@ -1,4 +1,4 @@
-import { iconsStyles } from '@/ui/view/index.js'
+import { iconsStyles } from '@/common/ui/styles/index.js'
 import { el } from 'lithen-fns'
 
 export const chevronUpIcon = () => el/*html*/`

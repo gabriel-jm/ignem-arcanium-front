@@ -1,5 +1,6 @@
-import { containerStyles, IgnemElement } from '@/ui/view/index.js'
+import { containerStyles } from '@/common/ui/styles/index.js'
 import { css, el } from 'lithen-fns'
+import { IgnemElement } from '../../ignem-element.js'
 
 export interface IgnemSideModalElement extends IgnemElement {
   open(): void
