@@ -1,4 +1,3 @@
-import './modal/ignem-character-modal.js'
 import { Presenter } from '@/presentation/protocols/index.js'
 import { containerStyles } from '@/common/ui/styles/index.js'
 import { IgnemElement } from '@/ui/view/ignem-element.js'
@@ -8,8 +7,7 @@ import { router } from '@/main/config/routes.js'
 import { IgnemCharacterModal } from './modal/ignem-character-modal.js'
 import { FindAllCharactersResult } from '@/domain/protocols/use-cases/index.js'
 import { UiNotifier } from '@/common/ui/notifiers/index.js'
-import { breadcrumbs, loadingIcon } from '@/common/ui/components/index.js'
-import { confirmDialogStyles, confirmDialog } from '../../components/index.js'
+import { breadcrumbs, confirmDialog, confirmDialogStyles, loadingIcon } from '@/common/ui/components/index.js'
 
 type Character = FindAllCharactersResult
 

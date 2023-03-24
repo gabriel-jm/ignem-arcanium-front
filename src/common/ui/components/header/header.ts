@@ -1,9 +1,8 @@
 import { html, ref } from 'lithen-fns'
 import { headerStyles } from './header-styles.js'
 import { router } from '@/main/config/routes.js'
-import { confirmDialog } from '@/ui/view/components/index.js'
 import { AccountStore } from '@/account/ui/stores/account-store.js'
-import { logOutIcon } from '../index.js'
+import { confirmDialog, logOutIcon } from '../index.js'
 import { IgnemElement } from '@/ui/view/ignem-element.js'
 
 export class IgnemHeader extends IgnemElement {
