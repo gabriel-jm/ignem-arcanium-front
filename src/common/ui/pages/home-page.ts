@@ -1,26 +1,22 @@
-import '@/ui/view/components/index.js'
-import { IgnemElement } from '@/ui/view/ignem-element.js'
 import { css, html } from 'lithen-fns'
 import { buttonStyles, containerStyles } from '@/common/ui/styles/index.js'
 import { router } from '@/main/config/routes.js'
 import { AccountStore } from '@/account/ui/stores/account-store.js'
 
-export class IgnemHomePage extends IgnemElement {
-  styling() {
-    return css`
-      ${[containerStyles, buttonStyles]}
+const homePageStyles = css`
+  ${[containerStyles, buttonStyles]}
 
-      ul {
-        margin-top: 20px;
-      }
-    `
+  ul {
+    margin-top: 20px;
   }
+`
 
-  render() {
-    const accountStore = new AccountStore()
-    const accountName = accountStore.account?.name
+export function homePage() {
+  const accountStore = new AccountStore()
+  const accountName = accountStore.account?.name
 
-    return html`
+  return html`
+    <ignem-wrapper css="${homePageStyles}">
       <ignem-header />
 
       <section class="container">
@@ -37,8 +33,6 @@ export class IgnemHomePage extends IgnemElement {
           </li>
         </ul>
       </section>
-    `
-  }
+    </ignem-wrapper>
+  `
 }
-
-customElements.define('ignem-home', IgnemHomePage)

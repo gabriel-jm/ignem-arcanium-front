@@ -5,10 +5,10 @@ import { introPage } from '@/introduction/index.js'
 import {
   makeCharactersPage,
   makeCreateCharactersPage,
-  makeHomePage,
 } from '@/main/factories/pages/index.js'
 import { notFoundPage } from '@/not-found/not-found-page.js'
 import { LithenRouter } from 'lithen-router'
+import { makeHomePage } from '@/common/main/factories/home-page-factory.js'
 
 type ElementFactory = () => Node | null | Promise<Node | null>
 
