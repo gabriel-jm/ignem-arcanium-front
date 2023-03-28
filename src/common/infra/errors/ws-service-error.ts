@@ -1,4 +1,4 @@
-import { ErrorResponse, MessageOnceListenerPayload } from '@/infra/protocols/index.js'
+import { MessageOnceListenerPayload, ErrorResponse } from '../protocols/index.js'
 
 export class WsServiceError extends Error {
   constructor(
