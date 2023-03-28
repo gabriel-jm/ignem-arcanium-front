@@ -1,6 +1,6 @@
 import { router } from '@/main/config/routes.js'
 import { html } from 'lithen-fns'
-import { IgnemElement } from '@/ui/view/ignem-element.js'
+import { IgnemElement } from '@/common/ui/ignem-element.js'
 import { Presenter } from '@/presentation/protocols/index.js'
 import { SuccessNotifier } from '@/ui/protocols/index.js'
 import { loginStyles } from './login-styles.js'

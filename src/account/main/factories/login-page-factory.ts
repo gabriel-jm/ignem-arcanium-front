@@ -1,4 +1,4 @@
-import { UiNotifier } from '@/common/ui/notifiers/index.js'
+import { UiNotifier } from '@/common/ui/components/notification/index.js'
 import { makeCheckTokenExistsPresenter } from '@/main/factories/presenters/index.js'
 import { LoginPage } from '@/account/ui/pages/index.js'
 import { LocalStorageCacheStore } from '@/common/infra/stores/index.js'

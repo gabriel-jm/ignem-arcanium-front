@@ -3,7 +3,7 @@ import { FindAllCharactersResult } from '@/domain/protocols/use-cases/index.js'
 import { Item } from '@/item/types/items.js'
 import { IgnemItemTinyCard, itemCard } from '@/item/ui/index.js'
 import { equipmentItemCard } from '@/ui/view/components/index.js'
-import { IgnemElement } from '@/ui/view/ignem-element.js'
+import { IgnemElement } from '@/common/ui/ignem-element.js'
 import { characterModalStyles } from '@/ui/view/pages/characters/modal/character-modal-styles.js'
 import { html, el, ref } from 'lithen-fns'
 

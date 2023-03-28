@@ -1,6 +1,6 @@
 import { Item } from '@/item/types/items.js'
 import { equipmentItemCard } from '@/ui/view/components/equipment/equipment-item-card.js'
-import { IgnemElement } from '@/ui/view/ignem-element.js'
+import { IgnemElement } from '@/common/ui/ignem-element.js'
 import { css, html } from 'lithen-fns'
 
 /**

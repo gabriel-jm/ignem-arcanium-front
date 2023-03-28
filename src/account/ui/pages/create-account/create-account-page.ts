@@ -1,9 +1,9 @@
 import { Presenter } from '@/presentation/protocols/index.js'
-import { IgnemElement } from '@/ui/view/ignem-element.js'
+import { IgnemElement } from '@/common/ui/ignem-element.js'
 import { createAccountStyles } from './create-account-styles.js'
 import { router } from '@/main/config/routes.js'
 import { html } from 'lithen-fns'
-import { UiNotifier } from '@/common/ui/notifiers/index.js'
+import { UiNotifier } from '@/common/ui/components/notification/index.js'
 import { lockButtonUntil, CustomForm, inputField } from '@/common/ui/index.js'
 
 export class CreateAccountPage extends IgnemElement {

@@ -1,6 +1,6 @@
 import { itemIconByType } from './item-icon-by-type.js'
 import { css, html, el } from 'lithen-fns'
-import { IgnemElement } from '@/ui/view/ignem-element.js'
+import { IgnemElement } from '@/common/ui/ignem-element.js'
 import { capitalize } from '@/common/ui/helpers/index.js'
 import { IgnemQuantityControl } from '@/common/ui/index.js'
 import { Item } from '@/item/types/items.js'

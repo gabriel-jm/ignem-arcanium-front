@@ -3,7 +3,7 @@ import { headerStyles } from './header-styles.js'
 import { router } from '@/main/config/routes.js'
 import { AccountStore } from '@/account/ui/stores/account-store.js'
 import { confirmDialog, logOutIcon } from '../index.js'
-import { IgnemElement } from '@/ui/view/ignem-element.js'
+import { IgnemElement } from '@/common/ui/ignem-element.js'
 
 export class IgnemHeader extends IgnemElement {
   #accountStore = new AccountStore()

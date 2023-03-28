@@ -1,5 +1,5 @@
 import { css, html } from 'lithen-fns'
-import { IgnemElement } from '@/ui/view/ignem-element.js'
+import { IgnemElement } from '@/common/ui/ignem-element.js'
 import { SuperElementRenderValues } from 'lithen-super-element'
 import {
   borderedButtonStyles,

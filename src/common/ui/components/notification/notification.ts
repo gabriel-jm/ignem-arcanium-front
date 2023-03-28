@@ -1,7 +1,7 @@
 import { html } from 'lithen-fns'
 import { notificationStyles } from './notification-styles.js'
-import { IgnemElement } from '@/ui/view/ignem-element.js'
 import { checkCircleIcon, alertIcon, infoIcon } from '@/common/ui/index.js'
+import { IgnemElement } from '../../ignem-element.js'
 
 interface IgnemNotificationProps {
   label?: string
