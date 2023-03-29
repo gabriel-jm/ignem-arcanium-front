@@ -1,5 +1,5 @@
+import { HTTPServiceError } from '@/common/infra/errors/index.js'
 import { HTTPClient } from '@/common/infra/protocols/index.js'
-import { HTTPServiceError } from '@/infra/errors/index.js'
 import { successResponse } from '@/presentation/helpers/index.js'
 import { Presenter, PresenterResult } from '@/presentation/protocols/index.js'
 

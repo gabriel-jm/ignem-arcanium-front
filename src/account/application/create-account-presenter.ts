@@ -1,5 +1,5 @@
+import { HTTPServiceError } from '@/common/infra/errors/index.js'
 import { CacheStore, HTTPClient } from '@/common/infra/protocols/index.js'
-import { HTTPServiceError } from '@/infra/errors/index.js'
 import { successResponse } from '@/presentation/helpers/index.js'
 import { Presenter, PresenterResult } from '@/presentation/protocols/index.js'
 import { SetAccountStore } from '@/presentation/protocols/stores/index.js'

@@ -3,7 +3,7 @@ import { ErrorHandlingPresenterDecorator, ValidationPresenterDecorator } from '@
 import { UiNotifier } from '@/common/ui/components/notification/index.js'
 import { CreateAccountPage } from '@/account/ui/pages/create-account/create-account-page.js'
 import { CreateAccountPresenter } from '@/account/application/create-account-presenter.js'
-import { makeFetchHTTPClient } from '@/main/factories/clients/index.js'
+import { makeFetchHTTPClient } from '@/common/main/factories/clients/index.js'
 import { AccountStore } from '@/account/ui/stores/account-store.js'
 
 export function makeCreateAccountPage() {

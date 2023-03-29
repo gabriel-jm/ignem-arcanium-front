@@ -1,5 +1,5 @@
 import { ErrorHandlingPresenterDecorator, ValidationPresenterDecorator } from '@/main/decorators/index.js'
-import { makeFetchHTTPClient } from '@/main/factories/clients/index.js'
+import { makeFetchHTTPClient } from '@/common/main/factories/clients/index.js'
 import { makeCreateCharacterPresenter } from '@/main/factories/presenters/index.js'
 import { successResponse } from '@/presentation/helpers/index.js'
 import { ListAllDefaultItemsPresenter } from '@/item/application/index.js'

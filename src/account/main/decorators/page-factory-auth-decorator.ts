@@ -1,4 +1,4 @@
-import { setAccountStorePresenters } from '@/main/factories/stores/index.js'
+import { setAccountStorePresenters } from '../factories/index.js'
 import { makeVerifyTokenPresenter } from '../factories/verify-token-presenter-factory.js'
 
 export function auth(pageFactory: () => Node) {

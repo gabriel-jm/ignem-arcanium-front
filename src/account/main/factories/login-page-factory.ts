@@ -4,7 +4,7 @@ import { LoginPage } from '@/account/ui/pages/index.js'
 import { LocalStorageCacheStore } from '@/common/infra/stores/index.js'
 import { ErrorHandlingPresenterDecorator, ValidationPresenterDecorator } from '@/main/decorators/index.js'
 import { LoginPresenter } from '@/account/application/login-presenter.js'
-import { makeFetchHTTPClient } from '@/main/factories/clients/index.js'
+import { makeFetchHTTPClient } from '@/common/main/factories/clients/index.js'
 import { AccountStore } from '@/account/ui/stores/account-store.js'
 
 export function makeLoginPage() {
