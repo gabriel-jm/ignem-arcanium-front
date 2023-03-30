@@ -1,4 +1,3 @@
-import { UiNotifier } from '@/common/ui/components/notification/index.js'
 import { makeCheckTokenExistsPresenter } from '@/main/factories/presenters/index.js'
 import { LoginPage } from '@/account/ui/pages/index.js'
 import { LocalStorageCacheStore } from '@/common/infra/stores/index.js'
@@ -10,8 +9,7 @@ import { AccountStore } from '@/account/ui/stores/account-store.js'
 export function makeLoginPage() {
   return new LoginPage(
     makeLoginPresenter(),
-    makeCheckTokenExistsPresenter(),
-    new UiNotifier()
+    makeCheckTokenExistsPresenter()
   )
 }
 
@@ -23,7 +21,6 @@ export function makeLoginPresenter() {
   )
 
   return new ErrorHandlingPresenterDecorator(
-    new UiNotifier(),
     new ValidationPresenterDecorator(
       loginPresenter,
       {

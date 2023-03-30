@@ -1,5 +1,5 @@
+import { InventoryWeapon } from '@/item/types/inventory-items.js'
 import { AnyKindOfItem } from '@/item/types/items.js'
-import { InventoryWeapon } from '@/ui/protocols/index.js'
 
 export function itemIconByType(item: AnyKindOfItem) {
   const distance = (item as InventoryWeapon).distance
@@ -12,9 +12,7 @@ export function itemIconByType(item: AnyKindOfItem) {
     weapon: '/sword.png',
     shield: '/shield.png',
     armor: '/armor.png',
-    alchemicalItem: '/potion.png',
-    // OIL: '/oil.png',
-    // OINTMENT: '/ointment.png'
+    alchemicalItem: '/potion.png'
   }
 
   return iconByType[type] ?? '/bag.png'

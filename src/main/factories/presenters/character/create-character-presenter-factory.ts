@@ -2,7 +2,6 @@ import { RemoteCreateCharacter } from '@/domain/use-cases/index.js'
 import { ErrorHandlingPresenterDecorator, ValidationPresenterDecorator } from '@/main/decorators/index.js'
 import { makeCharacterService } from '@/main/factories/services/index.js'
 import { CreateCharacterPresenter } from '@/presentation/presenters/index.js'
-import { UiNotifier } from '@/common/ui/components/notification/index.js'
 
 const requiredNumber = {
   type: 'number',
@@ -19,7 +18,6 @@ export function makeCreateCharacterPresenter() {
   const remoteCreateCharacter = new RemoteCreateCharacter(charactersService)
 
   return new ErrorHandlingPresenterDecorator(
-    new UiNotifier(),
     new ValidationPresenterDecorator(
       new CreateCharacterPresenter(remoteCreateCharacter),
       {

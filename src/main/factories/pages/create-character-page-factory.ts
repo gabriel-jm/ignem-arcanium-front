@@ -4,7 +4,6 @@ import { makeCreateCharacterPresenter } from '@/main/factories/presenters/index.
 import { successResponse } from '@/presentation/helpers/index.js'
 import { ListAllDefaultItemsPresenter } from '@/item/application/index.js'
 import { Presenter } from '@/presentation/protocols/index.js'
-import { UiNotifier } from '@/common/ui/components/notification/index.js'
 import { ItemsStore } from '@/item/ui/store/items-store.js'
 import { IgnemCreateCharacterPage } from '@/ui/view/pages/index.js'
 
@@ -71,7 +70,6 @@ export function makeCreateCharactersPage() {
 
   return new IgnemCreateCharacterPage({
     listItemsPresenter: new ErrorHandlingPresenterDecorator(
-      new UiNotifier(),
       listAllDefaultItemsPresenter
     ),
     generalInfoPresenter,

@@ -1,6 +1,5 @@
 import { LocalStorageCacheStore } from '@/common/infra/stores/index.js'
 import { ErrorHandlingPresenterDecorator, ValidationPresenterDecorator } from '@/main/decorators/index.js'
-import { UiNotifier } from '@/common/ui/components/notification/index.js'
 import { CreateAccountPage } from '@/account/ui/pages/create-account/create-account-page.js'
 import { CreateAccountPresenter } from '@/account/application/create-account-presenter.js'
 import { makeFetchHTTPClient } from '@/common/main/factories/clients/index.js'
@@ -14,7 +13,6 @@ export function makeCreateAccountPage() {
   )
   
   const decoratedPresenter = new ErrorHandlingPresenterDecorator(
-    new UiNotifier(),
     new ValidationPresenterDecorator(
       presenter,
       {

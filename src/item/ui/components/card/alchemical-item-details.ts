@@ -1,6 +1,6 @@
-import { InventoryAlchemicalItem } from '@/ui/protocols/index.js'
 import { itemProperty } from './item-card.js'
 import { html } from 'lithen-fns'
+import { InventoryAlchemicalItem } from '@/item/types/inventory-items.js'
 
 export function alchemicalItemDetails(props: InventoryAlchemicalItem) {
   const { brewTime, brewPrice, weight, price, effects } = props

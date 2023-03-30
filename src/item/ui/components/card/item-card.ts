@@ -3,7 +3,7 @@ import {
   InventoryAlchemicalItem,
   InventoryShieldOrArmor,
   InventoryWeapon
-} from '@/ui/protocols/index.js'
+} from '@/item/types/inventory-items.js'
 import { itemIconByType } from '../item-icon-by-type.js'
 import { itemCardStyles } from './item-card-styles.js'
 import { weaponDetails } from './weapon-details.js'

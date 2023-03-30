@@ -1,7 +1,7 @@
-import { InventoryShieldOrArmor } from '@/ui/protocols/index.js'
 import { itemProperty } from './item-card.js'
 import { html, el } from 'lithen-fns'
 import { damageFormater, propertiesFormater } from '@/item/ui/components/formaters/index.js'
+import { InventoryShieldOrArmor } from '@/item/types/inventory-items.js'
 
 export function shieldOrArmorDetails(props: InventoryShieldOrArmor) {
   const {

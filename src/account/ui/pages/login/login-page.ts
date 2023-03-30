@@ -2,9 +2,8 @@ import { router } from '@/main/config/routes.js'
 import { html } from 'lithen-fns'
 import { IgnemElement } from '@/common/ui/ignem-element.js'
 import { Presenter } from '@/presentation/protocols/index.js'
-import { SuccessNotifier } from '@/ui/protocols/index.js'
 import { loginStyles } from './login-styles.js'
-import { CustomForm, inputField, loadingIcon, lockButtonUntil } from '@/common/ui/index.js'
+import { CustomForm, inputField, loadingIcon, lockButtonUntil, UiNotifier } from '@/common/ui/index.js'
 import { textBetweenDashes } from '@/common/ui/components/singles/text-between-dashes.js'
 
 export class LoginPage extends IgnemElement {
@@ -12,17 +11,15 @@ export class LoginPage extends IgnemElement {
 
   #accountLoginPresenter: Presenter
   #checkTokenExists: Presenter
-  #successNotifier: SuccessNotifier
+  #successNotifier = new UiNotifier()
 
   constructor(
     accountLoginPresenter: Presenter,
-    checkTokenExists: Presenter,
-    successNotifier: SuccessNotifier
+    checkTokenExists: Presenter
   ) {
     super()
     this.#accountLoginPresenter = accountLoginPresenter
     this.#checkTokenExists = checkTokenExists
-    this.#successNotifier = successNotifier
 
     this.init()
   }
