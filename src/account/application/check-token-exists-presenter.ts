@@ -1,16 +1,16 @@
-import { CheckTokenExists } from '@/domain/protocols/use-cases/index.js'
+import { CacheStore } from '@/common/infra/protocols/index.js'
 import { failureResponse, successResponse } from '@/presentation/helpers/index.js'
 import { Presenter } from '@/presentation/protocols/index.js'
 
 export class CheckTokenExistsPresenter implements Presenter {
   constructor(
-    private readonly checkTokenExists: CheckTokenExists
+    private readonly cacheStore: CacheStore
   ) {}
   
   handle() {
-    const hasToken = this.checkTokenExists.check()
+    const tokenData = this.cacheStore.get<Record<'token', string>>('token')
 
-    if (hasToken) {
+    if (tokenData?.token) {
       return Promise.resolve(successResponse(null))
     }
 
