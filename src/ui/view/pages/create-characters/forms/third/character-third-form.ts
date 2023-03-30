@@ -1,12 +1,10 @@
 import { html } from 'lithen-fns'
-import {
-  IgnemEquipmentSlot,
-} from '@/ui/view/components/index.js'
 import { IgnemCreateCharacterPage, IgnemCreateCharacterProps } from '../../ignem-create-character-page.js'
 import { IgnemItemTinyCard, itemCard } from '@/item/ui/index.js'
 import { Item } from '@/item/types/items.js'
 import { ItemsStore } from '@/item/ui/store/items-store.js'
 import { CustomForm, textBetweenDashes } from '@/common/ui/index.js'
+import { IgnemEquipmentSlot } from '@/equipment/index.js'
 
 export function characterThirdForm(
   parent: IgnemCreateCharacterPage,
