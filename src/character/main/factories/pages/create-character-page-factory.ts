@@ -5,7 +5,7 @@ import { successResponse } from '@/presentation/helpers/index.js'
 import { ListAllDefaultItemsPresenter } from '@/item/application/index.js'
 import { Presenter } from '@/presentation/protocols/index.js'
 import { ItemsStore } from '@/item/ui/store/items-store.js'
-import { IgnemCreateCharacterPage } from '@/ui/view/pages/index.js'
+import { IgnemCreateCharacterPage } from '@/character/ui/pages/index.js'
 
 export function makeCreateCharactersPage() {
   const listAllDefaultItemsPresenter = new ListAllDefaultItemsPresenter(

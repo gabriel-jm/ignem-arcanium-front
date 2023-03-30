@@ -3,9 +3,9 @@ import { FindAllCharactersResult } from '@/domain/protocols/use-cases/index.js'
 import { Item } from '@/item/types/items.js'
 import { IgnemItemTinyCard, itemCard } from '@/item/ui/index.js'
 import { IgnemElement } from '@/common/ui/ignem-element.js'
-import { characterModalStyles } from '@/ui/view/pages/characters/modal/character-modal-styles.js'
 import { html, el, ref } from 'lithen-fns'
 import { equipmentItemCard } from '@/equipment/index.js'
+import { characterModalStyles } from './character-modal-styles.js'
 
 export type CharacterModalData = FindAllCharactersResult
 
