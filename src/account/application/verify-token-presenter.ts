@@ -1,6 +1,6 @@
 import { router } from '@/main/config/routes.js'
 import { CacheStore } from '@/common/infra/protocols/index.js'
-import { InvalidTokenError } from '@/domain/error/index.js'
+import { InvalidTokenError } from '@/account/application/error/index.js'
 import { successResponse } from '@/presentation/helpers/index.js'
 import { Presenter } from '@/presentation/protocols/index.js'
 import { SetAccountStore } from '@/presentation/protocols/stores/index.js'
