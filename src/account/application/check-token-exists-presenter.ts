@@ -1,6 +1,6 @@
 import { CacheStore } from '@/common/infra/protocols/index.js'
-import { failureResponse, successResponse } from '@/presentation/helpers/index.js'
-import { Presenter } from '@/presentation/protocols/index.js'
+import { failureResponse, successResponse } from '@/common/application/helpers/index.js'
+import { Presenter } from '@/common/application/protocols/index.js'
 
 export class CheckTokenExistsPresenter implements Presenter {
   constructor(

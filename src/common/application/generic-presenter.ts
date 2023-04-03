@@ -1,5 +1,5 @@
-import { successResponse } from '@/presentation/helpers/presenter-results.js'
-import { Presenter, PresenterResult } from '@/presentation/protocols/index.js'
+import { Presenter, PresenterResult } from '@/common/application/protocols/index.js'
+import { successResponse } from './helpers/presenter-results.js'
 
 export class GenericPresenter implements Presenter {
   constructor(private readonly usecaseFunction: (...args: any[]) => Promise<unknown>) {}

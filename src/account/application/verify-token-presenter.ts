@@ -1,8 +1,8 @@
 import { router } from '@/main/config/routes.js'
 import { CacheStore } from '@/common/infra/protocols/index.js'
 import { InvalidTokenError } from '@/account/application/error/index.js'
-import { successResponse } from '@/presentation/helpers/index.js'
-import { Presenter } from '@/presentation/protocols/index.js'
+import { successResponse } from '@/common/application/helpers/index.js'
+import { Presenter } from '@/common/application/protocols/index.js'
 import { SetAccountStore } from '@/presentation/protocols/stores/index.js'
 import { TokenDecoder } from './token-decoder.js'
 

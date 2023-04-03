@@ -1,7 +1,7 @@
 import { HTTPServiceError } from '@/common/infra/errors/index.js'
 import { CacheStore, HTTPClient } from '@/common/infra/protocols/index.js'
-import { successResponse } from '@/presentation/helpers/index.js'
-import { Presenter, PresenterResult } from '@/presentation/protocols/index.js'
+import { successResponse } from '@/common/application/helpers/index.js'
+import { Presenter, PresenterResult } from '@/common/application/protocols/index.js'
 import { SetAccountStore } from '@/presentation/protocols/stores/index.js'
 
 export interface CreateAccountPresenterParams {

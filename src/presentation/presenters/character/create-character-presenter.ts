@@ -1,6 +1,6 @@
 import { CreateCharacter, CreateCharacterParams } from '@/domain/protocols/use-cases/index.js'
-import { successResponse } from '@/presentation/helpers/index.js'
-import { Presenter, PresenterResult } from '@/presentation/protocols/index.js'
+import { successResponse } from '@/common/application/helpers/index.js'
+import { Presenter, PresenterResult } from '@/common/application/protocols/index.js'
 
 export type CreateCharacterPresenterParams = Omit<CreateCharacterParams, 'icon'>
 

@@ -1,4 +1,4 @@
-import { Presenter } from '@/presentation/protocols/index.js'
+import { Presenter } from '@/common/application/protocols/index.js'
 import { containerStyles } from '@/common/ui/styles/index.js'
 import { IgnemElement } from '@/common/ui/ignem-element.js'
 import { css, html, ref } from 'lithen-fns'

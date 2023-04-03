@@ -1,4 +1,4 @@
-import { Presenter } from '@/presentation/protocols/index.js'
+import { Presenter } from '@/common/application/protocols/index.js'
 import { IgnemElement } from '@/common/ui/ignem-element.js'
 import { createAccountStyles } from './create-account-styles.js'
 import { router } from '@/main/config/routes.js'

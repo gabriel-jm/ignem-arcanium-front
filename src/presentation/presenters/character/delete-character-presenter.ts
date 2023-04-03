@@ -1,7 +1,7 @@
 import { HTTPServiceError } from '@/common/infra/errors/index.js'
 import { HTTPClient } from '@/common/infra/protocols/index.js'
-import { successResponse } from '@/presentation/helpers/index.js'
-import { Presenter, PresenterResult } from '@/presentation/protocols/index.js'
+import { successResponse } from '@/common/application/helpers/index.js'
+import { Presenter, PresenterResult } from '@/common/application/protocols/index.js'
 
 export class DeleteCharacterPresenter implements Presenter {
   constructor(private readonly httpClient: HTTPClient) {}

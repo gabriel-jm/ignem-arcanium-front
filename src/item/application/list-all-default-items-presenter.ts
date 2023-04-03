@@ -1,7 +1,7 @@
 import { HTTPServiceError } from '@/common/infra/errors/index.js'
 import { HTTPClient } from '@/common/infra/protocols/index.js'
-import { successResponse } from '@/presentation/helpers/index.js'
-import { Presenter } from '@/presentation/protocols/index.js'
+import { successResponse } from '@/common/application/helpers/index.js'
+import { Presenter } from '@/common/application/protocols/index.js'
 import { SetItemsStore } from '@/presentation/protocols/stores/index.js'
 import { AnyKindOfItem } from '../types/items.js'
 

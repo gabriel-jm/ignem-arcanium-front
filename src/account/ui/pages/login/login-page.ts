@@ -1,7 +1,7 @@
 import { router } from '@/main/config/routes.js'
 import { html } from 'lithen-fns'
 import { IgnemElement } from '@/common/ui/ignem-element.js'
-import { Presenter } from '@/presentation/protocols/index.js'
+import { Presenter } from '@/common/application/protocols/index.js'
 import { loginStyles } from './login-styles.js'
 import { CustomForm, inputField, loadingIcon, lockButtonUntil, UiNotifier } from '@/common/ui/index.js'
 import { textBetweenDashes } from '@/common/ui/components/singles/text-between-dashes.js'

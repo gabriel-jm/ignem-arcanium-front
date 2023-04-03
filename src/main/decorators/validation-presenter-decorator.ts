@@ -1,5 +1,5 @@
-import { validationErrorResponse } from '@/presentation/helpers/index.js'
-import { Presenter } from '@/presentation/protocols/index.js'
+import { validationErrorResponse } from '@/common/application/helpers/index.js'
+import { Presenter } from '@/common/application/protocols/index.js'
 import { createValidator } from '@/common/validation/facades/index.js'
 
 export class ValidationPresenterDecorator implements Presenter {
