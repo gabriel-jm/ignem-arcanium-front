@@ -1,4 +1,4 @@
-import { CreateCharacterParams } from '@/domain/protocols/use-cases/index.js'
+import { CreateCharacterParams } from '../create-character-presenter.js'
 
 export type CreateCharacterServiceParams = CreateCharacterParams
 

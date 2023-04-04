@@ -17,9 +17,9 @@ import { characterSecondFormStyles } from './forms/second/character-second-form-
 import { characterFourthFormStyles } from './forms/fourth/character-fourth-form-styles.js'
 import { characterThirdForm } from './forms/third/character-third-form.js'
 import { characterThirdFormStyles } from './forms/third/character-third-form-styles.js'
-import { CreateCharacterParams } from '@/domain/protocols/use-cases/index.js'
 import { itemTinyCardStyles } from '@/item/ui/index.js'
 import { breadcrumbs, CustomForm, IgnemSteps, textBetweenDashesStyles } from '@/common/ui/index.js'
+import { CreateCharacterParams } from '@/character/application/create-character-presenter.js'
 
 export interface IgnemCreateCharacterProps {
   listItemsPresenter: Presenter
