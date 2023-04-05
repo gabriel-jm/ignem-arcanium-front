@@ -1,11 +1,61 @@
 import { ErrorHandlingPresenterDecorator, ValidationPresenterDecorator } from '@/main/decorators/index.js'
 import { makeFetchHTTPClient } from '@/common/main/factories/clients/index.js'
-import { makeCreateCharacterPresenter } from '@/main/factories/presenters/index.js'
 import { successResponse } from '@/common/application/helpers/index.js'
 import { ListAllDefaultItemsPresenter } from '@/item/application/index.js'
 import { Presenter } from '@/common/application/protocols/index.js'
 import { ItemsStore } from '@/item/ui/store/items-store.js'
 import { IgnemCreateCharacterPage } from '@/character/ui/pages/index.js'
+import { makeCharacterService } from '@/character/main/factories/services/index.js'
+import { CreateCharacterPresenter } from '@/character/application/create-character-presenter.js'
+
+const requiredNumber = {
+  type: 'number',
+  required: true
+}
+
+const requiredAttributeNumber = {
+  ...requiredNumber,
+  valueInBetween: [1, 6]
+}
+
+export function makeCreateCharacterPresenter() {
+  const charactersService = makeCharacterService()
+
+  return new ErrorHandlingPresenterDecorator(
+    new ValidationPresenterDecorator(
+      new CreateCharacterPresenter(charactersService),
+      {
+        name: {
+          type: 'string',
+          required: true
+        },
+        level: requiredNumber,
+        gold: requiredNumber,
+        alignment: {
+          type: 'string',
+          required: true
+          // TODO: add oneOf validation
+        },
+        description: {
+          type: 'string'
+        },
+        strength: requiredAttributeNumber,
+        dexterity: requiredAttributeNumber,
+        constitution: requiredAttributeNumber,
+        intelligence: requiredAttributeNumber,
+        wisdom: requiredAttributeNumber,
+        charisma: requiredAttributeNumber,
+        // TODO: add object and array validation
+        equipment: {
+          type: 'object'
+        },
+        inventoryItems: {
+          type: 'array'
+        }
+      }
+    )
+  )
+}
 
 export function makeCreateCharactersPage() {
   const listAllDefaultItemsPresenter = new ListAllDefaultItemsPresenter(
