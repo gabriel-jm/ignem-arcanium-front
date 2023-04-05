@@ -1,4 +1,4 @@
-import { TokenDecoder } from '@/account/application/token-decoder.js'
+import { TokenDecoder } from '@/account/application/protocols/token-decoder.js'
 
 export class Base64TokenDecoder implements TokenDecoder {
   decode(token: string) {

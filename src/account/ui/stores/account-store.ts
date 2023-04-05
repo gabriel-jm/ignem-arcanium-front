@@ -1,5 +1,5 @@
+import { AccountData, SetAccountStore } from '@/account/application/protocols/set-account-store.js'
 import { Presenter } from '@/common/application/protocols/index.js'
-import { AccountData, SetAccountStore } from '@/presentation/protocols/stores/index.js'
 
 export class AccountStore implements SetAccountStore {
   static #instance: AccountStore
