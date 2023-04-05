@@ -1,13 +1,13 @@
 import { closeIcon } from '@/common/ui/index.js'
-import { FindAllCharactersResult } from '@/domain/protocols/use-cases/index.js'
 import { Item } from '@/item/types/items.js'
 import { IgnemItemTinyCard, itemCard } from '@/item/ui/index.js'
 import { IgnemElement } from '@/common/ui/ignem-element.js'
 import { html, el, ref } from 'lithen-fns'
 import { equipmentItemCard } from '@/equipment/index.js'
 import { characterModalStyles } from './character-modal-styles.js'
+import { FindAllCharactersServiceResult } from '@/character/application/protocols/find-all-characters-service.js'
 
-export type CharacterModalData = FindAllCharactersResult
+export type CharacterModalData = FindAllCharactersServiceResult
 
 export class IgnemCharacterModal extends IgnemElement {
   get dialog() {
