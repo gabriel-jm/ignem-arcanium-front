@@ -1,10 +1,7 @@
 import { CreateCharacterService, CreateCharacterServiceParams, CreateCharacterServiceResult } from '@/character/application/protocols/create-character-service.js'
 import { HTTPServiceError } from '@/common/infra/errors/index.js'
 import { HTTPClient } from '@/common/infra/protocols/index.js'
-import {
-  FindAllCharactersService,
-  FindAllCharactersServiceResult
-} from '@/domain/protocols/services/index.js'
+import { FindAllCharactersService, FindAllCharactersServiceResult } from '../application/protocols/find-all-characters-service.js'
 
 type Service = FindAllCharactersService & CreateCharacterService
 
