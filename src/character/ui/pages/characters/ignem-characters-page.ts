@@ -1,3 +1,4 @@
+import './modal/ignem-character-modal.js'
 import { Presenter } from '@/common/application/protocols/index.js'
 import { containerStyles } from '@/common/ui/styles/index.js'
 import { IgnemElement } from '@/common/ui/ignem-element.js'
@@ -37,7 +38,6 @@ export class IgnemCharactersPage extends IgnemElement {
 
     const onClickCharacterCard = (character: Character) => {
       return () => {
-        console.log(this.#characterModalRef.el)
         this.#characterModalRef.el?.open(character)
       }
     }

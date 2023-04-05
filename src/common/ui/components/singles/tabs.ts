@@ -49,28 +49,19 @@ export class IgnemTabs extends IgnemElement {
         display: flex;
         align-items: center;
       }
-
+      
       [tab-names] p {
-        padding: 12px 18px;
+        width: 120px;
+        padding: 8px 18px;
         font-size: 1.1rem;
         cursor: pointer;
-        background-color: var(--black);
-        transition: all 200ms ease-in-out;
+        border-bottom: 2px solid transparent;
+        transition: border 200ms ease-in-out;
       }
 
       [tab-names] p.active {
-        background-color: var(--white);
-        color: var(--black);
-      }
-
-      [tab-names] p:first-of-type {
-        border-top-left-radius: 4px;
-        border-bottom-left-radius: 4px;
-      }
-
-      [tab-names] p:last-of-type {
-        border-top-right-radius: 4px;
-        border-bottom-right-radius: 4px;
+        border-color: var(--white);
+        font-weight: bold;
       }
     `
   }
