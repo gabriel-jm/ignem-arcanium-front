@@ -25,8 +25,8 @@ export class IgnemHeader extends IgnemElement {
     const onConfirmDialog = () => this.#accountStore.logout()
 
     return html`
-      <header class="header">
-        <section class="container">
+      <header class="container">
+        <section class="float-header">
           <div>
             <h1
               class="title"

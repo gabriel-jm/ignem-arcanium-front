@@ -5,32 +5,34 @@ import { confirmDialogStyles } from '../index.js'
 export const headerStyles = css`
   ${[containerStyles, confirmDialogStyles]}
 
-  .header {
+  .container {
+    padding: 4px 8px;
+  }
+
+  .container div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .float-header {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     background: linear-gradient(
       150deg,
       var(--black) 50%,
       var(--bright-black) 80%,
       var(--body-bg-color) 95%
     );
-    display: block;
-    padding: 6px 10px;
-  }
-
-  .container {
-    padding: 0;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-
-  .container > div {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    padding: 6px 18px;
+    border-radius: 8px;
+    box-shadow: 0 2px 3px 2px var(--bright-black);
   }
 
   .title {
-    font-size: 1.4rem;
+    font-size: 1.25rem;
     margin: 0;
     cursor: pointer;
   }
@@ -41,7 +43,7 @@ export const headerStyles = css`
   }
 
   .account-name {
-    font-size: 1.2rem;
+    font-size: 1.15rem;
     max-width: 100px;
     white-space: nowrap;
     text-overflow: ellipsis;
