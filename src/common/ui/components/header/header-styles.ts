@@ -22,13 +22,12 @@ export const headerStyles = css`
     justify-content: space-between;
     background: linear-gradient(
       150deg,
-      var(--black) 50%,
-      var(--bright-black) 80%,
-      var(--body-bg-color) 95%
+      var(--primary) 50%,
+      var(--primary-bright)
     );
     padding: 6px 18px;
     border-radius: 8px;
-    box-shadow: 0 2px 3px 2px var(--bright-black);
+    box-shadow: 0 2px 3px var(--primary);
   }
 
   .title {
@@ -37,9 +36,8 @@ export const headerStyles = css`
     cursor: pointer;
   }
 
-  .menu-icon {
-    cursor: pointer;
-    margin-right: 16px;
+  .user-section {
+    position: relative;
   }
 
   .account-name {
@@ -50,15 +48,15 @@ export const headerStyles = css`
     overflow: hidden;
   }
 
-  .log-out-icon {
+  .vertical-dots-icon {
     font-size: 0.8rem;
-    margin-left: 16px;
+    margin-left: 12px;
     cursor: pointer;
     padding: 6px;
     border-radius: 4px;
   }
 
-  .log-out-icon:hover {
+  .vertical-dots-icon:hover {
     background-color: #222;
   }
 `

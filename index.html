@@ -13,7 +13,7 @@
   <style>
     :root {
       --max-content-width: 1380px;
-      --body-bg-color: #202020;
+      --body-bg-color: #1f1f1f;
       --font-color: #ddd;
       --font-family: 'Nunito', sans-serif;
       --sub-font-color: #7a7a7a;
@@ -21,14 +21,18 @@
 
       --container-border-color: #3f3f3f;
 
+      --primary: var(--black);
+      --primary-bright: var(--bright-black);
+      --secondary: var(--white);
+
       /* Colors */
       --danger: #a34444;
       --semitransparent-danger: #a3444477;
       --dark-danger: #a02b2b;
-      --black: #111;
-      --bright-black: #1d1d1d;
+      --black: #0e0e0e;
+      --bright-black: #171717;
       --blue: #0e6e94;
-      --light-blue: #64a7c2;
+      --bright-blue: #64a7c2;
       --white: #ddd;
       --outline-white: #aaaa;
       --transparent-white: #6a6a6a15;
@@ -71,6 +75,11 @@
     ::-webkit-scrollbar-thumb {
       background-color: #999;
       border-radius: 4px;
+    }
+
+    body.blue {
+      --primary: var(--blue);
+      --primary-bright: var(--bright-blue);
     }
   </style>
 </head>

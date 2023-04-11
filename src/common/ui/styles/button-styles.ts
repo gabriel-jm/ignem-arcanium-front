@@ -2,7 +2,7 @@ import { css } from 'lithen-fns'
 
 export const buttonStyles = css`
   .btn {
-    --btn-bg-color: var(--black);
+    --btn-bg-color: var(--primary);
     --btn-focus-outline-color: var(--outline-white);
     --btn-border-color: #6a6a6a;
 
@@ -18,7 +18,7 @@ export const buttonStyles = css`
   }
 
   .btn:hover {
-    --btn-bg-color: #171717;
+    --btn-bg-color: var(--primary-bright);
   }
 
   .btn:focus {

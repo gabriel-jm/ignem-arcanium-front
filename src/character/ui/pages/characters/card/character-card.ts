@@ -28,7 +28,7 @@ export const characterCardStyles = css`
     background-image: linear-gradient(
       to top right,
       var(--body-bg-color),
-      #141414 45%
+      var(--bright-black) 45%
     );
     display: flex;
     justify-content: flex-start;
@@ -65,7 +65,7 @@ export const characterCardStyles = css`
     text-align: center;
     color: var(--font-color);
     font-weight: bold;
-    background-color: #111;
+    background-color: var(--black);
     border-radius: 2px;
     padding: 3px 4px;
   }
