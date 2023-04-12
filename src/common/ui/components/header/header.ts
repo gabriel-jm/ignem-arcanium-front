@@ -2,8 +2,9 @@ import { html, ref } from 'lithen-fns'
 import { headerStyles } from './header-styles.js'
 import { router } from '@/main/config/routes.js'
 import { AccountStore } from '@/account/ui/stores/account-store.js'
-import { confirmDialog, logOutIcon, optionsDialog, verticalDotsIcon } from '../index.js'
+import { confirmDialog, optionsDialog, verticalDotsIcon } from '../index.js'
 import { IgnemElement } from '@/common/ui/ignem-element.js'
+import { settingsModal } from './settings-modal.js'
 
 export class IgnemHeader extends IgnemElement {
   #accountStore = new AccountStore()
@@ -19,10 +20,11 @@ export class IgnemHeader extends IgnemElement {
 
   render() {
     const dialogRef = ref<DialogElement>()
+    const confirmDialogRef = ref<DialogElement>()
+    const settingsDialogRef = ref<DialogElement>()
     const accountName = this.#accountStore.account?.name
 
     const openDialog = () => dialogRef.el?.show()
-    const onConfirmDialog = () => this.#accountStore.logout()
 
     return html`
       <header class="container">
@@ -43,32 +45,31 @@ export class IgnemHeader extends IgnemElement {
             ${optionsDialog({
               ref: dialogRef,
               options: {
-                'Sign Out': {
-                  onClick: onConfirmDialog
-                },
-                'Sign Out 2': {
-                  onClick: onConfirmDialog
-                },
-                'Sign Out 3': {
+                'Settings': {
                   onClick() {
-                    console.log('sign out 3')
+                    settingsDialogRef.el?.showModal()
                   }
                 },
+                'Sign Out': {
+                  onClick: () => confirmDialogRef.el?.showModal()
+                }
               }
             })}  
           </div>
         </section>
       </header>
+
+      ${confirmDialog({
+        ref: confirmDialogRef,
+        message: 'Confirm Sign Out?',
+        onConfirm: () => this.#accountStore.logout()
+      })}
+
+      ${settingsModal({
+        ref: settingsDialogRef
+      })}
     `
   }
 }
-
-/**
- * ${confirmDialog({
-        ref: dialogRef,
-        message: 'Confirm log out?',
-        onConfirm: onConfirmDialog
-      })}
- */
 
 customElements.define('ignem-header', IgnemHeader)

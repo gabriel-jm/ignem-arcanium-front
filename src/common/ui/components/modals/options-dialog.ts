@@ -36,7 +36,11 @@ const optionsDialogStyles = css`
 export function optionsDialog({ ref, options }: OptionsDialogProps) {
   return html`
     <ignem-wrapper css="${optionsDialogStyles}">
-      <dialog ref=${ref} on-blur=${() => ref.el?.close()}>
+      <dialog
+        tabindex="0"
+        ref=${ref}
+        on-blur=${() => ref.el?.close()}
+      >
         ${Object
           .entries(options)
           .map(([key, value]) => html`

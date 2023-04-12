@@ -103,7 +103,7 @@ export function confirmDialog(props: ConfirmDialogProps) {
     >
       <p>${message}</p>
       <button on-click=${onConfirmDialog}>
-        Ok
+        OK
       </button>
       <button on-click=${onCancelDialog}>
         Cancel

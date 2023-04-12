@@ -3,7 +3,7 @@ import { IgnemElement } from '@/common/ui/ignem-element.js'
 
 export class AppRoot extends IgnemElement {
   constructor() {
-    super({ shadowRoot: false })
+    super()
     window.onload = () => this.init()
   }
 
@@ -18,7 +18,7 @@ export class AppRoot extends IgnemElement {
 
     if (!component) return
 
-    this.replaceChildren(component)
+    this.root.replaceChildren(component)
   }
 }
 
