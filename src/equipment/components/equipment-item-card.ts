@@ -16,7 +16,7 @@ const borderImageByRarity = rarities.map(rarity => css`
     background-image: linear-gradient(
       145deg,
       var(--dark-${rarity}),
-      var(--black) 30%
+      var(--black-900) 30%
     );
   }
 `)
@@ -28,7 +28,7 @@ const equipmentItemCardStyles = css`
     justify-content: space-between;
     width: 230px;
     height: 48px;
-    background-color: var(--black);
+    background-color: var(--black-900);
     font-size: 1rem;
     white-space: nowrap;
     overflow: hidden;

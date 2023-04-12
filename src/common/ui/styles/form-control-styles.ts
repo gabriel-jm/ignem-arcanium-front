@@ -12,7 +12,7 @@ export const formControlStyles = css`
     --form-control-border-color: #555;
 
     width: 100%;
-    background-color: var(--body-bg-color);
+    background-color: var(--bg-primary);
     border: 1px solid var(--form-control-border-color);
     border-radius: 4px;
     color: var(--font-color);

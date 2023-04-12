@@ -33,7 +33,7 @@ export class IgnemEquipmentSlot extends IgnemElement {
   styling() {
     return css`
       .equip-slot-container {
-        background-color: var(--bright-black);
+        background-color: var(--black-800);
         box-sizing: border-box;
         padding: 10px;
         border: 2px solid transparent;

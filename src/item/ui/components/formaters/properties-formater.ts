@@ -6,7 +6,7 @@ export const propertiesFormaterStyles = css`
     display: inline-block;
     font-size: 0.9rem;
     padding: 0 4px;
-    background-color: var(--bright-black);
+    background-color: var(--black-800);
     border-radius: 4px;
   }
 

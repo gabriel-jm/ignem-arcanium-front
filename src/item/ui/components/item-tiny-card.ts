@@ -23,7 +23,7 @@ const backgroundByRarity = rarities.map(rarity => css`
     background-image: linear-gradient(
       145deg,
       var(--dark-${rarity}),
-      var(--black) 35%
+      var(--black-900) 35%
     );
   }
 `)
@@ -33,7 +33,7 @@ export const itemTinyCardStyles = css`
     min-width: 210px;
     min-height: 60px;
     max-height: 60px;
-    background-color: var(--black);
+    background-color: var(--black-900);
     padding: 6px 8px;
     border-radius: 4px;
     display: flex;

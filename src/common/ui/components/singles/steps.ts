@@ -72,7 +72,7 @@ export class IgnemSteps extends IgnemElement {
         text-align: center;
         position: relative;
         font-weight: bolder;
-        background-color: var(--bright-black);
+        background-color: var(--black-800);
         padding: 18px;
         border-radius: 50%;
         cursor: pointer;
@@ -94,12 +94,12 @@ export class IgnemSteps extends IgnemElement {
         flex: 1;
         width: 110%;
         height: 6px;
-        background-color: var(--bright-black);
+        background-color: var(--black-800);
         transition: background-color 200ms ease-in;
       }
 
       .step.passed, .line.passed {
-        color: var(--black);
+        color: var(--black-900);
         background-color: var(--white);
       }
     `

@@ -57,6 +57,6 @@ export const headerStyles = css`
   }
 
   .vertical-dots-icon:hover {
-    background-color: #222;
+    background-color: var(--secondary);
   }
 `

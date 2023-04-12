@@ -14,7 +14,7 @@ const settingsModalStyles = css`
     border: 0;
     border-radius: 4px;
     background-color: transparent;
-    box-shadow: 1px 3px 3px 2px var(--black);
+    box-shadow: 1px 3px 3px 2px var(--black-900);
   }
 
   dialog::backdrop {
@@ -31,7 +31,7 @@ const settingsModalStyles = css`
 
   .settings-tabs {
     flex: 1;
-    background-color: var(--primary);
+    background-color: var(--bg-primary);
     color: var(--font-color);
     padding: 24px;
   }
@@ -54,13 +54,13 @@ const settingsModalStyles = css`
   }
 
   .tabs-list li.active {
-    background-color: var(--primary-bright);
+    background-color: var(--bg-primary-bright);
     font-weight: bolder;
   }
 
   .settings-content {
     flex: 3;
-    background-color: var(--primary-bright);
+    background-color: var(--bg-secondary);
     padding: 24px;
   }
 
@@ -96,6 +96,88 @@ const accountTab = el/*html*/`
   </div>
 `
 
+const themeTabStyles = css`
+  h2 {
+    padding-bottom: 24px;
+  }
+
+  form {
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  label {
+    display: block;
+    padding: 8px 16px;
+    background-color: var(--transparent-white);
+    border-radius: 4px;
+    cursor: pointer;
+  }
+`
+
+function themeTab() {
+  return el/*html*/`
+    <ignem-wrapper css="${themeTabStyles}">
+      <h2>Theme</h2>
+
+      <form>
+        <label>
+          Dark Black &nbsp;
+          <input
+            type="radio"
+            name="theme"
+            value="dark-black"
+            checked
+            on-change=${(e: Event) => {
+              const target = e.target as HTMLInputElement
+
+              if (target.checked) {
+                document.body.className = target.value
+              }
+            }}
+          />
+        </label>
+
+        <label>
+          Dark Blue &nbsp;
+          <input
+            type="radio"
+            name="theme"
+            value="dark-blue"
+            on-change=${(e: Event) => {
+              const target = e.target as HTMLInputElement
+
+              if (target.checked) {
+                document.body.className = target.value
+              }
+            }}
+          />
+        </label>
+
+        <label>
+          Light Black &nbsp;
+          <input
+            type="radio"
+            name="theme"
+            value="light-black"
+          />
+        </label>
+
+        <label>
+          Light Blue &nbsp;
+          <input
+            type="radio"
+            name="theme"
+            value="light-blue"
+          />
+        </label>
+      </form>
+    </ignem-wrapper>
+  `
+}
+
 export function settingsModal({ ref: modalRef }: SettingsModalProps) {
   const currentTab = signal('account')
   const tabShell = shell(currentTab, (tab) => {
@@ -103,46 +185,7 @@ export function settingsModal({ ref: modalRef }: SettingsModalProps) {
       case 'account':
         return accountTab
       case 'theme':
-        return el/*html*/`
-          <div>
-            <h2>Theme</h2>
-
-            <form>
-              <label>
-                Dark Black &nbsp;
-                <input
-                  type="radio"
-                  value="dark-black"
-                  checked
-                />
-              </label>
-
-              <label>
-                Dark Blue &nbsp;
-                <input
-                  type="radio"
-                  value="dark-blue"
-                />
-              </label>
-
-              <label>
-                Light Black &nbsp;
-                <input
-                  type="radio"
-                  value="light-black"
-                />
-              </label>
-
-              <label>
-                Light Blue &nbsp;
-                <input
-                  type="radio"
-                  value="light-blue"
-                />
-              </label>
-            </form>
-          </div>
-        `
+        return themeTab()
       case 'language':
         return html`
           <h1>Language</h1>

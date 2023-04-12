@@ -55,7 +55,7 @@ export class IgnemSideModal extends IgnemElement {
         max-width: 400px;
         height: 100%;
         margin-left: auto;
-        background-color: var(--body-bg-color);
+        background-color: var(--bg-primary);
         box-sizing: border-box;
         border: 1px solid var(--container-border-color);
         border-radius: 4px;

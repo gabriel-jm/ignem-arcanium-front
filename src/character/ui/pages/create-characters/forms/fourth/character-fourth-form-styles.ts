@@ -70,7 +70,7 @@ export const characterFourthFormStyles = css`
 
   [inventory], .items-list {
     display: grid;
-    background-color: var(--bright-black);
+    background-color: var(--black-800);
     grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
     gap: 10px;
     padding: 10px;
@@ -125,7 +125,7 @@ export const characterFourthFormStyles = css`
       position: fixed;
       left: 0;
       top: 90%;
-      background-color: var(--black);
+      background-color: var(--black-900);
       padding: 6px;
       border-radius: 8px;
       box-shadow: 0 0 3px 2px #1117;
@@ -158,7 +158,7 @@ export const characterFourthFormStyles = css`
 
     .item-info {
       height: 85%;
-      background-color: var(--body-bg-color);
+      background-color: var(--bg-primary);
       padding: 6px 8px;
       border-radius: 4px;
       overflow-y: auto;

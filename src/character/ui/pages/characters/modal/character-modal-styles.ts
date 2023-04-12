@@ -18,7 +18,7 @@ export const characterModalStyles = css`
   }
 
   .modal-container {
-    background-color: var(--body-bg-color);
+    background-color: var(--bg-primary);
     border-radius: 4px;
     padding: 12px 16px;
     box-shadow: 0 2px 8px 2px #0008;
@@ -54,7 +54,7 @@ export const characterModalStyles = css`
     align-items: center;
     flex-wrap: wrap;
     padding: 18px;
-    background-color: var(--bright-black);
+    background-color: var(--black-800);
     border-radius: 4px;
     margin-bottom: 16px;
   }
@@ -90,7 +90,7 @@ export const characterModalStyles = css`
 
   .inventory {
     display: grid;
-    background-color: var(--bright-black);
+    background-color: var(--black-800);
     grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
     gap: 10px;
     padding: 10px;

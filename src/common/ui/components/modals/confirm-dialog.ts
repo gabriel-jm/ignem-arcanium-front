@@ -13,7 +13,7 @@ export const confirmDialogStyles = css`
     margin-top: 5%;
     border: 1px solid var(--container-border-color);
     border-radius: 5px;
-    background-color: var(--body-bg-color);
+    background-color: var(--bg-primary);
     box-shadow: 0 3px 5px #121212;
   }
 

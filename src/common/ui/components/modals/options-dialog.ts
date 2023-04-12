@@ -29,7 +29,7 @@ const optionsDialogStyles = css`
   }
 
   dialog div:hover {
-    background-color: var(--transparent-white);
+    background-color: var(--secondary);
   }
 `
 

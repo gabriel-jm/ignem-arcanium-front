@@ -12,8 +12,20 @@
   <title>Ignem Arcanium</title>
   <style>
     :root {
+      /* Colors */
+      --danger: #a34444;
+      --semitransparent-danger: #a3444477;
+      --dark-danger: #a02b2b;
+      --black-900: #0d0d0d;
+      --black-800: #161616;
+      --black-700: #1f1f1f;
+      --blue: #0e6e94;
+      --bright-blue: #64a7c2;
+      --white: #ddd;
+      --outline-white: #aaaa;
+      --transparent-white: #9a9a9a15;
+
       --max-content-width: 1380px;
-      --body-bg-color: #1f1f1f;
       --font-color: #ddd;
       --font-family: 'Nunito', sans-serif;
       --sub-font-color: #7a7a7a;
@@ -21,27 +33,31 @@
 
       --container-border-color: #3f3f3f;
 
-      --primary: var(--black);
-      --primary-bright: var(--bright-black);
-      --secondary: var(--white);
-
-      /* Colors */
-      --danger: #a34444;
-      --semitransparent-danger: #a3444477;
-      --dark-danger: #a02b2b;
-      --black: #0e0e0e;
-      --bright-black: #171717;
-      --blue: #0e6e94;
-      --bright-blue: #64a7c2;
-      --white: #ddd;
-      --outline-white: #aaaa;
-      --transparent-white: #9a9a9a15;
-
       /* Rarity Colors */
       --dark-common: #3a3a3a;
       --bright-common: #a3a3a3;
       --dark-uncommon: #2a3a2a;
       --bright-uncommon: #62a362;
+    }
+
+    .dark-black {
+      --primary: var(--black-900);
+      --primary-bright: var(--black-800);
+      --secondary: var(--black-700);
+
+      --bg-primary: var(--black-900);
+      --bg-primary-bright: var(--black-800);
+      --bg-secondary: var(--black-700);
+    }
+
+    .dark-blue {
+      --primary: var(--blue);
+      --primary-bright: var(--bright-blue);
+      --secondary: var(--blue);
+
+      --bg-primary: var(--black-900);
+      --bg-primary-bright: var(--black-800);
+      --bg-secondary: var(--black-700);
     }
 
     html,
@@ -51,7 +67,7 @@
 
     body {
       font-family: 'Nunito', sans-serif;
-      background-color: var(--body-bg-color);
+      background-color: var(--bg-secondary);
       color: var(--font-color);
       margin: 0;
       padding: 0;
@@ -76,15 +92,10 @@
       background-color: #999;
       border-radius: 4px;
     }
-
-    body.blue {
-      --primary: var(--blue);
-      --primary-bright: var(--bright-blue);
-    }
   </style>
 </head>
 
-<body>
+<body class="dark-black">
   <ignem-root></ignem-root>
   <ignem-notification-container></ignem-notification-container>
 </body>

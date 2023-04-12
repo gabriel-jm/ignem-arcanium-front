@@ -20,7 +20,7 @@ export const characterSecondFormStyles = css`
     display: inline-block;
     width: 200px;
     margin: 8px;
-    background-color: var(--black);
+    background-color: var(--black-900);
     padding: 8px;
     border-radius: 4px;
     cursor: default;
@@ -57,7 +57,7 @@ export const characterSecondFormStyles = css`
     border: 0;
     padding: 2px 4px;
     border-radius: 4px;
-    background-color: var(--body-bg-color);
+    background-color: var(--bg-primary);
     color: var(--font-color);
     font-size: 0.95rem;
     text-align: center;

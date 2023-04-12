@@ -57,7 +57,7 @@ export class IgnemQuantityControl extends IgnemElement {
       }
 
       .quantity-controls button:hover {
-        background-color: var(--bright-black);
+        background-color: var(--black-800);
       }
 
       .quantity-controls {

@@ -58,6 +58,6 @@ export const borderedButtonStyles = css`
 
   .btn-bordered:active {
     --btn-bg-color: #6a6a6a;
-    --btn-font-color: var(--black);
+    --btn-font-color: var(--black-900);
   }
 `

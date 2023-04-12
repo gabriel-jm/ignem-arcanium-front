@@ -8,7 +8,7 @@ const backgroundByRarity = rarities.map(rarity => css`
     background-image: linear-gradient(
       145deg,
       var(--dark-${rarity}),
-      var(--black) 30%
+      var(--black-900) 30%
     );
   }
 `)
@@ -25,7 +25,7 @@ export const itemCardStyles = css`
   .item-details {
     padding: 12px;
     border-radius: 4px;
-    background-color: var(--black);
+    background-color: var(--black-900);
     animation: show 120ms backwards ease-in-out;
   }
 
