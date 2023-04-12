@@ -1,4 +1,4 @@
-import { ElementRef, css, html } from 'lithen-fns'
+import { ElementRef, css, el, html, ref, shell, signal } from 'lithen-fns'
 import { closeIcon } from '../index.js'
 
 export interface SettingsModalProps {
@@ -7,8 +7,9 @@ export interface SettingsModalProps {
 
 const settingsModalStyles = css`
   dialog {
-    width: 60%;
-    margin: auto;
+    width: 65vw;
+    height: 520px;
+    margin: 40px auto;
     color: var(--font-color);
     border: 0;
     border-radius: 4px;
@@ -24,6 +25,8 @@ const settingsModalStyles = css`
   .content {
     display: flex;
     justify-content: center;
+    align-items: stretch;
+    height: 100%;
   }
 
   .settings-tabs {
@@ -36,6 +39,23 @@ const settingsModalStyles = css`
   .settings-tabs h3 {
     font-size: 1.6rem;
     padding-bottom: 24px;
+  }
+
+  .tabs-list li {
+    margin: 8px 0;
+    padding: 12px 16px;
+    border-radius: 4px;
+    transition: background 200ms ease-out;
+    cursor: pointer;
+  }
+
+  .tabs-list li:not(.active):hover {
+    background-color: var(--transparent-white);
+  }
+
+  .tabs-list li.active {
+    background-color: var(--primary-bright);
+    font-weight: bolder;
   }
 
   .settings-content {
@@ -54,36 +74,131 @@ const settingsModalStyles = css`
     color: var(--font-color);
     background-color: transparent;
   }
+
+  .bold {
+    font-weight: bold;
+    margin-right: 12px;
+  }
 `
 
-export function settingsModal({ ref }: SettingsModalProps) {
+const accountTab = el/*html*/`
+  <div>
+    <h2>Account</h2>
+
+    <div>
+      <span class="bold">Name</span>
+      <span>Anyone</span>
+    </div>
+    <div>
+      <span class="bold">E-Mail</span>
+      <span>any@email.com</span>
+    </div>
+  </div>
+`
+
+export function settingsModal({ ref: modalRef }: SettingsModalProps) {
+  const currentTab = signal('account')
+  const tabShell = shell(currentTab, (tab) => {
+    switch(tab) {
+      case 'account':
+        return accountTab
+      case 'theme':
+        return el/*html*/`
+          <div>
+            <h2>Theme</h2>
+
+            <form>
+              <label>
+                Dark Black &nbsp;
+                <input
+                  type="radio"
+                  value="dark-black"
+                  checked
+                />
+              </label>
+
+              <label>
+                Dark Blue &nbsp;
+                <input
+                  type="radio"
+                  value="dark-blue"
+                />
+              </label>
+
+              <label>
+                Light Black &nbsp;
+                <input
+                  type="radio"
+                  value="light-black"
+                />
+              </label>
+
+              <label>
+                Light Blue &nbsp;
+                <input
+                  type="radio"
+                  value="light-blue"
+                />
+              </label>
+            </form>
+          </div>
+        `
+      case 'language':
+        return html`
+          <h1>Language</h1>
+
+          <p>Coming soon...</p>
+        `
+      default:
+        return el/*html*/`<p>Not Found</p>`
+    }
+  })
+
+  const tabsListRef = ref<HTMLUListElement>()
+
+  function changeTab(event: Event) {
+    if (event.target === event.currentTarget) return
+
+    const activeTab = tabsListRef.el?.querySelector('li.active')
+
+    if (activeTab) {
+      activeTab.className = ''
+    }
+
+    const target = event.target as HTMLElement
+    target.className = 'active'
+    const tabName = target.getAttribute('tab')
+
+    currentTab.set(String(tabName))
+  }
+
   return html`
     <ignem-wrapper css="${settingsModalStyles}">
-      <dialog ref=${ref}>
+      <dialog ref=${modalRef}>
         <div class="content">
           <section class="settings-tabs">
             <h3>Settings</h3>
 
-            <ul>
-              <li>Account</li>
-              <li>Theme</li>
-              <li>Language</li>
+            <ul
+              ref=${tabsListRef}
+              class="tabs-list"
+              on-click=${changeTab}
+            >
+              <li class="active" tab="account">
+                Account
+              </li>
+              <li tab="theme">Theme</li>
+              <li tab="language">Language</li>
             </ul>
           </section>
           <section class="settings-content">
-            <button class="close" on-click=${() => ref.el?.close()}>
+            <button
+              class="close"
+              on-click=${() => modalRef.el?.close()}
+            >
               ${closeIcon()}
             </button>
-            <div>
-              <div>
-                <span>Name</span>
-                <span>Anyone</span>
-              </div>
-              <div>
-                <span>E-Mail</span>
-                <span>any@email.com</span>
-              </div> 
-            </div>
+            ${tabShell}
           </section>
         </div>
       </dialog>
