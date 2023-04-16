@@ -2,6 +2,7 @@ import { css, html } from 'lithen-fns'
 import { buttonStyles, containerStyles } from '@/common/ui/styles/index.js'
 import { router } from '@/main/config/routes.js'
 import { AccountStore } from '@/account/ui/stores/account-store.js'
+import { t } from '../components/singles/translation.js'
 
 const homePageStyles = css`
   ${[containerStyles, buttonStyles]}
@@ -20,7 +21,7 @@ export function homePage() {
       <ignem-header />
 
       <section class="container">
-        <h2>Welcome ${accountName}!</h2>
+        <h2>${t('Welcome')} ${accountName}!</h2>
 
         <ul>
           <li>
@@ -28,7 +29,7 @@ export function homePage() {
               class="btn"
               on-click=${() => router.navigate('/characters')}
             >
-              Characters
+              ${t('Characters')}
             </button>
           </li>
         </ul>

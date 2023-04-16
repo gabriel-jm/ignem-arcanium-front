@@ -45,14 +45,10 @@ export class IgnemHeader extends IgnemElement {
             ${optionsDialog({
               ref: dialogRef,
               options: {
-                'Settings': {
-                  onClick() {
-                    settingsDialogRef.el?.showModal()
-                  }
+                Settings() {
+                  settingsDialogRef.el?.showModal()
                 },
-                'Sign Out': {
-                  onClick: () => confirmDialogRef.el?.showModal()
-                }
+                'Sign Out': () => confirmDialogRef.el?.showModal()
               }
             })}  
           </div>

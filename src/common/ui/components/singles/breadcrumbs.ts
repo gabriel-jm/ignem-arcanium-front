@@ -1,6 +1,8 @@
 import '@/common/ui/styles/index.js'
 import { router } from '@/main/config/routes.js'
 import { css, html, el } from 'lithen-fns'
+import { t } from './translation.js'
+import { TranslationKeys } from '@/main/config/i18n.js'
 
 type BreadcrumbsProps = Record<string, string>
 
@@ -32,7 +34,11 @@ export function breadcrumbs(props: BreadcrumbsProps) {
     <ignem-wrapper css="${breadcrumbsStyles}">
       ${Object.entries(props).map(([name, path]) => {
         if (path === 'current') {
-          return el/*html*/`<span class="current">${name}</span>`
+          return el/*html*/`
+            <span class="current">
+              ${t(name as TranslationKeys)}
+            </span>
+          `
         }
 
         return html`
@@ -40,7 +46,7 @@ export function breadcrumbs(props: BreadcrumbsProps) {
             class="link"
             on-click=${onClick(path)}
           >
-            ${name}
+            ${t(name as TranslationKeys)}
           </span>
           <span class="slash">/</span>
         `

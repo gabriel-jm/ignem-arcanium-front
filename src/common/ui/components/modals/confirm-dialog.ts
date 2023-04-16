@@ -1,4 +1,5 @@
 import { css, ElementRef, html } from 'lithen-fns'
+import { t } from '../singles/translation.js'
 
 export interface ConfirmDialogProps {
   ref: ElementRef<DialogElement>
@@ -106,7 +107,7 @@ export function confirmDialog(props: ConfirmDialogProps) {
         OK
       </button>
       <button on-click=${onCancelDialog}>
-        Cancel
+        ${t('Cancel')}
       </button>
     </dialog>
   `

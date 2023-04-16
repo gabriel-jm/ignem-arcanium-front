@@ -22,6 +22,7 @@
     "vitest": "^0.29.3"
   },
   "dependencies": {
+    "i18next": "^22.4.14",
     "lithen-fns": "^1.0.2",
     "lithen-router": "^3.0.0",
     "lithen-super-element": "^5.0.0"

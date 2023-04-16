@@ -1,8 +1,10 @@
 import { ElementRef, css, html } from 'lithen-fns'
+import { t } from '../singles/translation.js'
+import { TranslationKeys } from '@/main/config/i18n.js'
 
 export interface OptionsDialogProps {
   ref: ElementRef<DialogElement>
-  options: Record<string, { onClick: Function }>
+  options: Record<string, Function>
 }
 
 const optionsDialogStyles = css`
@@ -44,8 +46,8 @@ export function optionsDialog({ ref, options }: OptionsDialogProps) {
         ${Object
           .entries(options)
           .map(([key, value]) => html`
-            <div on-click=${value.onClick}>
-              ${key}
+            <div on-click=${value}>
+              ${t(key as TranslationKeys)}
             </div>
           `)
         }

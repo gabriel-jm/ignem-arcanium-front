@@ -1,11 +1,12 @@
 import { html } from 'lithen-fns'
 
 export interface selectFieldProps {
-  label?: string
+  label?: string | Text
   name: string
   options: string[]
   className?: string
   placeholder?: string
+  onChange?: Function
 }
 
 export function selectField({
@@ -13,15 +14,18 @@ export function selectField({
   options,
   name,
   className,
-  placeholder
+  placeholder,
+  onChange
 }: selectFieldProps) {
-  function onChange(event: Event) {
+  function onSelectChange(event: Event) {
     const select = event.target as HTMLSelectElement
 
     if (select.value && select.classList.contains('error')) {
       select.classList.remove('error')
       select.nextElementSibling!.textContent = ''
     }
+
+    onChange?.(event)
   }
 
   return html`
@@ -30,7 +34,7 @@ export function selectField({
       <select
         class="form-control ${className}"
         name="${name}"
-        on-change=${onChange}
+        on-change=${onSelectChange}
       >
         ${placeholder && html`
           <option hidden value="">${placeholder}</option>

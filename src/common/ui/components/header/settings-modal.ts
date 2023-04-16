@@ -1,5 +1,9 @@
 import { ElementRef, css, el, html, ref, shell, signal } from 'lithen-fns'
 import { closeIcon } from '../index.js'
+import { accountTab } from './account-tab.js'
+import { themeTab } from './theme-tab.js'
+import { languageTab } from './language-tab.js'
+import { t } from '../singles/translation.js'
 
 export interface SettingsModalProps {
   ref: ElementRef<DialogElement>
@@ -61,7 +65,7 @@ const settingsModalStyles = css`
   .settings-content {
     flex: 3;
     background-color: var(--bg-secondary);
-    padding: 24px;
+    padding: 20px;
   }
 
   .close {
@@ -81,117 +85,16 @@ const settingsModalStyles = css`
   }
 `
 
-const accountTab = el/*html*/`
-  <div>
-    <h2>Account</h2>
-
-    <div>
-      <span class="bold">Name</span>
-      <span>Anyone</span>
-    </div>
-    <div>
-      <span class="bold">E-Mail</span>
-      <span>any@email.com</span>
-    </div>
-  </div>
-`
-
-const themeTabStyles = css`
-  h2 {
-    padding-bottom: 24px;
-  }
-
-  form {
-    display: grid;
-    grid-template-rows: 1fr 1fr;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-  }
-
-  label {
-    display: block;
-    padding: 8px 16px;
-    background-color: var(--transparent-white);
-    border-radius: 4px;
-    cursor: pointer;
-  }
-`
-
-function themeTab() {
-  return el/*html*/`
-    <ignem-wrapper css="${themeTabStyles}">
-      <h2>Theme</h2>
-
-      <form>
-        <label>
-          Dark Black &nbsp;
-          <input
-            type="radio"
-            name="theme"
-            value="dark-black"
-            checked
-            on-change=${(e: Event) => {
-              const target = e.target as HTMLInputElement
-
-              if (target.checked) {
-                document.body.className = target.value
-              }
-            }}
-          />
-        </label>
-
-        <label>
-          Dark Blue &nbsp;
-          <input
-            type="radio"
-            name="theme"
-            value="dark-blue"
-            on-change=${(e: Event) => {
-              const target = e.target as HTMLInputElement
-
-              if (target.checked) {
-                document.body.className = target.value
-              }
-            }}
-          />
-        </label>
-
-        <label>
-          Light Black &nbsp;
-          <input
-            type="radio"
-            name="theme"
-            value="light-black"
-          />
-        </label>
-
-        <label>
-          Light Blue &nbsp;
-          <input
-            type="radio"
-            name="theme"
-            value="light-blue"
-          />
-        </label>
-      </form>
-    </ignem-wrapper>
-  `
-}
-
 export function settingsModal({ ref: modalRef }: SettingsModalProps) {
   const currentTab = signal('account')
   const tabShell = shell(currentTab, (tab) => {
     switch(tab) {
       case 'account':
-        return accountTab
+        return accountTab()
       case 'theme':
         return themeTab()
       case 'language':
-        return html`
-          <h1>Language</h1>
-
-          <p>Coming soon...</p>
-        `
+        return languageTab()
       default:
         return el/*html*/`<p>Not Found</p>`
     }
@@ -220,7 +123,7 @@ export function settingsModal({ ref: modalRef }: SettingsModalProps) {
       <dialog ref=${modalRef}>
         <div class="content">
           <section class="settings-tabs">
-            <h3>Settings</h3>
+            <h3>${t('Settings')}</h3>
 
             <ul
               ref=${tabsListRef}
@@ -228,10 +131,10 @@ export function settingsModal({ ref: modalRef }: SettingsModalProps) {
               on-click=${changeTab}
             >
               <li class="active" tab="account">
-                Account
+                ${t('Account')}
               </li>
-              <li tab="theme">Theme</li>
-              <li tab="language">Language</li>
+              <li tab="theme">${t('Theme')}</li>
+              <li tab="language">${t('Language')}</li>
             </ul>
           </section>
           <section class="settings-content">
