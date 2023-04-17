@@ -6,6 +6,7 @@ import { html, el, ref } from 'lithen-fns'
 import { equipmentItemCard } from '@/equipment/index.js'
 import { characterModalStyles } from './character-modal-styles.js'
 import { FindAllCharactersServiceResult } from '@/character/application/protocols/find-all-characters-service.js'
+import { t } from '@/common/ui/components/singles/translation.js'
 
 export type CharacterModalData = FindAllCharactersServiceResult
 
@@ -69,13 +70,13 @@ function characterModalContent(modal: IgnemCharacterModal, data: CharacterModalD
           <h1>${data.name}</h1>
           <div class="primary-stats-container">
             <span class="level">
-              Level ${data.level}
+              ${t('Level')} &nbsp; ${data.level}
             </span>
             <span class="gold">
-              Gold ${data.gold}
+              ${t('Gold')} &nbsp; ${data.gold}
             </span>
             <span class="character-points">
-              Character points ${data.characterPoints}
+              ${t('Character points')} &nbsp; ${data.characterPoints}
             </span>
           </div>
         </div>

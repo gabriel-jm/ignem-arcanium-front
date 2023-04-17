@@ -1,7 +1,6 @@
 import { TranslationKeys, i18n } from '@/main/config/i18n.js'
 
-export function t(translationKeys: TranslationKeys | TranslationKeys[]) {
-  const keys = Array.isArray(translationKeys) ? translationKeys : [translationKeys]
+export function t(...keys: TranslationKeys[]) {
   const translation = getTranslation(keys)
 
   if (!translation) {
@@ -21,5 +20,4 @@ function getTranslation(keys: string[]) {
   return keys.map(key => {
     return i18n.t(key) ?? key
   }).join(' ')
-
 }

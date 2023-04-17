@@ -1,6 +1,7 @@
 import { buttonStyles } from '@/common/ui/styles/index.js'
 import { css, html } from 'lithen-fns'
 import { router } from '@/main/config/routes.js'
+import { t } from '../components/singles/translation.js'
 
 const introPageStyles = css`
   ${buttonStyles}
@@ -32,7 +33,7 @@ export function introPage() {
 
   return html`
     <ignem-wrapper css="${introPageStyles}">
-      <h1>Welcome to Ignem Arcanium</h1>
+      <h1>${t('Welcome to')} Ignem Arcanium</h1>
       <button class="btn" on-click=${onClick}>
         Login
       </button>

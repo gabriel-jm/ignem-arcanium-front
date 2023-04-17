@@ -9,6 +9,7 @@ import { IgnemCharacterModal } from './modal/ignem-character-modal.js'
 import { breadcrumbs, confirmDialog, confirmDialogStyles, loadingIcon } from '@/common/ui/components/index.js'
 import { UiNotifier } from '@/common/ui/components/notification/index.js'
 import { FindAllCharactersServiceResult } from '@/character/application/protocols/find-all-characters-service.js'
+import { t } from '@/common/ui/components/singles/translation.js'
 
 type Character = FindAllCharactersServiceResult
 
@@ -62,7 +63,7 @@ export class IgnemCharactersPage extends IgnemElement {
           class="new-btn"
           on-click=${() => router.navigate('/characters/create')}
         >
-          &plus; New
+          &plus; &nbsp; ${t('New')}
         </button>
       `)       
 
@@ -142,7 +143,7 @@ export class IgnemCharactersPage extends IgnemElement {
       <section class="container">
         ${breadcrumbs(pathsRecord)}
 
-        <h2 class="characters-title">Characters</h2>
+        <h2 class="characters-title">${t('Characters')}</h2>
 
         <div class="characters-list">
           ${loadingIcon()}

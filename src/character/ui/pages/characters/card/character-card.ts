@@ -1,3 +1,4 @@
+import { t } from '@/common/ui/components/singles/translation.js'
 import { trashIcon } from '@/common/ui/index.js'
 import { characterStatsStyles } from '@/common/ui/styles/index.js'
 import { css, html } from 'lithen-fns'
@@ -102,7 +103,9 @@ export function characterCard(
           </div>
         </div>
         <div>
-          <span class="level">Level ${character.level}</span>
+          <span class="level">
+            ${t('Level')} &nbsp; ${character.level}
+          </span>
           <svg style="margin: 0 10px;" width="12" height="12">
             <rect
               x="7"
@@ -114,7 +117,9 @@ export function characterCard(
               fill="var(--font-color)"
             />
           </svg>
-          <span class="gold">Gold ${character.gold}</span>
+          <span class="gold">
+            ${t('Gold')} &nbsp; ${character.gold}
+          </span>
         </div>
         <ul class="stats-list">
           <li>Str ${character.strength}</li>

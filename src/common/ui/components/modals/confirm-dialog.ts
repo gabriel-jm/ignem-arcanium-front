@@ -1,5 +1,6 @@
 import { css, ElementRef, html } from 'lithen-fns'
 import { t } from '../singles/translation.js'
+import { TranslationKeys } from '@/main/config/i18n.js'
 
 export interface ConfirmDialogProps {
   ref: ElementRef<DialogElement>
@@ -102,7 +103,7 @@ export function confirmDialog(props: ConfirmDialogProps) {
       class="confirm-dialog"
       on-animationend=${onAnimationEnd}
     >
-      <p>${message}</p>
+      <p>${t(message as TranslationKeys)}</p>
       <button on-click=${onConfirmDialog}>
         OK
       </button>
