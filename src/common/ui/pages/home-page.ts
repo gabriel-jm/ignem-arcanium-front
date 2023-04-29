@@ -9,6 +9,8 @@ const homePageStyles = css`
 
   ul {
     margin-top: 20px;
+    display: flex;
+    gap: 10px;
   }
 `
 
@@ -30,6 +32,15 @@ export function homePage() {
               on-click=${() => router.navigate('/characters')}
             >
               ${t('Characters')}
+            </button>
+          </li>
+
+          <li>
+            <button
+              class="btn"
+              on-click=${() => router.navigate('/contents')}
+            >
+              ${t('Contents')}
             </button>
           </li>
         </ul>

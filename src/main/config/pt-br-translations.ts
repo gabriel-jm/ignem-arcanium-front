@@ -7,6 +7,7 @@ export default <const> {
     Blue: 'Azul',
 
     Cancel: 'Cancelar',
+    Contents: 'Conteúdos',
 
     Characters: 'Personagens',
     'Character points': 'Pontos de Personagem',
