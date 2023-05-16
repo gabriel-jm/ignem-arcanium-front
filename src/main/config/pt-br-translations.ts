@@ -12,6 +12,8 @@ export default <const> {
     Characters: 'Personagens',
     'Character points': 'Pontos de Personagem',
 
+    Create: 'Criar',
+
     'Confirm Sign Out?': 'Deseja Sair?',
 
     Dark: 'Escuro',

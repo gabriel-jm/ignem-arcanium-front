@@ -22,6 +22,8 @@ export class CreateContentPresenter implements Presenter {
       body: { ...data }
     })
 
+    console.log({ response })
+
     if (response.statusCode >= 400) {
       throw new HTTPServiceError(response, 'Internal error on creating content')
     }
