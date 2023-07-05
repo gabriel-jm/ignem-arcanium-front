@@ -29,15 +29,6 @@ export function homePage() {
           <li>
             <button
               class="btn"
-              on-click=${() => router.navigate('/characters')}
-            >
-              ${t('Characters')}
-            </button>
-          </li>
-
-          <li>
-            <button
-              class="btn"
               on-click=${() => router.navigate('/contents')}
             >
               ${t('Contents')}
