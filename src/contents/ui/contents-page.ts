@@ -1,7 +1,18 @@
+import { Presenter } from '@/common/application/protocols/index.js'
 import { t } from '@/common/ui/components/singles/translation.js'
 import { breadcrumbs, containerStyles } from '@/common/ui/index.js'
 import { router } from '@/main/config/routes.js'
-import { css, html } from 'lithen-fns'
+import { css, html, shell, signal } from 'lithen-fns'
+import { Content } from '../application/index.js'
+
+interface ContentsPageProps {
+  findAll: Presenter
+}
+
+type ContentsSignal = {
+  loading: boolean
+  data: Content[]
+}
 
 const contentPageStyle = css`
   ${[containerStyles]}
@@ -12,7 +23,24 @@ const contentPageStyle = css`
   }
 `
 
-export function contentsPage() {
+export function contentsPage({ findAll }: ContentsPageProps) {
+  const contents = signal<ContentsSignal>({
+    loading: true,
+    data: []
+  })
+
+  findAll.handle()
+    .then(result => {
+      console.log('Find all')
+
+      if (result.ok) {
+        contents.set({
+          loading: false,
+          data: result.data
+        })
+      }
+    })
+
   return html`
     <ignem-wrapper css="${contentPageStyle}">
       <ignem-header />
@@ -26,6 +54,28 @@ export function contentsPage() {
         <h2 class="contents-title">
           ${t('Contents')}
         </h2>
+
+        ${shell(contents, ({ loading, data }) => {
+          if (loading) {
+            return html`
+              <p>${t('Loading')}...</p>
+            `
+          }
+
+          if (!data.length) {
+            return html `
+              <p>No contents found</p>
+            `
+          }
+
+          return html`
+            <ul>
+              ${data.map(
+                value => html`<li>${value.title}</li>`
+              )}
+            </ul>
+          `
+        })}
 
         <div>
           <button on-click=${() => {

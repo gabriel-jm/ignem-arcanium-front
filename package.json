@@ -13,16 +13,16 @@
     "check": "ncu"
   },
   "devDependencies": {
-    "@types/node": "^18.15.3",
-    "c8": "^7.13.0",
-    "happy-dom": "^8.9.0",
-    "npm-check-updates": "^16.7.12",
-    "typescript": "^5.0.2",
-    "vite": "^4.2.0",
-    "vitest": "^0.29.3"
+    "@types/node": "^20.4.0",
+    "c8": "^5.0.2",
+    "happy-dom": "^10.0.3",
+    "npm-check-updates": "^16.10.15",
+    "typescript": "^5.1.6",
+    "vite": "^4.4.2",
+    "vitest": "^0.33.0"
   },
   "dependencies": {
-    "i18next": "^22.4.14",
+    "i18next": "^23.2.8",
     "lithen-fns": "^1.0.2",
     "lithen-router": "^3.0.0",
     "lithen-super-element": "^5.0.0"

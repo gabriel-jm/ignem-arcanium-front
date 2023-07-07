@@ -23,6 +23,7 @@ export default <const> {
     Language: 'Idioma',
     Level: 'Nível',
     Light: 'Claro',
+    Loading: 'Carregando',
     'Select your language': 'Selecione o idioma',
 
     'Sign Out': 'Sair',
