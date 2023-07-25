@@ -4,6 +4,7 @@ import { breadcrumbs, containerStyles } from '@/common/ui/index.js'
 import { router } from '@/main/config/routes.js'
 import { css, html, shell, signal } from 'lithen-fns'
 import { Content } from '../application/index.js'
+import { mainPageCard } from './components/main-page-card.js'
 
 interface ContentsPageProps {
   findAll: Presenter
@@ -31,8 +32,6 @@ export function contentsPage({ findAll }: ContentsPageProps) {
 
   findAll.handle()
     .then(result => {
-      console.log('Find all')
-
       if (result.ok) {
         contents.set({
           loading: false,
@@ -70,9 +69,12 @@ export function contentsPage({ findAll }: ContentsPageProps) {
 
           return html`
             <ul>
-              ${data.map(
-                value => html`<li>${value.title}</li>`
-              )}
+              ${data.map(value => html`
+                <li>${mainPageCard({
+                  title: value.title,
+                  cover: value.cover
+                })}</li>
+              `)}
             </ul>
           `
         })}
