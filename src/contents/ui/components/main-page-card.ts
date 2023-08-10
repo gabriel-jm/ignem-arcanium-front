@@ -5,11 +5,11 @@ interface MainPageCardProps {
   title: string
 }
 
-export function mainPageCard({ title }: MainPageCardProps) {
+export function mainPageCard({ title, cover }: MainPageCardProps) {
   const mainPageCardStyles = css`
     :host {
       display: block;
-      background: url('https://wallpaperaccess.com/full/1193446.jpg');
+      background: url('${cover}');
       background-position: top;
       background-size: cover;
       border-radius: 4px;
@@ -35,6 +35,9 @@ export function mainPageCard({ title }: MainPageCardProps) {
     h3 {
       font-size: 1.8rem;
       text-shadow: 0 1px 2px var(--black-900);
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
     }
   `
   

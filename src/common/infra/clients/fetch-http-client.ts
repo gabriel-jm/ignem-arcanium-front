@@ -16,10 +16,10 @@ export class FetchHTTPClient implements HTTPClient {
     if (typeof params.body === 'object') {
       if (params.body instanceof FormData) {
         requestBody = params.body
+      } else {
+        contentType = 'application/json'
+        requestBody = JSON.stringify(params.body)
       }
-
-      contentType = 'application/json'
-      requestBody = JSON.stringify(params.body)
     }
 
     const response = await fetch(this.baseURL + params.path, {

@@ -1,6 +1,6 @@
 import { Presenter } from '@/common/application/protocols/index.js'
 import { t } from '@/common/ui/components/singles/translation.js'
-import { breadcrumbs, containerStyles } from '@/common/ui/index.js'
+import { breadcrumbs, buttonStyles, containerStyles } from '@/common/ui/index.js'
 import { router } from '@/main/config/routes.js'
 import { css, html, shell, signal } from 'lithen-fns'
 import { Content } from '../application/index.js'
@@ -16,11 +16,18 @@ type ContentsSignal = {
 }
 
 const contentPageStyle = css`
-  ${[containerStyles]}
+  ${[containerStyles, buttonStyles]}
 
   .contents-title {
     font-size: 2rem;
     padding-top: 10px;
+  }
+
+  .pages-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    padding: 16px 0;
   }
 `
 
@@ -54,6 +61,12 @@ export function contentsPage({ findAll }: ContentsPageProps) {
           ${t('Contents')}
         </h2>
 
+        <div>
+          <button class="btn" on-click=${() => {
+            router.navigate('/contents/create')
+          }}>${t('Create')}</button>
+        </div>
+
         ${shell(contents, ({ loading, data }) => {
           if (loading) {
             return html`
@@ -68,7 +81,7 @@ export function contentsPage({ findAll }: ContentsPageProps) {
           }
 
           return html`
-            <ul>
+            <ul class="pages-list">
               ${data.map(value => html`
                 <li>${mainPageCard({
                   title: value.title,
@@ -78,12 +91,6 @@ export function contentsPage({ findAll }: ContentsPageProps) {
             </ul>
           `
         })}
-
-        <div>
-          <button on-click=${() => {
-            router.navigate('/contents/create')
-          }}>Add</button>
-        </div>
       </section>
     </ignem-wrapper>
   `

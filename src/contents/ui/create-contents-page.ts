@@ -24,7 +24,8 @@ export function createContentsPage({ createContent }: CreateContentPageProps) {
     const formValue = form.getData({
       title: 'string',
       type: 'string',
-      value: 'string'
+      value: 'string',
+      cover: 'file'
     })
 
     const result = await createContent.handle({
@@ -63,24 +64,28 @@ export function createContentsPage({ createContent }: CreateContentPageProps) {
             selectField({
               name: 'type',
               label: 'Type',
-              options: [
-                'MainPage',
-                'Page',
-                'Card'
-              ]
+              options: {
+                'Main Page': 'MainPage',
+                Page: 'Page',
+                Card: 'Card'
+              }
+            }),
+
+            inputField({
+              name: 'cover',
+              label: 'Cover',
+              type: 'file'
             }),
 
             textAreaField({
               name: 'value',
               label: 'Content'
             }),
-
-            html`
-              <button class="btn">
-                ${t('Create')}
-              </button>
-            `
           ]}
+
+          <button class="btn">
+            ${t('Create')}
+          </button>
         </form>
       </section>
     </ignem-wrapper>
