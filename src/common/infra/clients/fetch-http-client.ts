@@ -1,4 +1,4 @@
-import { UnauthorizedError } from '../errors/index.js'
+import { AuthenticationError } from '../errors/index.js'
 import { CacheStore, HTTPClient, HTTPRequest, HTTPResponse } from '../protocols/index.js'
 
 export class FetchHTTPClient implements HTTPClient {
@@ -34,7 +34,7 @@ export class FetchHTTPClient implements HTTPClient {
     })
 
     if (response.status === 401) {
-      throw new UnauthorizedError()
+      throw new AuthenticationError()
     }
 
     const body = await (async () => {

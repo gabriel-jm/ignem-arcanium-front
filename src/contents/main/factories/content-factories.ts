@@ -3,14 +3,18 @@ import { CreateContentPresenter } from '@/contents/application/create-content-pr
 import { FindContentsPresenter } from '@/contents/application/find-contents-presenter.js'
 import { createContentsPage } from '@/contents/ui/create-contents-page.js'
 import { contentsPage } from '@/contents/ui/index.js'
+import { ErrorHandlingPresenterDecorator } from '@/main/decorators/index.js'
 
 export function makeContentPage() {
-  return contentsPage({
-    findAll: new FindContentsPresenter(makeFetchHTTPClient())
-  })
+  const presenter = new ErrorHandlingPresenterDecorator(
+    new FindContentsPresenter(makeFetchHTTPClient())
+  )
+  return contentsPage({ findAll: presenter })
 }
 
 export function makeCreateContentPage() {
-  const createContent = new CreateContentPresenter(makeFetchHTTPClient())
+  const createContent = new ErrorHandlingPresenterDecorator(
+    new CreateContentPresenter(makeFetchHTTPClient())
+  )
   return createContentsPage({ createContent })
 }
