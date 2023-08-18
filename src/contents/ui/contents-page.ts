@@ -1,6 +1,6 @@
 import { Presenter } from '@/common/application/protocols/index.js'
 import { t } from '@/common/ui/components/singles/translation.js'
-import { breadcrumbs, buttonStyles, containerStyles } from '@/common/ui/index.js'
+import { breadcrumbs, buttonStyles, confirmDialogStyles, containerStyles } from '@/common/ui/index.js'
 import { router } from '@/main/config/routes.js'
 import { css, html, shell, signal } from 'lithen-fns'
 import { Content } from '../application/index.js'
@@ -8,6 +8,7 @@ import { mainPageCard } from './components/main-page-card.js'
 
 interface ContentsPageProps {
   findAll: Presenter
+  delete: Presenter
 }
 
 type ContentsSignal = {
@@ -16,7 +17,7 @@ type ContentsSignal = {
 }
 
 const contentPageStyle = css`
-  ${[containerStyles, buttonStyles]}
+  ${[containerStyles, buttonStyles, confirmDialogStyles]}
 
   .contents-title {
     font-size: 2rem;
@@ -46,6 +47,18 @@ export function contentsPage({ findAll }: ContentsPageProps) {
         })
       }
     })
+
+  function onConfirmDelete(itemId: string) {
+    return async (event: Event) => {
+      // const result = await deleteContent.handle({ id: itemId })
+
+      // if (result.ok) {
+      //   const target = event.target
+
+      // }
+      console.log(event.target, itemId)
+    }
+  }
 
   return html`
     <ignem-wrapper css="${contentPageStyle}">
@@ -83,10 +96,13 @@ export function contentsPage({ findAll }: ContentsPageProps) {
           return html`
             <ul class="pages-list">
               ${data.map(value => html`
-                <li>${mainPageCard({
-                  title: value.title,
-                  cover: value.cover
-                })}</li>
+                <li>
+                  ${mainPageCard({
+                    title: value.title,
+                    cover: value.cover,
+                    onConfirmDelete: onConfirmDelete(value.id)
+                  })}
+                </li>
               `)}
             </ul>
           `

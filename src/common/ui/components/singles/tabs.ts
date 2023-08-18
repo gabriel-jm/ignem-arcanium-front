@@ -60,7 +60,7 @@ export class IgnemTabs extends IgnemElement {
       }
 
       [tab-names] p.active {
-        border-color: var(--white);
+        border-color: var(--white-900);
         font-weight: bold;
       }
     `

@@ -100,7 +100,7 @@ export class IgnemSteps extends IgnemElement {
 
       .step.passed, .line.passed {
         color: var(--black-900);
-        background-color: var(--white);
+        background-color: var(--white-900);
       }
     `
   }

@@ -7,6 +7,7 @@ export interface ConfirmDialogProps {
   message: string
   onConfirm?(): Promise<void> | void
   onCancel?(): Promise<void> | void
+  onBlur?(): Promise<void> | void
 }
 
 export const confirmDialogStyles = css`
@@ -17,6 +18,7 @@ export const confirmDialogStyles = css`
     border-radius: 5px;
     background-color: var(--bg-primary);
     box-shadow: 0 3px 5px #121212;
+    z-index: 10;
   }
 
   confirm-dialog::backdrop {
@@ -50,13 +52,14 @@ export const confirmDialogStyles = css`
   }
 
   .confirm-dialog.close {
-    animation: close-dialog 200ms ease-in;
+    animation: close-dialog 180ms ease-in;
   }
 
   @keyframes show-dialog {
     from {
       transform: translateY(-30px);
       opacity: 0;
+      pointer-events: none;
     }
 
     to {
@@ -74,12 +77,12 @@ export const confirmDialogStyles = css`
 `
 
 export function confirmDialog(props: ConfirmDialogProps) {
-  const { ref, message, onConfirm, onCancel } = props
+  const { ref, message, onConfirm, onCancel, onBlur } = props
 
   function onAnimationEnd(event: AnimationEventInit) {
     if (event.animationName === 'close-dialog') {
-      ref.el?.close()
       ref.el?.classList.remove('close')
+      ref.el?.close()
     }
   }
 
@@ -97,11 +100,20 @@ export function confirmDialog(props: ConfirmDialogProps) {
     onCancel?.()
   }
 
+  function onBlurDialog() {
+    !ref.el?.classList.contains('close')
+      && ref.el?.classList.add('close')
+
+    onBlur?.()
+  }
+
   return html`
     <dialog
       ref=${ref}
+      tabindex="-1"
       class="confirm-dialog"
       on-animationend=${onAnimationEnd}
+      on-blur=${onBlurDialog}
     >
       <p>${t(message as TranslationKeys)}</p>
       <button on-click=${onConfirmDialog}>
