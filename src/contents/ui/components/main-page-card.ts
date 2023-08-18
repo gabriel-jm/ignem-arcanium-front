@@ -86,17 +86,17 @@ export function mainPageCard(props: MainPageCardProps) {
     <ignem-wrapper css="${mainPageCardStyles}">
       <div class="gradient-layer">
         <div on-click=${() => {
-          dialogRef.el?.show()
           dialogRef.el?.focus()
+          dialogRef.el?.show()
         }}>
-          ${confirmDialog({
-            ref: dialogRef,
-            message: `Delete '${title}'?`,
-            onConfirm: onConfirmDelete
-          })}
           ${trashIcon()}
         </div>
         <h3>${title}</h3>
+        ${confirmDialog({
+          ref: dialogRef,
+          message: `Delete '${title}'?`,
+          onConfirm: onConfirmDelete
+        })}
       </div>
     </ignem-wrapper>
   `

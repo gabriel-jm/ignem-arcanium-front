@@ -2,9 +2,10 @@ import { Presenter } from '@/common/application/protocols/index.js'
 import { t } from '@/common/ui/components/singles/translation.js'
 import { breadcrumbs, buttonStyles, confirmDialogStyles, containerStyles } from '@/common/ui/index.js'
 import { router } from '@/main/config/routes.js'
-import { css, html, shell, signal } from 'lithen-fns'
+import { css, html, ref, shell, signal } from 'lithen-fns'
 import { Content } from '../application/index.js'
 import { mainPageCard } from './components/main-page-card.js'
+import { IgnemElement } from '@/common/ui/ignem-element.js'
 
 interface ContentsPageProps {
   findAll: Presenter
@@ -32,7 +33,8 @@ const contentPageStyle = css`
   }
 `
 
-export function contentsPage({ findAll }: ContentsPageProps) {
+export function contentsPage({ findAll, delete: deleteContent }: ContentsPageProps) {
+  const containerRef = ref<IgnemElement>()
   const contents = signal<ContentsSignal>({
     loading: true,
     data: []
@@ -49,19 +51,19 @@ export function contentsPage({ findAll }: ContentsPageProps) {
     })
 
   function onConfirmDelete(itemId: string) {
-    return async (event: Event) => {
-      // const result = await deleteContent.handle({ id: itemId })
+    return async () => {
+      const result = await deleteContent.handle({ id: itemId })
 
-      // if (result.ok) {
-      //   const target = event.target
-
-      // }
-      console.log(event.target, itemId)
+      if (result.ok) {
+        containerRef.el?.root
+          .querySelector(`[key-id="${itemId}"]`)
+          ?.remove()        
+      }
     }
   }
 
   return html`
-    <ignem-wrapper css="${contentPageStyle}">
+    <ignem-wrapper css="${contentPageStyle}" ref=${containerRef}>
       <ignem-header />
 
       <section class="container">
@@ -96,7 +98,7 @@ export function contentsPage({ findAll }: ContentsPageProps) {
           return html`
             <ul class="pages-list">
               ${data.map(value => html`
-                <li>
+                <li key-id="${value.id}">
                   ${mainPageCard({
                     title: value.title,
                     cover: value.cover,
