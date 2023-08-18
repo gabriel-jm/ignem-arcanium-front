@@ -1,21 +1,23 @@
-export type FormDataTypes = 'string'|'number'|'boolean'
+export type FormDataTypes = 'string'|'number'|'boolean'|'file'
 
 type FormDataTypeMap = {
   string: string
   number: number
   boolean: boolean
+  file: File | null
 }
 
 type FormDataParser = {
-  [K in FormDataTypes]: (value: string) => FormDataTypeMap[K] | null
+  [K in FormDataTypes]: (value: HTMLInputElement) => FormDataTypeMap[K] | null
 }
 
 const formDataParser: FormDataParser = {
-  string(value) {
-    return value || null
+  string(formControl) {
+    return formControl.value || null
   },
 
-  number(value) {
+  number(formControl) {
+    const value = formControl.value
     const isValidValue = value && !isNaN(Number(value))
 
     return isValidValue
@@ -23,11 +25,17 @@ const formDataParser: FormDataParser = {
       : null
   },
 
-  boolean(value) {
+  boolean(formControl) {
+    const value = formControl.value
+
     if (value === 'true') return true
     if (value === 'false') return false
 
     return null
+  },
+
+  file(formControl) {
+    return formControl.files?.[0] ?? null
   }
 }
 
@@ -45,7 +53,7 @@ export class CustomForm extends HTMLFormElement {
 
     if (!formControl) return null
 
-    return formDataParser[type](formControl.value) as T
+    return formDataParser[type](formControl as HTMLInputElement) as T
   }
 
   getData<T extends Record<string, unknown | null>>(

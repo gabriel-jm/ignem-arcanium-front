@@ -12,6 +12,8 @@ export default <const> {
     Characters: 'Personagens',
     'Character points': 'Pontos de Personagem',
 
+    Create: 'Criar',
+
     'Confirm Sign Out?': 'Deseja Sair?',
 
     Dark: 'Escuro',
@@ -21,6 +23,7 @@ export default <const> {
     Language: 'Idioma',
     Level: 'Nível',
     Light: 'Claro',
+    Loading: 'Carregando',
     'Select your language': 'Selecione o idioma',
 
     'Sign Out': 'Sair',

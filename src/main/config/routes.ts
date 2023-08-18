@@ -4,7 +4,7 @@ import { makeCreateAccountPage } from '@/account/main/factories/create-account-p
 import { LithenRouter } from 'lithen-router'
 import { introPage, notFoundPage } from '@/common/ui/pages/index.js'
 import { makeHomePage } from '@/common/main/factories/home-page-factory.js'
-import { makeContentPage } from '@/contents/main/factories/index.js'
+import { makeContentPage, makeCreateContentPage } from '@/contents/main/factories/index.js'
 
 type ElementFactory = () => Node | null | Promise<Node | null>
 
@@ -14,5 +14,6 @@ export const router = new LithenRouter<ElementFactory>({
   '/create-account': makeCreateAccountPage,
   '/home': auth(makeHomePage),
   '/contents': auth(makeContentPage),
+  '/contents/create': auth(makeCreateContentPage),
   notFound: notFoundPage
 })

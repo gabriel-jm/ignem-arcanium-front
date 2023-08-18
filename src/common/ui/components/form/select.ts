@@ -3,7 +3,7 @@ import { html } from 'lithen-fns'
 export interface selectFieldProps {
   label?: string | Text
   name: string
-  options: string[]
+  options: string[] | Record<string, string>
   className?: string
   placeholder?: string
   onChange?: Function
@@ -28,6 +28,10 @@ export function selectField({
     onChange?.(event)
   }
 
+  const optionsData = Array.isArray(options)
+    ? options.map(opt => [opt, opt])
+    : Object.entries(options)
+
   return html`
     <label class="form-control-container">
       ${label && html`<span>${label}</span>`}
@@ -39,8 +43,8 @@ export function selectField({
         ${placeholder && html`
           <option hidden value="">${placeholder}</option>
         `}
-        ${options.map(option => html`
-          <option value="${option}">${option}</option>
+        ${optionsData.map(([key, value]) => html`
+          <option value="${value}">${key}</option>
         `)}
       </select>
       <p class="form-control-message"></p>

@@ -1,4 +1,4 @@
-import { UnauthorizedError } from '../errors/index.js'
+import { AuthenticationError } from '../errors/index.js'
 import { CacheStore, HTTPClient, HTTPRequest, HTTPResponse } from '../protocols/index.js'
 
 export class FetchHTTPClient implements HTTPClient {
@@ -10,19 +10,31 @@ export class FetchHTTPClient implements HTTPClient {
   async request<T = unknown>(params: HTTPRequest): Promise<HTTPResponse<T>> {
     const tokenData = this.cacheStore.get<Record<'token', string>>('token')
 
-    const response = await fetch(`${this.baseURL}${params.path}`, {
+    let contentType = null
+    let requestBody = null
+
+    if (typeof params.body === 'object') {
+      if (params.body instanceof FormData) {
+        requestBody = params.body
+      } else {
+        contentType = 'application/json'
+        requestBody = JSON.stringify(params.body)
+      }
+    }
+
+    const response = await fetch(this.baseURL + params.path, {
       method: params.method.toUpperCase(),
       mode: 'cors',
       headers: {
-        'Content-Type': 'application/json',
+        ...contentType && { 'Content-Type': contentType, },
         ...tokenData && { Authorization: `Bearer ${tokenData.token}` },
         ...params.headers
       },
-      body: params.body ? JSON.stringify(params.body) : null
+      body: requestBody
     })
 
     if (response.status === 401) {
-      throw new UnauthorizedError()
+      throw new AuthenticationError()
     }
 
     const body = await (async () => {
